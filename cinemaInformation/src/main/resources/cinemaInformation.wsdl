@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions name="CinemaInformationService"
+	targetNamespace="http://it.univaq.disim.sose.cald/cinemaInformation" 
+	xmlns:tns="http://it.univaq.disim.sose.cald/cinemaInformation"
+	xmlns="http://schemas.xmlsoap.org/wsdl/"
+	xmlns:wsp="http://www.w3.org/ns/ws-policy" 
+	xmlns:wsp1_2="http://schemas.xmlsoap.org/ws/2004/09/policy"
+	xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+	xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+	xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata">
+	
+	<types>
+		<xsd:schema targetNamespace="http://it.univaq.disim.sose.cald/cinemaInformation">
+			<xsd:element name="cinemaInformationRequest" type="tns:cinemaInformationRequest" />
+			<xsd:element name="cinemaInformationResponse" type="tns:cinemaInformationResponse" />
+			<xsd:element name="cinemaInformationFault" type="tns:cinemaInformationFault" />
+			
+			<!-- Cinema Info -->
+			<!-- Request -->
+			<xsd:complexType name="cinemaInformationRequest">
+				<xsd:sequence>
+					<xsd:element name="city" type="xsd:string" />
+				</xsd:sequence>
+			</xsd:complexType>
+			
+			<!-- Response -->
+			<xsd:complexType name="cinemaInformationResponse">
+				<xsd:sequence maxOccurs="unbounded" minOccurs="0">
+					<xsd:element name="cinemas" type="tns:cinemaType" />
+				</xsd:sequence>
+			</xsd:complexType>
+			<xsd:complexType name="cinemaType">
+				<xsd:sequence>
+					<xsd:element name="lat" type="xsd:double" />
+					<xsd:element name="lon" type="xsd:double" />
+					<xsd:element name="cinemaInfo" type="tns:cinemaInfoType" />
+				</xsd:sequence>
+			</xsd:complexType>
+			<xsd:complexType name="cinemaInfoType">
+				<xsd:sequence>
+					<xsd:element name="name" minOccurs="0" type="xsd:string" />
+					<xsd:element name="address" type="xsd:string" />
+					<xsd:element name="cap" type="xsd:string" />
+					<xsd:element name="city" type="xsd:string" />
+					<xsd:element name="telephoneNumber" minOccurs="0" type="xsd:string" />
+					<xsd:element name="hall" maxOccurs="unbounded" minOccurs="1" type="tns:hallType" />
+				</xsd:sequence>
+			</xsd:complexType>
+			<xsd:complexType name="hallType">
+				<xsd:sequence>
+					<xsd:element name="number" type="xsd:int" />
+					<xsd:element name="seatsNumber" type="xsd:int" />
+					<xsd:element name="hallInfo" type="tns:hallInfoType" />
+				</xsd:sequence>
+			</xsd:complexType>
+			<xsd:complexType name="hallInfoType">
+				<xsd:sequence>
+					<xsd:element name="time" type="xsd:date" />
+					<xsd:element name="film" type="tns:filmType" />
+					<xsd:element name="price" type="xsd:float" />
+					<xsd:element name="freeSeatsNumber" type="xsd:int" />
+				</xsd:sequence>
+			</xsd:complexType>
+			<xsd:complexType name="filmType">
+				<xsd:sequence>
+					<xsd:element name="name" type="xsd:string" />
+					<xsd:element name="director" type="xsd:string" />
+					<xsd:element name="cast" type="xsd:string" />
+					<xsd:element name="duration" type="xsd:int" />
+					<xsd:element name="rating" type="xsd:string" />
+					<xsd:element name="plot" type="xsd:string" />
+				</xsd:sequence>
+			</xsd:complexType>
+			
+			<!-- Fault -->
+			<xsd:complexType name="cinemaInformationFault">
+				<xsd:sequence>
+                        <xsd:element name="faultInfo" type="xsd:string" />
+                        <xsd:element name="message" type="xsd:string" />
+				</xsd:sequence>
+			</xsd:complexType>
+		</xsd:schema>
+	</types>
+	
+	<!-- Message -->
+	<!-- Cinema Information -->
+	<message name="cinemaInformationRequest">
+		<part name="parameters" element="tns:cinemaInformationRequest">
+		</part>
+	</message>
+	<message name="cinemaInformationResponse">
+		<part name="parameters" element="tns:cinemaInformationResponse">
+		</part>
+	</message>
+	<message name="cinemaInformationFault">
+		<part name="parameters" element="tns:cinemaInformationFault">
+		</part>
+	</message>
+	
+	<!-- Port -->
+	<portType name="cinemaInformationPT">
+		<operation name="cinemaInformation">
+			<input message="tns:cinemaInformationRequest" />
+			<output message="tns:cinemaInformationResponse" />
+			<fault name="cinemaInformationFault" message="tns:cinemaInformationFault" />
+		</operation>
+	</portType>
+	
+	<!-- Binding -->
+	<binding name="cinemaInformationBinding" type="tns:cinemaInformationPT">
+		<soap:binding style="document"
+			transport="http://schemas.xmlsoap.org/soap/http" />
+		<operation name="cinemaInformation">
+			<soap:operation soapAction="" />
+			<input>
+				<soap:body use="literal" />
+			</input>
+			<output>
+				<soap:body use="literal" />
+			</output>
+		</operation>
+	</binding>
+	
+	<!-- Service -->
+	<service name="CinemaInformationService">
+		<port name="cinemaInformationPort" binding="tns:cinemaInformationBinding">
+			<soap:address location="http://localhost:8080/cinema/services/information" />
+		</port>
+	</service>
+</definitions>
