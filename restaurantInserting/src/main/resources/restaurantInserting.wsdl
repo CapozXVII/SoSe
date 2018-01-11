@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions name="RestaurantInsertingService"
+	targetNamespace="http://it.univaq.disim.sose.cald/restaurantInserting" 
+	xmlns="http://schemas.xmlsoap.org/wsdl/"
+	xmlns:wsp="http://www.w3.org/ns/ws-policy" 
+	xmlns:tns="http://it.univaq.disim.sose.cald/restaurantInserting"
+	xmlns:wsp1_2="http://schemas.xmlsoap.org/ws/2004/09/policy"
+	xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+	xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+	xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata">
+	
+	<types>
+		<xsd:schema targetNamespace="http://it.univaq.disim.sose.cald/restaurantInserting">
+			<xsd:element name="restaurantInsertRequest" type="tns:restaurantInsertRequest" />
+			<xsd:element name="restaurantInsertResponse" type="tns:restaurantInsertResponse" />
+			<xsd:element name="restaurantInsertFault" type="tns:restaurantInsertFault" />
+			<xsd:element name="restaurantUpdateRequest" type="tns:restaurantUpdateRequest" />
+			<xsd:element name="restaurantUpdateResponse" type="tns:restaurantUpdateResponse" />
+			<xsd:element name="restaurantUpdateFault" type="tns:restaurantUpdateFault" />
+			
+			<!-- Resturant Inserting -->
+			<!-- Request -->
+			<xsd:complexType name="restaurantInsertRequest">
+				<xsd:sequence>
+					<xsd:element name="restaurant" type="tns:restaurantType" />
+				</xsd:sequence>
+			</xsd:complexType>
+			<xsd:complexType name="restaurantType">
+				<xsd:sequence>
+					<xsd:element name="lat" type="xsd:double" />
+					<xsd:element name="lon" type="xsd:double" />
+					<xsd:element name="restaurantInfo" type="tns:restaurantInfoType" />
+				</xsd:sequence>
+			</xsd:complexType>
+			<xsd:complexType name="restaurantInfoType">
+				<xsd:sequence>
+					<xsd:element name="name" minOccurs="0" type="xsd:string" />
+					<xsd:element name="address" type="xsd:string" />
+					<xsd:element name="cap" type="xsd:int" />
+					<xsd:element name="city" type="xsd:string" />
+					<xsd:element name="telephoneNumber" minOccurs="0" type="xsd:string" />
+					<xsd:element name="table" maxOccurs="unbounded" minOccurs="1" type="tns:tableType" />
+					<xsd:element name="style" type="xsd:string" />
+					<xsd:element name="cuisine" type="xsd:string" />
+					<xsd:element name="menu" type="xsd:string" />
+					<xsd:element name="discount" minOccurs="0" type="tns:discountType" />
+				</xsd:sequence>
+			</xsd:complexType>
+			<xsd:complexType name="tableType">
+				<xsd:sequence>
+					<xsd:element name="number" type="xsd:int" />
+					<xsd:element name="seatsNumber"  type="xsd:int" />
+				</xsd:sequence>
+			</xsd:complexType>
+			<xsd:complexType name="discountType">
+				<xsd:sequence>
+					<xsd:element name="cinema" type="xsd:string" />
+					<xsd:element name="price" type="xsd:float" />
+				</xsd:sequence>
+			</xsd:complexType>
+			
+			<!-- Response -->
+			<xsd:complexType name="restaurantInsertResponse">
+				<xsd:sequence>
+					<xsd:element name="accepted" type="xsd:boolean" />
+				</xsd:sequence>
+			</xsd:complexType>
+			
+			<!-- Fault -->
+			<xsd:complexType name="restaurantInsertFault">
+				<xsd:sequence>
+                        <xsd:element name="faultInfo" type="xsd:string" />
+                        <xsd:element name="message" type="xsd:string" />
+				</xsd:sequence>
+			</xsd:complexType>
+			
+			<!-- Resturant Update -->
+			<!-- Request -->
+			<xsd:complexType name="restaurantUpdateRequest">
+				<xsd:sequence>
+					<xsd:element name="restaurant" type="tns:restaurantType" />
+				</xsd:sequence>
+			</xsd:complexType>
+			
+			<!-- Response -->
+			<xsd:complexType name="restaurantUpdateResponse">
+				<xsd:sequence>
+					<xsd:element name="accepted" type="xsd:boolean" />
+				</xsd:sequence>
+			</xsd:complexType>
+			
+			<!-- Fault -->
+			<xsd:complexType name="restaurantUpdateFault">
+				<xsd:sequence>
+                        <xsd:element name="faultInfo" type="xsd:string" />
+                        <xsd:element name="message" type="xsd:string" />
+				</xsd:sequence>
+			</xsd:complexType>
+		</xsd:schema>
+	</types>
+	
+	<!-- Message -->
+	<!-- Restaurant Inserting -->
+	<message name="restaurantInsertRequest">
+		<part name="parameters" element="tns:restaurantInsertRequest">
+		</part>
+	</message>
+	<message name="restaurantInsertResponse">
+		<part name="parameters" element="tns:restaurantInsertResponse">
+		</part>
+	</message>
+	<message name="restaurantInsertFault">
+		<part name="parameters" element="tns:restaurantInsertFault">
+		</part>
+	</message>
+	
+	<!-- Resturant Update -->
+	<message name="restaurantUpdateRequest">
+		<part name="parameters" element="tns:restaurantInsertRequest">
+		</part>
+	</message>
+	<message name="restaurantUpdateResponse">
+		<part name="parameters" element="tns:restaurantInsertResponse">
+		</part>
+	</message>
+	<message name="restaurantUpdateFault">
+		<part name="parameters" element="tns:restaurantInsertFault">
+		</part>
+	</message>
+	
+	<!-- Port -->
+	<portType name="restaurantPT">
+		<operation name="restaurantInsert">
+			<input message="tns:restaurantInsertRequest"
+				wsam:Action="http://it.univaq.disim.sose.cald/restaurantInserting/restaurantInsertRequest">
+			</input>
+			<output message="tns:restaurantInsertResponse"
+				wsam:Action="http://it.univaq.disim.sose.cald/restaurantInserting/restaurantInsertResponse">
+			</output>
+			<fault name="restaurantInsertFault" message="tns:restaurantInsertFault"></fault>
+			
+		</operation>
+		<operation name="restaurantUpdate">
+			<input message="tns:restaurantUpdateRequest"
+				wsam:Action="http://it.univaq.disim.sose.cald/restaurantInserting/restaurantUpdateRequest">
+			</input>
+			<output message="tns:restaurantUpdateResponse"
+				wsam:Action="http://it.univaq.disim.sose.cald/restaurantInserting/restaurantUpdateResponse">
+			</output>
+			<fault name="restaurantUpdateFault" message="tns:restaurantUpdateFault"></fault>
+		</operation>
+	</portType>
+	
+	<!-- Binding -->
+	<binding name="restaurantBinding" type="tns:restaurantPT">
+		<soap:binding style="document"
+			transport="http://schemas.xmlsoap.org/soap/http" />
+		<operation name="restaurantInsert">
+			<soap:operation soapAction="" />
+			<input>
+				<soap:body use="literal" />
+			</input>
+			<output>
+				<soap:body use="literal" />
+			</output>
+		</operation>
+		<operation name="restaurantUpdate">
+			<soap:operation soapAction="" />
+			<input>
+				<soap:body use="literal" />
+			</input>
+			<output>
+				<soap:body use="literal" />
+			</output>
+		</operation>
+	</binding>
+	
+	<!-- Service -->
+	<service name="RestaurantInsertingService">
+		<port name="restaurantPort" binding="tns:restaurantBinding">
+			<soap:address location="http://localhost:8080/restaurant/services/inserting" />
+		</port>
+	</service>
+</definitions>
