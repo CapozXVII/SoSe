@@ -26,6 +26,8 @@ public class JDBCCinemaInformationServiceImpl implements CinemaInformationServic
 	//private Map<Cinema, List<HallFilm>> listCinema = new HashMap<Cinema, List<HallFilm>>();
 	@Autowired
 	private DataSource dataSource;
+	
+	List<HallFilm> hallFilmList = new ArrayList<HallFilm>();
 
 	public List<HallFilm> getCinemas(String city) throws BusinessException {
 		String sql = "SELECT * FROM cinema JOIN halls ON cinema.cinema_id = halls.cinema JOIN hall_film ON hall_film.hall = halls.hall_id JOIN films ON films.film_id = hall_film.film WHERE city =" + city + " " + "ORDER BY cinema.cinema_id";
@@ -34,17 +36,19 @@ public class JDBCCinemaInformationServiceImpl implements CinemaInformationServic
 		Connection con = null;
 		Statement st = null;
 		ResultSet rs = null;
+		
 		try {
-			List<HallFilm> hallFilmList = new ArrayList<HallFilm>();
 			con = dataSource.getConnection();
 			st = con.createStatement();
 			rs = st.executeQuery(sql);
+			
 			while (rs.next()) {
 				Hall hall = new Hall();
 				Film film = new Film();
 				HallFilm hallFilm = new HallFilm();
 				Cinema cinema = new Cinema();
 				cinema.setId(rs.getLong("parking_id"));
+				cinema.setName(rs.getString("cinema_name"));
 				cinema.setLatitude(rs.getDouble("lat"));
 				cinema.setLongitude(rs.getDouble("lon"));
 				cinema.setAddress(rs.getString("address"));
@@ -99,11 +103,9 @@ public class JDBCCinemaInformationServiceImpl implements CinemaInformationServic
 			if (con != null) {
 				try {
 					con.close();
-				} catch (SQLException e) {
-				}
+				} catch (SQLException e) {}
 			}
-
 		}
-		return null;
+		return hallFilmList;
 	}
 }

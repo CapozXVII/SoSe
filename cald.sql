@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Creato il: Gen 09, 2018 alle 11:23
+-- Creato il: Gen 12, 2018 alle 19:58
 -- Versione del server: 10.1.19-MariaDB
 -- Versione PHP: 7.0.13
 
@@ -30,7 +30,7 @@ CREATE TABLE `cinema` (
   `cinema_id` int(11) NOT NULL,
   `lat` decimal(20,8) NOT NULL,
   `lon` decimal(20,8) NOT NULL,
-  `name` varchar(50) NOT NULL,
+  `cinema_name` varchar(50) NOT NULL,
   `address` varchar(100) DEFAULT NULL,
   `cap` varchar(10) DEFAULT NULL,
   `city` varchar(50) NOT NULL,
@@ -41,7 +41,7 @@ CREATE TABLE `cinema` (
 -- Dump dei dati per la tabella `cinema`
 --
 
-INSERT INTO `cinema` (`cinema_id`, `lat`, `lon`, `name`, `address`, `cap`, `city`, `telephoneNumber`) VALUES
+INSERT INTO `cinema` (`cinema_id`, `lat`, `lon`, `cinema_name`, `address`, `cap`, `city`, `telephoneNumber`) VALUES
 (3, '19.00000000', '19.00000000', 'Bo', 'Bo', '67100', 'Rome', NULL),
 (4, '19.00000000', '19.00000000', 'Bo', 'Bo', '67100', 'Rome', NULL);
 

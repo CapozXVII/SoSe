@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions name="RestaurantInformationService"
+	targetNamespace="http://it.univaq.disim.sose.cald/restaurantInformation" 
+	xmlns:tns="http://it.univaq.disim.sose.cald/restaurantInformation"
+	xmlns="http://schemas.xmlsoap.org/wsdl/"
+	xmlns:wsp="http://www.w3.org/ns/ws-policy" 
+	xmlns:wsp1_2="http://schemas.xmlsoap.org/ws/2004/09/policy"
+	xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+	xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+	xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata">
+	
+	<types>
+		<xsd:schema targetNamespace="http://it.univaq.disim.sose.cald/restaurantInformation">
+			<xsd:element name="restaurantInformationRequest" type="tns:restaurantInformationRequest" />
+			<xsd:element name="restaurantInformationResponse" type="tns:restaurantInformationResponse" />
+			<xsd:element name="restaurantInformationFault" type="tns:restaurantInformationFault" />
+			
+			<!-- Resturant Info -->
+			<!-- Request -->
+			<xsd:complexType name="restaurantInformationRequest">
+				<xsd:sequence>
+					<xsd:element name="city" type="xsd:string" />
+				</xsd:sequence>
+			</xsd:complexType>
+			
+			<!-- Response -->
+			<xsd:complexType name="restaurantInformationResponse">
+				<xsd:sequence maxOccurs="unbounded" minOccurs="0">
+					<xsd:element name="restaurants" type="tns:restaurantType" />
+				</xsd:sequence>
+			</xsd:complexType>
+			<xsd:complexType name="restaurantType">
+				<xsd:sequence>
+					<xsd:element name="lat" type="xsd:double" />
+					<xsd:element name="lon" type="xsd:double" />
+					<xsd:element name="restaurantInfo" type="tns:restaurantInfoType" />
+				</xsd:sequence>
+			</xsd:complexType>
+			<xsd:complexType name="restaurantInfoType">
+				<xsd:sequence>
+					<xsd:element name="name" minOccurs="0" type="xsd:string" />
+					<xsd:element name="address" type="xsd:string" />
+					<xsd:element name="cap" type="xsd:string" />
+					<xsd:element name="city" type="xsd:string" />
+					<xsd:element name="telephoneNumber" minOccurs="0" type="xsd:string" />
+					<xsd:element name="table" maxOccurs="unbounded" minOccurs="1" type="tns:tableType" />
+					<xsd:element name="style" type="xsd:string" />
+					<xsd:element name="cuisine" type="xsd:string" />
+					<xsd:element name="menu" type="xsd:string" />
+					<xsd:element name="discount" minOccurs="0" type="tns:discountType" />
+				</xsd:sequence>
+			</xsd:complexType>
+			<xsd:complexType name="tableType">
+				<xsd:sequence>
+					<xsd:element name="number" type="xsd:int" />
+					<xsd:element name="seatsNumber" type="xsd:int" />
+					<xsd:element name="tableInfo" type="tns:tableInfoType" />
+				</xsd:sequence>
+			</xsd:complexType>
+			<xsd:complexType name="tableInfoType">
+				<xsd:sequence>
+					<xsd:element name="reservationTime" type="xsd:date" />
+					<xsd:element name="reservationName" type="xsd:string" />
+				</xsd:sequence>
+			</xsd:complexType>
+			<xsd:complexType name="discountType">
+				<xsd:sequence>
+					<xsd:element name="cinema" type="xsd:string" />
+					<xsd:element name="price" type="xsd:float" />
+				</xsd:sequence>
+			</xsd:complexType>
+			
+			<!-- Fault -->
+			<xsd:complexType name="restaurantInformationFault">
+				<xsd:sequence>
+                        <xsd:element name="faultInfo" type="xsd:string" />
+                        <xsd:element name="message" type="xsd:string" />
+				</xsd:sequence>
+			</xsd:complexType>
+		</xsd:schema>
+	</types>
+	
+	<!-- Message -->
+	<!-- Restaurant Info -->
+	<message name="restaurantInformationRequest">
+		<part name="parameters" element="tns:restaurantInformationRequest">
+		</part>
+	</message>
+	<message name="restaurantInformationResponse">
+		<part name="parameters" element="tns:restaurantInformationResponse">
+		</part>
+	</message>
+	<message name="restaurantInformationFault">
+		<part name="parameters" element="tns:restaurantInformationFault">
+		</part>
+	</message>
+	
+	<!-- Port -->
+	<portType name="restaurantInformationPT">
+		<operation name="restaurantInformation">
+			<input name="restaurantInformationRequest" message="tns:restaurantInformationRequest" />
+			<output name="restaurantInformationResponse" message="tns:restaurantInformationResponse" />
+			<fault name="restaurantInformationFault" message="tns:restaurantInformationFault" />
+		</operation>
+	</portType>
+	
+	<!-- Binding -->
+	<binding name="restaurantInformationBinding" type="tns:restaurantInformationPT">
+		<soap:binding style="document"
+			transport="http://schemas.xmlsoap.org/soap/http" />
+		<operation name="restaurantInformation">
+			<soap:operation soapAction="" />
+			<input>
+				<soap:body use="literal" />
+			</input>
+			<output>
+				<soap:body use="literal" />
+			</output>
+		</operation>
+	</binding>
+	
+	<!-- Service -->
+	<service name="RestaurantInformationService">
+		<port name="restaurantInformationPort" binding="tns:restaurantInformationBinding">
+			<soap:address location="http://localhost:8080/restaurant/services/information" />
+		</port>
+	</service>
+</definitions>
