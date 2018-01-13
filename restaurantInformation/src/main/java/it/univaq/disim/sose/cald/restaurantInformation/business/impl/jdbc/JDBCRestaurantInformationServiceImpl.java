@@ -12,6 +12,7 @@ import javax.sql.DataSource;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import it.univaq.disim.sose.cald.restaurantInformation.business.model.Cinema;
 import it.univaq.disim.sose.cald.restaurantInformation.business.BusinessException;
@@ -20,6 +21,7 @@ import it.univaq.disim.sose.cald.restaurantInformation.business.model.Discount;
 import it.univaq.disim.sose.cald.restaurantInformation.business.model.Restaurant;
 import it.univaq.disim.sose.cald.restaurantInformation.business.model.Table;
 
+@Service
 public class JDBCRestaurantInformationServiceImpl implements RestaurantInformationService {
 	
 	private static Logger LOGGER = LoggerFactory.getLogger(JDBCRestaurantInformationServiceImpl.class);
@@ -30,6 +32,7 @@ public class JDBCRestaurantInformationServiceImpl implements RestaurantInformati
 	List<Restaurant> restaurantList = new ArrayList<Restaurant>();
 	List<Table> tableList = new ArrayList<Table>();
 
+	@Override
 	public List<Restaurant> getRestaurants(String city) throws BusinessException {
 		String sql = "SELECT * FROM restaurants JOIN tables ON restaurant.restaurant_id = tables.restaurant JOIN discount ON discount.restaurant = restaurant.restaurant_id JOIN cinema ON cinema.cinema_id = discount.cinema WHERE city =" + city + " " + "ORDER BY restaurant.restaurant_id";
 		LOGGER.info(sql);

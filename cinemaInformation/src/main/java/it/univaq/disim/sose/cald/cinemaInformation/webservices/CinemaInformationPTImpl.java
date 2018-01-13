@@ -10,6 +10,7 @@ import org.springframework.stereotype.Component;
 import it.univaq.disim.sose.cald.cinemaInformation.business.CinemaInformationService;
 import it.univaq.disim.sose.cald.cinemaInformation.business.model.HallFilm;
 import it.univaq.disim.sose.cald.cinemaInformation.CinemaInfoType;
+import it.univaq.disim.sose.cald.cinemaInformation.CinemaInformationPT;
 import it.univaq.disim.sose.cald.cinemaInformation.CinemaInformationRequest;
 import it.univaq.disim.sose.cald.cinemaInformation.CinemaInformationResponse;
 import it.univaq.disim.sose.cald.cinemaInformation.CinemaType;
@@ -18,7 +19,7 @@ import it.univaq.disim.sose.cald.cinemaInformation.HallInfoType;
 import it.univaq.disim.sose.cald.cinemaInformation.HallType;
 
 @Component(value = "CinemaInformationPTImpl")
-public class CinemaInformationPTImpl {
+public class CinemaInformationPTImpl implements CinemaInformationPT{
 
 	private static Logger LOGGER = LoggerFactory.getLogger(CinemaInformationPTImpl.class);
 	

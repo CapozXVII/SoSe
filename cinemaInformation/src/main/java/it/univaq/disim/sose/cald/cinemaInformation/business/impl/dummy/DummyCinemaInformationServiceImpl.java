@@ -10,8 +10,9 @@ import it.univaq.disim.sose.cald.cinemaInformation.business.CinemaInformationSer
 import it.univaq.disim.sose.cald.cinemaInformation.business.model.HallFilm;
 
 @Service
-public class DummyCinemaInformationServiceImpl implements CinemaInformationService {
-
+public class DummyCinemaInformationServiceImpl implements CinemaInformationService{
+	
+	
 	public List<HallFilm> getCinemas(String city) throws BusinessException {
 		List<HallFilm> result = new ArrayList<HallFilm>();
 		return result;

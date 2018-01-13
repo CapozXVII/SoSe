@@ -10,6 +10,7 @@ import org.springframework.stereotype.Component;
 
 import it.univaq.disim.sose.cald.restaurantInformation.DiscountType;
 import it.univaq.disim.sose.cald.restaurantInformation.RestaurantInfoType;
+import it.univaq.disim.sose.cald.restaurantInformation.RestaurantInformationPT;
 import it.univaq.disim.sose.cald.restaurantInformation.RestaurantInformationRequest;
 import it.univaq.disim.sose.cald.restaurantInformation.RestaurantInformationResponse;
 import it.univaq.disim.sose.cald.restaurantInformation.RestaurantType;
@@ -18,7 +19,7 @@ import it.univaq.disim.sose.cald.restaurantInformation.business.RestaurantInform
 import it.univaq.disim.sose.cald.restaurantInformation.business.model.Restaurant;
 
 @Component(value = "RestaurantInformationPTImpl")
-public class RestaurantInformationPTImpl {
+public class RestaurantInformationPTImpl implements RestaurantInformationPT {
 	
 	private static Logger LOGGER = LoggerFactory.getLogger(RestaurantInformationPTImpl.class);
 	

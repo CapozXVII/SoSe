@@ -13,6 +13,7 @@ import javax.sql.DataSource;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import it.univaq.disim.sose.cald.restaurantInserting.DiscountType;
 import it.univaq.disim.sose.cald.restaurantInserting.RestaurantInfoType;
@@ -25,7 +26,7 @@ import it.univaq.disim.sose.cald.restaurantInserting.TableType;
 import it.univaq.disim.sose.cald.restaurantInserting.business.BusinessException;
 import it.univaq.disim.sose.cald.restaurantInserting.business.RestaurantInsertingService;
 
-
+@Service
 public class JDBCRestaurantInsertingImpl implements RestaurantInsertingService {
 
 private static Logger LOGGER = LoggerFactory.getLogger(JDBCRestaurantInsertingImpl.class);
@@ -85,7 +86,6 @@ private static Logger LOGGER = LoggerFactory.getLogger(JDBCRestaurantInsertingIm
                 }
             }	
 		} catch (SQLException e1) {
-			// TODO Auto-generated catch block
 			e1.printStackTrace();	
 		} finally {
 			if (con != null) {
