@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions name="CinemaInsertingService"
+	targetNamespace="http://it.univaq.disim.sose.cald/cinemaInserting" 
+	xmlns="http://schemas.xmlsoap.org/wsdl/"
+	xmlns:wsp="http://www.w3.org/ns/ws-policy" 
+	xmlns:tns="http://it.univaq.disim.sose.cald/cinemaInserting"
+	xmlns:wsp1_2="http://schemas.xmlsoap.org/ws/2004/09/policy"
+	xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+	xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+	xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata">
+	
+	<types>
+		<xsd:schema targetNamespace="http://it.univaq.disim.sose.cald/cinemaInserting">
+			<xsd:element name="cinemaInsertRequest" type="tns:cinemaInsertRequest" />
+			<xsd:element name="cinemaInsertResponse" type="tns:cinemaInsertResponse" />
+			<xsd:element name="cinemaInsertFault" type="tns:cinemaInsertFault" />
+			<xsd:element name="cinemaUpdateRequest" type="tns:cinemaUpdateRequest" />
+			<xsd:element name="cinemaUpdateResponse" type="tns:cinemaUpdateResponse" />
+			<xsd:element name="cinemaUpdateFault" type="tns:cinemaUpdateFault" />
+			
+			<!-- Cinema Insert Info -->
+			<!-- Request -->
+			<xsd:complexType name="cinemaInsertRequest">
+				<xsd:sequence>
+					<xsd:element name="cinema" type="tns:cinemaType" />
+				</xsd:sequence>
+			</xsd:complexType>
+			<xsd:complexType name="cinemaType">
+				<xsd:sequence>
+					<xsd:element name="lat" type="xsd:double" />
+					<xsd:element name="lon" type="xsd:double" />
+					<xsd:element name="cinemaInfo" type="tns:cinemaInfoType" />
+				</xsd:sequence>
+			</xsd:complexType>
+			<xsd:complexType name="cinemaInfoType">
+				<xsd:sequence>
+					<xsd:element name="name" minOccurs="0" type="xsd:string" />
+					<xsd:element name="address" type="xsd:string" />
+					<xsd:element name="cap" type="xsd:int" />
+					<xsd:element name="city" type="xsd:string" />
+					<xsd:element name="telephoneNumber" minOccurs="0" type="xsd:string" />
+					<xsd:element name="hall" maxOccurs="unbounded" minOccurs="1" type="tns:hallType" />
+					<xsd:element name="films" type="xsd:string" />
+					<xsd:element name="discount" minOccurs="0" type="tns:discountType" />
+				</xsd:sequence>
+			</xsd:complexType>
+			<xsd:complexType name="hallType">
+				<xsd:sequence>
+					<xsd:element name="number" type="xsd:int" />
+					<xsd:element name="seatsNumber" maxOccurs="unbounded" type="xsd:int" />
+				</xsd:sequence>
+			</xsd:complexType>
+			<xsd:complexType name="discountType">
+				<xsd:sequence>
+					<xsd:element name="restaurant" type="xsd:string" />
+					<xsd:element name="price" type="xsd:float" />
+				</xsd:sequence>
+			</xsd:complexType>
+			
+			<!-- Response -->
+			<xsd:complexType name="cinemaInsertResponse">
+				<xsd:sequence>
+					<xsd:element name="accepted" type="xsd:boolean" />
+				</xsd:sequence>
+			</xsd:complexType>
+			
+			<!-- Fault -->
+			<xsd:complexType name="cinemaInsertFault">
+				<xsd:sequence>
+                        <xsd:element name="faultInfo" type="xsd:string" />
+                        <xsd:element name="message" type="xsd:string" />
+				</xsd:sequence>
+			</xsd:complexType>
+			
+			<!-- Cinema Update -->
+			<!-- Request -->
+			<xsd:complexType name="cinemaUpdateRequest">
+				<xsd:sequence>
+					<xsd:element name="cinema" type="tns:cinemaType" />
+				</xsd:sequence>
+			</xsd:complexType>
+			
+			<!-- Response -->
+			<xsd:complexType name="cinemaUpdateResponse">
+				<xsd:sequence>
+					<xsd:element name="accepted" type="xsd:boolean" />
+				</xsd:sequence>
+			</xsd:complexType>
+			
+			<!-- Fault -->
+			<xsd:complexType name="cinemaUpdateFault">
+				<xsd:sequence>
+                        <xsd:element name="faultInfo" type="xsd:string" />
+                        <xsd:element name="message" type="xsd:string" />
+				</xsd:sequence>
+			</xsd:complexType>
+		</xsd:schema>
+	</types>
+	
+	<!-- Message -->
+	<!-- Cinema Insert -->
+	<message name="cinemaInsertRequest">
+		<part name="parameters" element="tns:cinemaInsertRequest">
+		</part>
+	</message>
+	<message name="cinemaInsertResponse">
+		<part name="parameters" element="tns:cinemaInsertResponse">
+		</part>
+	</message>
+	<message name="cinemaInsertFault">
+		<part name="parameters" element="tns:cinemaInsertFault">
+		</part>
+	</message>
+	
+	<!-- Cinema Update -->
+	<message name="cinemaUpdateRequest">
+		<part name="parameters" element="tns:cinemaInsertRequest">
+		</part>
+	</message>
+	<message name="cinemaUpdateResponse">
+		<part name="parameters" element="tns:cinemaInsertResponse">
+		</part>
+	</message>
+	<message name="cinemaUpdateFault">
+		<part name="parameters" element="tns:cinemaInsertFault">
+		</part>
+	</message>
+	
+	<!-- Port -->
+	<portType name="cinemaPT">
+		<operation name="cinemaInsert">
+			<input message="tns:cinemaInsertRequest"
+				wsam:Action="http://it.univaq.disim.sose.cald/cinemaInserting/cinemaInsertRequest">
+			</input>
+			<output message="tns:cinemaInsertResponse"
+				wsam:Action="http://it.univaq.disim.sose.cald/cinemaInserting/cinemaInsertResponse">
+			</output>
+			<fault message="tns:cinemaInsertFault" name="cinemaInsertFault">
+			</fault>
+		</operation>
+		<operation name="cinemaUpdate">
+			<input message="tns:cinemaUpdateRequest"
+				wsam:Action="http://it.univaq.disim.sose.cald/cinemaInserting/cinemaUpdateRequest">
+			</input>
+			<output message="tns:cinemaUpdateResponse"
+				wsam:Action="http://it.univaq.disim.sose.cald/cinemaInserting/cinemaUpdateResponse">
+			</output>
+			<fault message="tns:cinemaUpdateFault" name="cinemaUpdateFault">
+			</fault>
+		</operation>
+	</portType>
+	
+	<!-- Binding -->
+	<binding name="cinemaBinding" type="tns:cinemaPT">
+		<soap:binding style="document"
+			transport="http://schemas.xmlsoap.org/soap/http" />
+		<operation name="cinemaInsert">
+			<soap:operation soapAction="" />
+			<input>
+				<soap:body use="literal" />
+			</input>
+			<output>
+				<soap:body use="literal" />
+			</output>
+		</operation>
+		<operation name="cinemaUpdate">
+			<soap:operation soapAction="" />
+			<input>
+				<soap:body use="literal" />
+			</input>
+			<output>
+				<soap:body use="literal" />
+			</output>
+		</operation>
+	</binding>
+	
+	<!-- Service -->
+	<service name="cinemaInsertingService">
+		<port name="cinemaPort" binding="tns:cinemaBinding">
+			<soap:address location="http://localhost:8080/cinema/services/inserting" />
+		</port>
+	</service>
+</definitions>
