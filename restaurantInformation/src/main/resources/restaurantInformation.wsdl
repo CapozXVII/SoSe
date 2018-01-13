@@ -123,7 +123,11 @@
 	<!-- Service -->
 	<service name="RestaurantInformationService">
 		<port name="restaurantInformationPort" binding="tns:restaurantInformationBinding">
+<<<<<<< HEAD
 			<soap:address location="http://localhost:8080/restaurant/services/information" />
+=======
+			<soap:address location="http://localhost:8080/restaurantInformation/services/restaurantInformation" />
+>>>>>>> master
 		</port>
 	</service>
 </definitions>

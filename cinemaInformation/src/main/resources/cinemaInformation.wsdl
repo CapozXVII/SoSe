@@ -125,7 +125,7 @@
 	<!-- Service -->
 	<service name="CinemaInformationService">
 		<port name="cinemaInformationPort" binding="tns:cinemaInformationBinding">
-			<soap:address location="http://localhost:8080/cinema/services/information" />
+			<soap:address location="http://localhost:8080/cinemaInformation/services/cinemaInformation" />
 		</port>
 	</service>
 </definitions>

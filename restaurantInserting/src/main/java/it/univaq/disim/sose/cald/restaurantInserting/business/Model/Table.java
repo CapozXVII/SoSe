@@ -1,4 +1,4 @@
-package it.univaq.disim.sose.cald.restaurantInserting.business.Model;
+package it.univaq.disim.sose.cald.restaurantInserting.business.model;
 
 public class Table implements java.io.Serializable {
 	
