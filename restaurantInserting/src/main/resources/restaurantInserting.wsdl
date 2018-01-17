@@ -117,15 +117,15 @@
 	
 	<!-- Resturant Update -->
 	<message name="restaurantUpdateRequest">
-		<part name="parameters" element="tns:restaurantInsertRequest">
+		<part name="parameters" element="tns:restaurantUpdateRequest">
 		</part>
 	</message>
 	<message name="restaurantUpdateResponse">
-		<part name="parameters" element="tns:restaurantInsertResponse">
+		<part name="parameters" element="tns:restaurantUpdateResponse">
 		</part>
 	</message>
 	<message name="restaurantUpdateFault">
-		<part name="parameters" element="tns:restaurantInsertFault">
+		<part name="parameters" element="tns:restaurantUpdateFault">
 		</part>
 	</message>
 	
