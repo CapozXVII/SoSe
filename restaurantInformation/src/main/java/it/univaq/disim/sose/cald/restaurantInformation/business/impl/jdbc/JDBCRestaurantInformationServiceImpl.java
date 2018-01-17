@@ -34,7 +34,7 @@ public class JDBCRestaurantInformationServiceImpl implements RestaurantInformati
 
 	@Override
 	public List<Restaurant> getRestaurants(String city) throws BusinessException {
-		String sql = "SELECT * FROM restaurants JOIN tables ON restaurant.restaurant_id = tables.restaurant JOIN discount ON discount.restaurant = restaurant.restaurant_id JOIN cinema ON cinema.cinema_id = discount.cinema WHERE city =" + city + " " + "ORDER BY restaurant.restaurant_id";
+		String sql = "SELECT * FROM restaurants JOIN tables ON restaurants.restaurant_id = tables.restaurant JOIN discount ON discount.restaurant = restaurants.restaurant_id JOIN cinema ON cinema.cinema_id = discount.cinema AND restaurants.restaurant_city =" + city + "" + "ORDER BY restaurants.restaurant_id;";
 		LOGGER.info(sql);
 		Connection con = null;
 		Statement st = null;
@@ -94,16 +94,16 @@ public class JDBCRestaurantInformationServiceImpl implements RestaurantInformati
 		Discount discount = new Discount();
 		Cinema cinema = new Cinema();
 		restaurant.setId(rs.getLong("restaurant_id"));
-		restaurant.setAddress(rs.getString("address"));
-		restaurant.setCap(rs.getString("cap"));
-		restaurant.setCity(rs.getString("city"));
+		restaurant.setAddress(rs.getString("restaurant_address"));
+		restaurant.setCap(rs.getString("restaurant_cap"));
+		restaurant.setCity(rs.getString("restaurant_city"));
 		restaurant.setCousine(rs.getString("cousine"));
-		restaurant.setLatitude(rs.getDouble("lat"));
-		restaurant.setLongitude(rs.getDouble("lon"));
+		restaurant.setLatitude(rs.getDouble("restaurant_lat"));
+		restaurant.setLongitude(rs.getDouble("restaurant_lon"));
 		restaurant.setMenu(rs.getString("menu"));
-		restaurant.setName(rs.getString("name"));
+		restaurant.setName(rs.getString("restaurant_name"));
 		restaurant.setStyle(rs.getString("style"));
-		restaurant.setTelephoneNumber(rs.getString("telephoneNumber"));
+		restaurant.setTelephoneNumber(rs.getString("restaurant_telephoneNumber"));
 		discount.setPrice(rs.getFloat("price"));
 		cinema.setName(rs.getString("cinema_name"));
 		discount.setCinema(cinema);

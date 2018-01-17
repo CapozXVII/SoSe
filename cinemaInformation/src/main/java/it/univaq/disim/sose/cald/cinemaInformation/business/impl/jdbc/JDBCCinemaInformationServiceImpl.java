@@ -30,7 +30,7 @@ public class JDBCCinemaInformationServiceImpl implements CinemaInformationServic
 	List<HallFilm> hallFilmList = new ArrayList<HallFilm>();
 
 	public List<HallFilm> getCinemas(String city) throws BusinessException {
-		String sql = "SELECT * FROM cinema JOIN halls ON cinema.cinema_id = halls.cinema JOIN hall_film ON hall_film.hall = halls.hall_id JOIN films ON films.film_id = hall_film.film WHERE city =" + city + " " + "ORDER BY cinema.cinema_id";
+		String sql = "SELECT * FROM cinema JOIN halls ON cinema.cinema_id = halls.cinema JOIN hall_film ON hall_film.hall = halls.hall_id JOIN films ON films.film_id = hall_film.film AND cinema.cinema_city =" + city + " " + "ORDER BY cinema.cinema_id";
 		LOGGER.info(sql);
 		Long count = (long) 0;
 		Connection con = null;
@@ -47,14 +47,14 @@ public class JDBCCinemaInformationServiceImpl implements CinemaInformationServic
 				Film film = new Film();
 				HallFilm hallFilm = new HallFilm();
 				Cinema cinema = new Cinema();
-				cinema.setId(rs.getLong("parking_id"));
+				cinema.setId(rs.getLong("cinema_id"));
 				cinema.setName(rs.getString("cinema_name"));
-				cinema.setLatitude(rs.getDouble("lat"));
-				cinema.setLongitude(rs.getDouble("lon"));
-				cinema.setAddress(rs.getString("address"));
-				cinema.setCap(rs.getString("cap"));
+				cinema.setLatitude(rs.getDouble("cinema_ilat"));
+				cinema.setLongitude(rs.getDouble("cinema_ilon"));
+				cinema.setAddress(rs.getString("cinema_iaddress"));
+				cinema.setCap(rs.getString("cinema_icap"));
 				cinema.setCity(city);
-				cinema.setTelephoneNumber(rs.getString("telephoneNumber"));
+				cinema.setTelephoneNumber(rs.getString("cinema_itelephoneNumber"));
 				hall.setId(rs.getLong("hall_id"));
 				hall.setNumber(rs.getInt("number"));
 				hall.setSeatsNumber(rs.getInt("seatsNumber"));

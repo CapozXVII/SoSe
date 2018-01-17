@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Creato il: Gen 12, 2018 alle 19:58
+-- Creato il: Gen 17, 2018 alle 21:59
 -- Versione del server: 10.1.19-MariaDB
 -- Versione PHP: 7.0.13
 
@@ -28,20 +28,20 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `cinema` (
   `cinema_id` int(11) NOT NULL,
-  `lat` decimal(20,8) NOT NULL,
-  `lon` decimal(20,8) NOT NULL,
+  `cinema_lat` decimal(20,8) NOT NULL,
+  `cinema_lon` decimal(20,8) NOT NULL,
   `cinema_name` varchar(50) NOT NULL,
-  `address` varchar(100) DEFAULT NULL,
-  `cap` varchar(10) DEFAULT NULL,
-  `city` varchar(50) NOT NULL,
-  `telephoneNumber` varchar(20) DEFAULT NULL
+  `cinema_address` varchar(100) DEFAULT NULL,
+  `cinema_cap` varchar(10) DEFAULT NULL,
+  `cinema_city` varchar(50) NOT NULL,
+  `cinema_telephoneNumber` varchar(20) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dump dei dati per la tabella `cinema`
 --
 
-INSERT INTO `cinema` (`cinema_id`, `lat`, `lon`, `cinema_name`, `address`, `cap`, `city`, `telephoneNumber`) VALUES
+INSERT INTO `cinema` (`cinema_id`, `cinema_lat`, `cinema_lon`, `cinema_name`, `cinema_address`, `cinema_cap`, `cinema_city`, `cinema_telephoneNumber`) VALUES
 (3, '19.00000000', '19.00000000', 'Bo', 'Bo', '67100', 'Rome', NULL),
 (4, '19.00000000', '19.00000000', 'Bo', 'Bo', '67100', 'Rome', NULL);
 
@@ -54,7 +54,7 @@ INSERT INTO `cinema` (`cinema_id`, `lat`, `lon`, `cinema_name`, `address`, `cap`
 CREATE TABLE `discount` (
   `discount_id` int(11) NOT NULL,
   `cinema` int(11) NOT NULL,
-  `restaurants` int(11) NOT NULL,
+  `restaurant` int(11) NOT NULL,
   `price` double NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -119,17 +119,24 @@ CREATE TABLE `hall_film` (
 
 CREATE TABLE `restaurants` (
   `restaurant_id` int(11) NOT NULL,
-  `lat` decimal(20,8) DEFAULT NULL,
-  `lon` decimal(20,8) DEFAULT NULL,
-  `name` varchar(50) NOT NULL,
-  `address` varchar(100) DEFAULT NULL,
-  `cap` varchar(10) DEFAULT NULL,
-  `city` varchar(50) DEFAULT NULL,
-  `telephoneumber` varchar(20) DEFAULT NULL,
+  `restaurant_lat` decimal(20,8) DEFAULT NULL,
+  `restaurant_lon` decimal(20,8) DEFAULT NULL,
+  `restaurant_name` varchar(50) NOT NULL,
+  `restaurant_address` varchar(100) DEFAULT NULL,
+  `restaurant_cap` varchar(10) DEFAULT NULL,
+  `restaurant_city` varchar(50) DEFAULT NULL,
+  `restaurant_telephoneumber` varchar(20) DEFAULT NULL,
   `style` varchar(50) DEFAULT NULL,
   `cuisine` varchar(50) DEFAULT NULL,
   `menu` varchar(500) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dump dei dati per la tabella `restaurants`
+--
+
+INSERT INTO `restaurants` (`restaurant_id`, `restaurant_lat`, `restaurant_lon`, `restaurant_name`, `restaurant_address`, `restaurant_cap`, `restaurant_city`, `restaurant_telephoneumber`, `style`, `cuisine`, `menu`) VALUES
+(1, NULL, NULL, 'Da Paolo', 'Via Mazzini 3', '00123', 'Rome', '3458987666', 'Napoletano', 'Bo', 'Bo');
 
 -- --------------------------------------------------------
 
@@ -203,7 +210,7 @@ ALTER TABLE `cinema`
 ALTER TABLE `discount`
   ADD PRIMARY KEY (`discount_id`),
   ADD KEY `cinema` (`cinema`),
-  ADD KEY `restaurants` (`restaurants`);
+  ADD KEY `restaurants` (`restaurant`);
 
 --
 -- Indici per le tabelle `films`
@@ -296,7 +303,7 @@ ALTER TABLE `hall_film`
 -- AUTO_INCREMENT per la tabella `restaurants`
 --
 ALTER TABLE `restaurants`
-  MODIFY `restaurant_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `restaurant_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT per la tabella `tables`
 --
@@ -326,7 +333,7 @@ ALTER TABLE `user_table`
 --
 ALTER TABLE `discount`
   ADD CONSTRAINT `discount_ibfk_1` FOREIGN KEY (`cinema`) REFERENCES `cinema` (`cinema_id`),
-  ADD CONSTRAINT `discount_ibfk_2` FOREIGN KEY (`restaurants`) REFERENCES `restaurants` (`restaurant_id`);
+  ADD CONSTRAINT `discount_ibfk_2` FOREIGN KEY (`restaurant`) REFERENCES `restaurants` (`restaurant_id`);
 
 --
 -- Limiti per la tabella `halls`
