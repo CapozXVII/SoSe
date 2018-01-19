@@ -31,13 +31,14 @@ public class RestaurantInformationPTImpl implements RestaurantInformationPT {
 		LOGGER.info("CALLED cinemaInformation");
 		try {
 			List<Restaurant> restaurants = service.getRestaurants(parameters.getCity());
-			List<TableType> tables = new ArrayList<TableType>();
+			List<TableType> tables;
 			RestaurantInformationResponse response = new RestaurantInformationResponse();
 			
 			for(Restaurant restaurant : restaurants) {
 				RestaurantInfoType osmRestaurantInfoType = new RestaurantInfoType();
 				RestaurantType osmRestaurantType = new RestaurantType();
 				DiscountType osmDiscountType = new DiscountType();
+				tables = new ArrayList<TableType>();
 				for(int i = 0; i < restaurant.getTables().size(); i++) {
 					TableType osmTableType = new TableType();
 					osmTableType.setNumber(restaurant.getTables().get(i).getNumber());

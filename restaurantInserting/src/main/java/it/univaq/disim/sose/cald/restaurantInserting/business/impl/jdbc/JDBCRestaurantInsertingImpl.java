@@ -64,7 +64,7 @@ private static Logger LOGGER = LoggerFactory.getLogger(JDBCRestaurantInsertingIm
 		PreparedStatement sql;
 		
 		try {
-			sql = con.prepareStatement("INSERT INTO RESTAURANTS (restaurant_lat,restaurant_lon,restaurant_name,restaurant_address,restaurant_cap,restaurant_city,restaurant_telephonenumber,style,cusine,menu) VALUES (?,?,?,?,?,?,?,?,?,?)", Statement.RETURN_GENERATED_KEYS);
+			sql = con.prepareStatement("INSERT INTO RESTAURANTS (restaurant_lat,restaurant_lon,restaurant_name,restaurant_address,restaurant_cap,restaurant_city,restaurant_telephoneNumber,style,cuisine,menu) VALUES (?,?,?,?,?,?,?,?,?,?)", Statement.RETURN_GENERATED_KEYS);
 			ResultSet rs = null;
 			sql.setDouble(1, lat);
 			sql.setDouble(2, lon);
@@ -129,7 +129,7 @@ private static Logger LOGGER = LoggerFactory.getLogger(JDBCRestaurantInsertingIm
 				}
 			}
 		}
-		RestaurantInsertResponse result= new RestaurantInsertResponse(); 
+		RestaurantInsertResponse result = new RestaurantInsertResponse(); 
 		
 		if (id2>0) {
 			result.setAccepted(true);
