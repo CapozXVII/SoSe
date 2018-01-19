@@ -31,6 +31,7 @@ public class JDBCRestaurantInformationServiceImpl implements RestaurantInformati
 
 	@Override
 	public List<Restaurant> getRestaurants(String city) throws BusinessException {
+		//CIAO
 		List<Restaurant> restaurantList = new ArrayList<Restaurant>();
 		List<Table> tableList = new ArrayList<Table>();
 		String sql = "SELECT * FROM restaurants JOIN tables ON restaurants.restaurant_id = tables.restaurant JOIN discount ON discount.restaurant = restaurants.restaurant_id JOIN cinema ON cinema.cinema_id = discount.cinema AND restaurants.restaurant_city ='" + city + "' " + "ORDER BY restaurants.restaurant_id";
