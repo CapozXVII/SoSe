@@ -20,7 +20,7 @@ public class DummyRestaurantInsertingServiceImpl implements RestaurantInsertingS
 	public RestaurantInsertResponse insertRestaurant(RestaurantInsertRequest parameters) throws BusinessException {
 		RestaurantInsertResponse result = new RestaurantInsertResponse(); 
 		result.setAccepted(false); /* controllare se va bene*/
-		LOGGER.info("CALLED dummy pollo");
+		LOGGER.info("CALLED dummy RestaurantInserting");
 		return result;
 	}
 	
