@@ -28,13 +28,12 @@ public class JDBCRestaurantInformationServiceImpl implements RestaurantInformati
 	
 	@Autowired
 	private DataSource dataSource;
-	
-	List<Restaurant> restaurantList = new ArrayList<Restaurant>();
-	List<Table> tableList = new ArrayList<Table>();
 
 	@Override
 	public List<Restaurant> getRestaurants(String city) throws BusinessException {
-		String sql = "SELECT * FROM restaurants JOIN tables ON restaurants.restaurant_id = tables.restaurant JOIN discount ON discount.restaurant = restaurants.restaurant_id JOIN cinema ON cinema.cinema_id = discount.cinema AND restaurants.restaurant_city =" + city + "" + "ORDER BY restaurants.restaurant_id;";
+		List<Restaurant> restaurantList = new ArrayList<Restaurant>();
+		List<Table> tableList = new ArrayList<Table>();
+		String sql = "SELECT * FROM restaurants JOIN tables ON restaurants.restaurant_id = tables.restaurant JOIN discount ON discount.restaurant = restaurants.restaurant_id JOIN cinema ON cinema.cinema_id = discount.cinema AND restaurants.restaurant_city ='" + city + "' " + "ORDER BY restaurants.restaurant_id";
 		LOGGER.info(sql);
 		Connection con = null;
 		Statement st = null;
@@ -97,7 +96,7 @@ public class JDBCRestaurantInformationServiceImpl implements RestaurantInformati
 		restaurant.setAddress(rs.getString("restaurant_address"));
 		restaurant.setCap(rs.getString("restaurant_cap"));
 		restaurant.setCity(rs.getString("restaurant_city"));
-		restaurant.setCousine(rs.getString("cousine"));
+		restaurant.setCousine(rs.getString("cuisine"));
 		restaurant.setLatitude(rs.getDouble("restaurant_lat"));
 		restaurant.setLongitude(rs.getDouble("restaurant_lon"));
 		restaurant.setMenu(rs.getString("menu"));

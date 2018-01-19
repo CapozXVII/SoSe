@@ -44,6 +44,7 @@ public class RestaurantInformationPTImpl implements RestaurantInformationPT {
 					osmTableType.setSeatsNumber(restaurant.getTables().get(i).getSeatsNumber());
 					tables.add(osmTableType);
 				}
+				osmRestaurantInfoType.setTable(tables);
 				osmRestaurantInfoType.setAddress(restaurant.getAddress());
 				osmRestaurantInfoType.setCap(restaurant.getCap());
 				osmRestaurantInfoType.setCity(restaurant.getCity());

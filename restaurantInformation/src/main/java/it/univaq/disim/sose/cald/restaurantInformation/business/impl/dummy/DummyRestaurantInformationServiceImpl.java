@@ -19,7 +19,7 @@ public class DummyRestaurantInformationServiceImpl implements RestaurantInformat
 
 	@Override
 	public List<Restaurant> getRestaurants(String city) throws BusinessException {
-		LOGGER.info("CIAO");
+		LOGGER.info("Sono nella classe Dummy");
 		List<Restaurant> result = new ArrayList<Restaurant>();
 		return result;
 	}

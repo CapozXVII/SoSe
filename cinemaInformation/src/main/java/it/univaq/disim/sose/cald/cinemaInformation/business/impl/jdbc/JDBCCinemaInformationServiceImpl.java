@@ -27,9 +27,8 @@ public class JDBCCinemaInformationServiceImpl implements CinemaInformationServic
 	@Autowired
 	private DataSource dataSource;
 	
-	List<HallFilm> hallFilmList = new ArrayList<HallFilm>();
-
 	public List<HallFilm> getCinemas(String city) throws BusinessException {
+		List<HallFilm> hallFilmList = new ArrayList<HallFilm>();
 		String sql = "SELECT * FROM cinema JOIN halls ON cinema.cinema_id = halls.cinema JOIN hall_film ON hall_film.hall = halls.hall_id JOIN films ON films.film_id = hall_film.film AND cinema.cinema_city =" + city + " " + "ORDER BY cinema.cinema_id";
 		LOGGER.info(sql);
 		Long count = (long) 0;

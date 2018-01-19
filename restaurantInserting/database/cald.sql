@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Creato il: Gen 17, 2018 alle 21:59
+-- Creato il: Gen 19, 2018 alle 15:48
 -- Versione del server: 10.1.19-MariaDB
 -- Versione PHP: 7.0.13
 
@@ -57,6 +57,13 @@ CREATE TABLE `discount` (
   `restaurant` int(11) NOT NULL,
   `price` double NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dump dei dati per la tabella `discount`
+--
+
+INSERT INTO `discount` (`discount_id`, `cinema`, `restaurant`, `price`) VALUES
+(1, 3, 1, 5);
 
 -- --------------------------------------------------------
 
@@ -125,7 +132,7 @@ CREATE TABLE `restaurants` (
   `restaurant_address` varchar(100) DEFAULT NULL,
   `restaurant_cap` varchar(10) DEFAULT NULL,
   `restaurant_city` varchar(50) DEFAULT NULL,
-  `restaurant_telephoneumber` varchar(20) DEFAULT NULL,
+  `restaurant_telephoneNumber` varchar(20) DEFAULT NULL,
   `style` varchar(50) DEFAULT NULL,
   `cuisine` varchar(50) DEFAULT NULL,
   `menu` varchar(500) DEFAULT NULL
@@ -135,7 +142,7 @@ CREATE TABLE `restaurants` (
 -- Dump dei dati per la tabella `restaurants`
 --
 
-INSERT INTO `restaurants` (`restaurant_id`, `restaurant_lat`, `restaurant_lon`, `restaurant_name`, `restaurant_address`, `restaurant_cap`, `restaurant_city`, `restaurant_telephoneumber`, `style`, `cuisine`, `menu`) VALUES
+INSERT INTO `restaurants` (`restaurant_id`, `restaurant_lat`, `restaurant_lon`, `restaurant_name`, `restaurant_address`, `restaurant_cap`, `restaurant_city`, `restaurant_telephoneNumber`, `style`, `cuisine`, `menu`) VALUES
 (1, NULL, NULL, 'Da Paolo', 'Via Mazzini 3', '00123', 'Rome', '3458987666', 'Napoletano', 'Bo', 'Bo');
 
 -- --------------------------------------------------------
@@ -150,6 +157,14 @@ CREATE TABLE `tables` (
   `seatsNumber` int(11) NOT NULL,
   `restaurant` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dump dei dati per la tabella `tables`
+--
+
+INSERT INTO `tables` (`table_id`, `number`, `seatsNumber`, `restaurant`) VALUES
+(1, 1, 10, 1),
+(2, 2, 15, 1);
 
 -- --------------------------------------------------------
 
@@ -283,7 +298,7 @@ ALTER TABLE `cinema`
 -- AUTO_INCREMENT per la tabella `discount`
 --
 ALTER TABLE `discount`
-  MODIFY `discount_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `discount_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT per la tabella `films`
 --
@@ -308,7 +323,7 @@ ALTER TABLE `restaurants`
 -- AUTO_INCREMENT per la tabella `tables`
 --
 ALTER TABLE `tables`
-  MODIFY `table_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `table_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT per la tabella `users`
 --
