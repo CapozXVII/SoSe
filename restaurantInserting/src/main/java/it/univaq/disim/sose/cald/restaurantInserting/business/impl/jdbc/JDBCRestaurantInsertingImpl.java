@@ -51,7 +51,7 @@ private static Logger LOGGER = LoggerFactory.getLogger(JDBCRestaurantInsertingIm
 		String cuisine = newRestaurantInfo.getCuisine();
 		String menu = newRestaurantInfo.getMenu();
 		DiscountType discount = newRestaurantInfo.getDiscount();
-		LOGGER.info("JDBCInserting");
+		LOGGER.info("Called JDBCInserting");
 		int id = 0;
 		int id2 = 0;
 				
@@ -64,8 +64,9 @@ private static Logger LOGGER = LoggerFactory.getLogger(JDBCRestaurantInsertingIm
 		PreparedStatement sql;
 		
 		try {
-			sql = con.prepareStatement("INSERT INTO RESTAURANTS (restaurant_lat,restaurant_lon,restaurant_name,restaurant_address,restaurant_cap,restaurant_city,restaurant_telephonenumber,style,cusine,menu) VALUES (?,?,?,?,?,?,?,?,?,?)", Statement.RETURN_GENERATED_KEYS);
-			ResultSet rs = null;
+			con = dataSource.getConnection();
+			sql = con.prepareStatement("INSERT INTO RESTAURANTS (restaurant_lat,restaurant_lon,restaurant_name,restaurant_address,restaurant_cap,restaurant_city,restaurant_telephonenumber,style,cuisine,menu) VALUES (?,?,?,?,?,?,?,?,?,?)", Statement.RETURN_GENERATED_KEYS);
+			
 			sql.setDouble(1, lat);
 			sql.setDouble(2, lon);
 			sql.setString(3, name);
@@ -76,7 +77,7 @@ private static Logger LOGGER = LoggerFactory.getLogger(JDBCRestaurantInsertingIm
 			sql.setString(8, style);
 			sql.setString(9, cuisine);
 			sql.setString(10, menu);
-			con = dataSource.getConnection();
+			
 			
 			if (sql.executeUpdate() == 1) {
                 try (ResultSet keys = sql.getGeneratedKeys()) {
@@ -104,12 +105,13 @@ private static Logger LOGGER = LoggerFactory.getLogger(JDBCRestaurantInsertingIm
 				LOGGER.info(sql2);*/
 				
 				try {
+					con = dataSource.getConnection();
 					sql = con.prepareStatement("INSERT INTO TABLES (number, seatsNumber, restaurant) VALUES (?,?,?)", Statement.RETURN_GENERATED_KEYS);
 					ResultSet rs = null;
 					sql.setInt(1, table.get(i).getNumber());
 					sql.setInt(2, table.get(i).getSeatsNumber());/*questo non va bene errore nel wsdl*//*modificato*/
 					sql.setInt(3, id);
-					con = dataSource.getConnection();
+					
 					
 					if (sql.executeUpdate() == 1) {
 		                try (ResultSet keys = sql.getGeneratedKeys()) {
