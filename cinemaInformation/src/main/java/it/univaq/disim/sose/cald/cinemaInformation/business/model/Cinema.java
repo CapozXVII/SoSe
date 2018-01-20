@@ -12,7 +12,7 @@ public class Cinema {
 	private String address;
 	private String city;
 	private String telephoneNumber;
-	private List<Hall> halls;
+	private List<HallFilm> halls;
 	
 	public Long getId() {
 		return id;
@@ -62,10 +62,10 @@ public class Cinema {
 	public void setTelephoneNumber(String telephoneNumber) {
 		this.telephoneNumber = telephoneNumber;
 	}
-	public List<Hall> getHalls() {
+	public List<HallFilm> getHalls() {
 		return halls;
 	}
-	public void setHalls(List<Hall> halls) {
+	public void setHalls(List<HallFilm> halls) {
 		this.halls = halls;
 	}
 	

@@ -11,6 +11,8 @@
 		<cxf.version>3.2.1</cxf.version>
 		<cxf.xjc-utils.version>3.2.0</cxf.xjc-utils.version>
 		<spring.version>4.3.12.RELEASE</spring.version>
+		<maven.compiler.target>1.8</maven.compiler.target>
+    		<maven.compiler.source>1.8</maven.compiler.source>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>		
 	</properties>
 	<dependencies> 

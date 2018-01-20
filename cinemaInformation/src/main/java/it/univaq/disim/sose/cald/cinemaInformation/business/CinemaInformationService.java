@@ -2,11 +2,11 @@ package it.univaq.disim.sose.cald.cinemaInformation.business;
 
 import java.util.List;
 
-import it.univaq.disim.sose.cald.cinemaInformation.business.model.HallFilm;
+import it.univaq.disim.sose.cald.cinemaInformation.business.model.Cinema;
 
 public interface CinemaInformationService {
 	
-	List<HallFilm> getCinemas(String city) throws BusinessException;
+	List<Cinema> getCinemas(String city) throws BusinessException;
 	
 	
 	
