@@ -7,12 +7,12 @@
                            http://cxf.apache.org/core http://cxf.apache.org/schemas/core.xsd 
                            http://cxf.apache.org/jaxws http://cxf.apache.org/schemas/jaxws.xsd">
                            
-    <jaxws:endpoint id="restaurantInsertingHTTP" 
-			xmlns:restaurantInserting="http://it.univaq.disim.sose.cald/restaurantInserting"
-		    address="/restaurantInserting" 
-		    serviceName="restaurantInserting:RestaurantInsertingService"
-		    endpointName="restaurantInserting:restaurantPort" 
-		    implementor="#restaurantInsertingPTImpl">
+    <jaxws:endpoint id="cinemaInsertingHTTP" 
+			xmlns:cinemaInserting="http://it.univaq.disim.sose.cald/cinemaInserting"
+		    address="/cinemaInserting" 
+		    serviceName="cinemaInserting:cinemaInsertingService"
+		    endpointName="cinemaInserting:cinemaPort" 
+		    implementor="#cinemaInsertingPTImpl">
 		    
 	</jaxws:endpoint>
 	
