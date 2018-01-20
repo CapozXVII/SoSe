@@ -31,10 +31,9 @@ public class JDBCRestaurantInformationServiceImpl implements RestaurantInformati
 
 	@Override
 	public List<Restaurant> getRestaurants(String city) throws BusinessException {
-		//CIAO
 		List<Restaurant> restaurantList = new ArrayList<Restaurant>();
 		List<Table> tableList = new ArrayList<Table>();
-		String sql = "SELECT * FROM restaurants JOIN tables ON restaurants.restaurant_id = tables.restaurant JOIN discount ON discount.restaurant = restaurants.restaurant_id JOIN cinema ON cinema.cinema_id = discount.cinema AND restaurants.restaurant_city ='" + city + "' " + "ORDER BY restaurants.restaurant_id";
+		String sql = "SELECT * FROM restaurants JOIN tables ON restaurants.restaurant_id = tables.restaurant JOIN discount ON discount.restaurant = restaurants.restaurant_id JOIN cinema ON cinema.cinema_id = discount.cinema AND restaurants.restaurant_city = '" + city + "' " + "ORDER BY restaurants.restaurant_id";
 		LOGGER.info(sql);
 		Connection con = null;
 		Statement st = null;
@@ -42,30 +41,28 @@ public class JDBCRestaurantInformationServiceImpl implements RestaurantInformati
 		
 		try {
 			Restaurant restaurant = null;
-			Table table = null;
 			int count = 0;
 			con = dataSource.getConnection();
 			st = con.createStatement();
 			rs = st.executeQuery(sql);
 			
 			while(rs.next()) {
-				if(rs.first()) {
+				if(rs.isFirst()) {
 					count = rs.getInt("restaurant_id");
 					restaurant = createRestaurant(rs);
 				}
 				if(count == rs.getInt("restaurant_id")) {
-					table = createTable(rs);
-					tableList.add(table);
+					tableList.add(createTable(rs));
 				}
 				else {
 					count = rs.getInt("restaurant_id");
 					restaurant.setTables(tableList);
 					restaurantList.add(restaurant);
+					tableList = new ArrayList<Table>();
 					restaurant = createRestaurant(rs);
-					table = createTable(rs);
-					tableList.add(table);
+					tableList.add(createTable(rs));
 				}
-				if(rs.last()) {
+				if(rs.isLast()) {
 					restaurant.setTables(tableList);
 					restaurantList.add(restaurant);
 				}
