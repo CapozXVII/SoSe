@@ -30,7 +30,7 @@ public class JDBCCinemaInformationServiceImpl implements CinemaInformationServic
 	public List<Cinema> getCinemas(String city) throws BusinessException {
 		List<Cinema> cinemaList = new ArrayList<Cinema>();
 		List<HallFilm> hallFilmList = new ArrayList<HallFilm>();
-		String sql = "SELECT * FROM cinema JOIN halls ON cinema.cinema_id = halls.cinema JOIN hall_film ON hall_film.hall = halls.hall_id JOIN films ON films.film_id = hall_film.film AND cinema.cinema_city = '" + city + "' " + "ORDER BY BY cinema.cinema_id";
+		String sql = "SELECT * FROM cinema JOIN halls ON cinema.cinema_id = halls.cinema JOIN hall_film ON hall_film.hall = halls.hall_id JOIN films ON films.film_id = hall_film.film AND cinema.cinema_city = '" + city + "' " + "ORDER BY cinema.cinema_id";
 		LOGGER.info(sql);
 		Connection con = null;
 		Statement st = null;
@@ -113,7 +113,8 @@ public class JDBCCinemaInformationServiceImpl implements CinemaInformationServic
 		hallFilm.setId(rs.getLong("hall_film_id"));
 		hallFilm.setFreeSeatsNumber(rs.getInt("freeSeatsNumber"));
 		hallFilm.setPrice(rs.getFloat("price"));
-		hallFilm.setTime(rs.getDate("time"));
+		hallFilm.setTime(rs.getTimestamp("time"));
+		LOGGER.info(hallFilm.getTime() + "CIa");
 		hallFilm.setHall(hall);
 		hallFilm.setFilm(film);
 		return hallFilm;
