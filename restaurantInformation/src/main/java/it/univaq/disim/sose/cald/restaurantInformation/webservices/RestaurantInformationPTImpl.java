@@ -54,8 +54,12 @@ public class RestaurantInformationPTImpl implements RestaurantInformationPT {
 				osmRestaurantInfoType.setName(restaurant.getName());
 				osmRestaurantInfoType.setStyle(restaurant.getStyle());
 				osmRestaurantInfoType.setTelephoneNumber(restaurant.getTelephoneNumber());
-				osmDiscountType.setCinema(restaurant.getDiscount().getCinema().getName());
-				osmDiscountType.setPrice(restaurant.getDiscount().getPrice());
+				if (restaurant.getDiscount() != null) {
+					osmDiscountType.setCinema(restaurant.getDiscount().getCinema().getName());
+					osmDiscountType.setPrice(restaurant.getDiscount().getPrice());
+				} else {
+					osmDiscountType = null;
+				}
 				osmRestaurantInfoType.setDiscount(osmDiscountType);
 				osmRestaurantType.setLat(restaurant.getLatitude());
 				osmRestaurantType.setLon(restaurant.getLongitude());
