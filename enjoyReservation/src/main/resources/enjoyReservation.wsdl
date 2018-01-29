@@ -1,0 +1,560 @@
+<?xml version="1.0"?>
+<definitions name="EnjoyReservationService"
+        targetNamespace="http://it.univaq.disim.sose.cald/enjoyReservation"
+	xmlns:tns="http://it.univaq.disim.sose.cald/enjoyReservation"
+        xmlns="http://schemas.xmlsoap.org/wsdl/"
+        xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+        xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+			
+	<types>
+		<xsd:schema targetNamespace="http://it.univaq.disim.sose.cald/enjoyReservation">
+			<xsd:element name="insertCinemaRequest" type="tns:insertCinemaRequest"/> 
+			<xsd:element name="getCinemaInformationRequest" type="tns:getCinemaInformationRequest"/> 
+			<xsd:element name="cinemaBookingRequest" type="tns:cinemaBookingRequest"/> 
+			<xsd:element name="updateCinemaRequest" type="tns:updateCinemaRequest"/>
+			<xsd:element name="insertRestaurantRequest" type="tns:insertRestaurantRequest"/> 
+			<xsd:element name="getRestaurantInformationRequest" type="tns:getRestaurantInformationRequest"/> 
+			<xsd:element name="restaurantBookingRequest" type="tns:restaurantBookingRequest"/>	
+			<xsd:element name="updateRestaurantRequest" type="tns:updateRestaurantRequest"/>
+			
+			<xsd:element name="insertCinemaResponse" type="tns:insertCinemaResponse"/> 
+			<xsd:element name="getCinemaInformationResponse" type="tns:getCinemaInformationResponse"/> 
+			<xsd:element name="cinemaBookingResponse" type="tns:cinemaBookingResponse"/> 
+			<xsd:element name="updateCinemaResponse" type="tns:updateCinemaResponse"/>
+			<xsd:element name="insertRestaurantResponse" type="tns:insertRestaurantResponse"/> 
+			<xsd:element name="getRestaurantInformationResponse" type="tns:getRestaurantInformationResponse"/> 
+			<xsd:element name="restaurantBookingResponse" type="tns:restaurantBookingResponse"/> 
+			<xsd:element name="updateRestaurantResponse" type="tns:updateRestaurantResponse"/>
+			
+			<xsd:element name="nightInformationRequest" type="tns:nightInformationRequest"/>
+			<xsd:element name="nightInformationResponse" type="tns:nightInformationResponse"/>
+			
+			<xsd:element name="getRestaurantInformationFault" type="tns:getRestaurantInformationFault"/>
+			<xsd:element name="getCinemaInformationFault" type="tns:getCinemaInformationFault"/>
+			<xsd:element name="getCinemaBookingFault" type="tns:getCinemaBookingFault"/>
+			<xsd:element name="getRestaurantBookingFault" type="tns:getRestaurantBookingFault"/>
+			<xsd:element name="insertRestaurantFault" type="tns:insertRestaurantFault"/>
+			<xsd:element name="updateRestaurantFault" type="tns:updateRestaurantFault"/>
+			<xsd:element name="insertCinemaFault" type="tns:insertCinemaFault"/>
+			<xsd:element name="updateCinemaFault" type="tns:updateCinemaFault"/>
+			<xsd:element name="nightInformationFault" type="tns:nightInformationFault"/>
+			
+			<!-- Resturant Info -->
+			<!-- Request -->
+			<xsd:complexType name="getRestaurantInformationRequest">
+				<xsd:sequence>
+					<xsd:element name="city" type="xsd:string" />
+				</xsd:sequence>
+			</xsd:complexType>
+			
+			<!-- response -->
+			<xsd:complexType name="getRestaurantInformationResponse">
+				<xsd:sequence>
+					<xsd:element maxOccurs="unbounded" minOccurs="0" name="restaurants" type="tns:restaurantType"/>
+				</xsd:sequence>
+			</xsd:complexType>
+			<xsd:complexType name="restaurantType">
+				<xsd:sequence>
+					<xsd:element name="lat" type="xsd:double" />
+					<xsd:element name="lon" type="xsd:double" />
+					<xsd:element name="restaurantInfo" type="tns:restaurantInfoType" />
+				</xsd:sequence>
+			</xsd:complexType>
+			<xsd:complexType name="restaurantInfoType">
+				<xsd:sequence>
+					<xsd:element name="name" minOccurs="0" type="xsd:string" />
+					<xsd:element name="address" type="xsd:string" />
+					<xsd:element name="cap" type="xsd:string" />
+					<xsd:element name="city" type="xsd:string" />
+					<xsd:element name="telephoneNumber" minOccurs="0" type="xsd:string" />
+					<xsd:element name="table" maxOccurs="unbounded" minOccurs="1" type="tns:tableType" />
+					<xsd:element name="style" type="xsd:string" />
+					<xsd:element name="cuisine" type="xsd:string" />
+					<xsd:element name="menu" type="xsd:string" />
+					<xsd:element name="discount" minOccurs="0" type="tns:discountType" />
+				</xsd:sequence>
+			</xsd:complexType>
+			<xsd:complexType name="tableType">
+				<xsd:sequence>
+					<xsd:element name="number" type="xsd:int" />
+					<xsd:element name="seatsNumber" type="xsd:int" />
+					<xsd:element name="tableInfo" type="tns:hallInfoType" />
+				</xsd:sequence>
+			</xsd:complexType>
+			<xsd:complexType name="tableInfoType">
+				<xsd:sequence>
+					<xsd:element name="reservationTime" type="xsd:dateTime" />
+					<xsd:element name="reservationName" type="xsd:string" />
+				</xsd:sequence>
+			</xsd:complexType>
+			<xsd:complexType name="discountType">
+				<xsd:sequence>
+					<xsd:element name="cinema" type="xsd:string" />
+					<xsd:element name="price" type="xsd:float" />
+				</xsd:sequence>
+			</xsd:complexType>
+			
+			<!-- Cinema Info -->
+			<!-- Request -->
+			<xsd:complexType name="getCinemaInformationRequest">
+				<xsd:sequence>
+					<xsd:element name="city" type="xsd:string" />
+				</xsd:sequence>
+			</xsd:complexType>
+			
+			<!-- response -->
+			<xsd:complexType name="getCinemaInformationResponse">
+				<xsd:sequence>
+					<xsd:element maxOccurs="unbounded" minOccurs="0" name="cinemas" type="tns:cinemaType"/>
+				</xsd:sequence>
+			</xsd:complexType>
+			<xsd:complexType name="cinemaType">
+				<xsd:sequence>
+					<xsd:element name="lat" type="xsd:double" />
+					<xsd:element name="lon" type="xsd:double" />
+					<xsd:element name="cinemaInfo" type="tns:cinemaInfoType" />
+				</xsd:sequence>
+			</xsd:complexType>
+			<xsd:complexType name="cinemaInfoType">
+				<xsd:sequence>
+					<xsd:element name="name" minOccurs="0" type="xsd:string" />
+					<xsd:element name="address" type="xsd:string" />
+					<xsd:element name="cap" type="xsd:string" />
+					<xsd:element name="city" type="xsd:string" />
+					<xsd:element name="telephoneNumber" minOccurs="0" type="xsd:string" />
+					<xsd:element name="hall" maxOccurs="unbounded" minOccurs="1" type="tns:hallType" />
+				</xsd:sequence>
+			</xsd:complexType>
+			<xsd:complexType name="hallType">
+				<xsd:sequence>
+					<xsd:element name="number" type="xsd:int" />
+					<xsd:element name="seatsNumber" type="xsd:int" />
+					<xsd:element name="hallInfo" type="tns:hallInfoType" />
+				</xsd:sequence>
+			</xsd:complexType>
+			<xsd:complexType name="hallInfoType">
+				<xsd:sequence>
+					<xsd:element name="time" type="xsd:dateTime" />
+					<xsd:element name="film" type="tns:filmType" />
+					<xsd:element name="price" type="xsd:float" />
+					<xsd:element name="freeSeatsNumber" type="xsd:int" />
+				</xsd:sequence>
+			</xsd:complexType>
+			<xsd:complexType name="filmType">
+				<xsd:sequence>
+					<xsd:element name="name" type="xsd:string" />
+					<xsd:element name="director" type="xsd:string" />
+					<xsd:element name="cast" type="xsd:string" />
+					<xsd:element name="duration" type="xsd:int" />
+					<xsd:element name="rating" type="xsd:string" />
+					<xsd:element name="plot" type="xsd:string" />
+				</xsd:sequence>
+			</xsd:complexType>
+			
+			<!--CinemaBooking-->
+			<!--Request-->
+			<xsd:complexType name="cinemaBookingRequest">
+					<xsd:sequence>
+						<xsd:element name="cinema" type="xsd:string" />
+						<xsd:element name="seats" type="xsd:int"/>
+						<xsd:element name="film" type="xsd:string"/>
+						<xsd:element name="schedule" type="xsd:dateTime"/>
+					</xsd:sequence>
+			</xsd:complexType>
+			
+			<!--Response-->
+			<xsd:complexType name="cinemaBookingResponse">
+					<xsd:sequence>
+						<xsd:element name="accepted" type="xsd:boolean" />
+					</xsd:sequence>
+			</xsd:complexType>
+					
+			<!--RestaurantBooking-->
+			<!--Request-->
+			<xsd:complexType name="restaurantBookingRequest">
+					<xsd:sequence>
+						<xsd:element name="restaurant" type="xsd:string" />
+						<xsd:element name="seats" type="xsd:int"/>
+						<xsd:element name="schedule" type="xsd:dateTime"/>
+					</xsd:sequence>
+			</xsd:complexType>
+			
+			<!--Response-->
+			<xsd:complexType name="restaurantBookingResponse">
+					<xsd:sequence>
+						<xsd:element name="accepted" type="xsd:boolean" />
+					</xsd:sequence>
+			</xsd:complexType>
+			
+			<!--insertRestaurant-->
+			<!--request-->
+			<xsd:complexType name="insertRestaurantRequest">
+				<xsd:sequence>
+					<xsd:element name="restaurant" type="tns:restaurantType" />
+				</xsd:sequence>
+			</xsd:complexType>
+			
+			<!--response-->
+			<xsd:complexType name="insertRestaurantResponse">
+				<xsd:sequence>
+					<xsd:element name="accepted" type="xsd:boolean" />
+				</xsd:sequence>
+			</xsd:complexType>
+			
+			<!--updateRestaurant-->
+			<!--request-->
+			<xsd:complexType name="updateRestaurantRequest">
+				<xsd:sequence>
+					<xsd:element name="restaurant" type="tns:restaurantType" />
+				</xsd:sequence>
+			</xsd:complexType>
+			
+			
+			<!--response-->
+			<xsd:complexType name="updateRestaurantResponse">
+				<xsd:sequence>
+					<xsd:element name="accepted" type="xsd:boolean" />
+				</xsd:sequence>
+			</xsd:complexType>
+			
+			<!--insertCinema-->
+			<!--request-->
+			<xsd:complexType name="insertCinemaRequest">
+				<xsd:sequence>
+					<xsd:element name="cinema" type="tns:cinemaType" />
+				</xsd:sequence>
+			</xsd:complexType>
+			
+			<!--response-->
+			<xsd:complexType name="insertCinemaResponse">
+				<xsd:sequence>
+					<xsd:element name="accepted" type="xsd:boolean" />
+				</xsd:sequence>
+			</xsd:complexType>
+			
+			<!--updateCinema-->
+			<!--request-->
+			<xsd:complexType name="updateCinemaRequest">
+				<xsd:sequence>
+					<xsd:element name="cinema" type="tns:cinemaType" />
+				</xsd:sequence>
+			</xsd:complexType>
+			
+			
+			<!--response-->
+			<xsd:complexType name="updateCinemaResponse">
+				<xsd:sequence>
+					<xsd:element name="accepted" type="xsd:boolean" />
+				</xsd:sequence>
+			</xsd:complexType>
+			
+			<!--NightInfo-->
+			<!--Request-->
+			<xsd:complexType name="nightInformationRequest">
+				<xsd:sequence>
+					<xsd:element name="city" type="xsd:string" />
+				</xsd:sequence>
+			</xsd:complexType>
+			
+			<!--Response-->
+			<xsd:complexType name="nightInformationResponse">
+				<xsd:sequence>
+					<xsd:element maxOccurs="unbounded" minOccurs="0" name="restaurants" type="tns:restaurantType"/>
+					<xsd:element maxOccurs="unbounded" minOccurs="0" name="cinemas" type="tns:cinemaType"/>
+				</xsd:sequence>
+			</xsd:complexType>
+							
+			<!--Fault Types-->
+			<xsd:complexType name="getRestaurantInformationFault">
+				<xsd:sequence>
+                        <xsd:element name="faultInfo" type="xsd:string" />
+                        <xsd:element name="message" type="xsd:string" />
+				</xsd:sequence>
+			</xsd:complexType>
+			<xsd:complexType name="getCinemaInformationFault">
+				<xsd:sequence>
+                        <xsd:element name="faultInfo" type="xsd:string" />
+                        <xsd:element name="message" type="xsd:string" />
+				</xsd:sequence>
+			</xsd:complexType>
+			<xsd:complexType name="getCinemaBookingFault">
+				<xsd:sequence>
+                        <xsd:element name="faultBook" type="xsd:string" />
+                        <xsd:element name="message" type="xsd:string" />
+				</xsd:sequence>
+			</xsd:complexType>
+			<xsd:complexType name="getRestaurantBookingFault">
+				<xsd:sequence>
+                        <xsd:element name="faultBook" type="xsd:string" />
+                        <xsd:element name="message" type="xsd:string" />
+				</xsd:sequence>
+			</xsd:complexType>
+			<xsd:complexType name="insertRestaurantFault">
+				<xsd:sequence>
+                        <xsd:element name="faultInsert" type="xsd:string" />
+                        <xsd:element name="message" type="xsd:string" />
+				</xsd:sequence>
+			</xsd:complexType>
+			<xsd:complexType name="updateRestaurantFault">
+				<xsd:sequence>
+                        <xsd:element name="faultInsert" type="xsd:string" />
+                        <xsd:element name="message" type="xsd:string" />
+				</xsd:sequence>
+			</xsd:complexType>
+			<xsd:complexType name="insertCinemaFault">
+				<xsd:sequence>
+                        <xsd:element name="faultInsert" type="xsd:string" />
+                        <xsd:element name="message" type="xsd:string" />
+				</xsd:sequence>
+			</xsd:complexType>
+			<xsd:complexType name="updateCinemaFault">
+				<xsd:sequence>
+                        <xsd:element name="faultInsert" type="xsd:string" />
+                        <xsd:element name="message" type="xsd:string" />
+				</xsd:sequence>
+			</xsd:complexType>
+			<xsd:complexType name="nightInformationFault">
+				<xsd:sequence>
+                        <xsd:element name="faultInsert" type="xsd:string" />
+                        <xsd:element name="message" type="xsd:string" />
+				</xsd:sequence>
+			</xsd:complexType>
+		</xsd:schema>
+	</types>
+	
+	<!--Message  -->
+	<!--Resturant info   -->
+	<message name="getRestaurantInformationRequest">
+        <part name="parameters" element="tns:getRestaurantInformationRequest"/>
+    </message>
+    <message name="getRestaurantInformationResponse">
+        <part name="parameters" element="tns:getRestaurantInformationResponse"/>
+    </message>
+	<!--Restaurant Booking-->
+	<message name="getRestaurantBookingRequest">
+        <part name="parameters" element="tns:restaurantBookingRequest"/>
+    </message>
+    <message name="getRestaurantBookingResponse">
+        <part name="parameters" element="tns:restaurantBookingResponse"/>
+    </message>
+	<!--Cinema info   -->
+	<message name="getCinemaInformationRequest">
+        <part name="parameters" element="tns:getCinemaInformationRequest"/>
+    </message>
+    <message name="getCinemaInformationResponse">
+        <part name="parameters" element="tns:getCinemaInformationResponse"/>
+    </message>
+	<!--Cinema Booking-->
+	<message name="getCinemaBookingRequest">
+        <part name="parameters" element="tns:cinemaBookingRequest"/>
+    </message>
+    <message name="getCinemaBookingResponse">
+        <part name="parameters" element="tns:cinemaBookingResponse"/>
+    </message>
+	<!--insert Restaurant-->
+	<message name="insertRestaurantRequest">
+        <part name="parameters" element="tns:insertRestaurantRequest"/>
+    </message>
+    <message name="insertRestaurantResponse">
+        <part name="parameters" element="tns:insertRestaurantResponse"/>
+    </message>
+	<!--update Restaurant-->
+	<message name="updateRestaurantRequest">
+        <part name="parameters" element="tns:updateRestaurantRequest"/>
+    </message>
+    <message name="updateRestaurantResponse">
+        <part name="parameters" element="tns:updateRestaurantResponse"/>
+    </message>
+	<!--insert Cinema-->
+	<message name="insertCinemaRequest">
+        <part name="parameters" element="tns:insertCinemaRequest"/>
+    </message>
+	<!--update Cinema-->
+	<message name="updateCinemaRequest">
+        <part name="parameters" element="tns:updateCinemaRequest"/>
+    </message>
+    <message name="insertCinemaResponse">
+        <part name="parameters" element="tns:insertCinemaResponse"/>
+    </message>
+    <message name="updateCinemaResponse">
+        <part name="parameters" element="tns:updateCinemaResponse"/>
+    </message>
+	<!--night Info-->
+	<message name="nightInformationRequest">
+        <part name="parameters" element="tns:nightInformationRequest"/>
+    </message>
+    <message name="nightInformationResponse">
+        <part name="parameters" element="tns:nightInformationResponse"/>
+    </message>
+	
+	<!--Fault Messages-->
+	 <message name="getRestaurantInformationFault">
+        <part name="parameters" element="tns:getRestaurantInformationFault"/>
+    </message>
+	<message name="getCinemaInformationFault">
+        <part name="parameters" element="tns:getCinemaInformationFault"/>
+    </message>
+	<message name="getCinemaBookingFault">
+        <part name="parameters" element="tns:getCinemaBookingFault"/>
+    </message>
+	<message name="getRestaurantBookingFault">
+        <part name="parameters" element="tns:getRestaurantBookingFault"/>
+    </message>
+	<message name="insertRestaurantFault">
+        <part name="parameters" element="tns:insertRestaurantFault"/>
+    </message>
+	<message name="updateRestaurantFault">
+        <part name="parameters" element="tns:updateRestaurantFault"/>
+    </message>
+	<message name="insertCinemaFault">
+        <part name="parameters" element="tns:insertRestaurantFault"/>
+    </message>
+	<message name="updateCinemaFault">
+        <part name="parameters" element="tns:updateRestaurantFault"/>
+    </message>
+	<message name="nightInformationFault">
+        <part name="parameters" element="tns:nightInformationFault"/>
+    </message>
+		
+	<!-- PORT -->
+	<portType name="enjoyReservationPT">
+        <operation name="getCinemaInformation">
+            <input  name="getCinemaInformationRequest" message="tns:getCinemaInformationRequest" />
+            <output name="getCinemaInformationResponse" message="tns:getCinemaInformationResponse"/>
+			<fault name="getCinemaInformationFault" message="tns:getCinemaInformationFault"/>
+        </operation>
+		<operation name="getRestaurantInformation">
+            <input  name="getRestaurantInformationRequest" message="tns:getRestaurantInformationRequest" />
+            <output name="getRestaurantInformationResponse" message="tns:getRestaurantInformationResponse"/>
+			<fault name="getRestaurantInformationFault" message="tns:getRestaurantInformationFault"/>
+        </operation>
+		<operation name="cinemaBooking">
+            <input  name="getCinemaBookingRequest" message="tns:getCinemaBookingRequest" />
+            <output name="getCinemaBookingResponse" message="tns:getCinemaBookingResponse"/>
+			<fault name="getCinemaBookingFault" message="tns:getCinemaBookingFault"/>
+        </operation>
+		<operation name="restaurantBooking">
+            <input name="getRestaurantBookingRequest" message="tns:getRestaurantBookingRequest" />
+            <output name="getRestaurantBookingResponse" message="tns:getRestaurantBookingResponse"/>
+			<fault name="getRestaurantBookingFault" message="tns:getRestaurantBookingFault"/>
+        </operation>
+		<operation name="insertRestaurant">
+            <input name="insertRestaurantRequest" message="tns:insertRestaurantRequest" />
+            <output name="insertRestaurantResponse" message="tns:insertRestaurantResponse"/>
+			<fault name="insertRestaurantFault" message="tns:insertRestaurantFault"/>
+        </operation>
+		<operation name="updateRestaurant">
+            <input name="updateRestaurantRequest" message="tns:updateRestaurantRequest" />
+            <output name="updateRestaurantResponse" message="tns:updateRestaurantResponse"/>
+			<fault name="updateRestaurantFault" message="tns:updateRestaurantFault"/>
+        </operation>
+		<operation name="insertCinema">
+            <input name="insertCinemaRequest" message="tns:insertCinemaRequest" />
+            <output name="insertCinemaResponse" message="tns:insertCinemaResponse"/>
+			<fault name="insertCinemaFault" message="tns:insertCinemaFault"/>
+        </operation>
+		<operation name="updateCinema">
+            <input name="updateCinemaRequest" message="tns:updateCinemaRequest" />
+            <output name="updateCinemaResponse" message="tns:updateCinemaResponse"/>
+			<fault name="updateCinemaFault" message="tns:updateCinemaFault"/>
+        </operation>
+		<operation name="nightInformation">
+            <input name="nightInformationRequest" message="tns:nightInformationRequest" />
+            <output name="nightInformationResponse" message="tns:nightInformationResponse"/>
+			<fault name="nightInformationFault" message="tns:nightInformationFault"/>
+        </operation>		
+    </portType>
+		
+	<!--BINDING-->
+	<binding name="enjoyReservationBinding" type="tns:enjoyReservationPT">
+    	<soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http" />
+    	<operation name="getCinemaInformation">
+    		<soap:operation soapAction="" />    	
+    		<input>
+    			<soap:body use="literal" />
+    		</input>
+    		<output>
+    			<soap:body use="literal" />
+    		</output>
+    	</operation>
+		<operation name="getRestaurantInformation">
+    		<soap:operation soapAction="" />    	
+    		<input>
+    			<soap:body use="literal" />
+    		</input>
+    		<output>
+    			<soap:body use="literal" />
+    		</output>
+    	</operation>
+		<operation name="cinemaBooking">
+    		<soap:operation soapAction="" />    	
+    		<input>
+    			<soap:body use="literal" />
+    		</input>
+    		<output>
+    			<soap:body use="literal" />
+    		</output>
+    	</operation>
+		<operation name="restaurantBooking">
+    		<soap:operation soapAction="" />    	
+    		<input>
+    			<soap:body use="literal" />
+    		</input>
+    		<output>
+    			<soap:body use="literal" />
+    		</output>
+    	</operation>
+		<operation name="insertRestaurant">
+    		<soap:operation soapAction="" />    	
+    		<input>
+    			<soap:body use="literal" />
+    		</input>
+    		<output>
+    			<soap:body use="literal" />
+    		</output>
+    	</operation>
+		<operation name="updateRestaurant">
+    		<soap:operation soapAction="" />    	
+    		<input>
+    			<soap:body use="literal" />
+    		</input>
+    		<output>
+    			<soap:body use="literal" />
+    		</output>
+    	</operation>
+		<operation name="insertCinema">
+    		<soap:operation soapAction="" />    	
+    		<input>
+    			<soap:body use="literal" />
+    		</input>
+    		<output>
+    			<soap:body use="literal" />
+    		</output>
+    	</operation>
+		<operation name="updateCinema">
+    		<soap:operation soapAction="" />    	
+    		<input>
+    			<soap:body use="literal" />
+    		</input>
+    		<output>
+    			<soap:body use="literal" />
+    		</output>
+    	</operation>
+		<operation name="nightInformation">
+    		<soap:operation soapAction="" />    	
+    		<input>
+    			<soap:body use="literal" />
+    		</input>
+    		<output>
+    			<soap:body use="literal" />
+    		</output>
+    	</operation>
+    </binding>
+	
+	<!-- SERVICE-->
+	<service name="EnjoyReservationService">
+    	<port name="enjoyReservationPort" binding="tns:enjoyReservationBinding">
+    		<soap:address location="http://localhost:8080/enjoyReservation/services/enjoyReservation" />
+    	</port>
+    </service>
+</definitions>
