@@ -41,22 +41,34 @@
 					<xsd:element name="city" type="xsd:string" />
 					<xsd:element name="telephoneNumber" minOccurs="0" type="xsd:string" />
 					<xsd:element name="hall" maxOccurs="unbounded" minOccurs="1" type="tns:hallType" />
-					<xsd:element name="films" type="xsd:string" />
-					<xsd:element name="discount" minOccurs="0" type="tns:discountType" />
 				</xsd:sequence>
 			</xsd:complexType>
 			<xsd:complexType name="hallType">
 				<xsd:sequence>
 					<xsd:element name="number" type="xsd:int" />
-					<xsd:element name="seatsNumber" maxOccurs="unbounded" type="xsd:int" />
+					<xsd:element name="seatsNumber" type="xsd:int" />
+					<xsd:element name="hallInfo" maxOccurs="unbounded" minOccurs="1" type="tns:hallInfoType" />
 				</xsd:sequence>
 			</xsd:complexType>
-			<xsd:complexType name="discountType">
+			<xsd:complexType name="hallInfoType">
 				<xsd:sequence>
-					<xsd:element name="restaurant" type="xsd:string" />
+					<xsd:element name="time" type="xsd:dateTime" />
+					<xsd:element name="film" type="tns:filmType" />
 					<xsd:element name="price" type="xsd:float" />
+					<xsd:element name="freeSeatsNumber" type="xsd:int" />
 				</xsd:sequence>
 			</xsd:complexType>
+			<xsd:complexType name="filmType">
+				<xsd:sequence>
+					<xsd:element name="name" type="xsd:string" />
+					<xsd:element name="director" type="xsd:string" />
+					<xsd:element name="cast" type="xsd:string" />
+					<xsd:element name="duration" type="xsd:int" />
+					<xsd:element name="rating" type="xsd:string" />
+					<xsd:element name="plot" type="xsd:string" />
+				</xsd:sequence>
+			</xsd:complexType>
+			
 			
 			<!-- Response -->
 			<xsd:complexType name="cinemaInsertResponse">

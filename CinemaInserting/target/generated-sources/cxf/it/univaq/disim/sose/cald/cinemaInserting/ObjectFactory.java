@@ -111,11 +111,19 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link DiscountType }
+     * Create an instance of {@link HallInfoType }
      * 
      */
-    public DiscountType createDiscountType() {
-        return new DiscountType();
+    public HallInfoType createHallInfoType() {
+        return new HallInfoType();
+    }
+
+    /**
+     * Create an instance of {@link FilmType }
+     * 
+     */
+    public FilmType createFilmType() {
+        return new FilmType();
     }
 
     /**
