@@ -8,7 +8,7 @@ public class Hall implements java.io.Serializable {
 	private int number; 
 	private int seatsNumber;
 	private Long cinema;
-	private List<HallInfo>hallinfo;
+	private List<HallInfo> hallinfo;
 	
 	public Long getHall_id() {
 		return hall_id;

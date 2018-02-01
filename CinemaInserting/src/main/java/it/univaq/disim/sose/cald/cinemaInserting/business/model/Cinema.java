@@ -8,7 +8,7 @@ public class Cinema {
 	private double latitude;
 	private double longitude;
 	private String name;
-	private String cap;
+	private int cap;
 	private String address;
 	private String city;
 	private String telephoneNumber;
@@ -38,10 +38,10 @@ public class Cinema {
 	public void setName(String name) {
 		this.name = name;
 	}
-	public String getCap() {
+	public int getCap() {
 		return cap;
 	}
-	public void setCap(String cap) {
+	public void setCap(int cap) {
 		this.cap = cap;
 	}
 	public String getAddress() {
