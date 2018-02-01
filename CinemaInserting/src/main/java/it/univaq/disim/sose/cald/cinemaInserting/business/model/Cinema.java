@@ -1,5 +1,7 @@
 package it.univaq.disim.sose.cald.cinemaInserting.business.model;
 
+import java.util.List;
+
 public class Cinema {
 	
 	private Long id;
@@ -10,6 +12,7 @@ public class Cinema {
 	private String address;
 	private String city;
 	private String telephoneNumber;
+	private List<Hall> hall;
 	
 	public Long getId() {
 		return id;
@@ -58,5 +61,11 @@ public class Cinema {
 	}
 	public void setTelephoneNumber(String telephoneNumber) {
 		this.telephoneNumber = telephoneNumber;
+	}
+	public List<Hall> getHall() {
+		return hall;
+	}
+	public void setHall(List<Hall> hall) {
+		this.hall = hall;
 	}
 }

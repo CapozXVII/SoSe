@@ -1,11 +1,14 @@
 package it.univaq.disim.sose.cald.cinemaInserting.business.model;
 
+import java.util.List;
+
 public class Hall implements java.io.Serializable {
 	
 	private Long hall_id;
 	private int number; 
 	private int seatsNumber;
 	private Long cinema;
+	private List<HallInfo>hallinfo;
 	
 	public Long getHall_id() {
 		return hall_id;
@@ -37,6 +40,14 @@ public class Hall implements java.io.Serializable {
 	
 	public void setCinema(Long cinema) {
 		this.cinema=cinema;
+	}
+	
+	public List<HallInfo> getHallInfo() {
+		return hallinfo;
+	}
+	
+	public void setHallInfo(List<HallInfo> hallinfo) {
+		this.hallinfo=hallinfo;
 	}
 	
 	
