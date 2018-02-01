@@ -1,5 +1,7 @@
 
-package it.univaq.disim.sose.cald.clients.cinemaInformation;
+package it.univaq.disim.sose.cald.clients.cinemainformation;
+
+import java.util.Date;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
@@ -42,7 +44,7 @@ public class HallInfoType {
 
     @XmlElement(required = true)
     @XmlSchemaType(name = "dateTime")
-    protected XMLGregorianCalendar time;
+    protected Date time;
     @XmlElement(required = true)
     protected FilmType film;
     protected float price;
@@ -56,7 +58,7 @@ public class HallInfoType {
      *     {@link XMLGregorianCalendar }
      *     
      */
-    public XMLGregorianCalendar getTime() {
+    public Date getTime() {
         return time;
     }
 
@@ -68,7 +70,7 @@ public class HallInfoType {
      *     {@link XMLGregorianCalendar }
      *     
      */
-    public void setTime(XMLGregorianCalendar value) {
+    public void setTime(Date value) {
         this.time = value;
     }
 

@@ -1,4 +1,4 @@
-package it.univaq.disim.sose.cald.enjoyReservation.business;
+package it.univaq.disim.sose.cald.enjoyreservation.business;
 
 public class BusinessException extends RuntimeException {
 

@@ -1,5 +1,5 @@
 
-package it.univaq.disim.sose.cald.clients.restaurantInformation;
+package it.univaq.disim.sose.cald.clients.restaurantinformation;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -1,5 +1,5 @@
 
-package it.univaq.disim.sose.cald.enjoyReservation;
+package it.univaq.disim.sose.cald.enjoyreservation;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
@@ -17,7 +17,7 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;complexContent&gt;
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&gt;
  *       &lt;sequence&gt;
- *         &lt;element name="cinema" type="{http://it.univaq.disim.sose.cald/enjoyReservation}cinemaType"/&gt;
+ *         &lt;element name="cinema" type="{http://it.univaq.disim.sose.cald/enjoyReservation}OSMCinemaType"/&gt;
  *       &lt;/sequence&gt;
  *     &lt;/restriction&gt;
  *   &lt;/complexContent&gt;
@@ -33,17 +33,17 @@ import javax.xml.bind.annotation.XmlType;
 public class UpdateCinemaRequest {
 
     @XmlElement(required = true)
-    protected CinemaType cinema;
+    protected OSMCinemaType cinema;
 
     /**
      * Gets the value of the cinema property.
      * 
      * @return
      *     possible object is
-     *     {@link CinemaType }
+     *     {@link OSMCinemaType }
      *     
      */
-    public CinemaType getCinema() {
+    public OSMCinemaType getCinema() {
         return cinema;
     }
 
@@ -52,10 +52,10 @@ public class UpdateCinemaRequest {
      * 
      * @param value
      *     allowed object is
-     *     {@link CinemaType }
+     *     {@link OSMCinemaType }
      *     
      */
-    public void setCinema(CinemaType value) {
+    public void setCinema(OSMCinemaType value) {
         this.cinema = value;
     }
 

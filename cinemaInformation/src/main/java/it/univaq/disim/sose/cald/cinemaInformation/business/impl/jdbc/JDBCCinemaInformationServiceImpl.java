@@ -109,7 +109,7 @@ public class JDBCCinemaInformationServiceImpl implements CinemaInformationServic
 		film.setDuration(rs.getInt("duration"));
 		film.setName(rs.getString("name"));
 		film.setPlot(rs.getString("plot"));
-		film.setRating(rs.getString("rating"));
+		film.setType(rs.getString("type"));
 		hallFilm.setId(rs.getLong("hall_film_id"));
 		hallFilm.setFreeSeatsNumber(rs.getInt("freeSeatsNumber"));
 		hallFilm.setPrice(rs.getFloat("price"));

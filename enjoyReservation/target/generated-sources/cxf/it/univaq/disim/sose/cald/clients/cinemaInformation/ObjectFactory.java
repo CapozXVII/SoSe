@@ -1,5 +1,5 @@
 
-package it.univaq.disim.sose.cald.clients.cinemaInformation;
+package it.univaq.disim.sose.cald.clients.cinemainformation;
 
 import javax.xml.bind.JAXBElement;
 import javax.xml.bind.annotation.XmlElementDecl;
@@ -10,7 +10,7 @@ import javax.xml.namespace.QName;
 /**
  * This object contains factory methods for each 
  * Java content interface and Java element interface 
- * generated in the it.univaq.disim.sose.cald.clients.cinemaInformation package. 
+ * generated in the it.univaq.disim.sose.cald.clients.cinemainformation package. 
  * <p>An ObjectFactory allows you to programatically 
  * construct new instances of the Java representation 
  * for XML content. The Java representation of XML 
@@ -29,7 +29,7 @@ public class ObjectFactory {
     private final static QName _CinemaInformationFault_QNAME = new QName("http://it.univaq.disim.sose.cald/cinemaInformation", "cinemaInformationFault");
 
     /**
-     * Create a new ObjectFactory that can be used to create new instances of schema derived classes for package: it.univaq.disim.sose.cald.clients.cinemaInformation
+     * Create a new ObjectFactory that can be used to create new instances of schema derived classes for package: it.univaq.disim.sose.cald.clients.cinemainformation
      * 
      */
     public ObjectFactory() {

@@ -21,7 +21,7 @@ import javax.xml.bind.annotation.XmlType;
  *         &lt;element name="director" type="{http://www.w3.org/2001/XMLSchema}string"/&gt;
  *         &lt;element name="cast" type="{http://www.w3.org/2001/XMLSchema}string"/&gt;
  *         &lt;element name="duration" type="{http://www.w3.org/2001/XMLSchema}int"/&gt;
- *         &lt;element name="rating" type="{http://www.w3.org/2001/XMLSchema}string"/&gt;
+ *         &lt;element name="type" type="{http://www.w3.org/2001/XMLSchema}string"/&gt;
  *         &lt;element name="plot" type="{http://www.w3.org/2001/XMLSchema}string"/&gt;
  *       &lt;/sequence&gt;
  *     &lt;/restriction&gt;
@@ -37,7 +37,7 @@ import javax.xml.bind.annotation.XmlType;
     "director",
     "cast",
     "duration",
-    "rating",
+    "type",
     "plot"
 })
 public class FilmType {
@@ -50,7 +50,7 @@ public class FilmType {
     protected String cast;
     protected int duration;
     @XmlElement(required = true)
-    protected String rating;
+    protected String type;
     @XmlElement(required = true)
     protected String plot;
 
@@ -143,27 +143,27 @@ public class FilmType {
     }
 
     /**
-     * Gets the value of the rating property.
+     * Gets the value of the type property.
      * 
      * @return
      *     possible object is
      *     {@link String }
      *     
      */
-    public String getRating() {
-        return rating;
+    public String getType() {
+        return type;
     }
 
     /**
-     * Sets the value of the rating property.
+     * Sets the value of the type property.
      * 
      * @param value
      *     allowed object is
      *     {@link String }
      *     
      */
-    public void setRating(String value) {
-        this.rating = value;
+    public void setType(String value) {
+        this.type = value;
     }
 
     /**

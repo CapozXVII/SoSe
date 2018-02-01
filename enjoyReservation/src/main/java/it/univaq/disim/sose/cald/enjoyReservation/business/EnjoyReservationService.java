@@ -1,14 +1,14 @@
-package it.univaq.disim.sose.cald.enjoyReservation.business;
+package it.univaq.disim.sose.cald.enjoyreservation.business;
 
-import it.univaq.disim.sose.cald.clients.cinemaInformation.CinemaInformationResponse;
-import it.univaq.disim.sose.cald.clients.restaurantInformation.RestaurantInformationRequest;
-import it.univaq.disim.sose.cald.clients.restaurantInformation.RestaurantInformationResponse;
-import it.univaq.disim.sose.cald.clients.cinemaInformation.CinemaInformationRequest;
-
+import it.univaq.disim.sose.cald.enjoyreservation.GetCinemaInfoRequest;
+import it.univaq.disim.sose.cald.enjoyreservation.GetCinemaInfoResponse;
+import it.univaq.disim.sose.cald.enjoyreservation.GetRestaurantInfoRequest;
+import it.univaq.disim.sose.cald.enjoyreservation.GetRestaurantInfoResponse;
 
 public interface EnjoyReservationService {
 	
-	CinemaInformationResponse getCinemaInformation(CinemaInformationRequest cinemaInformationRequest) throws BusinessException; 
+	GetRestaurantInfoResponse getRestaurantInfo(GetRestaurantInfoRequest request) throws BusinessException;
+	
+	GetCinemaInfoResponse getCinemaInfo(GetCinemaInfoRequest request) throws BusinessException;
 
-	RestaurantInformationResponse getRestaurantInformationResponse(RestaurantInformationRequest restaurantInformationRequest) throws BusinessException;
 }

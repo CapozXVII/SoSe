@@ -48,7 +48,7 @@ public class CinemaInformationPTImpl implements CinemaInformationPT{
 					osmFilmType.setDuration(cinema.getHalls().get(i).getFilm().getDuration());
 					osmFilmType.setName(cinema.getHalls().get(i).getFilm().getName());
 					osmFilmType.setPlot(cinema.getHalls().get(i).getFilm().getPlot());
-					osmFilmType.setRating(cinema.getHalls().get(i).getFilm().getRating());
+					osmFilmType.setType(cinema.getHalls().get(i).getFilm().getType());
 					osmHallInfoType.setFilm(osmFilmType);
 					osmHallInfoType.setFreeSeatsNumber(cinema.getHalls().get(i).getFreeSeatsNumber());
 					osmHallInfoType.setPrice(cinema.getHalls().get(i).getPrice());

@@ -1,5 +1,5 @@
 
-package it.univaq.disim.sose.cald.enjoyReservation;
+package it.univaq.disim.sose.cald.enjoyreservation;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
