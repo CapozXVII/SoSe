@@ -44,24 +44,11 @@
 					<xsd:element name="cap" type="xsd:string" />
 					<xsd:element name="city" type="xsd:string" />
 					<xsd:element name="telephoneNumber" minOccurs="0" type="xsd:string" />
-					<xsd:element name="table" maxOccurs="unbounded" minOccurs="1" type="tns:tableType" />
 					<xsd:element name="style" type="xsd:string" />
 					<xsd:element name="cuisine" type="xsd:string" />
 					<xsd:element name="menu" type="xsd:string" />
 					<xsd:element name="discount" minOccurs="0" type="tns:discountType" />
-				</xsd:sequence>
-			</xsd:complexType>
-			<xsd:complexType name="tableType">
-				<xsd:sequence>
-					<xsd:element name="number" type="xsd:int" />
-					<xsd:element name="seatsNumber" type="xsd:int" />
-					<xsd:element name="tableInfo" type="tns:tableInfoType" />
-				</xsd:sequence>
-			</xsd:complexType>
-			<xsd:complexType name="tableInfoType">
-				<xsd:sequence>
-					<xsd:element name="reservationTime" type="xsd:date" />
-					<xsd:element name="reservationName" type="xsd:string" />
+					<xsd:element name="maxSeats" type="xsd:int" />
 				</xsd:sequence>
 			</xsd:complexType>
 			<xsd:complexType name="discountType">
@@ -123,7 +110,7 @@
 	<!-- Service -->
 	<service name="RestaurantInformationService">
 		<port name="restaurantInformationPort" binding="tns:restaurantInformationBinding">
-			<soap:address location="http://localhost:8080/restaurantInformation/services/restaurantInformation" />
+			<soap:address location="http://localhost:8080/restaurantinformation/services/restaurantinformation" />
 		</port>
 	</service>
 </definitions>

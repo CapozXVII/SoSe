@@ -16,7 +16,7 @@
 
 
     <!-- Scans for application @Component and @Service to deploy -->
-    <context:component-scan base-package="it.univaq.disim.sose.cald.restaurantInformation.business.impl.jdbc" />
+    <context:component-scan base-package="it.univaq.disim.sose.cald.restaurantinformation.business.impl.jdbc" />
     
     <jee:jndi-lookup id="dataSource" jndi-name="jdbc/cald"/>
 </beans>

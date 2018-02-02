@@ -1,6 +1,5 @@
-package it.univaq.disim.sose.cald.restaurantInformation.webservices;
+package it.univaq.disim.sose.cald.restaurantinformation.webservices;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -8,15 +7,15 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import it.univaq.disim.sose.cald.restaurantInformation.DiscountType;
-import it.univaq.disim.sose.cald.restaurantInformation.RestaurantInfoType;
-import it.univaq.disim.sose.cald.restaurantInformation.RestaurantInformationPT;
-import it.univaq.disim.sose.cald.restaurantInformation.RestaurantInformationRequest;
-import it.univaq.disim.sose.cald.restaurantInformation.RestaurantInformationResponse;
-import it.univaq.disim.sose.cald.restaurantInformation.RestaurantType;
-import it.univaq.disim.sose.cald.restaurantInformation.TableType;
-import it.univaq.disim.sose.cald.restaurantInformation.business.RestaurantInformationService;
-import it.univaq.disim.sose.cald.restaurantInformation.business.model.Restaurant;
+import it.univaq.disim.sose.cald.restaurantinformation.DiscountType;
+import it.univaq.disim.sose.cald.restaurantinformation.RestaurantInfoType;
+import it.univaq.disim.sose.cald.restaurantinformation.RestaurantInformationFault_Exception;
+import it.univaq.disim.sose.cald.restaurantinformation.RestaurantInformationPT;
+import it.univaq.disim.sose.cald.restaurantinformation.RestaurantInformationRequest;
+import it.univaq.disim.sose.cald.restaurantinformation.RestaurantInformationResponse;
+import it.univaq.disim.sose.cald.restaurantinformation.RestaurantType;
+import it.univaq.disim.sose.cald.restaurantinformation.business.RestaurantInformationService;
+import it.univaq.disim.sose.cald.restaurantinformation.business.model.Restaurant;
 
 @Component(value = "RestaurantInformationPTImpl")
 public class RestaurantInformationPTImpl implements RestaurantInformationPT {
@@ -26,26 +25,18 @@ public class RestaurantInformationPTImpl implements RestaurantInformationPT {
 	@Autowired
 	RestaurantInformationService service;
 	
-	public RestaurantInformationResponse restaurantInformation(RestaurantInformationRequest parameters) {
+	public RestaurantInformationResponse restaurantInformation(RestaurantInformationRequest parameters) throws RestaurantInformationFault_Exception  {
 		
 		LOGGER.info("CALLED cinemaInformation");
 		try {
 			List<Restaurant> restaurants = service.getRestaurants(parameters.getCity());
-			List<TableType> tables;
 			RestaurantInformationResponse response = new RestaurantInformationResponse();
 			
 			for(Restaurant restaurant : restaurants) {
 				RestaurantInfoType osmRestaurantInfoType = new RestaurantInfoType();
 				RestaurantType osmRestaurantType = new RestaurantType();
 				DiscountType osmDiscountType = new DiscountType();
-				tables = new ArrayList<TableType>();
-				for(int i = 0; i < restaurant.getTables().size(); i++) {
-					TableType osmTableType = new TableType();
-					osmTableType.setNumber(restaurant.getTables().get(i).getNumber());
-					osmTableType.setSeatsNumber(restaurant.getTables().get(i).getSeatsNumber());
-					tables.add(osmTableType);
-				}
-				osmRestaurantInfoType.setTable(tables);
+		
 				osmRestaurantInfoType.setAddress(restaurant.getAddress());
 				osmRestaurantInfoType.setCap(restaurant.getCap());
 				osmRestaurantInfoType.setCity(restaurant.getCity());
@@ -53,6 +44,7 @@ public class RestaurantInformationPTImpl implements RestaurantInformationPT {
 				osmRestaurantInfoType.setMenu(restaurant.getMenu());
 				osmRestaurantInfoType.setName(restaurant.getName());
 				osmRestaurantInfoType.setStyle(restaurant.getStyle());
+				osmRestaurantInfoType.setMaxSeats(restaurant.getMaxSeats());
 				osmRestaurantInfoType.setTelephoneNumber(restaurant.getTelephoneNumber());
 				if (restaurant.getDiscount() != null) {
 					osmDiscountType.setCinema(restaurant.getDiscount().getCinema().getName());
@@ -68,7 +60,7 @@ public class RestaurantInformationPTImpl implements RestaurantInformationPT {
 			}
 			return response;
 		} catch (Exception ex) {
-			throw new RuntimeException(ex.getMessage());
+			throw new RestaurantInformationFault_Exception("Something was wrong with response");
 		}
 	}
 }

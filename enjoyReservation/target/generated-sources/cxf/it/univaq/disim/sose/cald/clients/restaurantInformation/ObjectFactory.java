@@ -76,22 +76,6 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link TableType }
-     * 
-     */
-    public TableType createTableType() {
-        return new TableType();
-    }
-
-    /**
-     * Create an instance of {@link TableInfoType }
-     * 
-     */
-    public TableInfoType createTableInfoType() {
-        return new TableInfoType();
-    }
-
-    /**
      * Create an instance of {@link DiscountType }
      * 
      */

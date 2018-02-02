@@ -1,6 +1,4 @@
-package it.univaq.disim.sose.cald.restaurantInformation.business.model;
-
-import java.util.List;
+package it.univaq.disim.sose.cald.restaurantinformation.business.model;
 
 public class Restaurant implements java.io.Serializable {
 	
@@ -15,7 +13,7 @@ public class Restaurant implements java.io.Serializable {
 	private String style;
 	private String cousine;
 	private String menu;
-	private List<Table> tables;
+	private int maxSeats;
 	private Discount discount;
 	
 	public Long getId() {
@@ -106,14 +104,14 @@ public class Restaurant implements java.io.Serializable {
 		this.menu = menu;
 	}
 	
-	public List<Table> getTables() {
-		return this.tables;
+	public int getMaxSeats() {
+		return this.maxSeats;
 	}
 	
-	public void setTables(List<Table> tables) {
-		this.tables = tables;
+	public void setMaxSeats(int maxSeats) {
+		this.maxSeats = maxSeats;
 	}
-	
+		
 	public Discount getDiscount() {
 		return this.discount;
 	}

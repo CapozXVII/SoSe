@@ -1,8 +1,6 @@
 
 package it.univaq.disim.sose.cald.clients.restaurantinformation;
 
-import java.util.ArrayList;
-import java.util.List;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
@@ -24,11 +22,11 @@ import javax.xml.bind.annotation.XmlType;
  *         &lt;element name="cap" type="{http://www.w3.org/2001/XMLSchema}string"/&gt;
  *         &lt;element name="city" type="{http://www.w3.org/2001/XMLSchema}string"/&gt;
  *         &lt;element name="telephoneNumber" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/&gt;
- *         &lt;element name="table" type="{http://it.univaq.disim.sose.cald/restaurantInformation}tableType" maxOccurs="unbounded"/&gt;
  *         &lt;element name="style" type="{http://www.w3.org/2001/XMLSchema}string"/&gt;
  *         &lt;element name="cuisine" type="{http://www.w3.org/2001/XMLSchema}string"/&gt;
  *         &lt;element name="menu" type="{http://www.w3.org/2001/XMLSchema}string"/&gt;
  *         &lt;element name="discount" type="{http://it.univaq.disim.sose.cald/restaurantInformation}discountType" minOccurs="0"/&gt;
+ *         &lt;element name="maxSeats" type="{http://www.w3.org/2001/XMLSchema}int"/&gt;
  *       &lt;/sequence&gt;
  *     &lt;/restriction&gt;
  *   &lt;/complexContent&gt;
@@ -44,11 +42,11 @@ import javax.xml.bind.annotation.XmlType;
     "cap",
     "city",
     "telephoneNumber",
-    "table",
     "style",
     "cuisine",
     "menu",
-    "discount"
+    "discount",
+    "maxSeats"
 })
 public class RestaurantInfoType {
 
@@ -61,14 +59,13 @@ public class RestaurantInfoType {
     protected String city;
     protected String telephoneNumber;
     @XmlElement(required = true)
-    protected List<TableType> table;
-    @XmlElement(required = true)
     protected String style;
     @XmlElement(required = true)
     protected String cuisine;
     @XmlElement(required = true)
     protected String menu;
     protected DiscountType discount;
+    protected int maxSeats;
 
     /**
      * Gets the value of the name property.
@@ -191,35 +188,6 @@ public class RestaurantInfoType {
     }
 
     /**
-     * Gets the value of the table property.
-     * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the table property.
-     * 
-     * <p>
-     * For example, to add a new item, do as follows:
-     * <pre>
-     *    getTable().add(newItem);
-     * </pre>
-     * 
-     * 
-     * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link TableType }
-     * 
-     * 
-     */
-    public List<TableType> getTable() {
-        if (table == null) {
-            table = new ArrayList<TableType>();
-        }
-        return this.table;
-    }
-
-    /**
      * Gets the value of the style property.
      * 
      * @return
@@ -313,6 +281,22 @@ public class RestaurantInfoType {
      */
     public void setDiscount(DiscountType value) {
         this.discount = value;
+    }
+
+    /**
+     * Gets the value of the maxSeats property.
+     * 
+     */
+    public int getMaxSeats() {
+        return maxSeats;
+    }
+
+    /**
+     * Sets the value of the maxSeats property.
+     * 
+     */
+    public void setMaxSeats(int value) {
+        this.maxSeats = value;
     }
 
 }

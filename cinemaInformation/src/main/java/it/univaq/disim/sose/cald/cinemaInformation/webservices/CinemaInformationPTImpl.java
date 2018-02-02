@@ -1,4 +1,4 @@
-package it.univaq.disim.sose.cald.cinemaInformation.webservices;
+package it.univaq.disim.sose.cald.cinemainformation.webservices;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -8,16 +8,17 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import it.univaq.disim.sose.cald.cinemaInformation.business.CinemaInformationService;
-import it.univaq.disim.sose.cald.cinemaInformation.business.model.Cinema;
-import it.univaq.disim.sose.cald.cinemaInformation.CinemaInfoType;
-import it.univaq.disim.sose.cald.cinemaInformation.CinemaInformationPT;
-import it.univaq.disim.sose.cald.cinemaInformation.CinemaInformationRequest;
-import it.univaq.disim.sose.cald.cinemaInformation.CinemaInformationResponse;
-import it.univaq.disim.sose.cald.cinemaInformation.CinemaType;
-import it.univaq.disim.sose.cald.cinemaInformation.FilmType;
-import it.univaq.disim.sose.cald.cinemaInformation.HallInfoType;
-import it.univaq.disim.sose.cald.cinemaInformation.HallType;
+import it.univaq.disim.sose.cald.cinemainformation.business.CinemaInformationService;
+import it.univaq.disim.sose.cald.cinemainformation.business.model.Cinema;
+import it.univaq.disim.sose.cald.cinemainformation.CinemaInfoType;
+import it.univaq.disim.sose.cald.cinemainformation.CinemaInformationFault_Exception;
+import it.univaq.disim.sose.cald.cinemainformation.CinemaInformationPT;
+import it.univaq.disim.sose.cald.cinemainformation.CinemaInformationRequest;
+import it.univaq.disim.sose.cald.cinemainformation.CinemaInformationResponse;
+import it.univaq.disim.sose.cald.cinemainformation.CinemaType;
+import it.univaq.disim.sose.cald.cinemainformation.FilmType;
+import it.univaq.disim.sose.cald.cinemainformation.HallInfoType;
+import it.univaq.disim.sose.cald.cinemainformation.HallType;
 
 @Component(value = "CinemaInformationPTImpl")
 public class CinemaInformationPTImpl implements CinemaInformationPT{
@@ -27,7 +28,7 @@ public class CinemaInformationPTImpl implements CinemaInformationPT{
 	@Autowired
 	CinemaInformationService service;
 	
-	public CinemaInformationResponse cinemaInformation(CinemaInformationRequest parameters) {
+	public CinemaInformationResponse cinemaInformation(CinemaInformationRequest parameters) throws CinemaInformationFault_Exception {
 		
 		LOGGER.info("CALLED cinemaInformation");
 		try {
@@ -53,7 +54,6 @@ public class CinemaInformationPTImpl implements CinemaInformationPT{
 					osmHallInfoType.setFreeSeatsNumber(cinema.getHalls().get(i).getFreeSeatsNumber());
 					osmHallInfoType.setPrice(cinema.getHalls().get(i).getPrice());
 					osmHallInfoType.setTime(cinema.getHalls().get(i).getTime());
-					LOGGER.info(osmHallInfoType.getTime() + "CIAOOOO");
 					osmHallType.setHallInfo(osmHallInfoType);
 					osmHallType.setNumber(cinema.getHalls().get(i).getHall().getNumber());
 					osmHallType.setSeatsNumber(cinema.getHalls().get(i).getHall().getSeatsNumber());
@@ -72,7 +72,7 @@ public class CinemaInformationPTImpl implements CinemaInformationPT{
 			}
 			return response;
 		} catch (Exception ex) {
-			throw new RuntimeException(ex.getMessage());
+			throw new CinemaInformationFault_Exception("Something was wrong with response");
 		}
 	}
 }

@@ -4,7 +4,7 @@
          xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd" 
          id="WebApp_ID" 
          version="3.1">
-	<display-name>RestaurantInformation</display-name>
+	<display-name>restaurantinformation</display-name>
 
     <context-param>
         <param-name>contextConfigLocation</param-name>
@@ -14,8 +14,8 @@
     </context-param>
 
 	<servlet>
-		<display-name>restaurantInformation</display-name>
-		<servlet-name>restaurantInformation</servlet-name>
+		<display-name>restaurantinformation</display-name>
+		<servlet-name>restaurantinformation</servlet-name>
 		<servlet-class>org.apache.cxf.transport.servlet.CXFServlet</servlet-class>
 		<init-param>
 			<param-name>config-location</param-name>
@@ -24,7 +24,7 @@
 		<load-on-startup>1</load-on-startup>
 	</servlet>
 	<servlet-mapping>
-		<servlet-name>restaurantInformation</servlet-name>
+		<servlet-name>restaurantinformation</servlet-name>
 		<url-pattern>/services/*</url-pattern>
 	</servlet-mapping>
 

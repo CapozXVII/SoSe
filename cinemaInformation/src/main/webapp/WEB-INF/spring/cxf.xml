@@ -8,10 +8,10 @@
                            http://cxf.apache.org/jaxws http://cxf.apache.org/schemas/jaxws.xsd">
                            
     <jaxws:endpoint id="CinemaInformationHTTP" 
-			xmlns:cinemaInformation="http://it.univaq.disim.sose.cald/cinemaInformation"
-		    address="/cinemaInformation" 
-		    serviceName="cinemaInformation:CinemaInformationService"
-		    endpointName="cinemaInformation:cinemaInformationPort" 
+			xmlns:cinemainformation="http://it.univaq.disim.sose.cald/cinemainformation"
+		    address="/cinemainformation" 
+		    serviceName="cinemainformation:CinemaInformationService"
+		    endpointName="cinemainformation:cinemaInformationPort" 
 		    implementor="#CinemaInformationPTImpl">
 	</jaxws:endpoint>
 	

@@ -1,10 +1,11 @@
-package it.univaq.disim.sose.cald.restaurantInformation.business;
+package it.univaq.disim.sose.cald.restaurantinformation.business;
 
 import java.util.List;
 
-import it.univaq.disim.sose.cald.restaurantInformation.business.model.Restaurant;
+import it.univaq.disim.sose.cald.restaurantinformation.RestaurantInformationFault_Exception;
+import it.univaq.disim.sose.cald.restaurantinformation.business.model.Restaurant;
 
 public interface RestaurantInformationService {
 
-	List<Restaurant> getRestaurants(String city) throws BusinessException;
+	List<Restaurant> getRestaurants(String city) throws RestaurantInformationFault_Exception;
 }

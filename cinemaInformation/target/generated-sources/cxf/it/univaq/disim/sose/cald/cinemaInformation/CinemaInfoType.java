@@ -1,5 +1,5 @@
 
-package it.univaq.disim.sose.cald.cinemaInformation;
+package it.univaq.disim.sose.cald.cinemainformation;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -203,9 +203,9 @@ public class CinemaInfoType {
         }
         return this.hall;
     }
-
-	public void setHall(List<HallType> hall) {
-		this.hall = hall;
-	}
+    
+    public void setHall(List<HallType> hall) {
+    		this.hall = hall;
+    }
 
 }

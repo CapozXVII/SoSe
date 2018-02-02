@@ -8,10 +8,10 @@
                            http://cxf.apache.org/jaxws http://cxf.apache.org/schemas/jaxws.xsd">
                            
     <jaxws:endpoint id="RestaurantInformationHTTP" 
-			xmlns:restaurantInformation="http://it.univaq.disim.sose.cald/restaurantInformation"
-		    address="/restaurantInformation" 
-		    serviceName="restaurantInformation:RestaurantInformationService"
-		    endpointName="restaurantInformation:restaurantInformationPort" 
+			xmlns:restaurantinformation="http://it.univaq.disim.sose.cald/restaurantinformation"
+		    address="/restaurantinformation" 
+		    serviceName="restaurantinformation:RestaurantInformationService"
+		    endpointName="restaurantinformation:restaurantInformationPort" 
 		    implementor="#RestaurantInformationPTImpl">
 	</jaxws:endpoint>
 	

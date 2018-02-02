@@ -1,4 +1,4 @@
-package it.univaq.disim.sose.cald.cinemaInformation.business.model;
+package it.univaq.disim.sose.cald.cinemainformation.business.model;
 
 import java.util.List;
 
