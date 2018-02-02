@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Context antiJARLocking="true" path="/cinemaBooking">
+	
+	<Resource name="jdbc/cald" driverClassName="com.mysql.jdbc.Driver" type="javax.sql.DataSource"
+		      factory="org.apache.tomcat.jdbc.pool.DataSourceFactory" 
+		      logAbandoned="true" maxActive="100" maxIdle="30" maxWait="50000"
+			  removeAbandoned="true" removeAbandonedTimeout="90" scope="Container"
+		      testWhileIdle="true" timeBetweenEvictionRunsMillis="50000"
+		      url="jdbc:mysql://localhost:3306/cald"
+		      username="cald" password="cald"  validationQuery="select 1" />
+</Context>

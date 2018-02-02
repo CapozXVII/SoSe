@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.5.2
+-- version 4.5.1
 -- http://www.phpmyadmin.net
 --
--- Host: localhost
--- Creato il: Gen 19, 2018 alle 15:48
--- Versione del server: 10.1.19-MariaDB
--- Versione PHP: 7.0.13
+-- Host: 127.0.0.1
+-- Creato il: Gen 27, 2018 alle 22:21
+-- Versione del server: 10.1.10-MariaDB
+-- Versione PHP: 7.0.4
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -44,6 +44,21 @@ CREATE TABLE `cinema` (
 INSERT INTO `cinema` (`cinema_id`, `cinema_lat`, `cinema_lon`, `cinema_name`, `cinema_address`, `cinema_cap`, `cinema_city`, `cinema_telephoneNumber`) VALUES
 (3, '19.00000000', '19.00000000', 'Bo', 'Bo', '67100', 'Rome', NULL),
 (4, '19.00000000', '19.00000000', 'Bo', 'Bo', '67100', 'Rome', NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Struttura della tabella `cinemabooking`
+--
+
+CREATE TABLE `cinemabooking` (
+  `Id` int(11) NOT NULL,
+  `hall` int(11) NOT NULL,
+  `film` int(11) NOT NULL,
+  `user` int(11) NOT NULL,
+  `seats` int(11) NOT NULL,
+  `schedule` datetime NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -220,6 +235,12 @@ ALTER TABLE `cinema`
   ADD PRIMARY KEY (`cinema_id`);
 
 --
+-- Indici per le tabelle `cinemabooking`
+--
+ALTER TABLE `cinemabooking`
+  ADD PRIMARY KEY (`Id`);
+
+--
 -- Indici per le tabelle `discount`
 --
 ALTER TABLE `discount`
@@ -294,6 +315,11 @@ ALTER TABLE `user_table`
 --
 ALTER TABLE `cinema`
   MODIFY `cinema_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+--
+-- AUTO_INCREMENT per la tabella `cinemabooking`
+--
+ALTER TABLE `cinemabooking`
+  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT per la tabella `discount`
 --
