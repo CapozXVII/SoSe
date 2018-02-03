@@ -1,5 +1,5 @@
 
-package it.univaq.disim.sose.cald.cinemaInformation;
+package it.univaq.disim.sose.cald.cinemainformation;
 
 import java.util.Date;
 

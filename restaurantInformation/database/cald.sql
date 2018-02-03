@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.5.2
+-- version 4.5.1
 -- http://www.phpmyadmin.net
 --
--- Host: localhost
--- Creato il: Gen 19, 2018 alle 15:48
--- Versione del server: 10.1.19-MariaDB
--- Versione PHP: 7.0.13
+-- Host: 127.0.0.1
+-- Creato il: Feb 02, 2018 alle 11:56
+-- Versione del server: 10.1.10-MariaDB
+-- Versione PHP: 7.0.4
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -48,6 +48,29 @@ INSERT INTO `cinema` (`cinema_id`, `cinema_lat`, `cinema_lon`, `cinema_name`, `c
 -- --------------------------------------------------------
 
 --
+-- Struttura della tabella `cinemabooking`
+--
+
+CREATE TABLE `cinemabooking` (
+  `Id` int(11) NOT NULL,
+  `hall` int(11) NOT NULL,
+  `film` int(11) NOT NULL,
+  `user` int(11) NOT NULL,
+  `seats` int(11) NOT NULL,
+  `schedule` datetime NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dump dei dati per la tabella `cinemabooking`
+--
+
+INSERT INTO `cinemabooking` (`Id`, `hall`, `film`, `user`, `seats`, `schedule`) VALUES
+(1, 1, 1, 1, 10, '2018-01-31 21:30:00'),
+(2, 1, 1, 1, 5, '2018-01-31 21:30:00');
+
+-- --------------------------------------------------------
+
+--
 -- Struttura della tabella `discount`
 --
 
@@ -80,6 +103,13 @@ CREATE TABLE `films` (
   `rating` varchar(50) DEFAULT NULL,
   `plot` varchar(1000) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dump dei dati per la tabella `films`
+--
+
+INSERT INTO `films` (`film_id`, `name`, `director`, `cast`, `duration`, `rating`, `plot`) VALUES
+(1, 'Una notte da leoni', NULL, NULL, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -118,6 +148,34 @@ CREATE TABLE `hall_film` (
   `freeSeatsNumber` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dump dei dati per la tabella `hall_film`
+--
+
+INSERT INTO `hall_film` (`hall_film_id`, `hall`, `film`, `time`, `price`, `freeSeatsNumber`) VALUES
+(2, 1, 1, '2018-01-31 21:30:00', 5, 5);
+
+-- --------------------------------------------------------
+
+--
+-- Struttura della tabella `restaurantbookings`
+--
+
+CREATE TABLE `restaurantbookings` (
+  `Id_Booking` int(11) NOT NULL,
+  `Restaurant` int(11) NOT NULL,
+  `User` int(11) NOT NULL,
+  `Schedule` int(11) NOT NULL,
+  `Seats` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dump dei dati per la tabella `restaurantbookings`
+--
+
+INSERT INTO `restaurantbookings` (`Id_Booking`, `Restaurant`, `User`, `Schedule`, `Seats`) VALUES
+(1, 1, 1, 2018, 10);
+
 -- --------------------------------------------------------
 
 --
@@ -135,15 +193,16 @@ CREATE TABLE `restaurants` (
   `restaurant_telephoneNumber` varchar(20) DEFAULT NULL,
   `style` varchar(50) DEFAULT NULL,
   `cuisine` varchar(50) DEFAULT NULL,
-  `menu` varchar(500) DEFAULT NULL
+  `menu` varchar(500) DEFAULT NULL,
+  `max_seats` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dump dei dati per la tabella `restaurants`
 --
 
-INSERT INTO `restaurants` (`restaurant_id`, `restaurant_lat`, `restaurant_lon`, `restaurant_name`, `restaurant_address`, `restaurant_cap`, `restaurant_city`, `restaurant_telephoneNumber`, `style`, `cuisine`, `menu`) VALUES
-(1, NULL, NULL, 'Da Paolo', 'Via Mazzini 3', '00123', 'Rome', '3458987666', 'Napoletano', 'Bo', 'Bo');
+INSERT INTO `restaurants` (`restaurant_id`, `restaurant_lat`, `restaurant_lon`, `restaurant_name`, `restaurant_address`, `restaurant_cap`, `restaurant_city`, `restaurant_telephoneNumber`, `style`, `cuisine`, `menu`, `max_seats`) VALUES
+(1, NULL, NULL, 'Da Paolo', 'Via Mazzini 3', '00123', 'Rome', '3458987666', 'Napoletano', 'Bo', 'Bo', 0);
 
 -- --------------------------------------------------------
 
@@ -220,6 +279,12 @@ ALTER TABLE `cinema`
   ADD PRIMARY KEY (`cinema_id`);
 
 --
+-- Indici per le tabelle `cinemabooking`
+--
+ALTER TABLE `cinemabooking`
+  ADD PRIMARY KEY (`Id`);
+
+--
 -- Indici per le tabelle `discount`
 --
 ALTER TABLE `discount`
@@ -247,6 +312,14 @@ ALTER TABLE `hall_film`
   ADD PRIMARY KEY (`hall_film_id`),
   ADD KEY `hall` (`hall`),
   ADD KEY `film` (`film`);
+
+--
+-- Indici per le tabelle `restaurantbookings`
+--
+ALTER TABLE `restaurantbookings`
+  ADD PRIMARY KEY (`Id_Booking`),
+  ADD KEY `Restaurant` (`Restaurant`),
+  ADD KEY `User` (`User`);
 
 --
 -- Indici per le tabelle `restaurants`
@@ -295,6 +368,11 @@ ALTER TABLE `user_table`
 ALTER TABLE `cinema`
   MODIFY `cinema_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 --
+-- AUTO_INCREMENT per la tabella `cinemabooking`
+--
+ALTER TABLE `cinemabooking`
+  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+--
 -- AUTO_INCREMENT per la tabella `discount`
 --
 ALTER TABLE `discount`
@@ -303,7 +381,7 @@ ALTER TABLE `discount`
 -- AUTO_INCREMENT per la tabella `films`
 --
 ALTER TABLE `films`
-  MODIFY `film_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `film_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT per la tabella `halls`
 --
@@ -313,7 +391,12 @@ ALTER TABLE `halls`
 -- AUTO_INCREMENT per la tabella `hall_film`
 --
 ALTER TABLE `hall_film`
-  MODIFY `hall_film_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `hall_film_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+--
+-- AUTO_INCREMENT per la tabella `restaurantbookings`
+--
+ALTER TABLE `restaurantbookings`
+  MODIFY `Id_Booking` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT per la tabella `restaurants`
 --

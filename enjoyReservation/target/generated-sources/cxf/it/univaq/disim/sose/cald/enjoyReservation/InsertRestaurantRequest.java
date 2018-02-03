@@ -1,5 +1,5 @@
 
-package it.univaq.disim.sose.cald.enjoyReservation;
+package it.univaq.disim.sose.cald.enjoyreservation;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
@@ -17,7 +17,7 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;complexContent&gt;
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&gt;
  *       &lt;sequence&gt;
- *         &lt;element name="restaurant" type="{http://it.univaq.disim.sose.cald/enjoyReservation}restaurantType"/&gt;
+ *         &lt;element name="restaurant" type="{http://it.univaq.disim.sose.cald/enjoyReservation}OSMRestaurantType"/&gt;
  *       &lt;/sequence&gt;
  *     &lt;/restriction&gt;
  *   &lt;/complexContent&gt;
@@ -33,17 +33,17 @@ import javax.xml.bind.annotation.XmlType;
 public class InsertRestaurantRequest {
 
     @XmlElement(required = true)
-    protected RestaurantType restaurant;
+    protected OSMRestaurantType restaurant;
 
     /**
      * Gets the value of the restaurant property.
      * 
      * @return
      *     possible object is
-     *     {@link RestaurantType }
+     *     {@link OSMRestaurantType }
      *     
      */
-    public RestaurantType getRestaurant() {
+    public OSMRestaurantType getRestaurant() {
         return restaurant;
     }
 
@@ -52,10 +52,10 @@ public class InsertRestaurantRequest {
      * 
      * @param value
      *     allowed object is
-     *     {@link RestaurantType }
+     *     {@link OSMRestaurantType }
      *     
      */
-    public void setRestaurant(RestaurantType value) {
+    public void setRestaurant(OSMRestaurantType value) {
         this.restaurant = value;
     }
 

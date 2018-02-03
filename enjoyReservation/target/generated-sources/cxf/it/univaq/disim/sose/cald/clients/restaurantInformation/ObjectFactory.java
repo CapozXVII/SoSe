@@ -1,5 +1,5 @@
 
-package it.univaq.disim.sose.cald.clients.restaurantInformation;
+package it.univaq.disim.sose.cald.clients.restaurantinformation;
 
 import javax.xml.bind.JAXBElement;
 import javax.xml.bind.annotation.XmlElementDecl;
@@ -10,7 +10,7 @@ import javax.xml.namespace.QName;
 /**
  * This object contains factory methods for each 
  * Java content interface and Java element interface 
- * generated in the it.univaq.disim.sose.cald.clients.restaurantInformation package. 
+ * generated in the it.univaq.disim.sose.cald.clients.restaurantinformation package. 
  * <p>An ObjectFactory allows you to programatically 
  * construct new instances of the Java representation 
  * for XML content. The Java representation of XML 
@@ -29,7 +29,7 @@ public class ObjectFactory {
     private final static QName _RestaurantInformationFault_QNAME = new QName("http://it.univaq.disim.sose.cald/restaurantInformation", "restaurantInformationFault");
 
     /**
-     * Create a new ObjectFactory that can be used to create new instances of schema derived classes for package: it.univaq.disim.sose.cald.clients.restaurantInformation
+     * Create a new ObjectFactory that can be used to create new instances of schema derived classes for package: it.univaq.disim.sose.cald.clients.restaurantinformation
      * 
      */
     public ObjectFactory() {
@@ -73,22 +73,6 @@ public class ObjectFactory {
      */
     public RestaurantInfoType createRestaurantInfoType() {
         return new RestaurantInfoType();
-    }
-
-    /**
-     * Create an instance of {@link TableType }
-     * 
-     */
-    public TableType createTableType() {
-        return new TableType();
-    }
-
-    /**
-     * Create an instance of {@link TableInfoType }
-     * 
-     */
-    public TableInfoType createTableInfoType() {
-        return new TableInfoType();
     }
 
     /**

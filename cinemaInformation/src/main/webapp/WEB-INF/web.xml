@@ -14,8 +14,8 @@
     </context-param>
 
 	<servlet>
-		<display-name>cinemaInformation</display-name>
-		<servlet-name>cinemaInformation</servlet-name>
+		<display-name>cinemainformation</display-name>
+		<servlet-name>cinemainformation</servlet-name>
 		<servlet-class>org.apache.cxf.transport.servlet.CXFServlet</servlet-class>
 		<init-param>
 			<param-name>config-location</param-name>
@@ -24,7 +24,7 @@
 		<load-on-startup>1</load-on-startup>
 	</servlet>
 	<servlet-mapping>
-		<servlet-name>cinemaInformation</servlet-name>
+		<servlet-name>cinemainformation</servlet-name>
 		<url-pattern>/services/*</url-pattern>
 	</servlet-mapping>
 

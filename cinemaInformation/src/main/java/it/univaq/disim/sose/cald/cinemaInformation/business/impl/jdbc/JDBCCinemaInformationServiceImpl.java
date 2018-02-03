@@ -1,4 +1,4 @@
-package it.univaq.disim.sose.cald.cinemaInformation.business.impl.jdbc;
+package it.univaq.disim.sose.cald.cinemainformation.business.impl.jdbc;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -13,9 +13,9 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import it.univaq.disim.sose.cald.cinemaInformation.business.BusinessException;
-import it.univaq.disim.sose.cald.cinemaInformation.business.CinemaInformationService;
-import it.univaq.disim.sose.cald.cinemaInformation.business.model.*;
+import it.univaq.disim.sose.cald.cinemainformation.CinemaInformationFault_Exception;
+import it.univaq.disim.sose.cald.cinemainformation.business.CinemaInformationService;
+import it.univaq.disim.sose.cald.cinemainformation.business.model.*;
 
 @Service
 public class JDBCCinemaInformationServiceImpl implements CinemaInformationService {
@@ -27,7 +27,7 @@ public class JDBCCinemaInformationServiceImpl implements CinemaInformationServic
 	@Autowired
 	private DataSource dataSource;
 	
-	public List<Cinema> getCinemas(String city) throws BusinessException {
+	public List<Cinema> getCinemas(String city) throws CinemaInformationFault_Exception {
 		List<Cinema> cinemaList = new ArrayList<Cinema>();
 		List<HallFilm> hallFilmList = new ArrayList<HallFilm>();
 		String sql = "SELECT * FROM cinema JOIN halls ON cinema.cinema_id = halls.cinema JOIN hall_film ON hall_film.hall = halls.hall_id JOIN films ON films.film_id = hall_film.film AND cinema.cinema_city = '" + city + "' " + "ORDER BY cinema.cinema_id";
@@ -66,7 +66,7 @@ public class JDBCCinemaInformationServiceImpl implements CinemaInformationServic
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
-			throw new BusinessException(e);
+			throw new CinemaInformationFault_Exception("Something was wrong with Cinema craetion");
 		} finally {
 			if (st != null) {
 				try {
@@ -109,12 +109,11 @@ public class JDBCCinemaInformationServiceImpl implements CinemaInformationServic
 		film.setDuration(rs.getInt("duration"));
 		film.setName(rs.getString("name"));
 		film.setPlot(rs.getString("plot"));
-		film.setRating(rs.getString("rating"));
+		film.setType(rs.getString("type"));
 		hallFilm.setId(rs.getLong("hall_film_id"));
 		hallFilm.setFreeSeatsNumber(rs.getInt("freeSeatsNumber"));
 		hallFilm.setPrice(rs.getFloat("price"));
 		hallFilm.setTime(rs.getTimestamp("time"));
-		LOGGER.info(hallFilm.getTime() + "CIa");
 		hallFilm.setHall(hall);
 		hallFilm.setFilm(film);
 		return hallFilm;

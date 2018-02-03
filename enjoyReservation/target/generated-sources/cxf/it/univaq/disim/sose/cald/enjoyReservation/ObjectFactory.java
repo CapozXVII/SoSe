@@ -1,5 +1,5 @@
 
-package it.univaq.disim.sose.cald.enjoyReservation;
+package it.univaq.disim.sose.cald.enjoyreservation;
 
 import javax.xml.bind.JAXBElement;
 import javax.xml.bind.annotation.XmlElementDecl;
@@ -10,7 +10,7 @@ import javax.xml.namespace.QName;
 /**
  * This object contains factory methods for each 
  * Java content interface and Java element interface 
- * generated in the it.univaq.disim.sose.cald.enjoyReservation package. 
+ * generated in the it.univaq.disim.sose.cald.enjoyreservation package. 
  * <p>An ObjectFactory allows you to programatically 
  * construct new instances of the Java representation 
  * for XML content. The Java representation of XML 
@@ -25,35 +25,32 @@ import javax.xml.namespace.QName;
 public class ObjectFactory {
 
     private final static QName _InsertCinemaRequest_QNAME = new QName("http://it.univaq.disim.sose.cald/enjoyReservation", "insertCinemaRequest");
-    private final static QName _GetCinemaInformationRequest_QNAME = new QName("http://it.univaq.disim.sose.cald/enjoyReservation", "getCinemaInformationRequest");
-    private final static QName _CinemaBookingRequest_QNAME = new QName("http://it.univaq.disim.sose.cald/enjoyReservation", "cinemaBookingRequest");
+    private final static QName _GetCinemaInfoRequest_QNAME = new QName("http://it.univaq.disim.sose.cald/enjoyReservation", "getCinemaInfoRequest");
+    private final static QName _BookingCinemaRequest_QNAME = new QName("http://it.univaq.disim.sose.cald/enjoyReservation", "bookingCinemaRequest");
     private final static QName _UpdateCinemaRequest_QNAME = new QName("http://it.univaq.disim.sose.cald/enjoyReservation", "updateCinemaRequest");
     private final static QName _InsertRestaurantRequest_QNAME = new QName("http://it.univaq.disim.sose.cald/enjoyReservation", "insertRestaurantRequest");
-    private final static QName _GetRestaurantInformationRequest_QNAME = new QName("http://it.univaq.disim.sose.cald/enjoyReservation", "getRestaurantInformationRequest");
-    private final static QName _RestaurantBookingRequest_QNAME = new QName("http://it.univaq.disim.sose.cald/enjoyReservation", "restaurantBookingRequest");
+    private final static QName _GetRestaurantInfoRequest_QNAME = new QName("http://it.univaq.disim.sose.cald/enjoyReservation", "getRestaurantInfoRequest");
+    private final static QName _BookingRestaurantRequest_QNAME = new QName("http://it.univaq.disim.sose.cald/enjoyReservation", "bookingRestaurantRequest");
     private final static QName _UpdateRestaurantRequest_QNAME = new QName("http://it.univaq.disim.sose.cald/enjoyReservation", "updateRestaurantRequest");
     private final static QName _InsertCinemaResponse_QNAME = new QName("http://it.univaq.disim.sose.cald/enjoyReservation", "insertCinemaResponse");
-    private final static QName _GetCinemaInformationResponse_QNAME = new QName("http://it.univaq.disim.sose.cald/enjoyReservation", "getCinemaInformationResponse");
-    private final static QName _CinemaBookingResponse_QNAME = new QName("http://it.univaq.disim.sose.cald/enjoyReservation", "cinemaBookingResponse");
+    private final static QName _GetCinemaInfoResponse_QNAME = new QName("http://it.univaq.disim.sose.cald/enjoyReservation", "getCinemaInfoResponse");
+    private final static QName _BookingCinemaResponse_QNAME = new QName("http://it.univaq.disim.sose.cald/enjoyReservation", "bookingCinemaResponse");
     private final static QName _UpdateCinemaResponse_QNAME = new QName("http://it.univaq.disim.sose.cald/enjoyReservation", "updateCinemaResponse");
     private final static QName _InsertRestaurantResponse_QNAME = new QName("http://it.univaq.disim.sose.cald/enjoyReservation", "insertRestaurantResponse");
-    private final static QName _GetRestaurantInformationResponse_QNAME = new QName("http://it.univaq.disim.sose.cald/enjoyReservation", "getRestaurantInformationResponse");
-    private final static QName _RestaurantBookingResponse_QNAME = new QName("http://it.univaq.disim.sose.cald/enjoyReservation", "restaurantBookingResponse");
+    private final static QName _GetRestaurantInfoResponse_QNAME = new QName("http://it.univaq.disim.sose.cald/enjoyReservation", "getRestaurantInfoResponse");
+    private final static QName _BookingRestaurantResponse_QNAME = new QName("http://it.univaq.disim.sose.cald/enjoyReservation", "bookingRestaurantResponse");
     private final static QName _UpdateRestaurantResponse_QNAME = new QName("http://it.univaq.disim.sose.cald/enjoyReservation", "updateRestaurantResponse");
-    private final static QName _NightInformationRequest_QNAME = new QName("http://it.univaq.disim.sose.cald/enjoyReservation", "nightInformationRequest");
-    private final static QName _NightInformationResponse_QNAME = new QName("http://it.univaq.disim.sose.cald/enjoyReservation", "nightInformationResponse");
-    private final static QName _GetRestaurantInformationFault_QNAME = new QName("http://it.univaq.disim.sose.cald/enjoyReservation", "getRestaurantInformationFault");
-    private final static QName _GetCinemaInformationFault_QNAME = new QName("http://it.univaq.disim.sose.cald/enjoyReservation", "getCinemaInformationFault");
-    private final static QName _GetCinemaBookingFault_QNAME = new QName("http://it.univaq.disim.sose.cald/enjoyReservation", "getCinemaBookingFault");
-    private final static QName _GetRestaurantBookingFault_QNAME = new QName("http://it.univaq.disim.sose.cald/enjoyReservation", "getRestaurantBookingFault");
+    private final static QName _GetRestaurantInfoFault_QNAME = new QName("http://it.univaq.disim.sose.cald/enjoyReservation", "getRestaurantInfoFault");
+    private final static QName _GetCinemaInfoFault_QNAME = new QName("http://it.univaq.disim.sose.cald/enjoyReservation", "getCinemaInfoFault");
+    private final static QName _BookingCinemaFault_QNAME = new QName("http://it.univaq.disim.sose.cald/enjoyReservation", "bookingCinemaFault");
+    private final static QName _BookingRestaurantFault_QNAME = new QName("http://it.univaq.disim.sose.cald/enjoyReservation", "bookingRestaurantFault");
     private final static QName _InsertRestaurantFault_QNAME = new QName("http://it.univaq.disim.sose.cald/enjoyReservation", "insertRestaurantFault");
     private final static QName _UpdateRestaurantFault_QNAME = new QName("http://it.univaq.disim.sose.cald/enjoyReservation", "updateRestaurantFault");
     private final static QName _InsertCinemaFault_QNAME = new QName("http://it.univaq.disim.sose.cald/enjoyReservation", "insertCinemaFault");
     private final static QName _UpdateCinemaFault_QNAME = new QName("http://it.univaq.disim.sose.cald/enjoyReservation", "updateCinemaFault");
-    private final static QName _NightInformationFault_QNAME = new QName("http://it.univaq.disim.sose.cald/enjoyReservation", "nightInformationFault");
 
     /**
-     * Create a new ObjectFactory that can be used to create new instances of schema derived classes for package: it.univaq.disim.sose.cald.enjoyReservation
+     * Create a new ObjectFactory that can be used to create new instances of schema derived classes for package: it.univaq.disim.sose.cald.enjoyreservation
      * 
      */
     public ObjectFactory() {
@@ -68,19 +65,19 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link GetCinemaInformationRequest }
+     * Create an instance of {@link GetCinemaInfoRequest }
      * 
      */
-    public GetCinemaInformationRequest createGetCinemaInformationRequest() {
-        return new GetCinemaInformationRequest();
+    public GetCinemaInfoRequest createGetCinemaInfoRequest() {
+        return new GetCinemaInfoRequest();
     }
 
     /**
-     * Create an instance of {@link CinemaBookingRequest }
+     * Create an instance of {@link BookingCinemaRequest }
      * 
      */
-    public CinemaBookingRequest createCinemaBookingRequest() {
-        return new CinemaBookingRequest();
+    public BookingCinemaRequest createBookingCinemaRequest() {
+        return new BookingCinemaRequest();
     }
 
     /**
@@ -100,19 +97,19 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link GetRestaurantInformationRequest }
+     * Create an instance of {@link GetRestaurantInfoRequest }
      * 
      */
-    public GetRestaurantInformationRequest createGetRestaurantInformationRequest() {
-        return new GetRestaurantInformationRequest();
+    public GetRestaurantInfoRequest createGetRestaurantInfoRequest() {
+        return new GetRestaurantInfoRequest();
     }
 
     /**
-     * Create an instance of {@link RestaurantBookingRequest }
+     * Create an instance of {@link BookingRestaurantRequest }
      * 
      */
-    public RestaurantBookingRequest createRestaurantBookingRequest() {
-        return new RestaurantBookingRequest();
+    public BookingRestaurantRequest createBookingRestaurantRequest() {
+        return new BookingRestaurantRequest();
     }
 
     /**
@@ -132,19 +129,19 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link GetCinemaInformationResponse }
+     * Create an instance of {@link GetCinemaInfoResponse }
      * 
      */
-    public GetCinemaInformationResponse createGetCinemaInformationResponse() {
-        return new GetCinemaInformationResponse();
+    public GetCinemaInfoResponse createGetCinemaInfoResponse() {
+        return new GetCinemaInfoResponse();
     }
 
     /**
-     * Create an instance of {@link CinemaBookingResponse }
+     * Create an instance of {@link BookingCinemaResponse }
      * 
      */
-    public CinemaBookingResponse createCinemaBookingResponse() {
-        return new CinemaBookingResponse();
+    public BookingCinemaResponse createBookingCinemaResponse() {
+        return new BookingCinemaResponse();
     }
 
     /**
@@ -164,19 +161,19 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link GetRestaurantInformationResponse }
+     * Create an instance of {@link GetRestaurantInfoResponse }
      * 
      */
-    public GetRestaurantInformationResponse createGetRestaurantInformationResponse() {
-        return new GetRestaurantInformationResponse();
+    public GetRestaurantInfoResponse createGetRestaurantInfoResponse() {
+        return new GetRestaurantInfoResponse();
     }
 
     /**
-     * Create an instance of {@link RestaurantBookingResponse }
+     * Create an instance of {@link BookingRestaurantResponse }
      * 
      */
-    public RestaurantBookingResponse createRestaurantBookingResponse() {
-        return new RestaurantBookingResponse();
+    public BookingRestaurantResponse createBookingRestaurantResponse() {
+        return new BookingRestaurantResponse();
     }
 
     /**
@@ -188,51 +185,35 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link NightInformationRequest }
+     * Create an instance of {@link GetRestaurantInfoFault }
      * 
      */
-    public NightInformationRequest createNightInformationRequest() {
-        return new NightInformationRequest();
+    public GetRestaurantInfoFault createGetRestaurantInfoFault() {
+        return new GetRestaurantInfoFault();
     }
 
     /**
-     * Create an instance of {@link NightInformationResponse }
+     * Create an instance of {@link GetCinemaInfoFault }
      * 
      */
-    public NightInformationResponse createNightInformationResponse() {
-        return new NightInformationResponse();
+    public GetCinemaInfoFault createGetCinemaInfoFault() {
+        return new GetCinemaInfoFault();
     }
 
     /**
-     * Create an instance of {@link GetRestaurantInformationFault }
+     * Create an instance of {@link BookingCinemaFault }
      * 
      */
-    public GetRestaurantInformationFault createGetRestaurantInformationFault() {
-        return new GetRestaurantInformationFault();
+    public BookingCinemaFault createBookingCinemaFault() {
+        return new BookingCinemaFault();
     }
 
     /**
-     * Create an instance of {@link GetCinemaInformationFault }
+     * Create an instance of {@link BookingRestaurantFault }
      * 
      */
-    public GetCinemaInformationFault createGetCinemaInformationFault() {
-        return new GetCinemaInformationFault();
-    }
-
-    /**
-     * Create an instance of {@link GetCinemaBookingFault }
-     * 
-     */
-    public GetCinemaBookingFault createGetCinemaBookingFault() {
-        return new GetCinemaBookingFault();
-    }
-
-    /**
-     * Create an instance of {@link GetRestaurantBookingFault }
-     * 
-     */
-    public GetRestaurantBookingFault createGetRestaurantBookingFault() {
-        return new GetRestaurantBookingFault();
+    public BookingRestaurantFault createBookingRestaurantFault() {
+        return new BookingRestaurantFault();
     }
 
     /**
@@ -268,91 +249,83 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link NightInformationFault }
+     * Create an instance of {@link OSMRestaurantType }
      * 
      */
-    public NightInformationFault createNightInformationFault() {
-        return new NightInformationFault();
+    public OSMRestaurantType createOSMRestaurantType() {
+        return new OSMRestaurantType();
     }
 
     /**
-     * Create an instance of {@link RestaurantType }
+     * Create an instance of {@link OSMRestaurantInfoType }
      * 
      */
-    public RestaurantType createRestaurantType() {
-        return new RestaurantType();
+    public OSMRestaurantInfoType createOSMRestaurantInfoType() {
+        return new OSMRestaurantInfoType();
     }
 
     /**
-     * Create an instance of {@link RestaurantInfoType }
+     * Create an instance of {@link OSMTableType }
      * 
      */
-    public RestaurantInfoType createRestaurantInfoType() {
-        return new RestaurantInfoType();
+    public OSMTableType createOSMTableType() {
+        return new OSMTableType();
     }
 
     /**
-     * Create an instance of {@link TableType }
+     * Create an instance of {@link OSMTableInfoType }
      * 
      */
-    public TableType createTableType() {
-        return new TableType();
+    public OSMTableInfoType createOSMTableInfoType() {
+        return new OSMTableInfoType();
     }
 
     /**
-     * Create an instance of {@link TableInfoType }
+     * Create an instance of {@link OSMDiscountType }
      * 
      */
-    public TableInfoType createTableInfoType() {
-        return new TableInfoType();
+    public OSMDiscountType createOSMDiscountType() {
+        return new OSMDiscountType();
     }
 
     /**
-     * Create an instance of {@link DiscountType }
+     * Create an instance of {@link OSMCinemaType }
      * 
      */
-    public DiscountType createDiscountType() {
-        return new DiscountType();
+    public OSMCinemaType createOSMCinemaType() {
+        return new OSMCinemaType();
     }
 
     /**
-     * Create an instance of {@link CinemaType }
+     * Create an instance of {@link OSMCinemaInfoType }
      * 
      */
-    public CinemaType createCinemaType() {
-        return new CinemaType();
+    public OSMCinemaInfoType createOSMCinemaInfoType() {
+        return new OSMCinemaInfoType();
     }
 
     /**
-     * Create an instance of {@link CinemaInfoType }
+     * Create an instance of {@link OSMHallType }
      * 
      */
-    public CinemaInfoType createCinemaInfoType() {
-        return new CinemaInfoType();
+    public OSMHallType createOSMHallType() {
+        return new OSMHallType();
     }
 
     /**
-     * Create an instance of {@link HallType }
+     * Create an instance of {@link OSMHallInfoType }
      * 
      */
-    public HallType createHallType() {
-        return new HallType();
+    public OSMHallInfoType createOSMHallInfoType() {
+        return new OSMHallInfoType();
     }
 
     /**
-     * Create an instance of {@link HallInfoType }
+     * Create an instance of {@link OSMFilmType }
      * 
      */
-    public HallInfoType createHallInfoType() {
-        return new HallInfoType();
-    }
-
-    /**
-     * Create an instance of {@link FilmType }
-     * 
-     */
-    public FilmType createFilmType() {
-        return new FilmType();
+    public OSMFilmType createOSMFilmType() {
+        return new OSMFilmType();
     }
 
     /**
@@ -365,21 +338,21 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link GetCinemaInformationRequest }{@code >}}
+     * Create an instance of {@link JAXBElement }{@code <}{@link GetCinemaInfoRequest }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "http://it.univaq.disim.sose.cald/enjoyReservation", name = "getCinemaInformationRequest")
-    public JAXBElement<GetCinemaInformationRequest> createGetCinemaInformationRequest(GetCinemaInformationRequest value) {
-        return new JAXBElement<GetCinemaInformationRequest>(_GetCinemaInformationRequest_QNAME, GetCinemaInformationRequest.class, null, value);
+    @XmlElementDecl(namespace = "http://it.univaq.disim.sose.cald/enjoyReservation", name = "getCinemaInfoRequest")
+    public JAXBElement<GetCinemaInfoRequest> createGetCinemaInfoRequest(GetCinemaInfoRequest value) {
+        return new JAXBElement<GetCinemaInfoRequest>(_GetCinemaInfoRequest_QNAME, GetCinemaInfoRequest.class, null, value);
     }
 
     /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link CinemaBookingRequest }{@code >}}
+     * Create an instance of {@link JAXBElement }{@code <}{@link BookingCinemaRequest }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "http://it.univaq.disim.sose.cald/enjoyReservation", name = "cinemaBookingRequest")
-    public JAXBElement<CinemaBookingRequest> createCinemaBookingRequest(CinemaBookingRequest value) {
-        return new JAXBElement<CinemaBookingRequest>(_CinemaBookingRequest_QNAME, CinemaBookingRequest.class, null, value);
+    @XmlElementDecl(namespace = "http://it.univaq.disim.sose.cald/enjoyReservation", name = "bookingCinemaRequest")
+    public JAXBElement<BookingCinemaRequest> createBookingCinemaRequest(BookingCinemaRequest value) {
+        return new JAXBElement<BookingCinemaRequest>(_BookingCinemaRequest_QNAME, BookingCinemaRequest.class, null, value);
     }
 
     /**
@@ -401,21 +374,21 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link GetRestaurantInformationRequest }{@code >}}
+     * Create an instance of {@link JAXBElement }{@code <}{@link GetRestaurantInfoRequest }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "http://it.univaq.disim.sose.cald/enjoyReservation", name = "getRestaurantInformationRequest")
-    public JAXBElement<GetRestaurantInformationRequest> createGetRestaurantInformationRequest(GetRestaurantInformationRequest value) {
-        return new JAXBElement<GetRestaurantInformationRequest>(_GetRestaurantInformationRequest_QNAME, GetRestaurantInformationRequest.class, null, value);
+    @XmlElementDecl(namespace = "http://it.univaq.disim.sose.cald/enjoyReservation", name = "getRestaurantInfoRequest")
+    public JAXBElement<GetRestaurantInfoRequest> createGetRestaurantInfoRequest(GetRestaurantInfoRequest value) {
+        return new JAXBElement<GetRestaurantInfoRequest>(_GetRestaurantInfoRequest_QNAME, GetRestaurantInfoRequest.class, null, value);
     }
 
     /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link RestaurantBookingRequest }{@code >}}
+     * Create an instance of {@link JAXBElement }{@code <}{@link BookingRestaurantRequest }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "http://it.univaq.disim.sose.cald/enjoyReservation", name = "restaurantBookingRequest")
-    public JAXBElement<RestaurantBookingRequest> createRestaurantBookingRequest(RestaurantBookingRequest value) {
-        return new JAXBElement<RestaurantBookingRequest>(_RestaurantBookingRequest_QNAME, RestaurantBookingRequest.class, null, value);
+    @XmlElementDecl(namespace = "http://it.univaq.disim.sose.cald/enjoyReservation", name = "bookingRestaurantRequest")
+    public JAXBElement<BookingRestaurantRequest> createBookingRestaurantRequest(BookingRestaurantRequest value) {
+        return new JAXBElement<BookingRestaurantRequest>(_BookingRestaurantRequest_QNAME, BookingRestaurantRequest.class, null, value);
     }
 
     /**
@@ -437,21 +410,21 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link GetCinemaInformationResponse }{@code >}}
+     * Create an instance of {@link JAXBElement }{@code <}{@link GetCinemaInfoResponse }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "http://it.univaq.disim.sose.cald/enjoyReservation", name = "getCinemaInformationResponse")
-    public JAXBElement<GetCinemaInformationResponse> createGetCinemaInformationResponse(GetCinemaInformationResponse value) {
-        return new JAXBElement<GetCinemaInformationResponse>(_GetCinemaInformationResponse_QNAME, GetCinemaInformationResponse.class, null, value);
+    @XmlElementDecl(namespace = "http://it.univaq.disim.sose.cald/enjoyReservation", name = "getCinemaInfoResponse")
+    public JAXBElement<GetCinemaInfoResponse> createGetCinemaInfoResponse(GetCinemaInfoResponse value) {
+        return new JAXBElement<GetCinemaInfoResponse>(_GetCinemaInfoResponse_QNAME, GetCinemaInfoResponse.class, null, value);
     }
 
     /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link CinemaBookingResponse }{@code >}}
+     * Create an instance of {@link JAXBElement }{@code <}{@link BookingCinemaResponse }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "http://it.univaq.disim.sose.cald/enjoyReservation", name = "cinemaBookingResponse")
-    public JAXBElement<CinemaBookingResponse> createCinemaBookingResponse(CinemaBookingResponse value) {
-        return new JAXBElement<CinemaBookingResponse>(_CinemaBookingResponse_QNAME, CinemaBookingResponse.class, null, value);
+    @XmlElementDecl(namespace = "http://it.univaq.disim.sose.cald/enjoyReservation", name = "bookingCinemaResponse")
+    public JAXBElement<BookingCinemaResponse> createBookingCinemaResponse(BookingCinemaResponse value) {
+        return new JAXBElement<BookingCinemaResponse>(_BookingCinemaResponse_QNAME, BookingCinemaResponse.class, null, value);
     }
 
     /**
@@ -473,21 +446,21 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link GetRestaurantInformationResponse }{@code >}}
+     * Create an instance of {@link JAXBElement }{@code <}{@link GetRestaurantInfoResponse }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "http://it.univaq.disim.sose.cald/enjoyReservation", name = "getRestaurantInformationResponse")
-    public JAXBElement<GetRestaurantInformationResponse> createGetRestaurantInformationResponse(GetRestaurantInformationResponse value) {
-        return new JAXBElement<GetRestaurantInformationResponse>(_GetRestaurantInformationResponse_QNAME, GetRestaurantInformationResponse.class, null, value);
+    @XmlElementDecl(namespace = "http://it.univaq.disim.sose.cald/enjoyReservation", name = "getRestaurantInfoResponse")
+    public JAXBElement<GetRestaurantInfoResponse> createGetRestaurantInfoResponse(GetRestaurantInfoResponse value) {
+        return new JAXBElement<GetRestaurantInfoResponse>(_GetRestaurantInfoResponse_QNAME, GetRestaurantInfoResponse.class, null, value);
     }
 
     /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link RestaurantBookingResponse }{@code >}}
+     * Create an instance of {@link JAXBElement }{@code <}{@link BookingRestaurantResponse }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "http://it.univaq.disim.sose.cald/enjoyReservation", name = "restaurantBookingResponse")
-    public JAXBElement<RestaurantBookingResponse> createRestaurantBookingResponse(RestaurantBookingResponse value) {
-        return new JAXBElement<RestaurantBookingResponse>(_RestaurantBookingResponse_QNAME, RestaurantBookingResponse.class, null, value);
+    @XmlElementDecl(namespace = "http://it.univaq.disim.sose.cald/enjoyReservation", name = "bookingRestaurantResponse")
+    public JAXBElement<BookingRestaurantResponse> createBookingRestaurantResponse(BookingRestaurantResponse value) {
+        return new JAXBElement<BookingRestaurantResponse>(_BookingRestaurantResponse_QNAME, BookingRestaurantResponse.class, null, value);
     }
 
     /**
@@ -500,57 +473,39 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link NightInformationRequest }{@code >}}
+     * Create an instance of {@link JAXBElement }{@code <}{@link GetRestaurantInfoFault }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "http://it.univaq.disim.sose.cald/enjoyReservation", name = "nightInformationRequest")
-    public JAXBElement<NightInformationRequest> createNightInformationRequest(NightInformationRequest value) {
-        return new JAXBElement<NightInformationRequest>(_NightInformationRequest_QNAME, NightInformationRequest.class, null, value);
+    @XmlElementDecl(namespace = "http://it.univaq.disim.sose.cald/enjoyReservation", name = "getRestaurantInfoFault")
+    public JAXBElement<GetRestaurantInfoFault> createGetRestaurantInfoFault(GetRestaurantInfoFault value) {
+        return new JAXBElement<GetRestaurantInfoFault>(_GetRestaurantInfoFault_QNAME, GetRestaurantInfoFault.class, null, value);
     }
 
     /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link NightInformationResponse }{@code >}}
+     * Create an instance of {@link JAXBElement }{@code <}{@link GetCinemaInfoFault }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "http://it.univaq.disim.sose.cald/enjoyReservation", name = "nightInformationResponse")
-    public JAXBElement<NightInformationResponse> createNightInformationResponse(NightInformationResponse value) {
-        return new JAXBElement<NightInformationResponse>(_NightInformationResponse_QNAME, NightInformationResponse.class, null, value);
+    @XmlElementDecl(namespace = "http://it.univaq.disim.sose.cald/enjoyReservation", name = "getCinemaInfoFault")
+    public JAXBElement<GetCinemaInfoFault> createGetCinemaInfoFault(GetCinemaInfoFault value) {
+        return new JAXBElement<GetCinemaInfoFault>(_GetCinemaInfoFault_QNAME, GetCinemaInfoFault.class, null, value);
     }
 
     /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link GetRestaurantInformationFault }{@code >}}
+     * Create an instance of {@link JAXBElement }{@code <}{@link BookingCinemaFault }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "http://it.univaq.disim.sose.cald/enjoyReservation", name = "getRestaurantInformationFault")
-    public JAXBElement<GetRestaurantInformationFault> createGetRestaurantInformationFault(GetRestaurantInformationFault value) {
-        return new JAXBElement<GetRestaurantInformationFault>(_GetRestaurantInformationFault_QNAME, GetRestaurantInformationFault.class, null, value);
+    @XmlElementDecl(namespace = "http://it.univaq.disim.sose.cald/enjoyReservation", name = "bookingCinemaFault")
+    public JAXBElement<BookingCinemaFault> createBookingCinemaFault(BookingCinemaFault value) {
+        return new JAXBElement<BookingCinemaFault>(_BookingCinemaFault_QNAME, BookingCinemaFault.class, null, value);
     }
 
     /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link GetCinemaInformationFault }{@code >}}
+     * Create an instance of {@link JAXBElement }{@code <}{@link BookingRestaurantFault }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "http://it.univaq.disim.sose.cald/enjoyReservation", name = "getCinemaInformationFault")
-    public JAXBElement<GetCinemaInformationFault> createGetCinemaInformationFault(GetCinemaInformationFault value) {
-        return new JAXBElement<GetCinemaInformationFault>(_GetCinemaInformationFault_QNAME, GetCinemaInformationFault.class, null, value);
-    }
-
-    /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link GetCinemaBookingFault }{@code >}}
-     * 
-     */
-    @XmlElementDecl(namespace = "http://it.univaq.disim.sose.cald/enjoyReservation", name = "getCinemaBookingFault")
-    public JAXBElement<GetCinemaBookingFault> createGetCinemaBookingFault(GetCinemaBookingFault value) {
-        return new JAXBElement<GetCinemaBookingFault>(_GetCinemaBookingFault_QNAME, GetCinemaBookingFault.class, null, value);
-    }
-
-    /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link GetRestaurantBookingFault }{@code >}}
-     * 
-     */
-    @XmlElementDecl(namespace = "http://it.univaq.disim.sose.cald/enjoyReservation", name = "getRestaurantBookingFault")
-    public JAXBElement<GetRestaurantBookingFault> createGetRestaurantBookingFault(GetRestaurantBookingFault value) {
-        return new JAXBElement<GetRestaurantBookingFault>(_GetRestaurantBookingFault_QNAME, GetRestaurantBookingFault.class, null, value);
+    @XmlElementDecl(namespace = "http://it.univaq.disim.sose.cald/enjoyReservation", name = "bookingRestaurantFault")
+    public JAXBElement<BookingRestaurantFault> createBookingRestaurantFault(BookingRestaurantFault value) {
+        return new JAXBElement<BookingRestaurantFault>(_BookingRestaurantFault_QNAME, BookingRestaurantFault.class, null, value);
     }
 
     /**
@@ -587,15 +542,6 @@ public class ObjectFactory {
     @XmlElementDecl(namespace = "http://it.univaq.disim.sose.cald/enjoyReservation", name = "updateCinemaFault")
     public JAXBElement<UpdateCinemaFault> createUpdateCinemaFault(UpdateCinemaFault value) {
         return new JAXBElement<UpdateCinemaFault>(_UpdateCinemaFault_QNAME, UpdateCinemaFault.class, null, value);
-    }
-
-    /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link NightInformationFault }{@code >}}
-     * 
-     */
-    @XmlElementDecl(namespace = "http://it.univaq.disim.sose.cald/enjoyReservation", name = "nightInformationFault")
-    public JAXBElement<NightInformationFault> createNightInformationFault(NightInformationFault value) {
-        return new JAXBElement<NightInformationFault>(_NightInformationFault_QNAME, NightInformationFault.class, null, value);
     }
 
 }

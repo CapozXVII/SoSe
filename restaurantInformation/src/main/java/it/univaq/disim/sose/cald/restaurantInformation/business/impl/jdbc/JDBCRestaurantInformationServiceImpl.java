@@ -1,4 +1,4 @@
-package it.univaq.disim.sose.cald.restaurantInformation.business.impl.jdbc;
+package it.univaq.disim.sose.cald.restaurantinformation.business.impl.jdbc;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -14,12 +14,11 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import it.univaq.disim.sose.cald.restaurantInformation.business.model.Cinema;
-import it.univaq.disim.sose.cald.restaurantInformation.business.BusinessException;
-import it.univaq.disim.sose.cald.restaurantInformation.business.RestaurantInformationService;
-import it.univaq.disim.sose.cald.restaurantInformation.business.model.Discount;
-import it.univaq.disim.sose.cald.restaurantInformation.business.model.Restaurant;
-import it.univaq.disim.sose.cald.restaurantInformation.business.model.Table;
+import it.univaq.disim.sose.cald.restaurantinformation.business.model.Cinema;
+import it.univaq.disim.sose.cald.restaurantinformation.RestaurantInformationFault_Exception;
+import it.univaq.disim.sose.cald.restaurantinformation.business.RestaurantInformationService;
+import it.univaq.disim.sose.cald.restaurantinformation.business.model.Discount;
+import it.univaq.disim.sose.cald.restaurantinformation.business.model.Restaurant;
 
 @Service
 public class JDBCRestaurantInformationServiceImpl implements RestaurantInformationService {
@@ -30,10 +29,9 @@ public class JDBCRestaurantInformationServiceImpl implements RestaurantInformati
 	private DataSource dataSource;
 
 	@Override
-	public List<Restaurant> getRestaurants(String city) throws BusinessException {
+	public List<Restaurant> getRestaurants(String city) throws RestaurantInformationFault_Exception {
 		List<Restaurant> restaurantList = new ArrayList<Restaurant>();
-		List<Table> tableList = new ArrayList<Table>();
-		String sql = "SELECT * FROM restaurants JOIN tables ON restaurants.restaurant_id = tables.restaurant AND restaurants.restaurant_city = '" + city + "' " + "ORDER BY restaurants.restaurant_id";
+		String sql = "SELECT * FROM restaurants WHERE restaurants.restaurant_city = '" + city + "' " + "ORDER BY restaurants.restaurant_id";
 		LOGGER.info(sql);
 		Connection con = null;
 		Statement st = null;
@@ -41,35 +39,17 @@ public class JDBCRestaurantInformationServiceImpl implements RestaurantInformati
 		
 		try {
 			Restaurant restaurant = null;
-			int count = 0;
 			con = dataSource.getConnection();
 			st = con.createStatement();
 			rs = st.executeQuery(sql);
 			
 			while(rs.next()) {
-				int restaurantId = rs.getInt("restaurant_id");
-				if (rs.isFirst()) {
-					count = restaurantId;
-					restaurant = createRestaurant(rs);
-				}
-				if (count == restaurantId) {
-					tableList.add(createTable(rs));
-				} else {
-					count = restaurantId;
-					restaurant.setTables(tableList);
-					restaurantList.add(restaurant);
-					tableList = new ArrayList<Table>();
-					restaurant = createRestaurant(rs);
-					tableList.add(createTable(rs));
-				}
-				if (rs.isLast()) {
-					restaurant.setTables(tableList);
-					restaurantList.add(restaurant);
-				}
+				restaurant = createRestaurant(rs);
+				restaurantList.add(restaurant);
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
-			throw new BusinessException(e);
+			throw new RestaurantInformationFault_Exception("Something was wrong Restaurant creation");
 		} finally {
 			if (st != null) {
 				try {
@@ -86,7 +66,7 @@ public class JDBCRestaurantInformationServiceImpl implements RestaurantInformati
 		return restaurantList;
 	}
 	
-	public Restaurant createRestaurant(ResultSet rs) throws SQLException {
+	public Restaurant createRestaurant(ResultSet rs) throws SQLException, RestaurantInformationFault_Exception {
 		Connection con = null;
 		Statement st = null;
 		ResultSet rss = null;
@@ -106,6 +86,7 @@ public class JDBCRestaurantInformationServiceImpl implements RestaurantInformati
 		restaurant.setName(rs.getString("restaurant_name"));
 		restaurant.setStyle(rs.getString("style"));
 		restaurant.setTelephoneNumber(rs.getString("restaurant_telephoneNumber"));
+		restaurant.setMaxSeats(rs.getInt("max_seats"));
 		
 		try {
 			con = dataSource.getConnection();
@@ -124,7 +105,7 @@ public class JDBCRestaurantInformationServiceImpl implements RestaurantInformati
 
 		} catch (SQLException e) {
 			e.printStackTrace();
-			throw new BusinessException(e);
+			throw new RestaurantInformationFault_Exception("Something was wrong with Discount selection");
 		} finally {
 			if (st != null) {
 				try {
@@ -141,13 +122,4 @@ public class JDBCRestaurantInformationServiceImpl implements RestaurantInformati
 		restaurant.setDiscount(discount);
 		return restaurant;
 	}
-	
-	public Table createTable(ResultSet rs) throws SQLException {
-		Table table = new Table();
-		table.setId(rs.getLong("table_id"));
-		table.setNumber(rs.getInt("number"));
-		table.setSeatsNumber(rs.getInt("seatsNumber"));
-		return table;
-	}
-
 }

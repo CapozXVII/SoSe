@@ -1,4 +1,4 @@
-package it.univaq.disim.sose.cald.restaurantInformation.business.model;
+package it.univaq.disim.sose.cald.restaurantinformation.business.model;
 
 public class Discount {
 	

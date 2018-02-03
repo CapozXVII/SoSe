@@ -4,7 +4,7 @@
          xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd" 
          id="WebApp_ID" 
          version="3.1">
-	<display-name>enjoyReservation</display-name>
+	<display-name>enjoyreservation</display-name>
     
     <context-param>
         <param-name>contextConfigLocation</param-name>
@@ -14,8 +14,8 @@
     </context-param>
     
 	<servlet>
-		<display-name>enjoyReservation</display-name>
-		<servlet-name>enjoyReservation</servlet-name>
+		<display-name>enjoyreservation</display-name>
+		<servlet-name>enjoyreservation</servlet-name>
 		<servlet-class>org.apache.cxf.transport.servlet.CXFServlet</servlet-class>
 		<init-param>
 			<param-name>config-location</param-name>
@@ -24,7 +24,7 @@
 		<load-on-startup>1</load-on-startup>
 	</servlet>
 	<servlet-mapping>
-		<servlet-name>enjoyReservation</servlet-name>
+		<servlet-name>enjoyreservation</servlet-name>
 		<url-pattern>/services/*</url-pattern>
 	</servlet-mapping>
 	<listener>

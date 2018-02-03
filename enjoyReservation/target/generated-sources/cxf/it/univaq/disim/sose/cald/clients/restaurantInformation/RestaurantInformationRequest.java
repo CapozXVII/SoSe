@@ -1,5 +1,5 @@
 
-package it.univaq.disim.sose.cald.clients.restaurantInformation;
+package it.univaq.disim.sose.cald.clients.restaurantinformation;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;

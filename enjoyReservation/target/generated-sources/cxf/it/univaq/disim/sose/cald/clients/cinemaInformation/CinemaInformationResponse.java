@@ -1,5 +1,5 @@
 
-package it.univaq.disim.sose.cald.clients.cinemaInformation;
+package it.univaq.disim.sose.cald.clients.cinemainformation;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -1,5 +1,5 @@
 
-package it.univaq.disim.sose.cald.clients.cinemaInformation;
+package it.univaq.disim.sose.cald.clients.cinemainformation;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
