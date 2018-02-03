@@ -31,13 +31,14 @@ public class RestaurantInformationPTImpl implements RestaurantInformationPT {
 		LOGGER.info("CALLED cinemaInformation");
 		try {
 			List<Restaurant> restaurants = service.getRestaurants(parameters.getCity());
-			List<TableType> tables = new ArrayList<TableType>();
+			List<TableType> tables;
 			RestaurantInformationResponse response = new RestaurantInformationResponse();
 			
 			for(Restaurant restaurant : restaurants) {
 				RestaurantInfoType osmRestaurantInfoType = new RestaurantInfoType();
 				RestaurantType osmRestaurantType = new RestaurantType();
 				DiscountType osmDiscountType = new DiscountType();
+				tables = new ArrayList<TableType>();
 				for(int i = 0; i < restaurant.getTables().size(); i++) {
 					TableType osmTableType = new TableType();
 					osmTableType.setNumber(restaurant.getTables().get(i).getNumber());
@@ -53,8 +54,12 @@ public class RestaurantInformationPTImpl implements RestaurantInformationPT {
 				osmRestaurantInfoType.setName(restaurant.getName());
 				osmRestaurantInfoType.setStyle(restaurant.getStyle());
 				osmRestaurantInfoType.setTelephoneNumber(restaurant.getTelephoneNumber());
-				osmDiscountType.setCinema(restaurant.getDiscount().getCinema().getName());
-				osmDiscountType.setPrice(restaurant.getDiscount().getPrice());
+				if (restaurant.getDiscount() != null) {
+					osmDiscountType.setCinema(restaurant.getDiscount().getCinema().getName());
+					osmDiscountType.setPrice(restaurant.getDiscount().getPrice());
+				} else {
+					osmDiscountType = null;
+				}
 				osmRestaurantInfoType.setDiscount(osmDiscountType);
 				osmRestaurantType.setLat(restaurant.getLatitude());
 				osmRestaurantType.setLon(restaurant.getLongitude());

@@ -31,10 +31,9 @@ public class JDBCRestaurantInformationServiceImpl implements RestaurantInformati
 
 	@Override
 	public List<Restaurant> getRestaurants(String city) throws BusinessException {
-		//CIAO
 		List<Restaurant> restaurantList = new ArrayList<Restaurant>();
 		List<Table> tableList = new ArrayList<Table>();
-		String sql = "SELECT * FROM restaurants JOIN tables ON restaurants.restaurant_id = tables.restaurant JOIN discount ON discount.restaurant = restaurants.restaurant_id JOIN cinema ON cinema.cinema_id = discount.cinema AND restaurants.restaurant_city ='" + city + "' " + "ORDER BY restaurants.restaurant_id";
+		String sql = "SELECT * FROM restaurants JOIN tables ON restaurants.restaurant_id = tables.restaurant AND restaurants.restaurant_city = '" + city + "' " + "ORDER BY restaurants.restaurant_id";
 		LOGGER.info(sql);
 		Connection con = null;
 		Statement st = null;
@@ -42,30 +41,28 @@ public class JDBCRestaurantInformationServiceImpl implements RestaurantInformati
 		
 		try {
 			Restaurant restaurant = null;
-			Table table = null;
 			int count = 0;
 			con = dataSource.getConnection();
 			st = con.createStatement();
 			rs = st.executeQuery(sql);
 			
 			while(rs.next()) {
-				if(rs.first()) {
-					count = rs.getInt("restaurant_id");
+				int restaurantId = rs.getInt("restaurant_id");
+				if (rs.isFirst()) {
+					count = restaurantId;
 					restaurant = createRestaurant(rs);
 				}
-				if(count == rs.getInt("restaurant_id")) {
-					table = createTable(rs);
-					tableList.add(table);
-				}
-				else {
-					count = rs.getInt("restaurant_id");
+				if (count == restaurantId) {
+					tableList.add(createTable(rs));
+				} else {
+					count = restaurantId;
 					restaurant.setTables(tableList);
 					restaurantList.add(restaurant);
+					tableList = new ArrayList<Table>();
 					restaurant = createRestaurant(rs);
-					table = createTable(rs);
-					tableList.add(table);
+					tableList.add(createTable(rs));
 				}
-				if(rs.last()) {
+				if (rs.isLast()) {
 					restaurant.setTables(tableList);
 					restaurantList.add(restaurant);
 				}
@@ -90,10 +87,15 @@ public class JDBCRestaurantInformationServiceImpl implements RestaurantInformati
 	}
 	
 	public Restaurant createRestaurant(ResultSet rs) throws SQLException {
+		Connection con = null;
+		Statement st = null;
+		ResultSet rss = null;
+		Long restaurantId = rs.getLong("restaurant_id");
+		String sql = "SELECT * FROM discount JOIN cinema ON cinema.cinema_id = discount.cinema AND discount.restaurant =" + restaurantId;
 		Restaurant restaurant = new Restaurant();
 		Discount discount = new Discount();
 		Cinema cinema = new Cinema();
-		restaurant.setId(rs.getLong("restaurant_id"));
+		restaurant.setId(restaurantId);
 		restaurant.setAddress(rs.getString("restaurant_address"));
 		restaurant.setCap(rs.getString("restaurant_cap"));
 		restaurant.setCity(rs.getString("restaurant_city"));
@@ -104,9 +106,38 @@ public class JDBCRestaurantInformationServiceImpl implements RestaurantInformati
 		restaurant.setName(rs.getString("restaurant_name"));
 		restaurant.setStyle(rs.getString("style"));
 		restaurant.setTelephoneNumber(rs.getString("restaurant_telephoneNumber"));
-		discount.setPrice(rs.getFloat("price"));
-		cinema.setName(rs.getString("cinema_name"));
-		discount.setCinema(cinema);
+		
+		try {
+			con = dataSource.getConnection();
+			st = con.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);;
+			rss = st.executeQuery(sql);
+			rss.last();
+			int numRows = rss.getRow();
+			if (numRows != 0) {
+				rss.first();
+				discount.setPrice(rss.getFloat("price"));
+				cinema.setName(rss.getString("cinema_name"));
+				discount.setCinema(cinema);
+			} else {
+				discount = null;
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+			throw new BusinessException(e);
+		} finally {
+			if (st != null) {
+				try {
+					st.close();
+				} catch (SQLException e) {
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (SQLException e) {}
+			}
+		}
 		restaurant.setDiscount(discount);
 		return restaurant;
 	}
