@@ -152,9 +152,10 @@
 			<!--Request-->
 			<xsd:complexType name="bookingCinemaRequest">
 					<xsd:sequence>
-						<xsd:element name="cinema" type="xsd:string" />
+						<xsd:element name="id_hall" type="xsd:int" />
+						<xsd:element name="id_film" type="xsd:int" />
+						<xsd:element name="id_utente" type="xsd:int" />
 						<xsd:element name="seats" type="xsd:int"/>
-						<xsd:element name="film" type="xsd:string"/>
 						<xsd:element name="schedule" type="xsd:dateTime"/>
 					</xsd:sequence>
 			</xsd:complexType>
@@ -162,7 +163,7 @@
 			<!--Response-->
 			<xsd:complexType name="bookingCinemaResponse">
 					<xsd:sequence>
-						<xsd:element name="accepted" type="xsd:boolean" />
+						<xsd:element name="accepted" type="xsd:string" />
 					</xsd:sequence>
 			</xsd:complexType>
 					
@@ -170,8 +171,9 @@
 			<!--Request-->
 			<xsd:complexType name="bookingRestaurantRequest">
 					<xsd:sequence>
-						<xsd:element name="restaurant" type="xsd:string" />
+						<xsd:element name="restaurant" type="xsd:int" />
 						<xsd:element name="seats" type="xsd:int"/>
+						<xsd:element name="user" type="xsd:int"/>
 						<xsd:element name="schedule" type="xsd:dateTime"/>
 					</xsd:sequence>
 			</xsd:complexType>
@@ -179,7 +181,7 @@
 			<!--Response-->
 			<xsd:complexType name="bookingRestaurantResponse">
 					<xsd:sequence>
-						<xsd:element name="accepted" type="xsd:boolean" />
+						<xsd:element name="accepted" type="xsd:string" />
 					</xsd:sequence>
 			</xsd:complexType>
 			

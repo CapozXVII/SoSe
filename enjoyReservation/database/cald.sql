@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.5.1
+-- version 4.5.2
 -- http://www.phpmyadmin.net
 --
--- Host: 127.0.0.1
--- Creato il: Feb 02, 2018 alle 11:56
--- Versione del server: 10.1.10-MariaDB
--- Versione PHP: 7.0.4
+-- Host: localhost
+-- Creato il: Feb 03, 2018 alle 16:49
+-- Versione del server: 10.1.19-MariaDB
+-- Versione PHP: 7.0.13
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -66,7 +66,9 @@ CREATE TABLE `cinemabooking` (
 
 INSERT INTO `cinemabooking` (`Id`, `hall`, `film`, `user`, `seats`, `schedule`) VALUES
 (1, 1, 1, 1, 10, '2018-01-31 21:30:00'),
-(2, 1, 1, 1, 5, '2018-01-31 21:30:00');
+(2, 1, 1, 1, 5, '2018-01-31 21:30:00'),
+(3, 1, 1, 1, 2, '2018-02-01 22:00:00'),
+(4, 1, 1, 1, 2, '2018-02-01 16:00:00');
 
 -- --------------------------------------------------------
 
@@ -86,7 +88,8 @@ CREATE TABLE `discount` (
 --
 
 INSERT INTO `discount` (`discount_id`, `cinema`, `restaurant`, `price`) VALUES
-(1, 3, 1, 5);
+(1, 3, 1, 5),
+(2, 4, 2, 3);
 
 -- --------------------------------------------------------
 
@@ -100,7 +103,7 @@ CREATE TABLE `films` (
   `director` varchar(50) DEFAULT NULL,
   `cast` varchar(400) DEFAULT NULL,
   `duration` int(11) DEFAULT NULL,
-  `rating` varchar(50) DEFAULT NULL,
+  `type` varchar(50) DEFAULT NULL,
   `plot` varchar(1000) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -108,8 +111,8 @@ CREATE TABLE `films` (
 -- Dump dei dati per la tabella `films`
 --
 
-INSERT INTO `films` (`film_id`, `name`, `director`, `cast`, `duration`, `rating`, `plot`) VALUES
-(1, 'Una notte da leoni', NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `films` (`film_id`, `name`, `director`, `cast`, `duration`, `type`, `plot`) VALUES
+(1, 'Avengers: Infinity War', 'Anthony Russo', 'Robert Downey Jr, Josh Brolin, Mark Buffalo, Tom Hiddleston, Chris Evans, Chris Hemsworth, Jeremy Renner, Chris Pratt', 147, 'Action', 'Four years after the events of Guardians of the Galaxy Vol. 2,[1] the Avengers have been torn apart following the events of Captain America: Civil War. When Thanos arrives on Earth to collect the Infinity Stones for a gauntlet that will allow him to bend reality to his will, the Avengers must join forces with the Guardians of the Galaxy to stop him before his onslaught of destruction puts an end to the universe');
 
 -- --------------------------------------------------------
 
@@ -153,7 +156,8 @@ CREATE TABLE `hall_film` (
 --
 
 INSERT INTO `hall_film` (`hall_film_id`, `hall`, `film`, `time`, `price`, `freeSeatsNumber`) VALUES
-(2, 1, 1, '2018-01-31 21:30:00', 5, 5);
+(1, 1, 1, '2018-02-01 16:00:00', 5, 248),
+(2, 1, 1, '2018-02-01 22:00:00', 7.5, 118);
 
 -- --------------------------------------------------------
 
@@ -165,7 +169,7 @@ CREATE TABLE `restaurantbookings` (
   `Id_Booking` int(11) NOT NULL,
   `Restaurant` int(11) NOT NULL,
   `User` int(11) NOT NULL,
-  `Schedule` int(11) NOT NULL,
+  `Schedule` datetime NOT NULL,
   `Seats` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -174,7 +178,9 @@ CREATE TABLE `restaurantbookings` (
 --
 
 INSERT INTO `restaurantbookings` (`Id_Booking`, `Restaurant`, `User`, `Schedule`, `Seats`) VALUES
-(1, 1, 1, 2018, 10);
+(1, 1, 1, '0000-00-00 00:00:00', 10),
+(2, 2, 1, '2018-02-03 00:00:00', 4),
+(3, 3, 1, '2018-02-04 00:00:00', 4);
 
 -- --------------------------------------------------------
 
@@ -202,28 +208,9 @@ CREATE TABLE `restaurants` (
 --
 
 INSERT INTO `restaurants` (`restaurant_id`, `restaurant_lat`, `restaurant_lon`, `restaurant_name`, `restaurant_address`, `restaurant_cap`, `restaurant_city`, `restaurant_telephoneNumber`, `style`, `cuisine`, `menu`, `max_seats`) VALUES
-(1, NULL, NULL, 'Da Paolo', 'Via Mazzini 3', '00123', 'Rome', '3458987666', 'Napoletano', 'Bo', 'Bo', 0);
-
--- --------------------------------------------------------
-
---
--- Struttura della tabella `tables`
---
-
-CREATE TABLE `tables` (
-  `table_id` int(11) NOT NULL,
-  `number` int(11) NOT NULL,
-  `seatsNumber` int(11) NOT NULL,
-  `restaurant` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dump dei dati per la tabella `tables`
---
-
-INSERT INTO `tables` (`table_id`, `number`, `seatsNumber`, `restaurant`) VALUES
-(1, 1, 10, 1),
-(2, 2, 15, 1);
+(1, NULL, NULL, 'Da Paolo', 'Via Mazzini 3', '00123', 'Rome', '3458987666', 'Napoletano', 'Bo', 'Bo', 0),
+(2, '11.00000000', '11.00000000', 'Da Paolo', 'Via Mazzini 3', '00123', 'Rome', '3458987666', 'Napoletano', 'Bo', 'Bo', 100),
+(3, '12.00000000', '12.00000000', 'Arrosticini Divini', 'Via Francia 3', '50121', 'Rome', '3478854123', 'Italian', 'Italian', 'BO', 50);
 
 -- --------------------------------------------------------
 
@@ -238,34 +225,6 @@ CREATE TABLE `users` (
   `email` varchar(30) NOT NULL,
   `password` varchar(100) NOT NULL,
   `username` varchar(50) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
--- --------------------------------------------------------
-
---
--- Struttura della tabella `user_hall`
---
-
-CREATE TABLE `user_hall` (
-  `user_hall_id` int(11) NOT NULL,
-  `user` int(11) NOT NULL,
-  `hall` int(11) NOT NULL,
-  `seats` int(11) NOT NULL,
-  `schedule` datetime NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
--- --------------------------------------------------------
-
---
--- Struttura della tabella `user_table`
---
-
-CREATE TABLE `user_table` (
-  `user_table_id` int(11) NOT NULL,
-  `user` int(11) NOT NULL,
-  `tables` int(11) NOT NULL,
-  `reservation_time` datetime NOT NULL,
-  `reservation_name` varchar(50) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -328,35 +287,12 @@ ALTER TABLE `restaurants`
   ADD PRIMARY KEY (`restaurant_id`);
 
 --
--- Indici per le tabelle `tables`
---
-ALTER TABLE `tables`
-  ADD PRIMARY KEY (`table_id`),
-  ADD KEY `restaurant` (`restaurant`);
-
---
 -- Indici per le tabelle `users`
 --
 ALTER TABLE `users`
   ADD PRIMARY KEY (`user_id`),
   ADD UNIQUE KEY `email` (`email`),
   ADD UNIQUE KEY `username` (`username`);
-
---
--- Indici per le tabelle `user_hall`
---
-ALTER TABLE `user_hall`
-  ADD PRIMARY KEY (`user_hall_id`),
-  ADD KEY `user` (`user`),
-  ADD KEY `hall` (`hall`);
-
---
--- Indici per le tabelle `user_table`
---
-ALTER TABLE `user_table`
-  ADD PRIMARY KEY (`user_table_id`),
-  ADD KEY `user` (`user`),
-  ADD KEY `tables` (`tables`);
 
 --
 -- AUTO_INCREMENT per le tabelle scaricate
@@ -371,12 +307,12 @@ ALTER TABLE `cinema`
 -- AUTO_INCREMENT per la tabella `cinemabooking`
 --
 ALTER TABLE `cinemabooking`
-  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 --
 -- AUTO_INCREMENT per la tabella `discount`
 --
 ALTER TABLE `discount`
-  MODIFY `discount_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `discount_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT per la tabella `films`
 --
@@ -396,32 +332,17 @@ ALTER TABLE `hall_film`
 -- AUTO_INCREMENT per la tabella `restaurantbookings`
 --
 ALTER TABLE `restaurantbookings`
-  MODIFY `Id_Booking` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `Id_Booking` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT per la tabella `restaurants`
 --
 ALTER TABLE `restaurants`
-  MODIFY `restaurant_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
---
--- AUTO_INCREMENT per la tabella `tables`
---
-ALTER TABLE `tables`
-  MODIFY `table_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `restaurant_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT per la tabella `users`
 --
 ALTER TABLE `users`
   MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT per la tabella `user_hall`
---
-ALTER TABLE `user_hall`
-  MODIFY `user_hall_id` int(11) NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT per la tabella `user_table`
---
-ALTER TABLE `user_table`
-  MODIFY `user_table_id` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- Limiti per le tabelle scaricate
 --
@@ -445,26 +366,6 @@ ALTER TABLE `halls`
 ALTER TABLE `hall_film`
   ADD CONSTRAINT `hall_film_ibfk_1` FOREIGN KEY (`hall`) REFERENCES `halls` (`hall_id`),
   ADD CONSTRAINT `hall_film_ibfk_2` FOREIGN KEY (`film`) REFERENCES `films` (`film_id`);
-
---
--- Limiti per la tabella `tables`
---
-ALTER TABLE `tables`
-  ADD CONSTRAINT `tables_ibfk_1` FOREIGN KEY (`restaurant`) REFERENCES `restaurants` (`restaurant_id`);
-
---
--- Limiti per la tabella `user_hall`
---
-ALTER TABLE `user_hall`
-  ADD CONSTRAINT `user_hall_ibfk_1` FOREIGN KEY (`user`) REFERENCES `users` (`user_id`),
-  ADD CONSTRAINT `user_hall_ibfk_2` FOREIGN KEY (`hall`) REFERENCES `halls` (`hall_id`);
-
---
--- Limiti per la tabella `user_table`
---
-ALTER TABLE `user_table`
-  ADD CONSTRAINT `user_table_ibfk_1` FOREIGN KEY (`user`) REFERENCES `users` (`user_id`),
-  ADD CONSTRAINT `user_table_ibfk_2` FOREIGN KEY (`tables`) REFERENCES `tables` (`table_id`);
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

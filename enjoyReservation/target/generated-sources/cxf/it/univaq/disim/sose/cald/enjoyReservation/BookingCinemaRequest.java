@@ -1,6 +1,8 @@
 
 package it.univaq.disim.sose.cald.enjoyreservation;
 
+import java.util.Date;
+
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
@@ -19,9 +21,10 @@ import javax.xml.datatype.XMLGregorianCalendar;
  *   &lt;complexContent&gt;
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&gt;
  *       &lt;sequence&gt;
- *         &lt;element name="cinema" type="{http://www.w3.org/2001/XMLSchema}string"/&gt;
+ *         &lt;element name="id_hall" type="{http://www.w3.org/2001/XMLSchema}int"/&gt;
+ *         &lt;element name="id_film" type="{http://www.w3.org/2001/XMLSchema}int"/&gt;
+ *         &lt;element name="id_utente" type="{http://www.w3.org/2001/XMLSchema}int"/&gt;
  *         &lt;element name="seats" type="{http://www.w3.org/2001/XMLSchema}int"/&gt;
- *         &lt;element name="film" type="{http://www.w3.org/2001/XMLSchema}string"/&gt;
  *         &lt;element name="schedule" type="{http://www.w3.org/2001/XMLSchema}dateTime"/&gt;
  *       &lt;/sequence&gt;
  *     &lt;/restriction&gt;
@@ -33,44 +36,71 @@ import javax.xml.datatype.XMLGregorianCalendar;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "bookingCinemaRequest", propOrder = {
-    "cinema",
+    "idHall",
+    "idFilm",
+    "idUtente",
     "seats",
-    "film",
     "schedule"
 })
 public class BookingCinemaRequest {
 
-    @XmlElement(required = true)
-    protected String cinema;
+    @XmlElement(name = "id_hall")
+    protected int idHall;
+    @XmlElement(name = "id_film")
+    protected int idFilm;
+    @XmlElement(name = "id_utente")
+    protected int idUtente;
     protected int seats;
     @XmlElement(required = true)
-    protected String film;
-    @XmlElement(required = true)
     @XmlSchemaType(name = "dateTime")
-    protected XMLGregorianCalendar schedule;
+    protected Date schedule;
 
     /**
-     * Gets the value of the cinema property.
+     * Gets the value of the idHall property.
      * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
      */
-    public String getCinema() {
-        return cinema;
+    public int getIdHall() {
+        return idHall;
     }
 
     /**
-     * Sets the value of the cinema property.
+     * Sets the value of the idHall property.
      * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
      */
-    public void setCinema(String value) {
-        this.cinema = value;
+    public void setIdHall(int value) {
+        this.idHall = value;
+    }
+
+    /**
+     * Gets the value of the idFilm property.
+     * 
+     */
+    public int getIdFilm() {
+        return idFilm;
+    }
+
+    /**
+     * Sets the value of the idFilm property.
+     * 
+     */
+    public void setIdFilm(int value) {
+        this.idFilm = value;
+    }
+
+    /**
+     * Gets the value of the idUtente property.
+     * 
+     */
+    public int getIdUtente() {
+        return idUtente;
+    }
+
+    /**
+     * Sets the value of the idUtente property.
+     * 
+     */
+    public void setIdUtente(int value) {
+        this.idUtente = value;
     }
 
     /**
@@ -90,30 +120,6 @@ public class BookingCinemaRequest {
     }
 
     /**
-     * Gets the value of the film property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
-     */
-    public String getFilm() {
-        return film;
-    }
-
-    /**
-     * Sets the value of the film property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
-     */
-    public void setFilm(String value) {
-        this.film = value;
-    }
-
-    /**
      * Gets the value of the schedule property.
      * 
      * @return
@@ -121,7 +127,7 @@ public class BookingCinemaRequest {
      *     {@link XMLGregorianCalendar }
      *     
      */
-    public XMLGregorianCalendar getSchedule() {
+    public Date getSchedule() {
         return schedule;
     }
 
@@ -133,7 +139,7 @@ public class BookingCinemaRequest {
      *     {@link XMLGregorianCalendar }
      *     
      */
-    public void setSchedule(XMLGregorianCalendar value) {
+    public void setSchedule(Date value) {
         this.schedule = value;
     }
 

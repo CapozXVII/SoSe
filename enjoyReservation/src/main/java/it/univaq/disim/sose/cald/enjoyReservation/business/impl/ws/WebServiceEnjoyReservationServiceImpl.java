@@ -5,6 +5,11 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
+import it.univaq.disim.sose.cald.clients.cinemabooking.CinemaBookingFault_Exception;
+import it.univaq.disim.sose.cald.clients.cinemabooking.CinemaBookingPT;
+import it.univaq.disim.sose.cald.clients.cinemabooking.CinemaBookingRequest;
+import it.univaq.disim.sose.cald.clients.cinemabooking.CinemaBookingResponse;
+import it.univaq.disim.sose.cald.clients.cinemabooking.CinemaBookingService;
 import it.univaq.disim.sose.cald.clients.cinemainformation.CinemaInformationFault_Exception;
 import it.univaq.disim.sose.cald.clients.cinemainformation.CinemaInformationPT;
 import it.univaq.disim.sose.cald.clients.cinemainformation.CinemaInformationRequest;
@@ -17,6 +22,11 @@ import it.univaq.disim.sose.cald.clients.cinemainserting.CinemaInsertRequest;
 import it.univaq.disim.sose.cald.clients.cinemainserting.CinemaInsertResponse;
 import it.univaq.disim.sose.cald.clients.cinemainserting.CinemaInsertingService;
 import it.univaq.disim.sose.cald.clients.cinemainserting.CinemaPT;
+import it.univaq.disim.sose.cald.clients.restaurantbooking.RestaurantBookingFault_Exception;
+import it.univaq.disim.sose.cald.clients.restaurantbooking.RestaurantBookingPT;
+import it.univaq.disim.sose.cald.clients.restaurantbooking.RestaurantBookingRequest;
+import it.univaq.disim.sose.cald.clients.restaurantbooking.RestaurantBookingResponse;
+import it.univaq.disim.sose.cald.clients.restaurantbooking.RestaurantBookingService;
 import it.univaq.disim.sose.cald.clients.restaurantinformation.RestaurantInformationFault_Exception;
 import it.univaq.disim.sose.cald.clients.restaurantinformation.RestaurantInformationPT;
 import it.univaq.disim.sose.cald.clients.restaurantinformation.RestaurantInformationRequest;
@@ -28,6 +38,10 @@ import it.univaq.disim.sose.cald.clients.restaurantinserting.RestaurantInsertReq
 import it.univaq.disim.sose.cald.clients.restaurantinserting.RestaurantInsertResponse;
 import it.univaq.disim.sose.cald.clients.restaurantinserting.RestaurantInsertingService;
 import it.univaq.disim.sose.cald.clients.restaurantinserting.RestaurantPT;
+import it.univaq.disim.sose.cald.enjoyreservation.BookingCinemaRequest;
+import it.univaq.disim.sose.cald.enjoyreservation.BookingCinemaResponse;
+import it.univaq.disim.sose.cald.enjoyreservation.BookingRestaurantRequest;
+import it.univaq.disim.sose.cald.enjoyreservation.BookingRestaurantResponse;
 import it.univaq.disim.sose.cald.enjoyreservation.GetCinemaInfoRequest;
 import it.univaq.disim.sose.cald.enjoyreservation.GetCinemaInfoResponse;
 import it.univaq.disim.sose.cald.enjoyreservation.GetRestaurantInfoRequest;
@@ -247,4 +261,52 @@ public class WebServiceEnjoyReservationServiceImpl implements EnjoyReservationSe
 		return response;
 	}
 
+	@Override
+	public BookingRestaurantResponse restaurantBooking(BookingRestaurantRequest request) throws BusinessException {
+		BookingRestaurantResponse response = new BookingRestaurantResponse();
+		
+		RestaurantBookingService restaurantBookingService = new RestaurantBookingService();
+		RestaurantBookingPT restaurantBooking = restaurantBookingService.getRestaurantBookingPort();
+		RestaurantBookingRequest restaurantBookingRequest = new RestaurantBookingRequest();
+		
+		restaurantBookingRequest.setRestaurant(request.getRestaurant());
+		restaurantBookingRequest.setSchedule(request.getSchedule());
+		restaurantBookingRequest.setSeats(request.getSeats());
+		restaurantBookingRequest.setUser(request.getUser());
+		
+		try {
+			RestaurantBookingResponse restaurantBookingResponse = restaurantBooking.restaurantBooking(restaurantBookingRequest);
+			
+			response.setAccepted(restaurantBookingResponse.getAccepted());
+		} catch (RestaurantBookingFault_Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return response;
+	}
+
+	@Override
+	public BookingCinemaResponse cinemaBooking(BookingCinemaRequest request) throws BusinessException {
+		BookingCinemaResponse response = new BookingCinemaResponse();
+		
+		CinemaBookingService cinemaBookingService = new CinemaBookingService();
+		CinemaBookingPT cinemaBooking = cinemaBookingService.getCinemaBookingPort();
+		CinemaBookingRequest cinemaBookingRequest = new CinemaBookingRequest();
+		
+		cinemaBookingRequest.setIdFilm(request.getIdFilm());
+		cinemaBookingRequest.setIdHall(request.getIdHall());
+		cinemaBookingRequest.setIdUtente(request.getIdUtente());
+		cinemaBookingRequest.setSchedule(request.getSchedule());
+		cinemaBookingRequest.setSeats(request.getSeats());
+		
+		try {
+			CinemaBookingResponse cinemaBookingResponse = cinemaBooking.cinemaBooking(cinemaBookingRequest);
+			
+			response.setAccepted(cinemaBookingResponse.getAccepted());
+		} catch (CinemaBookingFault_Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return response;
+	}
 }

@@ -66,6 +66,6 @@ public class GetRestaurantInfoResponse {
     
     public void setRestaurants(List<OSMRestaurantType> restaurants) {
     		this.restaurants = restaurants;
-    }
+   }
 
 }

@@ -1,18 +1,18 @@
-package it.univaq.disim.sose.cald.restaurantBooking.webservices;
+package it.univaq.disim.sose.cald.restaurantbooking.webservices;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import it.univaq.disim.sose.cald.restaurantBooking.RestaurantBookingFault_Exception;
-import it.univaq.disim.sose.cald.restaurantBooking.RestaurantBookingRequest;
-import it.univaq.disim.sose.cald.restaurantBooking.RestaurantBookingResponse;
-import it.univaq.disim.sose.cald.restaurantBooking.business.RestaurantBookingService;
-import it.univaq.disim.sose.cald.restaurantBooking.RestaurantBookingPT;
-import it.univaq.disim.sose.cald.restaurantBooking.RestaurantBookingFault_Exception;
-import it.univaq.disim.sose.cald.restaurantBooking.RestaurantBookingRequest;
-import it.univaq.disim.sose.cald.restaurantBooking.RestaurantBookingResponse;
+import it.univaq.disim.sose.cald.restaurantbooking.RestaurantBookingFault_Exception;
+import it.univaq.disim.sose.cald.restaurantbooking.RestaurantBookingRequest;
+import it.univaq.disim.sose.cald.restaurantbooking.RestaurantBookingResponse;
+import it.univaq.disim.sose.cald.restaurantbooking.business.RestaurantBookingService;
+import it.univaq.disim.sose.cald.restaurantbooking.RestaurantBookingPT;
+import it.univaq.disim.sose.cald.restaurantbooking.RestaurantBookingFault_Exception;
+import it.univaq.disim.sose.cald.restaurantbooking.RestaurantBookingRequest;
+import it.univaq.disim.sose.cald.restaurantbooking.RestaurantBookingResponse;
 //import it.univaq.disim.sose.cald.restaurantBooking.business.restaurantBookingService;
 @Component(value = "RestaurantBookingPTImpl")
 public class RestaurantBookingPTImpl implements RestaurantBookingPT {

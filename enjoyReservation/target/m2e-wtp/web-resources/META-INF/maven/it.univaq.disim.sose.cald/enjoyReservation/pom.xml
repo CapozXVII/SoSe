@@ -120,6 +120,24 @@
 										<extraarg>it.univaq.disim.sose.cald.clients.cinemainserting</extraarg>
 									</extraargs>
 								</wsdlOption>
+								<wsdlOption>
+									<wsdl>src/main/resources/clients/cinemaBooking.wsdl</wsdl>
+									<faultSerialVersionUID>1</faultSerialVersionUID>
+									<extraargs>
+										<extraarg>-verbose</extraarg>
+										<extraarg>-p </extraarg>
+										<extraarg>it.univaq.disim.sose.cald.clients.cinemabooking</extraarg>
+									</extraargs>
+								</wsdlOption>
+								<wsdlOption>
+									<wsdl>src/main/resources/clients/restaurantBooking.wsdl</wsdl>
+									<faultSerialVersionUID>1</faultSerialVersionUID>
+									<extraargs>
+										<extraarg>-verbose</extraarg>
+										<extraarg>-p </extraarg>
+										<extraarg>it.univaq.disim.sose.cald.clients.restaurantbooking</extraarg>
+									</extraargs>
+								</wsdlOption>
 							</wsdlOptions>
 						</configuration>
 						<goals>

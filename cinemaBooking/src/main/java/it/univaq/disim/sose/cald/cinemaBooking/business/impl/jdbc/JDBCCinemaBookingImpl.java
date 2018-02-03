@@ -1,4 +1,4 @@
-package it.univaq.disim.sose.cald.cinemaBooking.business.impl.jdbc;
+package it.univaq.disim.sose.cald.cinemabooking.business.impl.jdbc;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -18,11 +18,11 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import it.univaq.disim.sose.cald.cinemaBooking.CinemaBookingRequest;
-import it.univaq.disim.sose.cald.cinemaBooking.CinemaBookingResponse;
-import it.univaq.disim.sose.cald.cinemaBooking.business.*;
-import it.univaq.disim.sose.cald.cinemaBooking.business.impl.jdbc.JDBCCinemaBookingImpl;
-import it.univaq.disim.sose.cald.cinemaBooking.business.model.CinemaBooking;
+import it.univaq.disim.sose.cald.cinemabooking.CinemaBookingRequest;
+import it.univaq.disim.sose.cald.cinemabooking.CinemaBookingResponse;
+import it.univaq.disim.sose.cald.cinemabooking.business.*;
+import it.univaq.disim.sose.cald.cinemabooking.business.impl.jdbc.JDBCCinemaBookingImpl;
+import it.univaq.disim.sose.cald.cinemabooking.business.model.CinemaBooking;
 
 @Service
 public class JDBCCinemaBookingImpl implements CinemaBookingService {

@@ -1,4 +1,4 @@
-package it.univaq.disim.sose.cald.restaurantBooking.business;
+package it.univaq.disim.sose.cald.restaurantbooking.business;
 
 public class BusinessException extends RuntimeException {
 

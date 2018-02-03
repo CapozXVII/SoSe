@@ -1,7 +1,7 @@
-package it.univaq.disim.sose.cald.restaurantBooking.business;
+package it.univaq.disim.sose.cald.restaurantbooking.business;
 
-import it.univaq.disim.sose.cald.restaurantBooking.RestaurantBookingResponse;
-import it.univaq.disim.sose.cald.restaurantBooking.RestaurantBookingRequest;
+import it.univaq.disim.sose.cald.restaurantbooking.RestaurantBookingResponse;
+import it.univaq.disim.sose.cald.restaurantbooking.RestaurantBookingRequest;
 
 
 public interface RestaurantBookingService {

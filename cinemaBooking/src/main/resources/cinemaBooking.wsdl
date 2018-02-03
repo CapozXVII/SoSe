@@ -76,7 +76,7 @@
 		</binding>
 		<service name="CinemaBookingService">
 			<port name="cinemaBookingPort" binding="tns:cinemaBookingBinding">
-				<soap:address location="http://localhost:8080/cinemaBooking/services/cinemaBooking" />
+				<soap:address location="http://localhost:8080/cinemabooking/services/cinemabooking" />
 			</port>
 		</service>
 </definitions>

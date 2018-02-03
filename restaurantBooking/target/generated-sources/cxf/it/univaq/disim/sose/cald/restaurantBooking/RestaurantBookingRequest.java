@@ -1,5 +1,5 @@
 
-package it.univaq.disim.sose.cald.restaurantBooking;
+package it.univaq.disim.sose.cald.restaurantbooking;
 
 import java.util.Date;
 
@@ -8,13 +8,12 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlSchemaType;
 import javax.xml.bind.annotation.XmlType;
-import javax.xml.datatype.XMLGregorianCalendar;
 
 
 /**
- * <p>Classe Java per restaurantBookingRequest complex type.
+ * <p>Java class for restaurantBookingRequest complex type.
  * 
- * <p>Il seguente frammento di schema specifica il contenuto previsto contenuto in questa classe.
+ * <p>The following schema fragment specifies the expected content contained within this class.
  * 
  * <pre>
  * &lt;complexType name="restaurantBookingRequest"&gt;
@@ -50,7 +49,7 @@ public class RestaurantBookingRequest {
     protected Date schedule;
 
     /**
-     * Recupera il valore della proprietà restaurant.
+     * Gets the value of the restaurant property.
      * 
      */
     public int getRestaurant() {
@@ -58,7 +57,7 @@ public class RestaurantBookingRequest {
     }
 
     /**
-     * Imposta il valore della proprietà restaurant.
+     * Sets the value of the restaurant property.
      * 
      */
     public void setRestaurant(int value) {
@@ -66,7 +65,7 @@ public class RestaurantBookingRequest {
     }
 
     /**
-     * Recupera il valore della proprietà seats.
+     * Gets the value of the seats property.
      * 
      */
     public int getSeats() {
@@ -74,7 +73,7 @@ public class RestaurantBookingRequest {
     }
 
     /**
-     * Imposta il valore della proprietà seats.
+     * Sets the value of the seats property.
      * 
      */
     public void setSeats(int value) {
@@ -82,7 +81,7 @@ public class RestaurantBookingRequest {
     }
 
     /**
-     * Recupera il valore della proprietà user.
+     * Gets the value of the user property.
      * 
      */
     public int getUser() {
@@ -90,7 +89,7 @@ public class RestaurantBookingRequest {
     }
 
     /**
-     * Imposta il valore della proprietà user.
+     * Sets the value of the user property.
      * 
      */
     public void setUser(int value) {
@@ -98,7 +97,7 @@ public class RestaurantBookingRequest {
     }
 
     /**
-     * Recupera il valore della proprietà schedule.
+     * Gets the value of the schedule property.
      * 
      * @return
      *     possible object is
@@ -110,7 +109,7 @@ public class RestaurantBookingRequest {
     }
 
     /**
-     * Imposta il valore della proprietà schedule.
+     * Sets the value of the schedule property.
      * 
      * @param value
      *     allowed object is

@@ -1,7 +1,7 @@
-package it.univaq.disim.sose.cald.cinemaBooking.business;
+package it.univaq.disim.sose.cald.cinemabooking.business;
 
-import it.univaq.disim.sose.cald.cinemaBooking.CinemaBookingResponse;
-import it.univaq.disim.sose.cald.cinemaBooking.CinemaBookingRequest;
+import it.univaq.disim.sose.cald.cinemabooking.CinemaBookingResponse;
+import it.univaq.disim.sose.cald.cinemabooking.CinemaBookingRequest;
 
 
 public interface CinemaBookingService {

@@ -1,4 +1,4 @@
-package it.univaq.disim.sose.cald.restaurantBooking.business.model;
+package it.univaq.disim.sose.cald.restaurantbooking.business.model;
 
 import java.sql.Date;
 

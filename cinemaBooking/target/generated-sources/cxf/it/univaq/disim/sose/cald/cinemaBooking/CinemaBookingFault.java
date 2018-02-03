@@ -1,5 +1,5 @@
 
-package it.univaq.disim.sose.cald.cinemaBooking;
+package it.univaq.disim.sose.cald.cinemabooking;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
@@ -8,9 +8,9 @@ import javax.xml.bind.annotation.XmlType;
 
 
 /**
- * <p>Classe Java per cinemaBookingFault complex type.
+ * <p>Java class for cinemaBookingFault complex type.
  * 
- * <p>Il seguente frammento di schema specifica il contenuto previsto contenuto in questa classe.
+ * <p>The following schema fragment specifies the expected content contained within this class.
  * 
  * <pre>
  * &lt;complexType name="cinemaBookingFault"&gt;
@@ -40,7 +40,7 @@ public class CinemaBookingFault {
     protected String message;
 
     /**
-     * Recupera il valore della proprietà faultInfo.
+     * Gets the value of the faultInfo property.
      * 
      * @return
      *     possible object is
@@ -52,7 +52,7 @@ public class CinemaBookingFault {
     }
 
     /**
-     * Imposta il valore della proprietà faultInfo.
+     * Sets the value of the faultInfo property.
      * 
      * @param value
      *     allowed object is
@@ -64,7 +64,7 @@ public class CinemaBookingFault {
     }
 
     /**
-     * Recupera il valore della proprietà message.
+     * Gets the value of the message property.
      * 
      * @return
      *     possible object is
@@ -76,7 +76,7 @@ public class CinemaBookingFault {
     }
 
     /**
-     * Imposta il valore della proprietà message.
+     * Sets the value of the message property.
      * 
      * @param value
      *     allowed object is

@@ -8,10 +8,10 @@
                            http://cxf.apache.org/jaxws http://cxf.apache.org/schemas/jaxws.xsd">
                            
     <jaxws:endpoint id="CinemaBookingHTTP" 
-			xmlns:cinemaBooking="http://it.univaq.disim.sose.cald/cinemaBooking"
-		    address="/cinemaBooking" 
-		    serviceName="cinemaBooking:CinemaBookingService"
-		    endpointName="cinemaBooking:CinemaBookingPort" 
+			xmlns:cinemabooking="http://it.univaq.disim.sose.cald/cinemabooking"
+		    address="/cinemabooking" 
+		    serviceName="cinemabooking:CinemaBookingService"
+		    endpointName="cinemabooking:CinemaBookingPort" 
 		    implementor="#CinemaBookingPTImpl">
 		    
 	</jaxws:endpoint>

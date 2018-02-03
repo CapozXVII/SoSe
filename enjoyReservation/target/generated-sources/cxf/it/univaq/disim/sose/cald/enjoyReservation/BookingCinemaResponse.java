@@ -3,6 +3,7 @@ package it.univaq.disim.sose.cald.enjoyreservation;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
 
 
@@ -16,7 +17,7 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;complexContent&gt;
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&gt;
  *       &lt;sequence&gt;
- *         &lt;element name="accepted" type="{http://www.w3.org/2001/XMLSchema}boolean"/&gt;
+ *         &lt;element name="accepted" type="{http://www.w3.org/2001/XMLSchema}string"/&gt;
  *       &lt;/sequence&gt;
  *     &lt;/restriction&gt;
  *   &lt;/complexContent&gt;
@@ -31,21 +32,30 @@ import javax.xml.bind.annotation.XmlType;
 })
 public class BookingCinemaResponse {
 
-    protected boolean accepted;
+    @XmlElement(required = true)
+    protected String accepted;
 
     /**
      * Gets the value of the accepted property.
      * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
      */
-    public boolean isAccepted() {
+    public String getAccepted() {
         return accepted;
     }
 
     /**
      * Sets the value of the accepted property.
      * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
      */
-    public void setAccepted(boolean value) {
+    public void setAccepted(String value) {
         this.accepted = value;
     }
 

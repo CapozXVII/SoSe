@@ -8,10 +8,10 @@
                            http://cxf.apache.org/jaxws http://cxf.apache.org/schemas/jaxws.xsd">
                            
     <jaxws:endpoint id="RestaurantBookingHTTP" 
-			xmlns:restaurantBooking="http://it.univaq.disim.sose.cald/restaurantBooking"
-		    address="/restaurantBooking" 
-		    serviceName="restaurantBooking:RestaurantBookingService"
-		    endpointName="restaurantBooking:RestaurantBookingPort" 
+			xmlns:restaurantbooking="http://it.univaq.disim.sose.cald/restaurantbooking"
+		    address="/restaurantbooking" 
+		    serviceName="restaurantbooking:RestaurantBookingService"
+		    endpointName="restaurantbooking:RestaurantBookingPort" 
 		    implementor="#RestaurantBookingPTImpl">
 		    
 	</jaxws:endpoint>

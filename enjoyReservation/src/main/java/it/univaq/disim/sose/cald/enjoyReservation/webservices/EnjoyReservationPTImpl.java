@@ -71,15 +71,17 @@ public class EnjoyReservationPTImpl implements EnjoyReservationPT{
 
 	@Override
 	public BookingCinemaResponse cinemaBooking(BookingCinemaRequest parameters) throws BookingCinemaFault_Exception {
-		// TODO Auto-generated method stub
-		return null;
+		LOGGER.info("CALLED cinemaBooking ON enjoyreservation");
+		BookingCinemaResponse response = service.cinemaBooking(parameters);
+		return response;
 	}
 
 	@Override
 	public BookingRestaurantResponse restaurantBooking(BookingRestaurantRequest parameters)
 			throws BookingRestaurantFault_Exception {
-		// TODO Auto-generated method stub
-		return null;
+		LOGGER.info("CALLED restaurantBooking ON enjoyreservation");
+		BookingRestaurantResponse response = service.restaurantBooking(parameters);
+		return response;
 	}
 
 	@Override

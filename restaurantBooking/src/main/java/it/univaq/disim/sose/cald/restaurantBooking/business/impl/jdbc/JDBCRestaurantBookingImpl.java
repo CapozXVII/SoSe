@@ -1,12 +1,10 @@
-package it.univaq.disim.sose.cald.restaurantBooking.business.impl.jdbc;
+package it.univaq.disim.sose.cald.restaurantbooking.business.impl.jdbc;
 
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
-import java.sql.Timestamp;
 
 import javax.sql.DataSource;
 
@@ -15,11 +13,11 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import it.univaq.disim.sose.cald.restaurantBooking.RestaurantBookingRequest;
-import it.univaq.disim.sose.cald.restaurantBooking.RestaurantBookingResponse;
-import it.univaq.disim.sose.cald.restaurantBooking.business.*;
-import it.univaq.disim.sose.cald.restaurantBooking.business.impl.jdbc.JDBCRestaurantBookingImpl;
-import it.univaq.disim.sose.cald.restaurantBooking.business.model.RestaurantBooking;
+import it.univaq.disim.sose.cald.restaurantbooking.RestaurantBookingRequest;
+import it.univaq.disim.sose.cald.restaurantbooking.RestaurantBookingResponse;
+import it.univaq.disim.sose.cald.restaurantbooking.business.*;
+import it.univaq.disim.sose.cald.restaurantbooking.business.impl.jdbc.JDBCRestaurantBookingImpl;
+import it.univaq.disim.sose.cald.restaurantbooking.business.model.RestaurantBooking;
 
 @Service
 public class JDBCRestaurantBookingImpl implements RestaurantBookingService {

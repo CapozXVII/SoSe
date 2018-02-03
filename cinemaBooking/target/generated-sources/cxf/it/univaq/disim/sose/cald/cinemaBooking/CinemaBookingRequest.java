@@ -1,5 +1,7 @@
 
-package it.univaq.disim.sose.cald.cinemaBooking;
+package it.univaq.disim.sose.cald.cinemabooking;
+
+import java.util.Date;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
@@ -8,13 +10,11 @@ import javax.xml.bind.annotation.XmlSchemaType;
 import javax.xml.bind.annotation.XmlType;
 import javax.xml.datatype.XMLGregorianCalendar;
 
-import java.util.Date;
-
 
 /**
- * <p>Classe Java per cinemaBookingRequest complex type.
+ * <p>Java class for cinemaBookingRequest complex type.
  * 
- * <p>Il seguente frammento di schema specifica il contenuto previsto contenuto in questa classe.
+ * <p>The following schema fragment specifies the expected content contained within this class.
  * 
  * <pre>
  * &lt;complexType name="cinemaBookingRequest"&gt;
@@ -56,7 +56,7 @@ public class CinemaBookingRequest {
     protected Date schedule;
 
     /**
-     * Recupera il valore della proprietà idHall.
+     * Gets the value of the idHall property.
      * 
      */
     public int getIdHall() {
@@ -64,7 +64,7 @@ public class CinemaBookingRequest {
     }
 
     /**
-     * Imposta il valore della proprietà idHall.
+     * Sets the value of the idHall property.
      * 
      */
     public void setIdHall(int value) {
@@ -72,7 +72,7 @@ public class CinemaBookingRequest {
     }
 
     /**
-     * Recupera il valore della proprietà idFilm.
+     * Gets the value of the idFilm property.
      * 
      */
     public int getIdFilm() {
@@ -80,7 +80,7 @@ public class CinemaBookingRequest {
     }
 
     /**
-     * Imposta il valore della proprietà idFilm.
+     * Sets the value of the idFilm property.
      * 
      */
     public void setIdFilm(int value) {
@@ -88,7 +88,7 @@ public class CinemaBookingRequest {
     }
 
     /**
-     * Recupera il valore della proprietà idUtente.
+     * Gets the value of the idUtente property.
      * 
      */
     public int getIdUtente() {
@@ -96,7 +96,7 @@ public class CinemaBookingRequest {
     }
 
     /**
-     * Imposta il valore della proprietà idUtente.
+     * Sets the value of the idUtente property.
      * 
      */
     public void setIdUtente(int value) {
@@ -104,7 +104,7 @@ public class CinemaBookingRequest {
     }
 
     /**
-     * Recupera il valore della proprietà seats.
+     * Gets the value of the seats property.
      * 
      */
     public int getSeats() {
@@ -112,7 +112,7 @@ public class CinemaBookingRequest {
     }
 
     /**
-     * Imposta il valore della proprietà seats.
+     * Sets the value of the seats property.
      * 
      */
     public void setSeats(int value) {
@@ -120,7 +120,7 @@ public class CinemaBookingRequest {
     }
 
     /**
-     * Recupera il valore della proprietà schedule.
+     * Gets the value of the schedule property.
      * 
      * @return
      *     possible object is
@@ -132,7 +132,7 @@ public class CinemaBookingRequest {
     }
 
     /**
-     * Imposta il valore della proprietà schedule.
+     * Sets the value of the schedule property.
      * 
      * @param value
      *     allowed object is

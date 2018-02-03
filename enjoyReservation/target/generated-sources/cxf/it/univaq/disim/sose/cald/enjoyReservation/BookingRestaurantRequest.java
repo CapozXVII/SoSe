@@ -1,6 +1,8 @@
 
 package it.univaq.disim.sose.cald.enjoyreservation;
 
+import java.util.Date;
+
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
@@ -19,8 +21,9 @@ import javax.xml.datatype.XMLGregorianCalendar;
  *   &lt;complexContent&gt;
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&gt;
  *       &lt;sequence&gt;
- *         &lt;element name="restaurant" type="{http://www.w3.org/2001/XMLSchema}string"/&gt;
+ *         &lt;element name="restaurant" type="{http://www.w3.org/2001/XMLSchema}int"/&gt;
  *         &lt;element name="seats" type="{http://www.w3.org/2001/XMLSchema}int"/&gt;
+ *         &lt;element name="user" type="{http://www.w3.org/2001/XMLSchema}int"/&gt;
  *         &lt;element name="schedule" type="{http://www.w3.org/2001/XMLSchema}dateTime"/&gt;
  *       &lt;/sequence&gt;
  *     &lt;/restriction&gt;
@@ -34,38 +37,31 @@ import javax.xml.datatype.XMLGregorianCalendar;
 @XmlType(name = "bookingRestaurantRequest", propOrder = {
     "restaurant",
     "seats",
+    "user",
     "schedule"
 })
 public class BookingRestaurantRequest {
 
-    @XmlElement(required = true)
-    protected String restaurant;
+    protected int restaurant;
     protected int seats;
+    protected int user;
     @XmlElement(required = true)
     @XmlSchemaType(name = "dateTime")
-    protected XMLGregorianCalendar schedule;
+    protected Date schedule;
 
     /**
      * Gets the value of the restaurant property.
      * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
      */
-    public String getRestaurant() {
+    public int getRestaurant() {
         return restaurant;
     }
 
     /**
      * Sets the value of the restaurant property.
      * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
      */
-    public void setRestaurant(String value) {
+    public void setRestaurant(int value) {
         this.restaurant = value;
     }
 
@@ -86,6 +82,22 @@ public class BookingRestaurantRequest {
     }
 
     /**
+     * Gets the value of the user property.
+     * 
+     */
+    public int getUser() {
+        return user;
+    }
+
+    /**
+     * Sets the value of the user property.
+     * 
+     */
+    public void setUser(int value) {
+        this.user = value;
+    }
+
+    /**
      * Gets the value of the schedule property.
      * 
      * @return
@@ -93,7 +105,7 @@ public class BookingRestaurantRequest {
      *     {@link XMLGregorianCalendar }
      *     
      */
-    public XMLGregorianCalendar getSchedule() {
+    public Date getSchedule() {
         return schedule;
     }
 
@@ -105,7 +117,7 @@ public class BookingRestaurantRequest {
      *     {@link XMLGregorianCalendar }
      *     
      */
-    public void setSchedule(XMLGregorianCalendar value) {
+    public void setSchedule(Date value) {
         this.schedule = value;
     }
 

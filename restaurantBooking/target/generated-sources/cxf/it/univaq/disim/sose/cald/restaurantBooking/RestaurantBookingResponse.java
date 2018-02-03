@@ -1,5 +1,5 @@
 
-package it.univaq.disim.sose.cald.restaurantBooking;
+package it.univaq.disim.sose.cald.restaurantbooking;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
@@ -8,9 +8,9 @@ import javax.xml.bind.annotation.XmlType;
 
 
 /**
- * <p>Classe Java per restaurantBookingResponse complex type.
+ * <p>Java class for restaurantBookingResponse complex type.
  * 
- * <p>Il seguente frammento di schema specifica il contenuto previsto contenuto in questa classe.
+ * <p>The following schema fragment specifies the expected content contained within this class.
  * 
  * <pre>
  * &lt;complexType name="restaurantBookingResponse"&gt;
@@ -36,7 +36,7 @@ public class RestaurantBookingResponse {
     protected String accepted;
 
     /**
-     * Recupera il valore della proprietà accepted.
+     * Gets the value of the accepted property.
      * 
      * @return
      *     possible object is
@@ -48,7 +48,7 @@ public class RestaurantBookingResponse {
     }
 
     /**
-     * Imposta il valore della proprietà accepted.
+     * Sets the value of the accepted property.
      * 
      * @param value
      *     allowed object is

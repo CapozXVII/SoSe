@@ -1,4 +1,4 @@
-package it.univaq.disim.sose.cald.cinemaBooking.business.model;
+package it.univaq.disim.sose.cald.cinemabooking.business.model;
 
 import java.sql.Timestamp;
 import java.util.Date;
