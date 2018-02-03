@@ -1,8 +1,6 @@
 
 package it.univaq.disim.sose.cald.clients.cinemainserting;
 
-import java.util.ArrayList;
-import java.util.List;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
@@ -41,7 +39,7 @@ public class HallType {
     protected int number;
     protected int seatsNumber;
     @XmlElement(required = true)
-    protected List<HallInfoType> hallInfo;
+    protected HallInfoType hallInfo;
 
     /**
      * Gets the value of the number property.
@@ -97,11 +95,12 @@ public class HallType {
      * 
      * 
      */
-    public List<HallInfoType> getHallInfo() {
-        if (hallInfo == null) {
-            hallInfo = new ArrayList<HallInfoType>();
-        }
+    public HallInfoType getHallInfo() {
         return this.hallInfo;
+    }
+    
+    public void setHallInfo(HallInfoType hallInfo) {
+    		this.hallInfo = hallInfo;
     }
 
 }

@@ -12,8 +12,11 @@ import it.univaq.disim.sose.cald.clients.cinemainformation.CinemaInformationResp
 import it.univaq.disim.sose.cald.clients.cinemainformation.CinemaInformationService;
 import it.univaq.disim.sose.cald.clients.cinemainformation.CinemaType;
 import it.univaq.disim.sose.cald.clients.cinemainformation.HallType;
-import it.univaq.disim.sose.cald.clients.restaurantinformation.DiscountType;
-import it.univaq.disim.sose.cald.clients.restaurantinformation.RestaurantInfoType;
+import it.univaq.disim.sose.cald.clients.cinemainserting.CinemaInsertFault_Exception;
+import it.univaq.disim.sose.cald.clients.cinemainserting.CinemaInsertRequest;
+import it.univaq.disim.sose.cald.clients.cinemainserting.CinemaInsertResponse;
+import it.univaq.disim.sose.cald.clients.cinemainserting.CinemaInsertingService;
+import it.univaq.disim.sose.cald.clients.cinemainserting.CinemaPT;
 import it.univaq.disim.sose.cald.clients.restaurantinformation.RestaurantInformationFault_Exception;
 import it.univaq.disim.sose.cald.clients.restaurantinformation.RestaurantInformationPT;
 import it.univaq.disim.sose.cald.clients.restaurantinformation.RestaurantInformationRequest;
@@ -191,8 +194,57 @@ public class WebServiceEnjoyReservationServiceImpl implements EnjoyReservationSe
 
 	@Override
 	public InsertCinemaResponse insertCinema(InsertCinemaRequest request) throws BusinessException {
-		// TODO Auto-generated method stub
-		return null;
+		InsertCinemaResponse response = new InsertCinemaResponse();
+		it.univaq.disim.sose.cald.clients.cinemainserting.CinemaType cinema = new it.univaq.disim.sose.cald.clients.cinemainserting.CinemaType();
+		it.univaq.disim.sose.cald.clients.cinemainserting.CinemaInfoType cinemaInfo = new it.univaq.disim.sose.cald.clients.cinemainserting.CinemaInfoType();
+		List<it.univaq.disim.sose.cald.clients.cinemainserting.HallType> hallList = new ArrayList<it.univaq.disim.sose.cald.clients.cinemainserting.HallType>();
+		
+		CinemaInsertingService cinemaInsertingService = new CinemaInsertingService();
+		CinemaPT cinemaInserting = cinemaInsertingService.getCinemaPort();
+		CinemaInsertRequest cinemaInsertRequest = new CinemaInsertRequest();
+		
+		for(OSMHallType hallRequest : request.getCinema().getCinemaInfo().getHall()) {
+			it.univaq.disim.sose.cald.clients.cinemainserting.HallType hall = new it.univaq.disim.sose.cald.clients.cinemainserting.HallType();
+			it.univaq.disim.sose.cald.clients.cinemainserting.HallInfoType hallInfo = new it.univaq.disim.sose.cald.clients.cinemainserting.HallInfoType();
+			it.univaq.disim.sose.cald.clients.cinemainserting.FilmType film = new it.univaq.disim.sose.cald.clients.cinemainserting.FilmType();
+		
+			film.setCast(hallRequest.getHallInfo().getFilm().getCast());
+			film.setDirector(hallRequest.getHallInfo().getFilm().getDirector());
+			film.setDuration(hallRequest.getHallInfo().getFilm().getDuration());
+			film.setName(hallRequest.getHallInfo().getFilm().getName());
+			film.setPlot(hallRequest.getHallInfo().getFilm().getPlot());
+			film.setType(hallRequest.getHallInfo().getFilm().getType());
+			hallInfo.setFilm(film);
+			hallInfo.setFreeSeatsNumber(hallRequest.getHallInfo().getFreeSeatsNumber());
+			hallInfo.setPrice(hallRequest.getHallInfo().getPrice());
+			hallInfo.setTime(hallRequest.getHallInfo().getTime());
+			hall.setHallInfo(hallInfo);
+			hall.setNumber(hallRequest.getNumber());
+			hall.setSeatsNumber(hallRequest.getSeatsNumber());
+			hallList.add(hall);
+		}
+		
+		cinemaInfo.setHall(hallList);
+		cinemaInfo.setAddress(request.getCinema().getCinemaInfo().getAddress());
+		cinemaInfo.setCap(request.getCinema().getCinemaInfo().getCap());
+		cinemaInfo.setCity(request.getCinema().getCinemaInfo().getCity());
+		cinemaInfo.setName(request.getCinema().getCinemaInfo().getName());
+		cinemaInfo.setTelephoneNumber(request.getCinema().getCinemaInfo().getTelephoneNumber());
+		cinema.setCinemaInfo(cinemaInfo);
+		cinema.setLat(request.getCinema().getLat());
+		cinema.setLon(request.getCinema().getLon());
+		
+		cinemaInsertRequest.setCinema(cinema);
+		
+		try {
+			CinemaInsertResponse cinemaInsertResponse = cinemaInserting.cinemaInsert(cinemaInsertRequest);
+			
+			response.setAccepted(cinemaInsertResponse.isAccepted());
+		} catch (CinemaInsertFault_Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return response;
 	}
 
 }
