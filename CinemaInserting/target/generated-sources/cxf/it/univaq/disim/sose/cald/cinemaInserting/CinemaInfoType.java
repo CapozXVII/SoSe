@@ -25,8 +25,6 @@ import javax.xml.bind.annotation.XmlType;
  *         &lt;element name="city" type="{http://www.w3.org/2001/XMLSchema}string"/&gt;
  *         &lt;element name="telephoneNumber" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/&gt;
  *         &lt;element name="hall" type="{http://it.univaq.disim.sose.cald/cinemaInserting}hallType" maxOccurs="unbounded"/&gt;
- *         &lt;element name="films" type="{http://www.w3.org/2001/XMLSchema}string"/&gt;
- *         &lt;element name="discount" type="{http://it.univaq.disim.sose.cald/cinemaInserting}discountType" minOccurs="0"/&gt;
  *       &lt;/sequence&gt;
  *     &lt;/restriction&gt;
  *   &lt;/complexContent&gt;
@@ -42,9 +40,7 @@ import javax.xml.bind.annotation.XmlType;
     "cap",
     "city",
     "telephoneNumber",
-    "hall",
-    "films",
-    "discount"
+    "hall"
 })
 public class CinemaInfoType {
 
@@ -57,9 +53,6 @@ public class CinemaInfoType {
     protected String telephoneNumber;
     @XmlElement(required = true)
     protected List<HallType> hall;
-    @XmlElement(required = true)
-    protected String films;
-    protected DiscountType discount;
 
     /**
      * Recupera il valore della proprietà name.
@@ -200,54 +193,6 @@ public class CinemaInfoType {
             hall = new ArrayList<HallType>();
         }
         return this.hall;
-    }
-
-    /**
-     * Recupera il valore della proprietà films.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
-     */
-    public String getFilms() {
-        return films;
-    }
-
-    /**
-     * Imposta il valore della proprietà films.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
-     */
-    public void setFilms(String value) {
-        this.films = value;
-    }
-
-    /**
-     * Recupera il valore della proprietà discount.
-     * 
-     * @return
-     *     possible object is
-     *     {@link DiscountType }
-     *     
-     */
-    public DiscountType getDiscount() {
-        return discount;
-    }
-
-    /**
-     * Imposta il valore della proprietà discount.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link DiscountType }
-     *     
-     */
-    public void setDiscount(DiscountType value) {
-        this.discount = value;
     }
 
 }
