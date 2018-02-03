@@ -64,8 +64,9 @@ public class EnjoyReservationPTImpl implements EnjoyReservationPT{
 	@Override
 	public InsertRestaurantResponse insertRestaurant(InsertRestaurantRequest parameters)
 			throws InsertRestaurantFault_Exception {
-		// TODO Auto-generated method stub
-		return null;
+		LOGGER.info("CALLED insertRestaurant ON enjoyreservation");
+		InsertRestaurantResponse response = service.insertRestaurant(parameters);
+		return response;
 	}
 
 	@Override
@@ -90,8 +91,9 @@ public class EnjoyReservationPTImpl implements EnjoyReservationPT{
 
 	@Override
 	public InsertCinemaResponse insertCinema(InsertCinemaRequest parameters) throws InsertCinemaFault_Exception {
-		// TODO Auto-generated method stub
-		return null;
+		LOGGER.info("CALLED insertCinema ON enjoyreservation");
+		InsertCinemaResponse response = service.insertCinema(parameters);
+		return response;
 	}
 
 }

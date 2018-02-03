@@ -102,6 +102,24 @@
 										<extraarg>it.univaq.disim.sose.cald.clients.restaurantinformation</extraarg>
 									</extraargs>
 								</wsdlOption>
+								<wsdlOption>
+									<wsdl>src/main/resources/clients/restaurantInserting.wsdl</wsdl>
+									<faultSerialVersionUID>1</faultSerialVersionUID>
+									<extraargs>
+										<extraarg>-verbose</extraarg>
+										<extraarg>-p </extraarg>
+										<extraarg>it.univaq.disim.sose.cald.clients.restaurantinserting</extraarg>
+									</extraargs>
+								</wsdlOption>
+								<wsdlOption>
+									<wsdl>src/main/resources/clients/cinemaInserting.wsdl</wsdl>
+									<faultSerialVersionUID>1</faultSerialVersionUID>
+									<extraargs>
+										<extraarg>-verbose</extraarg>
+										<extraarg>-p </extraarg>
+										<extraarg>it.univaq.disim.sose.cald.clients.cinemainserting</extraarg>
+									</extraargs>
+								</wsdlOption>
 							</wsdlOptions>
 						</configuration>
 						<goals>

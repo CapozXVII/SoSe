@@ -12,16 +12,27 @@ import it.univaq.disim.sose.cald.clients.cinemainformation.CinemaInformationResp
 import it.univaq.disim.sose.cald.clients.cinemainformation.CinemaInformationService;
 import it.univaq.disim.sose.cald.clients.cinemainformation.CinemaType;
 import it.univaq.disim.sose.cald.clients.cinemainformation.HallType;
+import it.univaq.disim.sose.cald.clients.restaurantinformation.DiscountType;
+import it.univaq.disim.sose.cald.clients.restaurantinformation.RestaurantInfoType;
 import it.univaq.disim.sose.cald.clients.restaurantinformation.RestaurantInformationFault_Exception;
 import it.univaq.disim.sose.cald.clients.restaurantinformation.RestaurantInformationPT;
 import it.univaq.disim.sose.cald.clients.restaurantinformation.RestaurantInformationRequest;
 import it.univaq.disim.sose.cald.clients.restaurantinformation.RestaurantInformationResponse;
 import it.univaq.disim.sose.cald.clients.restaurantinformation.RestaurantInformationService;
 import it.univaq.disim.sose.cald.clients.restaurantinformation.RestaurantType;
+import it.univaq.disim.sose.cald.clients.restaurantinserting.RestaurantInsertFault_Exception;
+import it.univaq.disim.sose.cald.clients.restaurantinserting.RestaurantInsertRequest;
+import it.univaq.disim.sose.cald.clients.restaurantinserting.RestaurantInsertResponse;
+import it.univaq.disim.sose.cald.clients.restaurantinserting.RestaurantInsertingService;
+import it.univaq.disim.sose.cald.clients.restaurantinserting.RestaurantPT;
 import it.univaq.disim.sose.cald.enjoyreservation.GetCinemaInfoRequest;
 import it.univaq.disim.sose.cald.enjoyreservation.GetCinemaInfoResponse;
 import it.univaq.disim.sose.cald.enjoyreservation.GetRestaurantInfoRequest;
 import it.univaq.disim.sose.cald.enjoyreservation.GetRestaurantInfoResponse;
+import it.univaq.disim.sose.cald.enjoyreservation.InsertCinemaRequest;
+import it.univaq.disim.sose.cald.enjoyreservation.InsertCinemaResponse;
+import it.univaq.disim.sose.cald.enjoyreservation.InsertRestaurantRequest;
+import it.univaq.disim.sose.cald.enjoyreservation.InsertRestaurantResponse;
 import it.univaq.disim.sose.cald.enjoyreservation.OSMCinemaInfoType;
 import it.univaq.disim.sose.cald.enjoyreservation.OSMCinemaType;
 import it.univaq.disim.sose.cald.enjoyreservation.OSMDiscountType;
@@ -136,6 +147,52 @@ public class WebServiceEnjoyReservationServiceImpl implements EnjoyReservationSe
 			e.printStackTrace();
 		}
 		return response;
+	}
+
+	@Override
+	public InsertRestaurantResponse insertRestaurant(InsertRestaurantRequest request) throws BusinessException {
+		InsertRestaurantResponse response = new InsertRestaurantResponse();
+		it.univaq.disim.sose.cald.clients.restaurantinserting.RestaurantType restaurant = new it.univaq.disim.sose.cald.clients.restaurantinserting.RestaurantType();
+		it.univaq.disim.sose.cald.clients.restaurantinserting.RestaurantInfoType restaurantInfo = new it.univaq.disim.sose.cald.clients.restaurantinserting.RestaurantInfoType();
+		it.univaq.disim.sose.cald.clients.restaurantinserting.DiscountType discount = new it.univaq.disim.sose.cald.clients.restaurantinserting.DiscountType();
+		
+		RestaurantInsertingService restaurantInsertingService = new RestaurantInsertingService();
+		RestaurantPT restaurantInserting = restaurantInsertingService.getRestaurantPort();
+		RestaurantInsertRequest restaurantInsertRequest = new RestaurantInsertRequest();
+		
+		discount.setPrice(request.getRestaurant().getRestaurantInfo().getDiscount().getPrice());
+		discount.setCinema(request.getRestaurant().getRestaurantInfo().getDiscount().getCinema());
+		restaurantInfo.setDiscount(discount);
+		restaurantInfo.setAddress(request.getRestaurant().getRestaurantInfo().getAddress());
+		restaurantInfo.setCap(request.getRestaurant().getRestaurantInfo().getCap());
+		restaurantInfo.setCity(request.getRestaurant().getRestaurantInfo().getCity());
+		restaurantInfo.setCuisine(request.getRestaurant().getRestaurantInfo().getCuisine());
+		restaurantInfo.setMaxSeats(restaurant.getRestaurantInfo().getMaxSeats());
+		restaurantInfo.setMenu(request.getRestaurant().getRestaurantInfo().getMenu());
+		restaurantInfo.setName(request.getRestaurant().getRestaurantInfo().getName());
+		restaurantInfo.setStyle(request.getRestaurant().getRestaurantInfo().getStyle());
+		restaurantInfo.setTelephoneNumber(request.getRestaurant().getRestaurantInfo().getTelephoneNumber());
+		restaurant.setRestaurantInfo(restaurantInfo);
+		restaurant.setLat(request.getRestaurant().getLat());
+		restaurant.setLon(request.getRestaurant().getLon());
+	
+		restaurantInsertRequest.setRestaurant(restaurant);
+		
+		try {
+			RestaurantInsertResponse restaurantInsertResponse = restaurantInserting.restaurantInsert(restaurantInsertRequest);
+			
+			response.setAccepted(restaurantInsertResponse.isAccepted());
+		} catch (RestaurantInsertFault_Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return response;
+	}
+
+	@Override
+	public InsertCinemaResponse insertCinema(InsertCinemaRequest request) throws BusinessException {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

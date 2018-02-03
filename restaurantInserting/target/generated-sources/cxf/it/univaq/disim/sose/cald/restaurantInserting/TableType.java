@@ -7,9 +7,9 @@ import javax.xml.bind.annotation.XmlType;
 
 
 /**
- * <p>Classe Java per tableType complex type.
+ * <p>Java class for tableType complex type.
  * 
- * <p>Il seguente frammento di schema specifica il contenuto previsto contenuto in questa classe.
+ * <p>The following schema fragment specifies the expected content contained within this class.
  * 
  * <pre>
  * &lt;complexType name="tableType"&gt;
@@ -37,7 +37,7 @@ public class TableType {
     protected int seatsNumber;
 
     /**
-     * Recupera il valore della proprietà number.
+     * Gets the value of the number property.
      * 
      */
     public int getNumber() {
@@ -45,7 +45,7 @@ public class TableType {
     }
 
     /**
-     * Imposta il valore della proprietà number.
+     * Sets the value of the number property.
      * 
      */
     public void setNumber(int value) {
@@ -53,7 +53,7 @@ public class TableType {
     }
 
     /**
-     * Recupera il valore della proprietà seatsNumber.
+     * Gets the value of the seatsNumber property.
      * 
      */
     public int getSeatsNumber() {
@@ -61,7 +61,7 @@ public class TableType {
     }
 
     /**
-     * Imposta il valore della proprietà seatsNumber.
+     * Sets the value of the seatsNumber property.
      * 
      */
     public void setSeatsNumber(int value) {
