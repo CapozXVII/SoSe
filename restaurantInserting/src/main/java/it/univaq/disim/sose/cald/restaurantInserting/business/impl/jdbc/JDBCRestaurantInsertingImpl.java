@@ -5,7 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.List;
+
 
 import javax.sql.DataSource;
 
@@ -14,16 +14,15 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import it.univaq.disim.sose.cald.restaurantInserting.DiscountType;
-import it.univaq.disim.sose.cald.restaurantInserting.RestaurantInfoType;
+
 import it.univaq.disim.sose.cald.restaurantInserting.RestaurantInsertRequest;
 import it.univaq.disim.sose.cald.restaurantInserting.RestaurantInsertResponse;
-import it.univaq.disim.sose.cald.restaurantInserting.RestaurantType;
 import it.univaq.disim.sose.cald.restaurantInserting.RestaurantUpdateRequest;
 import it.univaq.disim.sose.cald.restaurantInserting.RestaurantUpdateResponse;
-import it.univaq.disim.sose.cald.restaurantInserting.TableType;
 import it.univaq.disim.sose.cald.restaurantInserting.business.BusinessException;
 import it.univaq.disim.sose.cald.restaurantInserting.business.RestaurantInsertingService;
+import it.univaq.disim.sose.cald.restaurantInserting.business.model.Discount;
+import it.univaq.disim.sose.cald.restaurantInserting.business.model.Restaurant;
 
 @Service
 public class JDBCRestaurantInsertingImpl implements RestaurantInsertingService {
@@ -37,63 +36,65 @@ public class JDBCRestaurantInsertingImpl implements RestaurantInsertingService {
 	public RestaurantInsertResponse insertRestaurant(RestaurantInsertRequest parameters) throws BusinessException {
 
 		LOGGER.info("Called JDBCInserting");
+		
+		Restaurant newRestaurant= new Restaurant();
+		newRestaurant.setLatitude(parameters.getRestaurant().getLat());
+		newRestaurant.setLongitude(parameters.getRestaurant().getLon());
+		newRestaurant.setName(parameters.getRestaurant().getRestaurantInfo().getName());
+		newRestaurant.setCap(parameters.getRestaurant().getRestaurantInfo().getCap());
+		newRestaurant.setAddress(parameters.getRestaurant().getRestaurantInfo().getAddress());
+		newRestaurant.setCity(parameters.getRestaurant().getRestaurantInfo().getCity());
+		newRestaurant.setTelephoneNumber(parameters.getRestaurant().getRestaurantInfo().getTelephoneNumber());
+		newRestaurant.setStyle(parameters.getRestaurant().getRestaurantInfo().getStyle());
+		newRestaurant.setCousine(parameters.getRestaurant().getRestaurantInfo().getCuisine());
+		newRestaurant.setMenu(parameters.getRestaurant().getRestaurantInfo().getMenu());
+		newRestaurant.setMax_seats(parameters.getRestaurant().getRestaurantInfo().getMaxSeats());
+		
+		Discount newDiscount= new Discount();
+		newDiscount.setCinema(parameters.getRestaurant().getRestaurantInfo().getDiscount().getCinema());
+		newDiscount.setPrice(parameters.getRestaurant().getRestaurantInfo().getDiscount().getPrice());
 
-		RestaurantType newRestaurant = parameters.getRestaurant();
-		double lat = newRestaurant.getLat();
-		double lon = newRestaurant.getLon();
-		RestaurantInfoType newRestaurantInfo = newRestaurant.getRestaurantInfo();
-		String name = newRestaurantInfo.getName();
-		String address = newRestaurantInfo.getAddress();
-		int cap = newRestaurantInfo.getCap();
-		String city = newRestaurantInfo.getCity();
-		String telephoneNumber = newRestaurantInfo.getTelephoneNumber();
-		List<TableType> table = newRestaurantInfo.getTable();
-		String style = newRestaurantInfo.getStyle();
-		String cuisine = newRestaurantInfo.getCuisine();
-		String menu = newRestaurantInfo.getMenu();
-		DiscountType discount = newRestaurantInfo.getDiscount(); /* controllare questo */
-
-		int id = 0;
-		int id2 = 0;
+		int id_restaurant = 0;
 		boolean insert=false;
 
 		
 
 		Connection con = null;
-		PreparedStatement sql;
-		PreparedStatement sql2;
+		PreparedStatement sql_iRestaurant, sql_iDiscout;
+		
 
 		try {
 			con = dataSource.getConnection();
-			sql = con.prepareStatement(
-					"INSERT INTO RESTAURANTS (restaurant_lat,restaurant_lon,restaurant_name,restaurant_address,restaurant_cap,restaurant_city,restaurant_telephonenumber,style,cuisine,menu) VALUES (?,?,?,?,?,?,?,?,?,?)",
+			sql_iRestaurant = con.prepareStatement(
+					"INSERT INTO RESTAURANTS (restaurant_lat,restaurant_lon,restaurant_name,restaurant_address,restaurant_cap,restaurant_city,restaurant_telephonenumber,style,cuisine,menu,max_seats) VALUES (?,?,?,?,?,?,?,?,?,?,?)",
 					Statement.RETURN_GENERATED_KEYS);
 
-			sql.setDouble(1, lat);
-			sql.setDouble(2, lon);
-			sql.setString(3, name);
-			sql.setString(4, address);
-			sql.setInt(5, cap);
-			sql.setString(6, city);
-			sql.setString(7, telephoneNumber);
-			sql.setString(8, style);
-			sql.setString(9, cuisine);
-			sql.setString(10, menu);
+			sql_iRestaurant.setDouble(1, newRestaurant.getLatitude());
+			sql_iRestaurant.setDouble(2, newRestaurant.getLongitude());
+			sql_iRestaurant.setString(3, newRestaurant.getName());
+			sql_iRestaurant.setString(4, newRestaurant.getAddress());
+			sql_iRestaurant.setString(5, newRestaurant.getCap());
+			sql_iRestaurant.setString(6, newRestaurant.getCity());
+			sql_iRestaurant.setString(7, newRestaurant.getTelephoneNumber());
+			sql_iRestaurant.setString(8, newRestaurant.getStyle());
+			sql_iRestaurant.setString(9, newRestaurant.getCousine());
+			sql_iRestaurant.setString(10, newRestaurant.getMenu());
+			sql_iRestaurant.setInt(11, newRestaurant.getMax_seats());
 
-			if (sql.executeUpdate() == 1) {
-				try (ResultSet keys = sql.getGeneratedKeys()) {
+			if (sql_iRestaurant.executeUpdate() == 1) {
+				try (ResultSet keys = sql_iRestaurant.getGeneratedKeys()) {
 					if (keys.next()) {
-						id = keys.getInt(1);
+						id_restaurant = keys.getInt(1);
 					}
 				}
 			}
 			
-			sql2= con.prepareStatement("INSERT INTO DISCOUNT (cinema,restaurant,price) VALUES (?,?,?)");
-			sql2.setInt(1, discount.getCinema()); /*forse meglio mettere il nome?*/
-			sql2.setInt(2, id);
-			sql2.setDouble(3, discount.getPrice());
+			sql_iDiscout= con.prepareStatement("INSERT INTO DISCOUNT (cinema,restaurant,price) VALUES (?,?,?)");
+			sql_iDiscout.setInt(1, newDiscount.getCinema()); /*forse meglio mettere il nome?*/
+			sql_iDiscout.setInt(2, id_restaurant);
+			sql_iDiscout.setDouble(3, newDiscount.getPrice());
 			
-			if (sql2.executeUpdate()==1) {
+			if (sql_iDiscout.executeUpdate()==1) {
 				insert=true;
 			}
 
@@ -112,45 +113,11 @@ public class JDBCRestaurantInsertingImpl implements RestaurantInsertingService {
 			}
 		}
 
-		if (id != 0) {
-			for (int i = 0; i < table.size(); i++) {
-				
-
-				try {
-					con = dataSource.getConnection();
-					sql = con.prepareStatement("INSERT INTO TABLES (number, seatsNumber, restaurant) VALUES (?,?,?)",
-							Statement.RETURN_GENERATED_KEYS);
-					ResultSet rs = null;
-					sql.setInt(1, table.get(i).getNumber());
-					sql.setInt(2, table.get(i).getSeatsNumber());
-					sql.setInt(3, id);
-
-					if (sql.executeUpdate() == 1) {
-						try (ResultSet keys = sql.getGeneratedKeys()) {
-							if (keys.next()) {
-								id2 = keys.getInt(1);
-							}
-						}
-					}
-					
-					
-
-				} catch (SQLException e1) {
-					e1.printStackTrace();
-				} finally {
-					if (con != null) {
-						try {
-							con.close();
-						} catch (SQLException e) {
-						}
-					}
-				}
-			}
-		}
+	
 
 		RestaurantInsertResponse result = new RestaurantInsertResponse();
 
-		if (id2 > 0 && insert) { /* Controllare qua se va bene >0 ma penso di si perchè funziona */
+		if (id_restaurant > 0 && insert) { /* Controllare qua se va bene >0 ma penso di si perchè funziona */
 			result.setAccepted(true);
 			return result;
 		} else {

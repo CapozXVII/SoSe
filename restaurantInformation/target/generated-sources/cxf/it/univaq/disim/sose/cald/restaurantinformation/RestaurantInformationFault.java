@@ -8,9 +8,9 @@ import javax.xml.bind.annotation.XmlType;
 
 
 /**
- * <p>Java class for restaurantInformationFault complex type.
+ * <p>Classe Java per restaurantInformationFault complex type.
  * 
- * <p>The following schema fragment specifies the expected content contained within this class.
+ * <p>Il seguente frammento di schema specifica il contenuto previsto contenuto in questa classe.
  * 
  * <pre>
  * &lt;complexType name="restaurantInformationFault"&gt;
@@ -40,7 +40,7 @@ public class RestaurantInformationFault {
     protected String message;
 
     /**
-     * Gets the value of the faultInfo property.
+     * Recupera il valore della proprietà faultInfo.
      * 
      * @return
      *     possible object is
@@ -52,7 +52,7 @@ public class RestaurantInformationFault {
     }
 
     /**
-     * Sets the value of the faultInfo property.
+     * Imposta il valore della proprietà faultInfo.
      * 
      * @param value
      *     allowed object is
@@ -64,7 +64,7 @@ public class RestaurantInformationFault {
     }
 
     /**
-     * Gets the value of the message property.
+     * Recupera il valore della proprietà message.
      * 
      * @return
      *     possible object is
@@ -76,7 +76,7 @@ public class RestaurantInformationFault {
     }
 
     /**
-     * Sets the value of the message property.
+     * Imposta il valore della proprietà message.
      * 
      * @param value
      *     allowed object is

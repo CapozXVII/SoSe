@@ -1,8 +1,6 @@
 
 package it.univaq.disim.sose.cald.restaurantInserting;
 
-import java.util.ArrayList;
-import java.util.List;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
@@ -10,9 +8,9 @@ import javax.xml.bind.annotation.XmlType;
 
 
 /**
- * <p>Java class for restaurantInfoType complex type.
+ * <p>Classe Java per restaurantInfoType complex type.
  * 
- * <p>The following schema fragment specifies the expected content contained within this class.
+ * <p>Il seguente frammento di schema specifica il contenuto previsto contenuto in questa classe.
  * 
  * <pre>
  * &lt;complexType name="restaurantInfoType"&gt;
@@ -21,14 +19,14 @@ import javax.xml.bind.annotation.XmlType;
  *       &lt;sequence&gt;
  *         &lt;element name="name" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/&gt;
  *         &lt;element name="address" type="{http://www.w3.org/2001/XMLSchema}string"/&gt;
- *         &lt;element name="cap" type="{http://www.w3.org/2001/XMLSchema}int"/&gt;
+ *         &lt;element name="cap" type="{http://www.w3.org/2001/XMLSchema}string"/&gt;
  *         &lt;element name="city" type="{http://www.w3.org/2001/XMLSchema}string"/&gt;
  *         &lt;element name="telephoneNumber" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/&gt;
- *         &lt;element name="table" type="{http://it.univaq.disim.sose.cald/restaurantInserting}tableType" maxOccurs="unbounded"/&gt;
  *         &lt;element name="style" type="{http://www.w3.org/2001/XMLSchema}string"/&gt;
  *         &lt;element name="cuisine" type="{http://www.w3.org/2001/XMLSchema}string"/&gt;
  *         &lt;element name="menu" type="{http://www.w3.org/2001/XMLSchema}string"/&gt;
  *         &lt;element name="discount" type="{http://it.univaq.disim.sose.cald/restaurantInserting}discountType" minOccurs="0"/&gt;
+ *         &lt;element name="max_seats" type="{http://www.w3.org/2001/XMLSchema}int"/&gt;
  *       &lt;/sequence&gt;
  *     &lt;/restriction&gt;
  *   &lt;/complexContent&gt;
@@ -44,23 +42,22 @@ import javax.xml.bind.annotation.XmlType;
     "cap",
     "city",
     "telephoneNumber",
-    "table",
     "style",
     "cuisine",
     "menu",
-    "discount"
+    "discount",
+    "maxSeats"
 })
 public class RestaurantInfoType {
 
     protected String name;
     @XmlElement(required = true)
     protected String address;
-    protected int cap;
+    @XmlElement(required = true)
+    protected String cap;
     @XmlElement(required = true)
     protected String city;
     protected String telephoneNumber;
-    @XmlElement(required = true)
-    protected List<TableType> table;
     @XmlElement(required = true)
     protected String style;
     @XmlElement(required = true)
@@ -68,9 +65,11 @@ public class RestaurantInfoType {
     @XmlElement(required = true)
     protected String menu;
     protected DiscountType discount;
+    @XmlElement(name = "max_seats")
+    protected int maxSeats;
 
     /**
-     * Gets the value of the name property.
+     * Recupera il valore della proprietà name.
      * 
      * @return
      *     possible object is
@@ -82,7 +81,7 @@ public class RestaurantInfoType {
     }
 
     /**
-     * Sets the value of the name property.
+     * Imposta il valore della proprietà name.
      * 
      * @param value
      *     allowed object is
@@ -94,7 +93,7 @@ public class RestaurantInfoType {
     }
 
     /**
-     * Gets the value of the address property.
+     * Recupera il valore della proprietà address.
      * 
      * @return
      *     possible object is
@@ -106,7 +105,7 @@ public class RestaurantInfoType {
     }
 
     /**
-     * Sets the value of the address property.
+     * Imposta il valore della proprietà address.
      * 
      * @param value
      *     allowed object is
@@ -118,23 +117,31 @@ public class RestaurantInfoType {
     }
 
     /**
-     * Gets the value of the cap property.
+     * Recupera il valore della proprietà cap.
      * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
      */
-    public int getCap() {
+    public String getCap() {
         return cap;
     }
 
     /**
-     * Sets the value of the cap property.
+     * Imposta il valore della proprietà cap.
      * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
      */
-    public void setCap(int value) {
+    public void setCap(String value) {
         this.cap = value;
     }
 
     /**
-     * Gets the value of the city property.
+     * Recupera il valore della proprietà city.
      * 
      * @return
      *     possible object is
@@ -146,7 +153,7 @@ public class RestaurantInfoType {
     }
 
     /**
-     * Sets the value of the city property.
+     * Imposta il valore della proprietà city.
      * 
      * @param value
      *     allowed object is
@@ -158,7 +165,7 @@ public class RestaurantInfoType {
     }
 
     /**
-     * Gets the value of the telephoneNumber property.
+     * Recupera il valore della proprietà telephoneNumber.
      * 
      * @return
      *     possible object is
@@ -170,7 +177,7 @@ public class RestaurantInfoType {
     }
 
     /**
-     * Sets the value of the telephoneNumber property.
+     * Imposta il valore della proprietà telephoneNumber.
      * 
      * @param value
      *     allowed object is
@@ -182,36 +189,7 @@ public class RestaurantInfoType {
     }
 
     /**
-     * Gets the value of the table property.
-     * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the table property.
-     * 
-     * <p>
-     * For example, to add a new item, do as follows:
-     * <pre>
-     *    getTable().add(newItem);
-     * </pre>
-     * 
-     * 
-     * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link TableType }
-     * 
-     * 
-     */
-    public List<TableType> getTable() {
-        if (table == null) {
-            table = new ArrayList<TableType>();
-        }
-        return this.table;
-    }
-
-    /**
-     * Gets the value of the style property.
+     * Recupera il valore della proprietà style.
      * 
      * @return
      *     possible object is
@@ -223,7 +201,7 @@ public class RestaurantInfoType {
     }
 
     /**
-     * Sets the value of the style property.
+     * Imposta il valore della proprietà style.
      * 
      * @param value
      *     allowed object is
@@ -235,7 +213,7 @@ public class RestaurantInfoType {
     }
 
     /**
-     * Gets the value of the cuisine property.
+     * Recupera il valore della proprietà cuisine.
      * 
      * @return
      *     possible object is
@@ -247,7 +225,7 @@ public class RestaurantInfoType {
     }
 
     /**
-     * Sets the value of the cuisine property.
+     * Imposta il valore della proprietà cuisine.
      * 
      * @param value
      *     allowed object is
@@ -259,7 +237,7 @@ public class RestaurantInfoType {
     }
 
     /**
-     * Gets the value of the menu property.
+     * Recupera il valore della proprietà menu.
      * 
      * @return
      *     possible object is
@@ -271,7 +249,7 @@ public class RestaurantInfoType {
     }
 
     /**
-     * Sets the value of the menu property.
+     * Imposta il valore della proprietà menu.
      * 
      * @param value
      *     allowed object is
@@ -283,7 +261,7 @@ public class RestaurantInfoType {
     }
 
     /**
-     * Gets the value of the discount property.
+     * Recupera il valore della proprietà discount.
      * 
      * @return
      *     possible object is
@@ -295,7 +273,7 @@ public class RestaurantInfoType {
     }
 
     /**
-     * Sets the value of the discount property.
+     * Imposta il valore della proprietà discount.
      * 
      * @param value
      *     allowed object is
@@ -304,6 +282,22 @@ public class RestaurantInfoType {
      */
     public void setDiscount(DiscountType value) {
         this.discount = value;
+    }
+
+    /**
+     * Recupera il valore della proprietà maxSeats.
+     * 
+     */
+    public int getMaxSeats() {
+        return maxSeats;
+    }
+
+    /**
+     * Imposta il valore della proprietà maxSeats.
+     * 
+     */
+    public void setMaxSeats(int value) {
+        this.maxSeats = value;
     }
 
 }

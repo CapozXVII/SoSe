@@ -15,10 +15,9 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import it.univaq.disim.sose.cald.cinemaInserting.CinemaInfoType;
+
 import it.univaq.disim.sose.cald.cinemaInserting.CinemaInsertRequest;
 import it.univaq.disim.sose.cald.cinemaInserting.CinemaInsertResponse;
-import it.univaq.disim.sose.cald.cinemaInserting.CinemaType;
 import it.univaq.disim.sose.cald.cinemaInserting.CinemaUpdateRequest;
 import it.univaq.disim.sose.cald.cinemaInserting.CinemaUpdateResponse;
 import it.univaq.disim.sose.cald.cinemaInserting.HallType;
@@ -28,7 +27,6 @@ import it.univaq.disim.sose.cald.cinemaInserting.business.model.Cinema;
 import it.univaq.disim.sose.cald.cinemaInserting.business.model.Film;
 import it.univaq.disim.sose.cald.cinemaInserting.business.model.Hall;
 import it.univaq.disim.sose.cald.cinemaInserting.business.model.HallInfo;
-import it.univaq.disim.sose.cald.cinemaInserting.DiscountType;
 import it.univaq.disim.sose.cald.cinemaInserting.HallInfoType;
 
 @Service
@@ -83,16 +81,7 @@ public class JDBCCinemaInsertingServiceImpl implements CinemaInsertingService {
 			
 		}
 		newCinema.setHall(hall_list);
-		//CinemaType newCinema = parameters.getCinema();
-		//double lat = newCinema.getLat();
-		//double lon = newCinema.getLon();
-		//CinemaInfoType newCinemaInfo = newCinema.getCinemaInfo();
-		//String name = newCinemaInfo.getName();
-		//String address = newCinemaInfo.getAddress();
-		//int cap = newCinemaInfo.getCap();
-		//String city = newCinemaInfo.getCity();
-		//String telephoneNumber = newCinemaInfo.getTelephoneNumber();
-		//List<HallType> hall = newCinemaInfo.getHall();
+		
 
 		int id_newCinema = 0;
 		int id_newHall = 0;

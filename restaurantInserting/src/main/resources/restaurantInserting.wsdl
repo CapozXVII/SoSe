@@ -37,22 +37,17 @@
 				<xsd:sequence>
 					<xsd:element name="name" minOccurs="0" type="xsd:string" />
 					<xsd:element name="address" type="xsd:string" />
-					<xsd:element name="cap" type="xsd:int" />
+					<xsd:element name="cap" type="xsd:string" />
 					<xsd:element name="city" type="xsd:string" />
 					<xsd:element name="telephoneNumber" minOccurs="0" type="xsd:string" />
-					<xsd:element name="table" maxOccurs="unbounded" minOccurs="1" type="tns:tableType" />
 					<xsd:element name="style" type="xsd:string" />
 					<xsd:element name="cuisine" type="xsd:string" />
 					<xsd:element name="menu" type="xsd:string" />
 					<xsd:element name="discount" minOccurs="0" type="tns:discountType" />
+					<xsd:element name="max_seats" type="xsd:int" />
 				</xsd:sequence>
 			</xsd:complexType>
-			<xsd:complexType name="tableType">
-				<xsd:sequence>
-					<xsd:element name="number" type="xsd:int" />
-					<xsd:element name="seatsNumber"  type="xsd:int" />
-				</xsd:sequence>
-			</xsd:complexType>
+			
 			<xsd:complexType name="discountType">
 				<xsd:sequence>
 					<xsd:element name="cinema" type="xsd:int" />
