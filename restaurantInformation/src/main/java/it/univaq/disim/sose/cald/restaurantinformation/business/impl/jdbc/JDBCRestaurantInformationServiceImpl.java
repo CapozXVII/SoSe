@@ -1,9 +1,9 @@
 package it.univaq.disim.sose.cald.restaurantinformation.business.impl.jdbc;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -31,20 +31,22 @@ public class JDBCRestaurantInformationServiceImpl implements RestaurantInformati
 	@Override
 	public List<Restaurant> getRestaurants(String city) throws RestaurantInformationFault_Exception {
 		List<Restaurant> restaurantList = new ArrayList<Restaurant>();
-		String sql = "SELECT * FROM restaurants WHERE restaurants.restaurant_city = '" + city + "' " + "ORDER BY restaurants.restaurant_id";
+		String sql = "SELECT * FROM restaurants WHERE restaurants.restaurant_city = ? ORDER BY restaurants.restaurant_id";
 		LOGGER.info(sql);
 		Connection con = null;
-		Statement st = null;
+		PreparedStatement st = null;
 		ResultSet rs = null;
 		
 		try {
 			Restaurant restaurant = null;
+			
 			con = dataSource.getConnection();
-			st = con.createStatement();
-			rs = st.executeQuery(sql);
+			st = con.prepareStatement(sql);
+			st.setString(1, city);
+			rs = st.executeQuery();
 			
 			while(rs.next()) {
-				restaurant = createRestaurant(rs);
+				restaurant = createRestaurant(con, rs);
 				restaurantList.add(restaurant);
 			}
 		} catch (SQLException e) {
@@ -66,15 +68,15 @@ public class JDBCRestaurantInformationServiceImpl implements RestaurantInformati
 		return restaurantList;
 	}
 	
-	public Restaurant createRestaurant(ResultSet rs) throws SQLException, RestaurantInformationFault_Exception {
-		Connection con = null;
-		Statement st = null;
+	public Restaurant createRestaurant(Connection con, ResultSet rs) throws SQLException, RestaurantInformationFault_Exception {
+		PreparedStatement st = null;
 		ResultSet rss = null;
 		Long restaurantId = rs.getLong("restaurant_id");
-		String sql = "SELECT * FROM discount JOIN cinema ON cinema.cinema_id = discount.cinema AND discount.restaurant =" + restaurantId;
+		String sql = "SELECT * FROM discount JOIN cinema ON cinema.cinema_id = discount.cinema AND discount.restaurant = ?";
 		Restaurant restaurant = new Restaurant();
 		Discount discount = new Discount();
 		Cinema cinema = new Cinema();
+		
 		restaurant.setId(restaurantId);
 		restaurant.setAddress(rs.getString("restaurant_address"));
 		restaurant.setCap(rs.getString("restaurant_cap"));
@@ -89,12 +91,13 @@ public class JDBCRestaurantInformationServiceImpl implements RestaurantInformati
 		restaurant.setMaxSeats(rs.getInt("max_seats"));
 		
 		try {
-			con = dataSource.getConnection();
-			st = con.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);;
-			rss = st.executeQuery(sql);
+			st = con.prepareStatement(sql);
+			
+			st.setLong(1, restaurantId);
+			rss = st.executeQuery();
 			rss.last();
-			int numRows = rss.getRow();
-			if (numRows != 0) {
+			
+			if (rss.getRow() != 0) {
 				rss.first();
 				discount.setPrice(rss.getFloat("price"));
 				cinema.setName(rss.getString("cinema_name"));
@@ -106,19 +109,8 @@ public class JDBCRestaurantInformationServiceImpl implements RestaurantInformati
 		} catch (SQLException e) {
 			e.printStackTrace();
 			throw new RestaurantInformationFault_Exception("Something was wrong with Discount selection");
-		} finally {
-			if (st != null) {
-				try {
-					st.close();
-				} catch (SQLException e) {
-				}
-			}
-			if (con != null) {
-				try {
-					con.close();
-				} catch (SQLException e) {}
-			}
-		}
+		} 
+		
 		restaurant.setDiscount(discount);
 		return restaurant;
 	}

@@ -1,6 +1,7 @@
 package it.univaq.disim.sose.cald.cinemainformation.business.impl.jdbc;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -30,18 +31,20 @@ public class JDBCCinemaInformationServiceImpl implements CinemaInformationServic
 	public List<Cinema> getCinemas(String city) throws CinemaInformationFault_Exception {
 		List<Cinema> cinemaList = new ArrayList<Cinema>();
 		List<HallFilm> hallFilmList = new ArrayList<HallFilm>();
-		String sql = "SELECT * FROM cinema JOIN halls ON cinema.cinema_id = halls.cinema JOIN hall_film ON hall_film.hall = halls.hall_id JOIN films ON films.film_id = hall_film.film AND cinema.cinema_city = '" + city + "' " + "ORDER BY cinema.cinema_id";
+		String sql = "SELECT * FROM cinema JOIN halls ON cinema.cinema_id = halls.cinema JOIN hall_film ON hall_film.hall = halls.hall_id JOIN films ON films.film_id = hall_film.film AND cinema.cinema_city = ? ORDER BY cinema.cinema_id";
 		LOGGER.info(sql);
 		Connection con = null;
-		Statement st = null;
+		PreparedStatement st = null;
 		ResultSet rs = null;
 		
 		try {
 			Cinema cinema = null;
 			int count = 0;
+			
 			con = dataSource.getConnection();
-			st = con.createStatement();
-			rs = st.executeQuery(sql);
+			st = con.prepareStatement(sql);
+			st.setString(1, city);
+			rs = st.executeQuery();
 			
 			while (rs.next()) {
 				int cinemaId = rs.getInt("cinema_id");
@@ -85,6 +88,7 @@ public class JDBCCinemaInformationServiceImpl implements CinemaInformationServic
 	
 	public Cinema createCinema(ResultSet rs) throws SQLException {
 		Cinema cinema = new Cinema();
+		
 		cinema.setId(rs.getLong("cinema_id"));
 		cinema.setName(rs.getString("cinema_name"));
 		cinema.setLatitude(rs.getDouble("cinema_lat"));
@@ -100,6 +104,7 @@ public class JDBCCinemaInformationServiceImpl implements CinemaInformationServic
 		Hall hall = new Hall();
 		Film film = new Film();
 		HallFilm hallFilm = new HallFilm();
+		
 		hall.setId(rs.getLong("hall_id"));
 		hall.setNumber(rs.getInt("number"));
 		hall.setSeatsNumber(rs.getInt("seatsNumber"));
