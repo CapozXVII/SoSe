@@ -1,5 +1,5 @@
 
-package it.univaq.disim.sose.cald.cinemaInserting;
+package it.univaq.disim.sose.cald.cinemainserting;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -10,9 +10,9 @@ import javax.xml.bind.annotation.XmlType;
 
 
 /**
- * <p>Classe Java per cinemaInfoType complex type.
+ * <p>Java class for cinemaInfoType complex type.
  * 
- * <p>Il seguente frammento di schema specifica il contenuto previsto contenuto in questa classe.
+ * <p>The following schema fragment specifies the expected content contained within this class.
  * 
  * <pre>
  * &lt;complexType name="cinemaInfoType"&gt;
@@ -21,7 +21,7 @@ import javax.xml.bind.annotation.XmlType;
  *       &lt;sequence&gt;
  *         &lt;element name="name" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/&gt;
  *         &lt;element name="address" type="{http://www.w3.org/2001/XMLSchema}string"/&gt;
- *         &lt;element name="cap" type="{http://www.w3.org/2001/XMLSchema}int"/&gt;
+ *         &lt;element name="cap" type="{http://www.w3.org/2001/XMLSchema}string"/&gt;
  *         &lt;element name="city" type="{http://www.w3.org/2001/XMLSchema}string"/&gt;
  *         &lt;element name="telephoneNumber" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/&gt;
  *         &lt;element name="hall" type="{http://it.univaq.disim.sose.cald/cinemaInserting}hallType" maxOccurs="unbounded"/&gt;
@@ -47,7 +47,8 @@ public class CinemaInfoType {
     protected String name;
     @XmlElement(required = true)
     protected String address;
-    protected int cap;
+    @XmlElement(required = true)
+    protected String cap;
     @XmlElement(required = true)
     protected String city;
     protected String telephoneNumber;
@@ -55,7 +56,7 @@ public class CinemaInfoType {
     protected List<HallType> hall;
 
     /**
-     * Recupera il valore della proprietà name.
+     * Gets the value of the name property.
      * 
      * @return
      *     possible object is
@@ -67,7 +68,7 @@ public class CinemaInfoType {
     }
 
     /**
-     * Imposta il valore della proprietà name.
+     * Sets the value of the name property.
      * 
      * @param value
      *     allowed object is
@@ -79,7 +80,7 @@ public class CinemaInfoType {
     }
 
     /**
-     * Recupera il valore della proprietà address.
+     * Gets the value of the address property.
      * 
      * @return
      *     possible object is
@@ -91,7 +92,7 @@ public class CinemaInfoType {
     }
 
     /**
-     * Imposta il valore della proprietà address.
+     * Sets the value of the address property.
      * 
      * @param value
      *     allowed object is
@@ -103,23 +104,31 @@ public class CinemaInfoType {
     }
 
     /**
-     * Recupera il valore della proprietà cap.
+     * Gets the value of the cap property.
      * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
      */
-    public int getCap() {
+    public String getCap() {
         return cap;
     }
 
     /**
-     * Imposta il valore della proprietà cap.
+     * Sets the value of the cap property.
      * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
      */
-    public void setCap(int value) {
+    public void setCap(String value) {
         this.cap = value;
     }
 
     /**
-     * Recupera il valore della proprietà city.
+     * Gets the value of the city property.
      * 
      * @return
      *     possible object is
@@ -131,7 +140,7 @@ public class CinemaInfoType {
     }
 
     /**
-     * Imposta il valore della proprietà city.
+     * Sets the value of the city property.
      * 
      * @param value
      *     allowed object is
@@ -143,7 +152,7 @@ public class CinemaInfoType {
     }
 
     /**
-     * Recupera il valore della proprietà telephoneNumber.
+     * Gets the value of the telephoneNumber property.
      * 
      * @return
      *     possible object is
@@ -155,7 +164,7 @@ public class CinemaInfoType {
     }
 
     /**
-     * Imposta il valore della proprietà telephoneNumber.
+     * Sets the value of the telephoneNumber property.
      * 
      * @param value
      *     allowed object is

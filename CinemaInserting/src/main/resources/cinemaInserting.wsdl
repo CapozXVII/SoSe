@@ -37,7 +37,7 @@
 				<xsd:sequence>
 					<xsd:element name="name" minOccurs="0" type="xsd:string" />
 					<xsd:element name="address" type="xsd:string" />
-					<xsd:element name="cap" type="xsd:int" />
+					<xsd:element name="cap" type="xsd:string" />
 					<xsd:element name="city" type="xsd:string" />
 					<xsd:element name="telephoneNumber" minOccurs="0" type="xsd:string" />
 					<xsd:element name="hall" maxOccurs="unbounded" minOccurs="1" type="tns:hallType" />
@@ -190,7 +190,7 @@
 	<!-- Service -->
 	<service name="cinemaInsertingService">
 		<port name="cinemaPort" binding="tns:cinemaBinding">
-			<soap:address location="http://localhost:8080/cinemaInserting/services/cinemaInserting" />
+			<soap:address location="http://localhost:8080/cinemainserting/services/cinemainserting" />
 		</port>
 	</service>
 </definitions>

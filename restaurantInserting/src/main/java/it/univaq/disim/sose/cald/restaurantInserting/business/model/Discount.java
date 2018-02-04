@@ -1,4 +1,4 @@
-package it.univaq.disim.sose.cald.restaurantInserting.business.model;
+package it.univaq.disim.sose.cald.restaurantinserting.business.model;
 
 public class Discount {
 	

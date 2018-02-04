@@ -1,4 +1,4 @@
-package it.univaq.disim.sose.cald.cinemaInserting.business.model;
+package it.univaq.disim.sose.cald.cinemainserting.business.model;
 
 import javax.xml.bind.annotation.XmlElement;
 

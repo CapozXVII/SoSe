@@ -1,4 +1,4 @@
-package it.univaq.disim.sose.cald.restaurantInserting.business.impl.jdbc;
+package it.univaq.disim.sose.cald.restaurantinserting.business.impl.jdbc;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -15,14 +15,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 
-import it.univaq.disim.sose.cald.restaurantInserting.RestaurantInsertRequest;
-import it.univaq.disim.sose.cald.restaurantInserting.RestaurantInsertResponse;
-import it.univaq.disim.sose.cald.restaurantInserting.RestaurantUpdateRequest;
-import it.univaq.disim.sose.cald.restaurantInserting.RestaurantUpdateResponse;
-import it.univaq.disim.sose.cald.restaurantInserting.business.BusinessException;
-import it.univaq.disim.sose.cald.restaurantInserting.business.RestaurantInsertingService;
-import it.univaq.disim.sose.cald.restaurantInserting.business.model.Discount;
-import it.univaq.disim.sose.cald.restaurantInserting.business.model.Restaurant;
+import it.univaq.disim.sose.cald.restaurantinserting.RestaurantInsertRequest;
+import it.univaq.disim.sose.cald.restaurantinserting.RestaurantInsertResponse;
+import it.univaq.disim.sose.cald.restaurantinserting.RestaurantUpdateRequest;
+import it.univaq.disim.sose.cald.restaurantinserting.RestaurantUpdateResponse;
+import it.univaq.disim.sose.cald.restaurantinserting.business.BusinessException;
+import it.univaq.disim.sose.cald.restaurantinserting.business.RestaurantInsertingService;
+import it.univaq.disim.sose.cald.restaurantinserting.business.model.Discount;
+import it.univaq.disim.sose.cald.restaurantinserting.business.model.Restaurant;
 
 @Service
 public class JDBCRestaurantInsertingImpl implements RestaurantInsertingService {
@@ -37,7 +37,7 @@ public class JDBCRestaurantInsertingImpl implements RestaurantInsertingService {
 
 		LOGGER.info("Called JDBCInserting");
 		
-		Restaurant newRestaurant= new Restaurant();
+		Restaurant newRestaurant = new Restaurant();
 		newRestaurant.setLatitude(parameters.getRestaurant().getLat());
 		newRestaurant.setLongitude(parameters.getRestaurant().getLon());
 		newRestaurant.setName(parameters.getRestaurant().getRestaurantInfo().getName());
@@ -50,15 +50,12 @@ public class JDBCRestaurantInsertingImpl implements RestaurantInsertingService {
 		newRestaurant.setMenu(parameters.getRestaurant().getRestaurantInfo().getMenu());
 		newRestaurant.setMax_seats(parameters.getRestaurant().getRestaurantInfo().getMaxSeats());
 		
-		Discount newDiscount= new Discount();
+		Discount newDiscount = new Discount();
 		newDiscount.setCinema(parameters.getRestaurant().getRestaurantInfo().getDiscount().getCinema());
 		newDiscount.setPrice(parameters.getRestaurant().getRestaurantInfo().getDiscount().getPrice());
 
 		int id_restaurant = 0;
-		boolean insert=false;
-
-		
-
+		boolean insert = false;
 		Connection con = null;
 		PreparedStatement sql_iRestaurant, sql_iDiscout;
 		
@@ -89,7 +86,7 @@ public class JDBCRestaurantInsertingImpl implements RestaurantInsertingService {
 				}
 			}
 			
-			sql_iDiscout= con.prepareStatement("INSERT INTO DISCOUNT (cinema,restaurant,price) VALUES (?,?,?)");
+			sql_iDiscout = con.prepareStatement("INSERT INTO DISCOUNT (cinema,restaurant,price) VALUES (?,?,?)");
 			sql_iDiscout.setInt(1, newDiscount.getCinema()); /*forse meglio mettere il nome?*/
 			sql_iDiscout.setInt(2, id_restaurant);
 			sql_iDiscout.setDouble(3, newDiscount.getPrice());
@@ -97,23 +94,17 @@ public class JDBCRestaurantInsertingImpl implements RestaurantInsertingService {
 			if (sql_iDiscout.executeUpdate()==1) {
 				insert=true;
 			}
-
 		} catch (SQLException e1) {
 
 			e1.printStackTrace();
-
 		} finally {
-
 			if (con != null) {
-
 				try {
 					con.close();
 				} catch (SQLException e) {
 				}
 			}
 		}
-
-	
 
 		RestaurantInsertResponse result = new RestaurantInsertResponse();
 

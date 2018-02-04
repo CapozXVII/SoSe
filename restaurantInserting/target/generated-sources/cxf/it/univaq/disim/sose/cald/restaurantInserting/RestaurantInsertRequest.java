@@ -1,5 +1,5 @@
 
-package it.univaq.disim.sose.cald.restaurantInserting;
+package it.univaq.disim.sose.cald.restaurantinserting;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
@@ -8,9 +8,9 @@ import javax.xml.bind.annotation.XmlType;
 
 
 /**
- * <p>Classe Java per restaurantInsertRequest complex type.
+ * <p>Java class for restaurantInsertRequest complex type.
  * 
- * <p>Il seguente frammento di schema specifica il contenuto previsto contenuto in questa classe.
+ * <p>The following schema fragment specifies the expected content contained within this class.
  * 
  * <pre>
  * &lt;complexType name="restaurantInsertRequest"&gt;
@@ -36,7 +36,7 @@ public class RestaurantInsertRequest {
     protected RestaurantType restaurant;
 
     /**
-     * Recupera il valore della proprietà restaurant.
+     * Gets the value of the restaurant property.
      * 
      * @return
      *     possible object is
@@ -48,7 +48,7 @@ public class RestaurantInsertRequest {
     }
 
     /**
-     * Imposta il valore della proprietà restaurant.
+     * Sets the value of the restaurant property.
      * 
      * @param value
      *     allowed object is

@@ -1,9 +1,9 @@
-package it.univaq.disim.sose.cald.restaurantInserting.business;
+package it.univaq.disim.sose.cald.restaurantinserting.business;
 
-import it.univaq.disim.sose.cald.restaurantInserting.RestaurantInsertRequest;
-import it.univaq.disim.sose.cald.restaurantInserting.RestaurantInsertResponse;
-import it.univaq.disim.sose.cald.restaurantInserting.RestaurantUpdateRequest;
-import it.univaq.disim.sose.cald.restaurantInserting.RestaurantUpdateResponse;
+import it.univaq.disim.sose.cald.restaurantinserting.RestaurantInsertRequest;
+import it.univaq.disim.sose.cald.restaurantinserting.RestaurantInsertResponse;
+import it.univaq.disim.sose.cald.restaurantinserting.RestaurantUpdateRequest;
+import it.univaq.disim.sose.cald.restaurantinserting.RestaurantUpdateResponse;
 
 public interface RestaurantInsertingService {
 	/*dubbi tables*/

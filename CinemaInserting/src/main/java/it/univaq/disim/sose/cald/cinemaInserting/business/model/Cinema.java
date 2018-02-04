@@ -1,4 +1,4 @@
-package it.univaq.disim.sose.cald.cinemaInserting.business.model;
+package it.univaq.disim.sose.cald.cinemainserting.business.model;
 
 import java.util.List;
 
@@ -8,7 +8,7 @@ public class Cinema {
 	private double latitude;
 	private double longitude;
 	private String name;
-	private int cap;
+	private String cap;
 	private String address;
 	private String city;
 	private String telephoneNumber;
@@ -38,10 +38,10 @@ public class Cinema {
 	public void setName(String name) {
 		this.name = name;
 	}
-	public int getCap() {
+	public String getCap() {
 		return cap;
 	}
-	public void setCap(int cap) {
+	public void setCap(String cap) {
 		this.cap = cap;
 	}
 	public String getAddress() {

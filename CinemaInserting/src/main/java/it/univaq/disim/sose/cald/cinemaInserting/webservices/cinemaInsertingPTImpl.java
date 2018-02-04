@@ -1,24 +1,24 @@
-package it.univaq.disim.sose.cald.cinemaInserting.webservices;
+package it.univaq.disim.sose.cald.cinemainserting.webservices;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import it.univaq.disim.sose.cald.cinemaInserting.CinemaInsertFault_Exception;
-import it.univaq.disim.sose.cald.cinemaInserting.CinemaInsertRequest;
-import it.univaq.disim.sose.cald.cinemaInserting.CinemaInsertResponse;
-import it.univaq.disim.sose.cald.cinemaInserting.business.CinemaInsertingService;
-import it.univaq.disim.sose.cald.cinemaInserting.CinemaPT;
-import it.univaq.disim.sose.cald.cinemaInserting.CinemaUpdateFault_Exception;
-import it.univaq.disim.sose.cald.cinemaInserting.CinemaUpdateRequest;
-import it.univaq.disim.sose.cald.cinemaInserting.CinemaUpdateResponse;
+import it.univaq.disim.sose.cald.cinemainserting.CinemaInsertFault_Exception;
+import it.univaq.disim.sose.cald.cinemainserting.CinemaInsertRequest;
+import it.univaq.disim.sose.cald.cinemainserting.CinemaInsertResponse;
+import it.univaq.disim.sose.cald.cinemainserting.business.CinemaInsertingService;
+import it.univaq.disim.sose.cald.cinemainserting.CinemaPT;
+import it.univaq.disim.sose.cald.cinemainserting.CinemaUpdateFault_Exception;
+import it.univaq.disim.sose.cald.cinemainserting.CinemaUpdateRequest;
+import it.univaq.disim.sose.cald.cinemainserting.CinemaUpdateResponse;
 
 
-@Component(value = "cinemaInsertingPTImpl")
-public class cinemaInsertingPTImpl implements CinemaPT {
+@Component(value = "CinemaInsertingPTImpl")
+public class CinemaInsertingPTImpl implements CinemaPT {
 	
-	private static Logger LOGGER = LoggerFactory.getLogger(cinemaInsertingPTImpl.class);
+	private static Logger LOGGER = LoggerFactory.getLogger(CinemaInsertingPTImpl.class);
 	
 	@Autowired
 	private CinemaInsertingService service;

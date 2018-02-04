@@ -1,4 +1,4 @@
-package it.univaq.disim.sose.cald.cinemaInserting.business.impl.jdbc;
+package it.univaq.disim.sose.cald.cinemainserting.business.impl.jdbc;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -15,19 +15,18 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-
-import it.univaq.disim.sose.cald.cinemaInserting.CinemaInsertRequest;
-import it.univaq.disim.sose.cald.cinemaInserting.CinemaInsertResponse;
-import it.univaq.disim.sose.cald.cinemaInserting.CinemaUpdateRequest;
-import it.univaq.disim.sose.cald.cinemaInserting.CinemaUpdateResponse;
-import it.univaq.disim.sose.cald.cinemaInserting.HallType;
-import it.univaq.disim.sose.cald.cinemaInserting.business.BusinessException;
-import it.univaq.disim.sose.cald.cinemaInserting.business.CinemaInsertingService;
-import it.univaq.disim.sose.cald.cinemaInserting.business.model.Cinema;
-import it.univaq.disim.sose.cald.cinemaInserting.business.model.Film;
-import it.univaq.disim.sose.cald.cinemaInserting.business.model.Hall;
-import it.univaq.disim.sose.cald.cinemaInserting.business.model.HallInfo;
-import it.univaq.disim.sose.cald.cinemaInserting.HallInfoType;
+import it.univaq.disim.sose.cald.cinemainserting.CinemaInsertRequest;
+import it.univaq.disim.sose.cald.cinemainserting.CinemaInsertResponse;
+import it.univaq.disim.sose.cald.cinemainserting.CinemaUpdateRequest;
+import it.univaq.disim.sose.cald.cinemainserting.CinemaUpdateResponse;
+import it.univaq.disim.sose.cald.cinemainserting.HallType;
+import it.univaq.disim.sose.cald.cinemainserting.business.BusinessException;
+import it.univaq.disim.sose.cald.cinemainserting.business.CinemaInsertingService;
+import it.univaq.disim.sose.cald.cinemainserting.business.model.Cinema;
+import it.univaq.disim.sose.cald.cinemainserting.business.model.Film;
+import it.univaq.disim.sose.cald.cinemainserting.business.model.Hall;
+import it.univaq.disim.sose.cald.cinemainserting.business.model.HallInfo;
+import it.univaq.disim.sose.cald.cinemainserting.HallInfoType;
 
 @Service
 public class JDBCCinemaInsertingServiceImpl implements CinemaInsertingService {
@@ -42,9 +41,9 @@ public class JDBCCinemaInsertingServiceImpl implements CinemaInsertingService {
 
 		LOGGER.info("Called JDBCInserting");
 		
-		
 		Cinema newCinema= new Cinema();
 		List<Hall> hall_list=new ArrayList<Hall>();
+		
 		newCinema.setLatitude(parameters.getCinema().getLat());
 		newCinema.setLongitude(parameters.getCinema().getLon());
 		newCinema.setName(parameters.getCinema().getCinemaInfo().getName());
@@ -56,6 +55,7 @@ public class JDBCCinemaInsertingServiceImpl implements CinemaInsertingService {
 		
 		for(HallType x : parameters.getCinema().getCinemaInfo().getHall()) {
 			Hall newHall  = new Hall();
+			
 			newHall.setNumber(x.getNumber());
 			newHall.setSeatsNumber(x.getSeatsNumber());
 			List<HallInfo> listHallInfo = new ArrayList<HallInfo>();
@@ -105,7 +105,7 @@ public class JDBCCinemaInsertingServiceImpl implements CinemaInsertingService {
 			sql_iCinema.setDouble(2, newCinema.getLongitude());
 			sql_iCinema.setString(3, newCinema.getName());
 			sql_iCinema.setString(4, newCinema.getAddress());
-			sql_iCinema.setInt(5, newCinema.getCap());
+			sql_iCinema.setString(5, newCinema.getCap());
 			sql_iCinema.setString(6, newCinema.getCity());
 			sql_iCinema.setString(7, newCinema.getTelephoneNumber());
 
@@ -197,11 +197,8 @@ public class JDBCCinemaInsertingServiceImpl implements CinemaInsertingService {
 							}
 						}
 					}
-
 				}
-
 			}
-
 		} catch (SQLException e) {
 			e.printStackTrace();
 			throw new BusinessException(e);

@@ -1,9 +1,9 @@
-package it.univaq.disim.sose.cald.cinemaInserting.business;
+package it.univaq.disim.sose.cald.cinemainserting.business;
 
-import it.univaq.disim.sose.cald.cinemaInserting.CinemaInsertRequest;
-import it.univaq.disim.sose.cald.cinemaInserting.CinemaInsertResponse;
-import it.univaq.disim.sose.cald.cinemaInserting.CinemaUpdateRequest;
-import it.univaq.disim.sose.cald.cinemaInserting.CinemaUpdateResponse;
+import it.univaq.disim.sose.cald.cinemainserting.CinemaInsertRequest;
+import it.univaq.disim.sose.cald.cinemainserting.CinemaInsertResponse;
+import it.univaq.disim.sose.cald.cinemainserting.CinemaUpdateRequest;
+import it.univaq.disim.sose.cald.cinemainserting.CinemaUpdateResponse;
 
 public interface CinemaInsertingService {
 	

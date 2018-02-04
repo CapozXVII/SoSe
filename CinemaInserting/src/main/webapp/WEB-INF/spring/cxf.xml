@@ -8,11 +8,11 @@
                            http://cxf.apache.org/jaxws http://cxf.apache.org/schemas/jaxws.xsd">
                            
     <jaxws:endpoint id="cinemaInsertingHTTP" 
-			xmlns:cinemaInserting="http://it.univaq.disim.sose.cald/cinemaInserting"
-		    address="/cinemaInserting" 
-		    serviceName="cinemaInserting:cinemaInsertingService"
-		    endpointName="cinemaInserting:cinemaPort" 
-		    implementor="#cinemaInsertingPTImpl">
+			xmlns:cinemainserting="http://it.univaq.disim.sose.cald/cinemainserting"
+		    address="/cinemainserting" 
+		    serviceName="cinemainserting:cinemaInsertingService"
+		    endpointName="cinemainserting:cinemaPort" 
+		    implementor="#CinemaInsertingPTImpl">
 		    
 	</jaxws:endpoint>
 	

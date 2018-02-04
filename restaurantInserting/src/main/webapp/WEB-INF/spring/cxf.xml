@@ -8,11 +8,11 @@
                            http://cxf.apache.org/jaxws http://cxf.apache.org/schemas/jaxws.xsd">
                            
     <jaxws:endpoint id="restaurantInsertingHTTP" 
-			xmlns:restaurantInserting="http://it.univaq.disim.sose.cald/restaurantInserting"
-		    address="/restaurantInserting" 
-		    serviceName="restaurantInserting:RestaurantInsertingService"
-		    endpointName="restaurantInserting:restaurantPort" 
-		    implementor="#restaurantInsertingPTImpl">
+			xmlns:restaurantinserting="http://it.univaq.disim.sose.cald/restaurantinserting"
+		    address="/restaurantinserting" 
+		    serviceName="restaurantinserting:RestaurantInsertingService"
+		    endpointName="restaurantinserting:restaurantPort" 
+		    implementor="#RestaurantInsertingPTImpl">
 		    
 	</jaxws:endpoint>
 	

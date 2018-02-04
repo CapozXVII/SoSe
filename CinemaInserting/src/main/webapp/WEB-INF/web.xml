@@ -4,7 +4,7 @@
  xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd" 
  id="WebApp_ID" 
  version="3.1">
-  <display-name>cinemaInserting</display-name>
+  <display-name>cinemainserting</display-name>
   <context-param>
     <param-name>contextConfigLocation</param-name>
     <param-value>
@@ -12,8 +12,8 @@
         </param-value>
   </context-param>
   <servlet>
-    <display-name>cinemaInserting</display-name>
-    <servlet-name>cinemaInserting</servlet-name>
+    <display-name>cinemainserting</display-name>
+    <servlet-name>cinemainserting</servlet-name>
     <servlet-class>org.apache.cxf.transport.servlet.CXFServlet</servlet-class>
     <init-param>
       <param-name>config-location</param-name>
@@ -22,7 +22,7 @@
     <load-on-startup>1</load-on-startup>
   </servlet>
   <servlet-mapping>
-    <servlet-name>cinemaInserting</servlet-name>
+    <servlet-name>cinemainserting</servlet-name>
     <url-pattern>/services/*</url-pattern>
   </servlet-mapping>
   <listener>

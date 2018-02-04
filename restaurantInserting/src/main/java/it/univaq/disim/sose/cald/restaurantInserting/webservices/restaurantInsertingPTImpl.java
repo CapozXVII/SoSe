@@ -1,25 +1,25 @@
-package it.univaq.disim.sose.cald.restaurantInserting.webservices;
+package it.univaq.disim.sose.cald.restaurantinserting.webservices;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import it.univaq.disim.sose.cald.restaurantInserting.RestaurantInsertFault_Exception;
-import it.univaq.disim.sose.cald.restaurantInserting.RestaurantInsertRequest;
-import it.univaq.disim.sose.cald.restaurantInserting.RestaurantInsertResponse;
-import it.univaq.disim.sose.cald.restaurantInserting.RestaurantPT;
-import it.univaq.disim.sose.cald.restaurantInserting.RestaurantUpdateFault_Exception;
-import it.univaq.disim.sose.cald.restaurantInserting.RestaurantUpdateRequest;
-import it.univaq.disim.sose.cald.restaurantInserting.RestaurantUpdateResponse;
-import it.univaq.disim.sose.cald.restaurantInserting.business.RestaurantInsertingService;
+import it.univaq.disim.sose.cald.restaurantinserting.RestaurantInsertFault_Exception;
+import it.univaq.disim.sose.cald.restaurantinserting.RestaurantInsertRequest;
+import it.univaq.disim.sose.cald.restaurantinserting.RestaurantInsertResponse;
+import it.univaq.disim.sose.cald.restaurantinserting.RestaurantPT;
+import it.univaq.disim.sose.cald.restaurantinserting.RestaurantUpdateFault_Exception;
+import it.univaq.disim.sose.cald.restaurantinserting.RestaurantUpdateRequest;
+import it.univaq.disim.sose.cald.restaurantinserting.RestaurantUpdateResponse;
+import it.univaq.disim.sose.cald.restaurantinserting.business.RestaurantInsertingService;
 
 
 
-@Component(value = "restaurantInsertingPTImpl")
-public class restaurantInsertingPTImpl implements RestaurantPT {
+@Component(value = "RestaurantInsertingPTImpl")
+public class RestaurantInsertingPTImpl implements RestaurantPT {
 	
-	private static Logger LOGGER = LoggerFactory.getLogger(restaurantInsertingPTImpl.class);
+	private static Logger LOGGER = LoggerFactory.getLogger(RestaurantInsertingPTImpl.class);
 	
 	@Autowired
 	private RestaurantInsertingService service;
@@ -51,3 +51,4 @@ public class restaurantInsertingPTImpl implements RestaurantPT {
 	}
 
 }
+

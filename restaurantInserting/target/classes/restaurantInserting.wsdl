@@ -174,7 +174,7 @@
 	<!-- Service -->
 	<service name="RestaurantInsertingService">
 		<port name="restaurantPort" binding="tns:restaurantBinding">
-			<soap:address location="http://localhost:8080/restaurantInserting/services/restaurantInserting" />
+			<soap:address location="http://localhost:8080/restaurantinserting/services/restaurantinserting" />
 		</port>
 	</service>
 </definitions>

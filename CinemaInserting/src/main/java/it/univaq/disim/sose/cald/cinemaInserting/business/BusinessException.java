@@ -1,4 +1,4 @@
-package it.univaq.disim.sose.cald.cinemaInserting.business;
+package it.univaq.disim.sose.cald.cinemainserting.business;
 
 public class BusinessException extends RuntimeException {
 
