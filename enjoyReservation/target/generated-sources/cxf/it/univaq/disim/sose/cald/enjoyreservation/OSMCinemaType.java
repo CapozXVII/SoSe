@@ -17,8 +17,8 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;complexContent&gt;
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&gt;
  *       &lt;sequence&gt;
- *         &lt;element name="lat" type="{http://www.w3.org/2001/XMLSchema}double"/&gt;
- *         &lt;element name="lon" type="{http://www.w3.org/2001/XMLSchema}double"/&gt;
+ *         &lt;element name="lat" type="{http://www.w3.org/2001/XMLSchema}double" minOccurs="0"/&gt;
+ *         &lt;element name="lon" type="{http://www.w3.org/2001/XMLSchema}double" minOccurs="0"/&gt;
  *         &lt;element name="cinemaInfo" type="{http://it.univaq.disim.sose.cald/enjoyReservation}OSMCinemaInfoType"/&gt;
  *       &lt;/sequence&gt;
  *     &lt;/restriction&gt;
@@ -36,40 +36,56 @@ import javax.xml.bind.annotation.XmlType;
 })
 public class OSMCinemaType {
 
-    protected double lat;
-    protected double lon;
+    protected Double lat;
+    protected Double lon;
     @XmlElement(required = true)
     protected OSMCinemaInfoType cinemaInfo;
 
     /**
      * Gets the value of the lat property.
      * 
+     * @return
+     *     possible object is
+     *     {@link Double }
+     *     
      */
-    public double getLat() {
+    public Double getLat() {
         return lat;
     }
 
     /**
      * Sets the value of the lat property.
      * 
+     * @param value
+     *     allowed object is
+     *     {@link Double }
+     *     
      */
-    public void setLat(double value) {
+    public void setLat(Double value) {
         this.lat = value;
     }
 
     /**
      * Gets the value of the lon property.
      * 
+     * @return
+     *     possible object is
+     *     {@link Double }
+     *     
      */
-    public double getLon() {
+    public Double getLon() {
         return lon;
     }
 
     /**
      * Sets the value of the lon property.
      * 
+     * @param value
+     *     allowed object is
+     *     {@link Double }
+     *     
      */
-    public void setLon(double value) {
+    public void setLon(Double value) {
         this.lon = value;
     }
 

@@ -265,22 +265,6 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link OSMTableType }
-     * 
-     */
-    public OSMTableType createOSMTableType() {
-        return new OSMTableType();
-    }
-
-    /**
-     * Create an instance of {@link OSMTableInfoType }
-     * 
-     */
-    public OSMTableInfoType createOSMTableInfoType() {
-        return new OSMTableInfoType();
-    }
-
-    /**
      * Create an instance of {@link OSMDiscountType }
      * 
      */

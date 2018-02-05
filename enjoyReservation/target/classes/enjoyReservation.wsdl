@@ -52,8 +52,8 @@
 			</xsd:complexType>
 			<xsd:complexType name="OSMRestaurantType">
 				<xsd:sequence>
-					<xsd:element name="lat" type="xsd:double" />
-					<xsd:element name="lon" type="xsd:double" />
+					<xsd:element name="lat" minOccurs="0" type="xsd:double" />
+					<xsd:element name="lon" minOccurs="0" type="xsd:double" />
 					<xsd:element name="restaurantInfo" type="tns:OSMRestaurantInfoType" />
 				</xsd:sequence>
 			</xsd:complexType>
@@ -64,24 +64,11 @@
 					<xsd:element name="cap" type="xsd:string" />
 					<xsd:element name="city" type="xsd:string" />
 					<xsd:element name="telephoneNumber" minOccurs="0" type="xsd:string" />
-					<xsd:element name="table" maxOccurs="unbounded" minOccurs="1" type="tns:OSMTableType" />
 					<xsd:element name="style" type="xsd:string" />
 					<xsd:element name="cuisine" type="xsd:string" />
 					<xsd:element name="menu" type="xsd:string" />
 					<xsd:element name="discount" minOccurs="0" type="tns:OSMDiscountType" />
-				</xsd:sequence>
-			</xsd:complexType>
-			<xsd:complexType name="OSMTableType">
-				<xsd:sequence>
-					<xsd:element name="number" type="xsd:int" />
-					<xsd:element name="seatsNumber" type="xsd:int" />
-					<xsd:element name="tableInfo" type="tns:OSMHallInfoType" />
-				</xsd:sequence>
-			</xsd:complexType>
-			<xsd:complexType name="OSMTableInfoType">
-				<xsd:sequence>
-					<xsd:element name="reservationTime" type="xsd:dateTime" />
-					<xsd:element name="reservationName" type="xsd:string" />
+					<xsd:element name="max_seats" type="xsd:int" />
 				</xsd:sequence>
 			</xsd:complexType>
 			<xsd:complexType name="OSMDiscountType">
@@ -107,8 +94,8 @@
 			</xsd:complexType>
 			<xsd:complexType name="OSMCinemaType">
 				<xsd:sequence>
-					<xsd:element name="lat" type="xsd:double" />
-					<xsd:element name="lon" type="xsd:double" />
+					<xsd:element name="lat" minOccurs="0" type="xsd:double" />
+					<xsd:element name="lon" minOccurs="0" type="xsd:double" />
 					<xsd:element name="cinemaInfo" type="tns:OSMCinemaInfoType" />
 				</xsd:sequence>
 			</xsd:complexType>
