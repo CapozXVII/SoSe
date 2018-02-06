@@ -69,7 +69,7 @@ public class JDBCCinemaInformationServiceImpl implements CinemaInformationServic
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
-			throw new CinemaInformationFault_Exception("Something was wrong with Cinema craetion");
+			throw new CinemaInformationFault_Exception("Something was wrong with Cinema creation");
 		} finally {
 			if (st != null) {
 				try {

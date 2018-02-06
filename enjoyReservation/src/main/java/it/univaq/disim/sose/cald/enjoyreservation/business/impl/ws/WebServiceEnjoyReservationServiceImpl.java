@@ -1,7 +1,13 @@
 package it.univaq.disim.sose.cald.enjoyreservation.business.impl.ws;
 
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.List;
+
+import javax.xml.datatype.DatatypeConfigurationException;
+import javax.xml.datatype.DatatypeFactory;
+import javax.xml.datatype.XMLGregorianCalendar;
 
 import org.springframework.stereotype.Service;
 
@@ -141,7 +147,7 @@ public class WebServiceEnjoyReservationServiceImpl implements EnjoyReservationSe
 					newHallInfo.setFilm(newFilm);
 					newHallInfo.setFreeSeatsNumber(hall.getHallInfo().getFreeSeatsNumber());
 					newHallInfo.setPrice(hall.getHallInfo().getPrice());
-					newHallInfo.setTime(hall.getHallInfo().getTime());
+					newHallInfo.setTime(toXMLGregorianCalendar(hall.getHallInfo().getTime()));
 					newHall.setHallInfo(newHallInfo);
 					newHall.setNumber(hall.getNumber());
 					newHall.setSeatsNumber(hall.getSeatsNumber());
@@ -231,7 +237,7 @@ public class WebServiceEnjoyReservationServiceImpl implements EnjoyReservationSe
 			hallInfo.setFilm(film);
 			hallInfo.setFreeSeatsNumber(hallRequest.getHallInfo().getFreeSeatsNumber());
 			hallInfo.setPrice(hallRequest.getHallInfo().getPrice());
-			hallInfo.setTime(hallRequest.getHallInfo().getTime());
+			hallInfo.setTime(toDate(hallRequest.getHallInfo().getTime()));
 			hall.setHallInfo(hallInfo);
 			hall.setNumber(hallRequest.getNumber());
 			hall.setSeatsNumber(hallRequest.getSeatsNumber());
@@ -270,7 +276,7 @@ public class WebServiceEnjoyReservationServiceImpl implements EnjoyReservationSe
 		RestaurantBookingRequest restaurantBookingRequest = new RestaurantBookingRequest();
 		
 		restaurantBookingRequest.setRestaurant(request.getRestaurant());
-		restaurantBookingRequest.setSchedule(request.getSchedule());
+		restaurantBookingRequest.setSchedule(toDate(request.getSchedule()));
 		restaurantBookingRequest.setSeats(request.getSeats());
 		restaurantBookingRequest.setUser(request.getUser());
 		
@@ -296,7 +302,7 @@ public class WebServiceEnjoyReservationServiceImpl implements EnjoyReservationSe
 		cinemaBookingRequest.setIdFilm(request.getIdFilm());
 		cinemaBookingRequest.setIdHall(request.getIdHall());
 		cinemaBookingRequest.setIdUtente(request.getIdUtente());
-		cinemaBookingRequest.setSchedule(request.getSchedule());
+		cinemaBookingRequest.setSchedule(toDate(request.getSchedule()));
 		cinemaBookingRequest.setSeats(request.getSeats());
 		
 		try {
@@ -309,4 +315,22 @@ public class WebServiceEnjoyReservationServiceImpl implements EnjoyReservationSe
 		}
 		return response;
 	}
+	
+	public static XMLGregorianCalendar toXMLGregorianCalendar(Date date){
+        GregorianCalendar gCalendar = new GregorianCalendar();
+        gCalendar.setTime(date);
+        XMLGregorianCalendar xmlCalendar = null;
+        try {
+            xmlCalendar = DatatypeFactory.newInstance().newXMLGregorianCalendar(gCalendar);
+        } catch (DatatypeConfigurationException ex) {
+        }
+        return xmlCalendar;
+    }
+	
+	public static Date toDate(XMLGregorianCalendar calendar){
+        if(calendar == null) {
+            return null;
+        }
+        return calendar.toGregorianCalendar().getTime();
+    }
 }

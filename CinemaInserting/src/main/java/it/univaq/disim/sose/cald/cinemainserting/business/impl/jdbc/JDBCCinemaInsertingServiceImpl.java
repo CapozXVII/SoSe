@@ -7,8 +7,11 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.List;
 import javax.sql.DataSource;
+import javax.xml.datatype.XMLGregorianCalendar;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -42,7 +45,7 @@ public class JDBCCinemaInsertingServiceImpl implements CinemaInsertingService {
 		LOGGER.info("Called JDBCInserting");
 		
 		Cinema newCinema= new Cinema();
-		List<Hall> hall_list=new ArrayList<Hall>();
+		List<Hall> hall_list = new ArrayList<Hall>();
 		
 		newCinema.setLatitude(parameters.getCinema().getLat());
 		newCinema.setLongitude(parameters.getCinema().getLon());
@@ -55,17 +58,18 @@ public class JDBCCinemaInsertingServiceImpl implements CinemaInsertingService {
 		
 		for(HallType x : parameters.getCinema().getCinemaInfo().getHall()) {
 			Hall newHall  = new Hall();
-			
+
 			newHall.setNumber(x.getNumber());
 			newHall.setSeatsNumber(x.getSeatsNumber());
 			List<HallInfo> listHallInfo = new ArrayList<HallInfo>();
 			
 			for(HallInfoType h : x.getHallInfo()) {
-				HallInfo newHallInfo= new HallInfo();
-				newHallInfo.setTime(h.getTime());
+				HallInfo newHallInfo = new HallInfo();
+
+				newHallInfo.setTime(toDate(h.getTime()));
 				newHallInfo.setFreeSeatsNumber(h.getFreeSeatsNumber());
 				newHallInfo.setPrice(h.getPrice());
-				Film newFilm= new Film();
+				Film newFilm = new Film();
 				newFilm.setName(h.getFilm().getName());
 				newFilm.setDirector(h.getFilm().getDirector());
 				newFilm.setCast(h.getFilm().getCast());
@@ -222,6 +226,14 @@ public class JDBCCinemaInsertingServiceImpl implements CinemaInsertingService {
 
 		return result;
 	}
+	
+	public static Date toDate(XMLGregorianCalendar calendar){
+        if(calendar == null) {
+            return null;
+        }
+        return calendar.toGregorianCalendar().getTime();
+    }
+
 
 	@Override
 	public CinemaUpdateResponse updateCinema(CinemaUpdateRequest parameters) throws BusinessException {

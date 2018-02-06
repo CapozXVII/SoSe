@@ -7,6 +7,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import javax.sql.DataSource;
+import javax.xml.datatype.XMLGregorianCalendar;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -42,7 +43,7 @@ public class JDBCRestaurantBookingImpl implements RestaurantBookingService {
 		
 		booking.setId_restaurant(parameters.getRestaurant());
 		booking.setId_user(parameters.getUser());
-		booking.setSchedule(parameters.getSchedule());
+		booking.setSchedule(toDate(parameters.getSchedule()));
 		booking.setSeats(parameters.getSeats());
 		
 		try {
@@ -67,7 +68,6 @@ public class JDBCRestaurantBookingImpl implements RestaurantBookingService {
 					if(resultBooking) {
 						
 						resultFinal = "Booking Updated";
-						
 					}
 					
 				} else {
@@ -76,15 +76,13 @@ public class JDBCRestaurantBookingImpl implements RestaurantBookingService {
 					
 					if(resultBooking) {
 						
-						resultFinal = "Booking inserted";
-						
+						resultFinal = "Booking inserted";	
 					}
 				}
 				
 			} else {
 				
 				resultFinal = "Not enough seats available. Booking not inserted";
-			
 			}
 		}
 		
@@ -137,8 +135,6 @@ public class JDBCRestaurantBookingImpl implements RestaurantBookingService {
 		catch (SQLException e) {
 			throw new SQLException(e);
 		}
-		
-		
 	}
 	
 	public int countSeats(Connection con, int id_restaurant, int seats, Date schedule) throws SQLException {
@@ -160,14 +156,10 @@ public class JDBCRestaurantBookingImpl implements RestaurantBookingService {
 			seatsNumber = res.getInt("seats");
 			
 			return seatsNumber;
-			
 		}
-		
 		catch (SQLException e) {
 			throw new SQLException(e);
 		}
-		
-		
 	}
 	
 	public boolean checkSeats(Connection con, int id_restaurant, int nSeats) throws SQLException {
@@ -194,14 +186,11 @@ public class JDBCRestaurantBookingImpl implements RestaurantBookingService {
 			
 			else {
 				return false;
-			}
-			
-			
+			}	
 		}
 		catch (SQLException e) {
 			throw new SQLException(e);
 		}
-		
 	}
 	
 	public boolean insertBooking(Connection con, int id_restaurant, int id_user, int seats, Date schedule) throws SQLException {
@@ -229,8 +218,7 @@ public class JDBCRestaurantBookingImpl implements RestaurantBookingService {
 		}
 		catch(SQLException e) {
 			throw new SQLException(e);
-		}
-				
+		}		
 	}
 	
 	public boolean updateBooking(Connection con, int id_restaurant, int id_user, Date schedule, int seats) throws SQLException {
@@ -252,13 +240,17 @@ public class JDBCRestaurantBookingImpl implements RestaurantBookingService {
 			}
 			else {
 				return false;
-			}
-			
+			}	
 		}
 		catch (SQLException e) {
 			throw new SQLException(e);
 		}
-		
 	}
 	
+	public static java.util.Date toDate(XMLGregorianCalendar calendar) {
+        if(calendar == null) {
+            return null;
+        }
+        return calendar.toGregorianCalendar().getTime();
+    }
 }

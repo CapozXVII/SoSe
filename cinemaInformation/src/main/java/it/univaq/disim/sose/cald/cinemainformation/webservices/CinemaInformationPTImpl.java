@@ -1,12 +1,16 @@
 package it.univaq.disim.sose.cald.cinemainformation.webservices;
 
 import java.util.ArrayList;
+import java.util.GregorianCalendar;
 import java.util.List;
+
+import javax.xml.datatype.XMLGregorianCalendar;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import javax.xml.datatype.DatatypeFactory;
 
 import it.univaq.disim.sose.cald.cinemainformation.business.CinemaInformationService;
 import it.univaq.disim.sose.cald.cinemainformation.business.model.Cinema;
@@ -35,6 +39,8 @@ public class CinemaInformationPTImpl implements CinemaInformationPT{
 			List<Cinema> cinemaList = service.getCinemas(parameters.getCity());
 			List<HallType> halls;
 			CinemaInformationResponse response = new CinemaInformationResponse();
+			GregorianCalendar gtime = new GregorianCalendar();
+			XMLGregorianCalendar xmlCalendar = null;
 			
 			for (Cinema cinema: cinemaList) {
 				halls = new ArrayList<HallType>();
@@ -53,7 +59,9 @@ public class CinemaInformationPTImpl implements CinemaInformationPT{
 					osmHallInfoType.setFilm(osmFilmType);
 					osmHallInfoType.setFreeSeatsNumber(cinema.getHalls().get(i).getFreeSeatsNumber());
 					osmHallInfoType.setPrice(cinema.getHalls().get(i).getPrice());
-					osmHallInfoType.setTime(cinema.getHalls().get(i).getTime());
+					gtime.setTime(cinema.getHalls().get(i).getTime());
+					xmlCalendar = DatatypeFactory.newInstance().newXMLGregorianCalendar(gtime);
+					osmHallInfoType.setTime(xmlCalendar);
 					osmHallType.setHallInfo(osmHallInfoType);
 					osmHallType.setNumber(cinema.getHalls().get(i).getHall().getNumber());
 					osmHallType.setSeatsNumber(cinema.getHalls().get(i).getHall().getSeatsNumber());

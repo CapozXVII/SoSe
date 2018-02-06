@@ -1,8 +1,6 @@
 
 package it.univaq.disim.sose.cald.cinemabooking;
 
-import java.util.Date;
-
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
@@ -53,7 +51,7 @@ public class CinemaBookingRequest {
     protected int seats;
     @XmlElement(required = true)
     @XmlSchemaType(name = "dateTime")
-    protected Date schedule;
+    protected XMLGregorianCalendar schedule;
 
     /**
      * Gets the value of the idHall property.
@@ -127,7 +125,7 @@ public class CinemaBookingRequest {
      *     {@link XMLGregorianCalendar }
      *     
      */
-    public Date getSchedule() {
+    public XMLGregorianCalendar getSchedule() {
         return schedule;
     }
 
@@ -139,7 +137,7 @@ public class CinemaBookingRequest {
      *     {@link XMLGregorianCalendar }
      *     
      */
-    public void setSchedule(Date value) {
+    public void setSchedule(XMLGregorianCalendar value) {
         this.schedule = value;
     }
 
