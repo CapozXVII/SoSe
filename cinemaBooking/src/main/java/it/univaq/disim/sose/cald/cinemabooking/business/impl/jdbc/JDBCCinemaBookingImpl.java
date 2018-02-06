@@ -43,7 +43,6 @@ public class JDBCCinemaBookingImpl implements CinemaBookingService {
 		booking.setId_hall(parameters.getIdHall());
 		booking.setId_utente(parameters.getIdUtente());
 		booking.setSchedule(toDate(parameters.getSchedule()));
-		LOGGER.info(booking.getSchedule()+ "CIAO");
 		booking.setSeats(parameters.getSeats());
 
 		con = null;
@@ -100,10 +99,8 @@ public class JDBCCinemaBookingImpl implements CinemaBookingService {
 			sql.setTimestamp(2, schedule);
 			LOGGER.info(query);
 			ResultSet res = sql.executeQuery();
-			LOGGER.info("forse");
 			res.next();
 			freeSeatsNumber = res.getInt("freeSeatsNumber");
-			LOGGER.info("forse2");
 			return freeSeatsNumber;
 		}
 
