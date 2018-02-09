@@ -8,9 +8,9 @@ import javax.xml.bind.annotation.XmlType;
 
 
 /**
- * <p>Java class for restaurantUpdateRequest complex type.
+ * <p>Classe Java per restaurantUpdateRequest complex type.
  * 
- * <p>The following schema fragment specifies the expected content contained within this class.
+ * <p>Il seguente frammento di schema specifica il contenuto previsto contenuto in questa classe.
  * 
  * <pre>
  * &lt;complexType name="restaurantUpdateRequest"&gt;
@@ -36,7 +36,7 @@ public class RestaurantUpdateRequest {
     protected RestaurantType restaurant;
 
     /**
-     * Gets the value of the restaurant property.
+     * Recupera il valore della proprietà restaurant.
      * 
      * @return
      *     possible object is
@@ -48,7 +48,7 @@ public class RestaurantUpdateRequest {
     }
 
     /**
-     * Sets the value of the restaurant property.
+     * Imposta il valore della proprietà restaurant.
      * 
      * @param value
      *     allowed object is

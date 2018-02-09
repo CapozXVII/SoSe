@@ -8,4 +8,6 @@ import it.univaq.disim.sose.cald.restaurantinformation.business.model.Restaurant
 public interface RestaurantInformationService {
 
 	List<Restaurant> getRestaurants(String city) throws RestaurantInformationFault_Exception;
+	
+	Restaurant getSingleRestaurant(int id)  throws RestaurantInformationFault_Exception;
 }

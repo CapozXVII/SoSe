@@ -14,6 +14,8 @@ import it.univaq.disim.sose.cald.restaurantinformation.RestaurantInformationPT;
 import it.univaq.disim.sose.cald.restaurantinformation.RestaurantInformationRequest;
 import it.univaq.disim.sose.cald.restaurantinformation.RestaurantInformationResponse;
 import it.univaq.disim.sose.cald.restaurantinformation.RestaurantType;
+import it.univaq.disim.sose.cald.restaurantinformation.SingleRestaurantInformationRequest;
+import it.univaq.disim.sose.cald.restaurantinformation.SingleRestaurantInformationResponse;
 import it.univaq.disim.sose.cald.restaurantinformation.business.RestaurantInformationService;
 import it.univaq.disim.sose.cald.restaurantinformation.business.model.Restaurant;
 
@@ -27,7 +29,7 @@ public class RestaurantInformationPTImpl implements RestaurantInformationPT {
 	
 	public RestaurantInformationResponse restaurantInformation(RestaurantInformationRequest parameters) throws RestaurantInformationFault_Exception  {
 		
-		LOGGER.info("CALLED cinemaInformation");
+		LOGGER.info("CALLED RestaurantInformation");
 		try {
 			List<Restaurant> restaurants = service.getRestaurants(parameters.getCity());
 			RestaurantInformationResponse response = new RestaurantInformationResponse();
@@ -62,5 +64,40 @@ public class RestaurantInformationPTImpl implements RestaurantInformationPT {
 		} catch (Exception ex) {
 			throw new RestaurantInformationFault_Exception("Something was wrong with response");
 		}
+	}
+
+	
+	public SingleRestaurantInformationResponse singleRestaurantInformation(
+			SingleRestaurantInformationRequest parameters) throws RestaurantInformationFault_Exception {
+		LOGGER.info("CALLED SingleRestaurantInformation");
+		
+		Restaurant restaurant = service.getSingleRestaurant(parameters.getId());
+		SingleRestaurantInformationResponse response= new SingleRestaurantInformationResponse();
+		
+		RestaurantInfoType osmRestaurantInfoType = new RestaurantInfoType();
+		RestaurantType osmRestaurantType = new RestaurantType();
+		DiscountType osmDiscountType = new DiscountType();
+
+		osmRestaurantInfoType.setAddress(restaurant.getAddress());
+		osmRestaurantInfoType.setCap(restaurant.getCap());
+		osmRestaurantInfoType.setCity(restaurant.getCity());
+		osmRestaurantInfoType.setCuisine(restaurant.getCousine());
+		osmRestaurantInfoType.setMenu(restaurant.getMenu());
+		osmRestaurantInfoType.setName(restaurant.getName());
+		osmRestaurantInfoType.setStyle(restaurant.getStyle());
+		osmRestaurantInfoType.setMaxSeats(restaurant.getMaxSeats());
+		osmRestaurantInfoType.setTelephoneNumber(restaurant.getTelephoneNumber());
+		if (restaurant.getDiscount() != null) {
+			osmDiscountType.setCinema(restaurant.getDiscount().getCinema().getName());
+			osmDiscountType.setPrice(restaurant.getDiscount().getPrice());
+		} else {
+			osmDiscountType = null;
+		}
+		osmRestaurantInfoType.setDiscount(osmDiscountType);
+		osmRestaurantType.setLat(restaurant.getLatitude());
+		osmRestaurantType.setLon(restaurant.getLongitude());
+		osmRestaurantType.setRestaurantInfo(osmRestaurantInfoType);
+		response.setRestaurants(osmRestaurantType);
+		return response;
 	}
 }

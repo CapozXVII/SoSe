@@ -72,7 +72,7 @@ public class JDBCRestaurantInformationServiceImpl implements RestaurantInformati
 		PreparedStatement st = null;
 		ResultSet rss = null;
 		Long restaurantId = rs.getLong("restaurant_id");
-		String sql = "SELECT * FROM discount JOIN cinema ON cinema.cinema_id = discount.cinema AND discount.restaurant = ?";
+		String sql = "SELECT * FROM discount JOIN cinemas ON cinemas.cinema_id = discount.cinema AND discount.restaurant = ?";
 		Restaurant restaurant = new Restaurant();
 		Discount discount = new Discount();
 		Cinema cinema = new Cinema();
@@ -112,6 +112,45 @@ public class JDBCRestaurantInformationServiceImpl implements RestaurantInformati
 		} 
 		
 		restaurant.setDiscount(discount);
+		return restaurant;
+	}
+
+	@Override
+	public Restaurant getSingleRestaurant(int id) throws RestaurantInformationFault_Exception {
+		LOGGER.info("CALLED JDBCSingleRestaurantInformation");
+		
+		Restaurant restaurant= new Restaurant();
+		String sql ="SELECT * FROM restaurants WHERE restaurant_id=?";
+		Connection con = null;
+		PreparedStatement st = null;
+		ResultSet rs = null;
+		
+		try {
+			con = dataSource.getConnection();
+			st = con.prepareStatement(sql);
+			st.setInt(1, id);
+			rs = st.executeQuery();
+			
+			if (rs.next()) {
+				restaurant=createRestaurant(con,rs);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			if (st != null) {
+				try {
+					st.close();
+				} catch (SQLException e) {
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (SQLException e) {}
+			}
+		}
+		
+		
 		return restaurant;
 	}
 }
