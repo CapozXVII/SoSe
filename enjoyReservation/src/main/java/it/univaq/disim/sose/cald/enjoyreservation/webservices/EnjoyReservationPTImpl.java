@@ -5,6 +5,15 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import it.univaq.disim.sose.cald.enjoyreservation.AccountLoginFault_Exception;
+import it.univaq.disim.sose.cald.enjoyreservation.AccountLoginRequest;
+import it.univaq.disim.sose.cald.enjoyreservation.AccountLoginResponse;
+import it.univaq.disim.sose.cald.enjoyreservation.AccountLogoutFault_Exception;
+import it.univaq.disim.sose.cald.enjoyreservation.AccountLogoutRequest;
+import it.univaq.disim.sose.cald.enjoyreservation.AccountLogoutResponse;
+import it.univaq.disim.sose.cald.enjoyreservation.AccountSessionFault_Exception;
+import it.univaq.disim.sose.cald.enjoyreservation.AccountSessionRequest;
+import it.univaq.disim.sose.cald.enjoyreservation.AccountSessionResponse;
 import it.univaq.disim.sose.cald.enjoyreservation.BookingCinemaFault_Exception;
 import it.univaq.disim.sose.cald.enjoyreservation.BookingCinemaRequest;
 import it.univaq.disim.sose.cald.enjoyreservation.BookingCinemaResponse;
@@ -95,6 +104,27 @@ public class EnjoyReservationPTImpl implements EnjoyReservationPT{
 	public InsertCinemaResponse insertCinema(InsertCinemaRequest parameters) throws InsertCinemaFault_Exception {
 		LOGGER.info("CALLED insertCinema ON enjoyreservation");
 		InsertCinemaResponse response = service.insertCinema(parameters);
+		return response;
+	}
+
+	@Override
+	public AccountLoginResponse userLogin(AccountLoginRequest parameters) throws AccountLoginFault_Exception {
+		LOGGER.info("CALLED userLogin ON enjoyreservation");
+		AccountLoginResponse response = service.userLogin(parameters);
+		return response;
+	}
+
+	@Override
+	public AccountSessionResponse accountSession(AccountSessionRequest parameters) throws AccountSessionFault_Exception {
+		LOGGER.info("CALLED checkSession ON enjoyreservation");
+		AccountSessionResponse response = service.accountSession(parameters);
+		return response;
+	}
+
+	@Override
+	public AccountLogoutResponse userLogout(AccountLogoutRequest parameters) throws AccountLogoutFault_Exception {
+		LOGGER.info("CALLED userLogout ON enjoyreservation");
+		AccountLogoutResponse response = service.userLogout(parameters);
 		return response;
 	}
 

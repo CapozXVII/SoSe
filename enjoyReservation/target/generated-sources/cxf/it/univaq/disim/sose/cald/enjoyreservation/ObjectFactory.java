@@ -32,6 +32,9 @@ public class ObjectFactory {
     private final static QName _GetRestaurantInfoRequest_QNAME = new QName("http://it.univaq.disim.sose.cald/enjoyReservation", "getRestaurantInfoRequest");
     private final static QName _BookingRestaurantRequest_QNAME = new QName("http://it.univaq.disim.sose.cald/enjoyReservation", "bookingRestaurantRequest");
     private final static QName _UpdateRestaurantRequest_QNAME = new QName("http://it.univaq.disim.sose.cald/enjoyReservation", "updateRestaurantRequest");
+    private final static QName _AccountLoginRequest_QNAME = new QName("http://it.univaq.disim.sose.cald/enjoyReservation", "accountLoginRequest");
+    private final static QName _AccountLogoutRequest_QNAME = new QName("http://it.univaq.disim.sose.cald/enjoyReservation", "accountLogoutRequest");
+    private final static QName _AccountSessionRequest_QNAME = new QName("http://it.univaq.disim.sose.cald/enjoyReservation", "accountSessionRequest");
     private final static QName _InsertCinemaResponse_QNAME = new QName("http://it.univaq.disim.sose.cald/enjoyReservation", "insertCinemaResponse");
     private final static QName _GetCinemaInfoResponse_QNAME = new QName("http://it.univaq.disim.sose.cald/enjoyReservation", "getCinemaInfoResponse");
     private final static QName _BookingCinemaResponse_QNAME = new QName("http://it.univaq.disim.sose.cald/enjoyReservation", "bookingCinemaResponse");
@@ -40,6 +43,9 @@ public class ObjectFactory {
     private final static QName _GetRestaurantInfoResponse_QNAME = new QName("http://it.univaq.disim.sose.cald/enjoyReservation", "getRestaurantInfoResponse");
     private final static QName _BookingRestaurantResponse_QNAME = new QName("http://it.univaq.disim.sose.cald/enjoyReservation", "bookingRestaurantResponse");
     private final static QName _UpdateRestaurantResponse_QNAME = new QName("http://it.univaq.disim.sose.cald/enjoyReservation", "updateRestaurantResponse");
+    private final static QName _AccountLoginResponse_QNAME = new QName("http://it.univaq.disim.sose.cald/enjoyReservation", "accountLoginResponse");
+    private final static QName _AccountLogoutResponse_QNAME = new QName("http://it.univaq.disim.sose.cald/enjoyReservation", "accountLogoutResponse");
+    private final static QName _AccountSessionResponse_QNAME = new QName("http://it.univaq.disim.sose.cald/enjoyReservation", "accountSessionResponse");
     private final static QName _GetRestaurantInfoFault_QNAME = new QName("http://it.univaq.disim.sose.cald/enjoyReservation", "getRestaurantInfoFault");
     private final static QName _GetCinemaInfoFault_QNAME = new QName("http://it.univaq.disim.sose.cald/enjoyReservation", "getCinemaInfoFault");
     private final static QName _BookingCinemaFault_QNAME = new QName("http://it.univaq.disim.sose.cald/enjoyReservation", "bookingCinemaFault");
@@ -48,6 +54,9 @@ public class ObjectFactory {
     private final static QName _UpdateRestaurantFault_QNAME = new QName("http://it.univaq.disim.sose.cald/enjoyReservation", "updateRestaurantFault");
     private final static QName _InsertCinemaFault_QNAME = new QName("http://it.univaq.disim.sose.cald/enjoyReservation", "insertCinemaFault");
     private final static QName _UpdateCinemaFault_QNAME = new QName("http://it.univaq.disim.sose.cald/enjoyReservation", "updateCinemaFault");
+    private final static QName _AccountLoginFault_QNAME = new QName("http://it.univaq.disim.sose.cald/enjoyReservation", "accountLoginFault");
+    private final static QName _AccountLogoutFault_QNAME = new QName("http://it.univaq.disim.sose.cald/enjoyReservation", "accountLogoutFault");
+    private final static QName _AccountSessionFault_QNAME = new QName("http://it.univaq.disim.sose.cald/enjoyReservation", "accountSessionFault");
 
     /**
      * Create a new ObjectFactory that can be used to create new instances of schema derived classes for package: it.univaq.disim.sose.cald.enjoyreservation
@@ -121,6 +130,30 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link AccountLoginRequest }
+     * 
+     */
+    public AccountLoginRequest createAccountLoginRequest() {
+        return new AccountLoginRequest();
+    }
+
+    /**
+     * Create an instance of {@link AccountLogoutRequest }
+     * 
+     */
+    public AccountLogoutRequest createAccountLogoutRequest() {
+        return new AccountLogoutRequest();
+    }
+
+    /**
+     * Create an instance of {@link AccountSessionRequest }
+     * 
+     */
+    public AccountSessionRequest createAccountSessionRequest() {
+        return new AccountSessionRequest();
+    }
+
+    /**
      * Create an instance of {@link InsertCinemaResponse }
      * 
      */
@@ -185,6 +218,30 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link AccountLoginResponse }
+     * 
+     */
+    public AccountLoginResponse createAccountLoginResponse() {
+        return new AccountLoginResponse();
+    }
+
+    /**
+     * Create an instance of {@link AccountLogoutResponse }
+     * 
+     */
+    public AccountLogoutResponse createAccountLogoutResponse() {
+        return new AccountLogoutResponse();
+    }
+
+    /**
+     * Create an instance of {@link AccountSessionResponse }
+     * 
+     */
+    public AccountSessionResponse createAccountSessionResponse() {
+        return new AccountSessionResponse();
+    }
+
+    /**
      * Create an instance of {@link GetRestaurantInfoFault }
      * 
      */
@@ -246,6 +303,30 @@ public class ObjectFactory {
      */
     public UpdateCinemaFault createUpdateCinemaFault() {
         return new UpdateCinemaFault();
+    }
+
+    /**
+     * Create an instance of {@link AccountLoginFault }
+     * 
+     */
+    public AccountLoginFault createAccountLoginFault() {
+        return new AccountLoginFault();
+    }
+
+    /**
+     * Create an instance of {@link AccountLogoutFault }
+     * 
+     */
+    public AccountLogoutFault createAccountLogoutFault() {
+        return new AccountLogoutFault();
+    }
+
+    /**
+     * Create an instance of {@link AccountSessionFault }
+     * 
+     */
+    public AccountSessionFault createAccountSessionFault() {
+        return new AccountSessionFault();
     }
 
     /**
@@ -385,6 +466,33 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link AccountLoginRequest }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://it.univaq.disim.sose.cald/enjoyReservation", name = "accountLoginRequest")
+    public JAXBElement<AccountLoginRequest> createAccountLoginRequest(AccountLoginRequest value) {
+        return new JAXBElement<AccountLoginRequest>(_AccountLoginRequest_QNAME, AccountLoginRequest.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link AccountLogoutRequest }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://it.univaq.disim.sose.cald/enjoyReservation", name = "accountLogoutRequest")
+    public JAXBElement<AccountLogoutRequest> createAccountLogoutRequest(AccountLogoutRequest value) {
+        return new JAXBElement<AccountLogoutRequest>(_AccountLogoutRequest_QNAME, AccountLogoutRequest.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link AccountSessionRequest }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://it.univaq.disim.sose.cald/enjoyReservation", name = "accountSessionRequest")
+    public JAXBElement<AccountSessionRequest> createAccountSessionRequest(AccountSessionRequest value) {
+        return new JAXBElement<AccountSessionRequest>(_AccountSessionRequest_QNAME, AccountSessionRequest.class, null, value);
+    }
+
+    /**
      * Create an instance of {@link JAXBElement }{@code <}{@link InsertCinemaResponse }{@code >}}
      * 
      */
@@ -457,6 +565,33 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link AccountLoginResponse }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://it.univaq.disim.sose.cald/enjoyReservation", name = "accountLoginResponse")
+    public JAXBElement<AccountLoginResponse> createAccountLoginResponse(AccountLoginResponse value) {
+        return new JAXBElement<AccountLoginResponse>(_AccountLoginResponse_QNAME, AccountLoginResponse.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link AccountLogoutResponse }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://it.univaq.disim.sose.cald/enjoyReservation", name = "accountLogoutResponse")
+    public JAXBElement<AccountLogoutResponse> createAccountLogoutResponse(AccountLogoutResponse value) {
+        return new JAXBElement<AccountLogoutResponse>(_AccountLogoutResponse_QNAME, AccountLogoutResponse.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link AccountSessionResponse }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://it.univaq.disim.sose.cald/enjoyReservation", name = "accountSessionResponse")
+    public JAXBElement<AccountSessionResponse> createAccountSessionResponse(AccountSessionResponse value) {
+        return new JAXBElement<AccountSessionResponse>(_AccountSessionResponse_QNAME, AccountSessionResponse.class, null, value);
+    }
+
+    /**
      * Create an instance of {@link JAXBElement }{@code <}{@link GetRestaurantInfoFault }{@code >}}
      * 
      */
@@ -526,6 +661,33 @@ public class ObjectFactory {
     @XmlElementDecl(namespace = "http://it.univaq.disim.sose.cald/enjoyReservation", name = "updateCinemaFault")
     public JAXBElement<UpdateCinemaFault> createUpdateCinemaFault(UpdateCinemaFault value) {
         return new JAXBElement<UpdateCinemaFault>(_UpdateCinemaFault_QNAME, UpdateCinemaFault.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link AccountLoginFault }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://it.univaq.disim.sose.cald/enjoyReservation", name = "accountLoginFault")
+    public JAXBElement<AccountLoginFault> createAccountLoginFault(AccountLoginFault value) {
+        return new JAXBElement<AccountLoginFault>(_AccountLoginFault_QNAME, AccountLoginFault.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link AccountLogoutFault }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://it.univaq.disim.sose.cald/enjoyReservation", name = "accountLogoutFault")
+    public JAXBElement<AccountLogoutFault> createAccountLogoutFault(AccountLogoutFault value) {
+        return new JAXBElement<AccountLogoutFault>(_AccountLogoutFault_QNAME, AccountLogoutFault.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link AccountSessionFault }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://it.univaq.disim.sose.cald/enjoyReservation", name = "accountSessionFault")
+    public JAXBElement<AccountSessionFault> createAccountSessionFault(AccountSessionFault value) {
+        return new JAXBElement<AccountSessionFault>(_AccountSessionFault_QNAME, AccountSessionFault.class, null, value);
     }
 
 }

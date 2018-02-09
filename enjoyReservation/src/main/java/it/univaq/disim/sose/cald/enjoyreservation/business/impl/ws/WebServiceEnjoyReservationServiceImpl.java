@@ -11,6 +11,17 @@ import javax.xml.datatype.XMLGregorianCalendar;
 
 import org.springframework.stereotype.Service;
 
+import it.univaq.disim.sose.cald.clients.accountmanager.AccountManagerPT;
+import it.univaq.disim.sose.cald.clients.accountmanager.AccountManagerService;
+import it.univaq.disim.sose.cald.clients.accountmanager.CheckSessionFault_Exception;
+import it.univaq.disim.sose.cald.clients.accountmanager.CheckSessionRequest;
+import it.univaq.disim.sose.cald.clients.accountmanager.CheckSessionResponse;
+import it.univaq.disim.sose.cald.clients.accountmanager.UserLoginFault_Exception;
+import it.univaq.disim.sose.cald.clients.accountmanager.UserLoginRequest;
+import it.univaq.disim.sose.cald.clients.accountmanager.UserLoginResponse;
+import it.univaq.disim.sose.cald.clients.accountmanager.UserLogoutFault_Exception;
+import it.univaq.disim.sose.cald.clients.accountmanager.UserLogoutRequest;
+import it.univaq.disim.sose.cald.clients.accountmanager.UserLogoutResponse;
 import it.univaq.disim.sose.cald.clients.cinemabooking.CinemaBookingFault_Exception;
 import it.univaq.disim.sose.cald.clients.cinemabooking.CinemaBookingPT;
 import it.univaq.disim.sose.cald.clients.cinemabooking.CinemaBookingRequest;
@@ -44,6 +55,12 @@ import it.univaq.disim.sose.cald.clients.restaurantinserting.RestaurantInsertReq
 import it.univaq.disim.sose.cald.clients.restaurantinserting.RestaurantInsertResponse;
 import it.univaq.disim.sose.cald.clients.restaurantinserting.RestaurantInsertingService;
 import it.univaq.disim.sose.cald.clients.restaurantinserting.RestaurantPT;
+import it.univaq.disim.sose.cald.enjoyreservation.AccountLoginRequest;
+import it.univaq.disim.sose.cald.enjoyreservation.AccountLoginResponse;
+import it.univaq.disim.sose.cald.enjoyreservation.AccountLogoutRequest;
+import it.univaq.disim.sose.cald.enjoyreservation.AccountLogoutResponse;
+import it.univaq.disim.sose.cald.enjoyreservation.AccountSessionRequest;
+import it.univaq.disim.sose.cald.enjoyreservation.AccountSessionResponse;
 import it.univaq.disim.sose.cald.enjoyreservation.BookingCinemaRequest;
 import it.univaq.disim.sose.cald.enjoyreservation.BookingCinemaResponse;
 import it.univaq.disim.sose.cald.enjoyreservation.BookingRestaurantRequest;
@@ -313,6 +330,71 @@ public class WebServiceEnjoyReservationServiceImpl implements EnjoyReservationSe
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		return response;
+	}
+	
+	@Override
+	public AccountLoginResponse userLogin(AccountLoginRequest request) throws BusinessException {
+		AccountLoginResponse response = new AccountLoginResponse();
+		
+		AccountManagerService accountManagerService = new AccountManagerService();
+		AccountManagerPT accountManager = accountManagerService.getAccountManagerPort();
+		UserLoginRequest userLoginRequest = new UserLoginRequest();
+		
+		userLoginRequest.setEmail(request.getEmail());
+		userLoginRequest.setPassword(request.getPassword());
+		
+		try {
+			UserLoginResponse userLoginResponse = accountManager.userLogin(userLoginRequest);
+			
+			response.setToken(userLoginResponse.getToken());
+		} catch (UserLoginFault_Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return response;
+	}
+
+	@Override
+	public AccountLogoutResponse userLogout(AccountLogoutRequest request) throws BusinessException {
+		AccountLogoutResponse response = new AccountLogoutResponse();
+		
+		AccountManagerService accountManagerService = new AccountManagerService();
+		AccountManagerPT accountManager = accountManagerService.getAccountManagerPort();
+		UserLogoutRequest userLogoutRequest = new UserLogoutRequest();
+		
+		userLogoutRequest.setToken(request.getToken());
+		
+		try {
+			UserLogoutResponse userLogoutResponse = accountManager.userLogout(userLogoutRequest);
+			response.setResponse(userLogoutResponse.getResponse());
+			
+		} catch (UserLogoutFault_Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return response;
+	}
+
+	@Override
+	public AccountSessionResponse accountSession(AccountSessionRequest request) throws BusinessException {
+		AccountSessionResponse response = new AccountSessionResponse();
+		
+		AccountManagerService accountManagerService = new AccountManagerService();
+		AccountManagerPT accountManager = accountManagerService.getAccountManagerPort();
+		CheckSessionRequest checkSessionRequest = new CheckSessionRequest();
+		
+		checkSessionRequest.setToken(request.getToken());
+		
+		try {
+			CheckSessionResponse checkSessionResponse = accountManager.checkSession(checkSessionRequest);
+			response.setResponse(checkSessionResponse.isResponse());
+			
+		} catch (CheckSessionFault_Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 		return response;
 	}
 	
