@@ -203,9 +203,5 @@ public class CinemaInfoType {
         }
         return this.hall;
     }
-    
-    public void setHall(List<HallType> hall) {
-    		this.hall = hall;
-    }
 
 }

@@ -63,9 +63,5 @@ public class GetRestaurantInfoResponse {
         }
         return this.restaurants;
     }
-    
-    public void setRestaurants(List<OSMRestaurantType> restaurants) {
-    		this.restaurants = restaurants;
-    }
 
 }

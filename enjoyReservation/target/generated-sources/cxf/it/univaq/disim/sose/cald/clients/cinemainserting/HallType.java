@@ -19,7 +19,7 @@ import javax.xml.bind.annotation.XmlType;
  *       &lt;sequence&gt;
  *         &lt;element name="number" type="{http://www.w3.org/2001/XMLSchema}int"/&gt;
  *         &lt;element name="seatsNumber" type="{http://www.w3.org/2001/XMLSchema}int"/&gt;
- *         &lt;element name="hallInfo" type="{http://it.univaq.disim.sose.cald/cinemaInserting}hallInfoType" maxOccurs="unbounded"/&gt;
+ *         &lt;element name="hallInfo" type="{http://it.univaq.disim.sose.cald/cinemaInserting}hallInfoType"/&gt;
  *       &lt;/sequence&gt;
  *     &lt;/restriction&gt;
  *   &lt;/complexContent&gt;
@@ -76,31 +76,25 @@ public class HallType {
     /**
      * Gets the value of the hallInfo property.
      * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the hallInfo property.
-     * 
-     * <p>
-     * For example, to add a new item, do as follows:
-     * <pre>
-     *    getHallInfo().add(newItem);
-     * </pre>
-     * 
-     * 
-     * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link HallInfoType }
-     * 
-     * 
+     * @return
+     *     possible object is
+     *     {@link HallInfoType }
+     *     
      */
     public HallInfoType getHallInfo() {
-        return this.hallInfo;
+        return hallInfo;
     }
-    
-    public void setHallInfo(HallInfoType hallInfo) {
-    		this.hallInfo = hallInfo;
+
+    /**
+     * Sets the value of the hallInfo property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link HallInfoType }
+     *     
+     */
+    public void setHallInfo(HallInfoType value) {
+        this.hallInfo = value;
     }
 
 }

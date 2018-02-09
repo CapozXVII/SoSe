@@ -43,7 +43,7 @@
 					<xsd:element name="style" type="xsd:string" />
 					<xsd:element name="cuisine" type="xsd:string" />
 					<xsd:element name="menu" type="xsd:string" />
-					<xsd:element name="maxSeats" type="xsd:int" />
+					<xsd:element name="max_seats" type="xsd:int" />
 					<xsd:element name="discount" minOccurs="0" type="tns:discountType" />
 				</xsd:sequence>
 			</xsd:complexType>

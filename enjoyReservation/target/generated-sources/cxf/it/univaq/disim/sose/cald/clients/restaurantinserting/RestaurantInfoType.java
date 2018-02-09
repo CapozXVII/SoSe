@@ -25,7 +25,7 @@ import javax.xml.bind.annotation.XmlType;
  *         &lt;element name="style" type="{http://www.w3.org/2001/XMLSchema}string"/&gt;
  *         &lt;element name="cuisine" type="{http://www.w3.org/2001/XMLSchema}string"/&gt;
  *         &lt;element name="menu" type="{http://www.w3.org/2001/XMLSchema}string"/&gt;
- *         &lt;element name="maxSeats" type="{http://www.w3.org/2001/XMLSchema}int"/&gt;
+ *         &lt;element name="max_seats" type="{http://www.w3.org/2001/XMLSchema}int"/&gt;
  *         &lt;element name="discount" type="{http://it.univaq.disim.sose.cald/restaurantInserting}discountType" minOccurs="0"/&gt;
  *       &lt;/sequence&gt;
  *     &lt;/restriction&gt;
@@ -64,6 +64,7 @@ public class RestaurantInfoType {
     protected String cuisine;
     @XmlElement(required = true)
     protected String menu;
+    @XmlElement(name = "max_seats")
     protected int maxSeats;
     protected DiscountType discount;
 

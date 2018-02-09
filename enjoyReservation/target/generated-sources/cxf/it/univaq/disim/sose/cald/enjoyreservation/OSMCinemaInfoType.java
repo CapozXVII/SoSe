@@ -203,9 +203,5 @@ public class OSMCinemaInfoType {
         }
         return this.hall;
     }
-    
-    public void setHall(List<OSMHallType> hall) {
-    		this.hall = hall;
-    }
 
 }

@@ -1,8 +1,6 @@
 
 package it.univaq.disim.sose.cald.clients.restaurantbooking;
 
-import java.util.Date;
-
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
@@ -47,7 +45,7 @@ public class RestaurantBookingRequest {
     protected int user;
     @XmlElement(required = true)
     @XmlSchemaType(name = "dateTime")
-    protected Date schedule;
+    protected XMLGregorianCalendar schedule;
 
     /**
      * Gets the value of the restaurant property.
@@ -105,7 +103,7 @@ public class RestaurantBookingRequest {
      *     {@link XMLGregorianCalendar }
      *     
      */
-    public Date getSchedule() {
+    public XMLGregorianCalendar getSchedule() {
         return schedule;
     }
 
@@ -117,7 +115,7 @@ public class RestaurantBookingRequest {
      *     {@link XMLGregorianCalendar }
      *     
      */
-    public void setSchedule(Date value) {
+    public void setSchedule(XMLGregorianCalendar value) {
         this.schedule = value;
     }
 
