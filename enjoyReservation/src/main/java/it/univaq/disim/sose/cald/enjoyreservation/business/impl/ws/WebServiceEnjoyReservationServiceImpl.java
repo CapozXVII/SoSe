@@ -36,6 +36,7 @@ import it.univaq.disim.sose.cald.clients.cinemainformation.CinemaInformationRequ
 import it.univaq.disim.sose.cald.clients.cinemainformation.CinemaInformationResponse;
 import it.univaq.disim.sose.cald.clients.cinemainformation.CinemaInformationService;
 import it.univaq.disim.sose.cald.clients.cinemainformation.CinemaType;
+import it.univaq.disim.sose.cald.clients.cinemainformation.HallInfoType;
 import it.univaq.disim.sose.cald.clients.cinemainformation.HallType;
 import it.univaq.disim.sose.cald.clients.cinemainserting.CinemaInsertFault_Exception;
 import it.univaq.disim.sose.cald.clients.cinemainserting.CinemaInsertRequest;
@@ -160,19 +161,24 @@ public class WebServiceEnjoyReservationServiceImpl implements EnjoyReservationSe
 				
 				for(HallType hall : cinema.getCinemaInfo().getHall()) {
 					OSMHallType newHall = new OSMHallType();
-					OSMHallInfoType newHallInfo = new OSMHallInfoType();
-					OSMFilmType newFilm = new OSMFilmType();
-					newFilm.setCast(hall.getHallInfo().getFilm().getCast());
-					newFilm.setDirector(hall.getHallInfo().getFilm().getDirector());
-					newFilm.setDuration(hall.getHallInfo().getFilm().getDuration());
-					newFilm.setName(hall.getHallInfo().getFilm().getName());
-					newFilm.setPlot(hall.getHallInfo().getFilm().getPlot());
-					newFilm.setType(hall.getHallInfo().getFilm().getType());
-					newHallInfo.setFilm(newFilm);
-					newHallInfo.setFreeSeatsNumber(hall.getHallInfo().getFreeSeatsNumber());
-					newHallInfo.setPrice(hall.getHallInfo().getPrice());
-					newHallInfo.setTime(hall.getHallInfo().getTime());
-					newHall.setHallInfo(newHallInfo);
+					
+					for(HallInfoType hallInfo : hall.getHallInfo()) {
+						OSMHallInfoType newHallInfo = new OSMHallInfoType();
+						OSMFilmType newFilm = new OSMFilmType();
+						
+						newFilm.setCast(hallInfo.getFilm().getCast());
+						newFilm.setDirector(hallInfo.getFilm().getDirector());
+						newFilm.setDuration(hallInfo.getFilm().getDuration());
+						newFilm.setName(hallInfo.getFilm().getName());
+						newFilm.setPlot(hallInfo.getFilm().getPlot());
+						newFilm.setType(hallInfo.getFilm().getType());
+						newHallInfo.setFilm(newFilm);
+						newHallInfo.setFreeSeatsNumber(hallInfo.getFreeSeatsNumber());
+						newHallInfo.setPrice(hallInfo.getPrice());
+						newHallInfo.setTime(hallInfo.getTime());
+						newHall.getHallInfo().add(newHallInfo);
+					}
+				
 					newHall.setNumber(hall.getNumber());
 					newHall.setSeatsNumber(hall.getSeatsNumber());
 					hallResponse.add(newHall);
@@ -270,20 +276,24 @@ public class WebServiceEnjoyReservationServiceImpl implements EnjoyReservationSe
 		
 		for(OSMHallType hallRequest : request.getCinema().getCinemaInfo().getHall()) {
 			it.univaq.disim.sose.cald.clients.cinemainserting.HallType hall = new it.univaq.disim.sose.cald.clients.cinemainserting.HallType();
-			it.univaq.disim.sose.cald.clients.cinemainserting.HallInfoType hallInfo = new it.univaq.disim.sose.cald.clients.cinemainserting.HallInfoType();
-			it.univaq.disim.sose.cald.clients.cinemainserting.FilmType film = new it.univaq.disim.sose.cald.clients.cinemainserting.FilmType();
-		
-			film.setCast(hallRequest.getHallInfo().getFilm().getCast());
-			film.setDirector(hallRequest.getHallInfo().getFilm().getDirector());
-			film.setDuration(hallRequest.getHallInfo().getFilm().getDuration());
-			film.setName(hallRequest.getHallInfo().getFilm().getName());
-			film.setPlot(hallRequest.getHallInfo().getFilm().getPlot());
-			film.setType(hallRequest.getHallInfo().getFilm().getType());
-			hallInfo.setFilm(film);
-			hallInfo.setFreeSeatsNumber(hallRequest.getHallInfo().getFreeSeatsNumber());
-			hallInfo.setPrice(hallRequest.getHallInfo().getPrice());
-			hallInfo.setTime(hallRequest.getHallInfo().getTime());
-			hall.setHallInfo(hallInfo);
+
+			for(OSMHallInfoType hallInfoRequest : hallRequest.getHallInfo()) {
+				it.univaq.disim.sose.cald.clients.cinemainserting.HallInfoType hallInfo = new it.univaq.disim.sose.cald.clients.cinemainserting.HallInfoType();
+				it.univaq.disim.sose.cald.clients.cinemainserting.FilmType film = new it.univaq.disim.sose.cald.clients.cinemainserting.FilmType();
+				
+				film.setCast(hallInfoRequest.getFilm().getCast());
+				film.setDirector(hallInfoRequest.getFilm().getDirector());
+				film.setDuration(hallInfoRequest.getFilm().getDuration());
+				film.setName(hallInfoRequest.getFilm().getName());
+				film.setPlot(hallInfoRequest.getFilm().getPlot());
+				film.setType(hallInfoRequest.getFilm().getType());
+				hallInfo.setFilm(film);
+				hallInfo.setFreeSeatsNumber(hallInfoRequest.getFreeSeatsNumber());
+				hallInfo.setPrice(hallInfoRequest.getPrice());
+				hallInfo.setTime(hallInfoRequest.getTime());
+				hall.getHallInfo().add(hallInfo);
+			}
+			
 			hall.setNumber(hallRequest.getNumber());
 			hall.setSeatsNumber(hallRequest.getSeatsNumber());
 			hallList.add(hall);

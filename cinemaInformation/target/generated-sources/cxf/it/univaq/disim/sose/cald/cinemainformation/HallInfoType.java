@@ -10,9 +10,9 @@ import javax.xml.datatype.XMLGregorianCalendar;
 
 
 /**
- * <p>Classe Java per hallInfoType complex type.
+ * <p>Java class for hallInfoType complex type.
  * 
- * <p>Il seguente frammento di schema specifica il contenuto previsto contenuto in questa classe.
+ * <p>The following schema fragment specifies the expected content contained within this class.
  * 
  * <pre>
  * &lt;complexType name="hallInfoType"&gt;
@@ -49,7 +49,7 @@ public class HallInfoType {
     protected int freeSeatsNumber;
 
     /**
-     * Recupera il valore della proprietà time.
+     * Gets the value of the time property.
      * 
      * @return
      *     possible object is
@@ -61,7 +61,7 @@ public class HallInfoType {
     }
 
     /**
-     * Imposta il valore della proprietà time.
+     * Sets the value of the time property.
      * 
      * @param value
      *     allowed object is
@@ -73,7 +73,7 @@ public class HallInfoType {
     }
 
     /**
-     * Recupera il valore della proprietà film.
+     * Gets the value of the film property.
      * 
      * @return
      *     possible object is
@@ -85,7 +85,7 @@ public class HallInfoType {
     }
 
     /**
-     * Imposta il valore della proprietà film.
+     * Sets the value of the film property.
      * 
      * @param value
      *     allowed object is
@@ -97,7 +97,7 @@ public class HallInfoType {
     }
 
     /**
-     * Recupera il valore della proprietà price.
+     * Gets the value of the price property.
      * 
      */
     public float getPrice() {
@@ -105,7 +105,7 @@ public class HallInfoType {
     }
 
     /**
-     * Imposta il valore della proprietà price.
+     * Sets the value of the price property.
      * 
      */
     public void setPrice(float value) {
@@ -113,7 +113,7 @@ public class HallInfoType {
     }
 
     /**
-     * Recupera il valore della proprietà freeSeatsNumber.
+     * Gets the value of the freeSeatsNumber property.
      * 
      */
     public int getFreeSeatsNumber() {
@@ -121,7 +121,7 @@ public class HallInfoType {
     }
 
     /**
-     * Imposta il valore della proprietà freeSeatsNumber.
+     * Sets the value of the freeSeatsNumber property.
      * 
      */
     public void setFreeSeatsNumber(int value) {

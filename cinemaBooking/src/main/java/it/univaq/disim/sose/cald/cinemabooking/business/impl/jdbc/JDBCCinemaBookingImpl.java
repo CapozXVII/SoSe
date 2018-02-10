@@ -11,7 +11,7 @@ import java.util.Date;
 
 
 import javax.sql.DataSource;
-
+import javax.xml.datatype.XMLGregorianCalendar;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -47,7 +47,7 @@ public class JDBCCinemaBookingImpl implements CinemaBookingService {
 		booking.setId_film(parameters.getIdFilm());
 		booking.setId_hall(parameters.getIdHall());
 		booking.setId_utente(parameters.getIdUtente());
-		booking.setSchedule(parameters.getSchedule());
+		booking.setSchedule(toDate(parameters.getSchedule()));
 		booking.setSeats(parameters.getSeats());
 		
 		LOGGER.info(booking.getSchedule().toString());
@@ -160,9 +160,6 @@ public class JDBCCinemaBookingImpl implements CinemaBookingService {
 			return false;
 
 		}
-		
-		
-
 	}
 
 	public boolean insertBooking(Connection con, int id_hall, int id_film, int id_user, Timestamp schedule, int seats) {
@@ -191,5 +188,12 @@ public class JDBCCinemaBookingImpl implements CinemaBookingService {
 		}
 
 	}
+	
+	public static Date toDate(XMLGregorianCalendar calendar){
+        if(calendar == null) {
+            return null;
+        }
+        return calendar.toGregorianCalendar().getTime();
+    }
 
 }

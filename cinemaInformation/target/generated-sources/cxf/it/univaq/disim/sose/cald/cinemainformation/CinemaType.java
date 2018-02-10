@@ -8,9 +8,9 @@ import javax.xml.bind.annotation.XmlType;
 
 
 /**
- * <p>Classe Java per cinemaType complex type.
+ * <p>Java class for cinemaType complex type.
  * 
- * <p>Il seguente frammento di schema specifica il contenuto previsto contenuto in questa classe.
+ * <p>The following schema fragment specifies the expected content contained within this class.
  * 
  * <pre>
  * &lt;complexType name="cinemaType"&gt;
@@ -42,7 +42,7 @@ public class CinemaType {
     protected CinemaInfoType cinemaInfo;
 
     /**
-     * Recupera il valore della proprietà lat.
+     * Gets the value of the lat property.
      * 
      */
     public double getLat() {
@@ -50,7 +50,7 @@ public class CinemaType {
     }
 
     /**
-     * Imposta il valore della proprietà lat.
+     * Sets the value of the lat property.
      * 
      */
     public void setLat(double value) {
@@ -58,7 +58,7 @@ public class CinemaType {
     }
 
     /**
-     * Recupera il valore della proprietà lon.
+     * Gets the value of the lon property.
      * 
      */
     public double getLon() {
@@ -66,7 +66,7 @@ public class CinemaType {
     }
 
     /**
-     * Imposta il valore della proprietà lon.
+     * Sets the value of the lon property.
      * 
      */
     public void setLon(double value) {
@@ -74,7 +74,7 @@ public class CinemaType {
     }
 
     /**
-     * Recupera il valore della proprietà cinemaInfo.
+     * Gets the value of the cinemaInfo property.
      * 
      * @return
      *     possible object is
@@ -86,7 +86,7 @@ public class CinemaType {
     }
 
     /**
-     * Imposta il valore della proprietà cinemaInfo.
+     * Sets the value of the cinemaInfo property.
      * 
      * @param value
      *     allowed object is

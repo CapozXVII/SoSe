@@ -7,9 +7,9 @@ import javax.xml.bind.annotation.XmlType;
 
 
 /**
- * <p>Classe Java per restaurantUpdateResponse complex type.
+ * <p>Java class for restaurantUpdateResponse complex type.
  * 
- * <p>Il seguente frammento di schema specifica il contenuto previsto contenuto in questa classe.
+ * <p>The following schema fragment specifies the expected content contained within this class.
  * 
  * <pre>
  * &lt;complexType name="restaurantUpdateResponse"&gt;
@@ -34,7 +34,7 @@ public class RestaurantUpdateResponse {
     protected boolean accepted;
 
     /**
-     * Recupera il valore della proprietà accepted.
+     * Gets the value of the accepted property.
      * 
      */
     public boolean isAccepted() {
@@ -42,7 +42,7 @@ public class RestaurantUpdateResponse {
     }
 
     /**
-     * Imposta il valore della proprietà accepted.
+     * Sets the value of the accepted property.
      * 
      */
     public void setAccepted(boolean value) {

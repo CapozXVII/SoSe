@@ -74,7 +74,7 @@ public class RestaurantInformationPTImpl implements RestaurantInformationPT {
 		LOGGER.info("CALLED SingleRestaurantInformation");
 		
 		Restaurant restaurant = service.getSingleRestaurant(parameters.getId());
-		SingleRestaurantInformationResponse response= new SingleRestaurantInformationResponse();
+		SingleRestaurantInformationResponse response = new SingleRestaurantInformationResponse();
 		
 		RestaurantInfoType osmRestaurantInfoType = new RestaurantInfoType();
 		RestaurantType osmRestaurantType = new RestaurantType();

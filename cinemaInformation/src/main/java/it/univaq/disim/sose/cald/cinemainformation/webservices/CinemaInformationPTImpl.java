@@ -50,7 +50,9 @@ public class CinemaInformationPTImpl implements CinemaInformationPT{
 				halls = new ArrayList<HallType>();
 				CinemaInfoType osmCinemaInfoType = new CinemaInfoType();
 				CinemaType osmCinemaType = new CinemaType();
+				
 				for (int i = 0; i < cinema.getHalls().size(); i++) {
+					
 					FilmType osmFilmType = new FilmType();
 					HallInfoType osmHallInfoType = new HallInfoType();
 					HallType osmHallType = new HallType();
@@ -98,20 +100,21 @@ public class CinemaInformationPTImpl implements CinemaInformationPT{
 			throws CinemaInformationFault_Exception {
 		LOGGER.info("CALLED SingleCinemaInformation");
 		
-		Cinema cinema=service.getSingleCinema(parameters.getId());
-		SingleCinemaInformationResponse response= new SingleCinemaInformationResponse();
+		Cinema cinema = service.getSingleCinema(parameters.getId());
+		SingleCinemaInformationResponse response = new SingleCinemaInformationResponse();
 		List<HallType> halls;
 		GregorianCalendar gtime = new GregorianCalendar();
 		XMLGregorianCalendar xmlCalendar = null;
 		
-		
 		halls = new ArrayList<HallType>();
 		CinemaInfoType osmCinemaInfoType = new CinemaInfoType();
 		CinemaType osmCinemaType = new CinemaType();
+		
 		for (int i = 0; i < cinema.getHalls().size(); i++) {
 			FilmType osmFilmType = new FilmType();
 			HallInfoType osmHallInfoType = new HallInfoType();
 			HallType osmHallType = new HallType();
+			
 			osmFilmType.setCast(cinema.getHalls().get(i).getFilm().getCast());
 			osmFilmType.setDirector(cinema.getHalls().get(i).getFilm().getDirector());
 			osmFilmType.setDuration(cinema.getHalls().get(i).getFilm().getDuration());

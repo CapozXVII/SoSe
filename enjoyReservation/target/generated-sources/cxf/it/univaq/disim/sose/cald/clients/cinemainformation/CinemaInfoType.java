@@ -24,6 +24,7 @@ import javax.xml.bind.annotation.XmlType;
  *         &lt;element name="cap" type="{http://www.w3.org/2001/XMLSchema}string"/&gt;
  *         &lt;element name="city" type="{http://www.w3.org/2001/XMLSchema}string"/&gt;
  *         &lt;element name="telephoneNumber" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/&gt;
+ *         &lt;element name="id" type="{http://www.w3.org/2001/XMLSchema}long"/&gt;
  *         &lt;element name="hall" type="{http://it.univaq.disim.sose.cald/cinemaInformation}hallType" maxOccurs="unbounded"/&gt;
  *       &lt;/sequence&gt;
  *     &lt;/restriction&gt;
@@ -40,6 +41,7 @@ import javax.xml.bind.annotation.XmlType;
     "cap",
     "city",
     "telephoneNumber",
+    "id",
     "hall"
 })
 public class CinemaInfoType {
@@ -52,6 +54,7 @@ public class CinemaInfoType {
     @XmlElement(required = true)
     protected String city;
     protected String telephoneNumber;
+    protected long id;
     @XmlElement(required = true)
     protected List<HallType> hall;
 
@@ -173,6 +176,22 @@ public class CinemaInfoType {
      */
     public void setTelephoneNumber(String value) {
         this.telephoneNumber = value;
+    }
+
+    /**
+     * Gets the value of the id property.
+     * 
+     */
+    public long getId() {
+        return id;
+    }
+
+    /**
+     * Sets the value of the id property.
+     * 
+     */
+    public void setId(long value) {
+        this.id = value;
     }
 
     /**

@@ -8,9 +8,9 @@ import javax.xml.bind.annotation.XmlType;
 
 
 /**
- * <p>Classe Java per filmType complex type.
+ * <p>Java class for filmType complex type.
  * 
- * <p>Il seguente frammento di schema specifica il contenuto previsto contenuto in questa classe.
+ * <p>The following schema fragment specifies the expected content contained within this class.
  * 
  * <pre>
  * &lt;complexType name="filmType"&gt;
@@ -55,7 +55,7 @@ public class FilmType {
     protected String plot;
 
     /**
-     * Recupera il valore della proprietà name.
+     * Gets the value of the name property.
      * 
      * @return
      *     possible object is
@@ -67,7 +67,7 @@ public class FilmType {
     }
 
     /**
-     * Imposta il valore della proprietà name.
+     * Sets the value of the name property.
      * 
      * @param value
      *     allowed object is
@@ -79,7 +79,7 @@ public class FilmType {
     }
 
     /**
-     * Recupera il valore della proprietà director.
+     * Gets the value of the director property.
      * 
      * @return
      *     possible object is
@@ -91,7 +91,7 @@ public class FilmType {
     }
 
     /**
-     * Imposta il valore della proprietà director.
+     * Sets the value of the director property.
      * 
      * @param value
      *     allowed object is
@@ -103,7 +103,7 @@ public class FilmType {
     }
 
     /**
-     * Recupera il valore della proprietà cast.
+     * Gets the value of the cast property.
      * 
      * @return
      *     possible object is
@@ -115,7 +115,7 @@ public class FilmType {
     }
 
     /**
-     * Imposta il valore della proprietà cast.
+     * Sets the value of the cast property.
      * 
      * @param value
      *     allowed object is
@@ -127,7 +127,7 @@ public class FilmType {
     }
 
     /**
-     * Recupera il valore della proprietà duration.
+     * Gets the value of the duration property.
      * 
      */
     public int getDuration() {
@@ -135,7 +135,7 @@ public class FilmType {
     }
 
     /**
-     * Imposta il valore della proprietà duration.
+     * Sets the value of the duration property.
      * 
      */
     public void setDuration(int value) {
@@ -143,7 +143,7 @@ public class FilmType {
     }
 
     /**
-     * Recupera il valore della proprietà type.
+     * Gets the value of the type property.
      * 
      * @return
      *     possible object is
@@ -155,7 +155,7 @@ public class FilmType {
     }
 
     /**
-     * Imposta il valore della proprietà type.
+     * Sets the value of the type property.
      * 
      * @param value
      *     allowed object is
@@ -167,7 +167,7 @@ public class FilmType {
     }
 
     /**
-     * Recupera il valore della proprietà plot.
+     * Gets the value of the plot property.
      * 
      * @return
      *     possible object is
@@ -179,7 +179,7 @@ public class FilmType {
     }
 
     /**
-     * Imposta il valore della proprietà plot.
+     * Sets the value of the plot property.
      * 
      * @param value
      *     allowed object is

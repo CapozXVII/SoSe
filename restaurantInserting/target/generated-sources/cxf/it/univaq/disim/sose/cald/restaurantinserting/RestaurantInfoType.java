@@ -8,9 +8,9 @@ import javax.xml.bind.annotation.XmlType;
 
 
 /**
- * <p>Classe Java per restaurantInfoType complex type.
+ * <p>Java class for restaurantInfoType complex type.
  * 
- * <p>Il seguente frammento di schema specifica il contenuto previsto contenuto in questa classe.
+ * <p>The following schema fragment specifies the expected content contained within this class.
  * 
  * <pre>
  * &lt;complexType name="restaurantInfoType"&gt;
@@ -72,7 +72,7 @@ public class RestaurantInfoType {
     protected int maxSeats;
 
     /**
-     * Recupera il valore della proprietà id.
+     * Gets the value of the id property.
      * 
      * @return
      *     possible object is
@@ -84,7 +84,7 @@ public class RestaurantInfoType {
     }
 
     /**
-     * Imposta il valore della proprietà id.
+     * Sets the value of the id property.
      * 
      * @param value
      *     allowed object is
@@ -96,7 +96,7 @@ public class RestaurantInfoType {
     }
 
     /**
-     * Recupera il valore della proprietà name.
+     * Gets the value of the name property.
      * 
      * @return
      *     possible object is
@@ -108,7 +108,7 @@ public class RestaurantInfoType {
     }
 
     /**
-     * Imposta il valore della proprietà name.
+     * Sets the value of the name property.
      * 
      * @param value
      *     allowed object is
@@ -120,7 +120,7 @@ public class RestaurantInfoType {
     }
 
     /**
-     * Recupera il valore della proprietà address.
+     * Gets the value of the address property.
      * 
      * @return
      *     possible object is
@@ -132,7 +132,7 @@ public class RestaurantInfoType {
     }
 
     /**
-     * Imposta il valore della proprietà address.
+     * Sets the value of the address property.
      * 
      * @param value
      *     allowed object is
@@ -144,7 +144,7 @@ public class RestaurantInfoType {
     }
 
     /**
-     * Recupera il valore della proprietà cap.
+     * Gets the value of the cap property.
      * 
      * @return
      *     possible object is
@@ -156,7 +156,7 @@ public class RestaurantInfoType {
     }
 
     /**
-     * Imposta il valore della proprietà cap.
+     * Sets the value of the cap property.
      * 
      * @param value
      *     allowed object is
@@ -168,7 +168,7 @@ public class RestaurantInfoType {
     }
 
     /**
-     * Recupera il valore della proprietà city.
+     * Gets the value of the city property.
      * 
      * @return
      *     possible object is
@@ -180,7 +180,7 @@ public class RestaurantInfoType {
     }
 
     /**
-     * Imposta il valore della proprietà city.
+     * Sets the value of the city property.
      * 
      * @param value
      *     allowed object is
@@ -192,7 +192,7 @@ public class RestaurantInfoType {
     }
 
     /**
-     * Recupera il valore della proprietà telephoneNumber.
+     * Gets the value of the telephoneNumber property.
      * 
      * @return
      *     possible object is
@@ -204,7 +204,7 @@ public class RestaurantInfoType {
     }
 
     /**
-     * Imposta il valore della proprietà telephoneNumber.
+     * Sets the value of the telephoneNumber property.
      * 
      * @param value
      *     allowed object is
@@ -216,7 +216,7 @@ public class RestaurantInfoType {
     }
 
     /**
-     * Recupera il valore della proprietà style.
+     * Gets the value of the style property.
      * 
      * @return
      *     possible object is
@@ -228,7 +228,7 @@ public class RestaurantInfoType {
     }
 
     /**
-     * Imposta il valore della proprietà style.
+     * Sets the value of the style property.
      * 
      * @param value
      *     allowed object is
@@ -240,7 +240,7 @@ public class RestaurantInfoType {
     }
 
     /**
-     * Recupera il valore della proprietà cuisine.
+     * Gets the value of the cuisine property.
      * 
      * @return
      *     possible object is
@@ -252,7 +252,7 @@ public class RestaurantInfoType {
     }
 
     /**
-     * Imposta il valore della proprietà cuisine.
+     * Sets the value of the cuisine property.
      * 
      * @param value
      *     allowed object is
@@ -264,7 +264,7 @@ public class RestaurantInfoType {
     }
 
     /**
-     * Recupera il valore della proprietà menu.
+     * Gets the value of the menu property.
      * 
      * @return
      *     possible object is
@@ -276,7 +276,7 @@ public class RestaurantInfoType {
     }
 
     /**
-     * Imposta il valore della proprietà menu.
+     * Sets the value of the menu property.
      * 
      * @param value
      *     allowed object is
@@ -288,7 +288,7 @@ public class RestaurantInfoType {
     }
 
     /**
-     * Recupera il valore della proprietà discount.
+     * Gets the value of the discount property.
      * 
      * @return
      *     possible object is
@@ -300,7 +300,7 @@ public class RestaurantInfoType {
     }
 
     /**
-     * Imposta il valore della proprietà discount.
+     * Sets the value of the discount property.
      * 
      * @param value
      *     allowed object is
@@ -312,7 +312,7 @@ public class RestaurantInfoType {
     }
 
     /**
-     * Recupera il valore della proprietà maxSeats.
+     * Gets the value of the maxSeats property.
      * 
      */
     public int getMaxSeats() {
@@ -320,7 +320,7 @@ public class RestaurantInfoType {
     }
 
     /**
-     * Imposta il valore della proprietà maxSeats.
+     * Sets the value of the maxSeats property.
      * 
      */
     public void setMaxSeats(int value) {

@@ -27,6 +27,7 @@ import javax.xml.bind.annotation.XmlType;
  *         &lt;element name="menu" type="{http://www.w3.org/2001/XMLSchema}string"/&gt;
  *         &lt;element name="discount" type="{http://it.univaq.disim.sose.cald/restaurantInformation}discountType" minOccurs="0"/&gt;
  *         &lt;element name="maxSeats" type="{http://www.w3.org/2001/XMLSchema}int"/&gt;
+ *         &lt;element name="id" type="{http://www.w3.org/2001/XMLSchema}long"/&gt;
  *       &lt;/sequence&gt;
  *     &lt;/restriction&gt;
  *   &lt;/complexContent&gt;
@@ -46,7 +47,8 @@ import javax.xml.bind.annotation.XmlType;
     "cuisine",
     "menu",
     "discount",
-    "maxSeats"
+    "maxSeats",
+    "id"
 })
 public class RestaurantInfoType {
 
@@ -66,6 +68,7 @@ public class RestaurantInfoType {
     protected String menu;
     protected DiscountType discount;
     protected int maxSeats;
+    protected long id;
 
     /**
      * Gets the value of the name property.
@@ -297,6 +300,22 @@ public class RestaurantInfoType {
      */
     public void setMaxSeats(int value) {
         this.maxSeats = value;
+    }
+
+    /**
+     * Gets the value of the id property.
+     * 
+     */
+    public long getId() {
+        return id;
+    }
+
+    /**
+     * Sets the value of the id property.
+     * 
+     */
+    public void setId(long value) {
+        this.id = value;
     }
 
 }

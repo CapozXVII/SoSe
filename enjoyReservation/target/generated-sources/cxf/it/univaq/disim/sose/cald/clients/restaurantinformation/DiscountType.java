@@ -3,7 +3,6 @@ package it.univaq.disim.sose.cald.clients.restaurantinformation;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
 
 
@@ -17,7 +16,7 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;complexContent&gt;
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&gt;
  *       &lt;sequence&gt;
- *         &lt;element name="cinema" type="{http://www.w3.org/2001/XMLSchema}string"/&gt;
+ *         &lt;element name="cinema" type="{http://www.w3.org/2001/XMLSchema}int"/&gt;
  *         &lt;element name="price" type="{http://www.w3.org/2001/XMLSchema}float"/&gt;
  *       &lt;/sequence&gt;
  *     &lt;/restriction&gt;
@@ -34,31 +33,22 @@ import javax.xml.bind.annotation.XmlType;
 })
 public class DiscountType {
 
-    @XmlElement(required = true)
-    protected String cinema;
+    protected int cinema;
     protected float price;
 
     /**
      * Gets the value of the cinema property.
      * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
      */
-    public String getCinema() {
+    public int getCinema() {
         return cinema;
     }
 
     /**
      * Sets the value of the cinema property.
      * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
      */
-    public void setCinema(String value) {
+    public void setCinema(int value) {
         this.cinema = value;
     }
 

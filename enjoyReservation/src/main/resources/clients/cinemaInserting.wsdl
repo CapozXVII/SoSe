@@ -47,7 +47,7 @@
 				<xsd:sequence>
 					<xsd:element name="number" type="xsd:int" />
 					<xsd:element name="seatsNumber" type="xsd:int" />
-					<xsd:element name="hallInfo" minOccurs="1" type="tns:hallInfoType" />
+					<xsd:element name="hallInfo" maxOccurs="unbounded" minOccurs="1" type="tns:hallInfoType" />
 				</xsd:sequence>
 			</xsd:complexType>
 			<xsd:complexType name="hallInfoType">
