@@ -4,11 +4,14 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.sql.Timestamp;
 import java.util.Date;
 
+
+
 import javax.sql.DataSource;
-import javax.xml.datatype.XMLGregorianCalendar;
+
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -26,24 +29,30 @@ public class JDBCCinemaBookingImpl implements CinemaBookingService {
 	
 	private static Logger LOGGER = LoggerFactory.getLogger(JDBCCinemaBookingImpl.class);
 
+	
 	@Autowired
 	private DataSource dataSource;
 
 	@Override
 	public CinemaBookingResponse insertCinemaBooking(CinemaBookingRequest parameters) throws BusinessException {
+		
 		int nSeats = 0;
 		boolean resultUpdate = false;
 		String resultBook = "Booking not inserted";
 		Connection con;
 		PreparedStatement sql;
+		
 		CinemaBooking booking = new CinemaBooking();
-		CinemaBookingResponse resultBooking = new CinemaBookingResponse();
 		
 		booking.setId_film(parameters.getIdFilm());
 		booking.setId_hall(parameters.getIdHall());
 		booking.setId_utente(parameters.getIdUtente());
-		booking.setSchedule(toDate(parameters.getSchedule()));
+		booking.setSchedule(parameters.getSchedule());
 		booking.setSeats(parameters.getSeats());
+		
+		LOGGER.info(booking.getSchedule().toString());
+
+		CinemaBookingResponse resultBooking = new CinemaBookingResponse();
 
 		con = null;
 		
@@ -55,17 +64,22 @@ public class JDBCCinemaBookingImpl implements CinemaBookingService {
 			if (nSeats >= booking.getSeats()) {
 
 				resultUpdate = updateSeats(con, booking.getId_hall(), booking.getSchedule(), booking.getSeats(), nSeats);
-				
+				LOGGER.info(Boolean.toString(resultUpdate));
 				if (resultUpdate) {
 					
 					if(insertBooking(con, booking.getId_hall(), booking.getId_film(), booking.getId_utente(), booking.getSchedule(), booking.getSeats())) {
 						resultBook = "Booking inserted";
 					}
+					
 				}
+				
 			}
 			else {
+				
 				resultBook = "Not enough seats available. Booking not inserted";
+				
 			}
+					
 		}
 
 		catch (SQLException e) {
@@ -85,6 +99,7 @@ public class JDBCCinemaBookingImpl implements CinemaBookingService {
 		resultBooking.setAccepted(resultBook);
 		
 		return resultBooking;
+
 	}
 
 	public int countSeats(Connection con, int id_hall, Timestamp schedule, int seats) throws SQLException {
@@ -92,16 +107,20 @@ public class JDBCCinemaBookingImpl implements CinemaBookingService {
 		int freeSeatsNumber = 0;
 
 		try {
+
 			String query = "SELECT freeSeatsNumber FROM hall_film WHERE hall = ? AND time = ?";
-			PreparedStatement sql = con.prepareStatement(query);
 			
+			PreparedStatement sql = con.prepareStatement(query);
 			sql.setInt(1, id_hall);
 			sql.setTimestamp(2, schedule);
 			LOGGER.info(query);
 			ResultSet res = sql.executeQuery();
+			LOGGER.info(sql.toString());
 			res.next();
 			freeSeatsNumber = res.getInt("freeSeatsNumber");
+			LOGGER.info("forse2");
 			return freeSeatsNumber;
+
 		}
 
 		catch (SQLException e1) {
@@ -127,16 +146,23 @@ public class JDBCCinemaBookingImpl implements CinemaBookingService {
 			sql.setInt(1, difference);
 			sql.setInt(2, id_hall);
 			sql.setTimestamp(3, schedule);
-			LOGGER.info(sql.toString());
+
 			if (sql.executeUpdate() == 1) {
 				return true;
 			} else {
 				return false;
 			}
+
 		}
+
 		catch (SQLException e1) {
+
 			return false;
+
 		}
+		
+		
+
 	}
 
 	public boolean insertBooking(Connection con, int id_hall, int id_film, int id_user, Timestamp schedule, int seats) {
@@ -151,7 +177,9 @@ public class JDBCCinemaBookingImpl implements CinemaBookingService {
 			sql.setInt(3, id_user);
 			sql.setInt(4, seats);
 			sql.setTimestamp(5, schedule);
-
+			
+			LOGGER.info(sql.toString());
+			
 			if (sql.executeUpdate() == 1) {
 				return true;
 			} else {
@@ -161,12 +189,7 @@ public class JDBCCinemaBookingImpl implements CinemaBookingService {
 		} catch (SQLException e) {
 			return false;
 		}
+
 	}
-	
-	public static Date toDate(XMLGregorianCalendar calendar){
-        if(calendar == null) {
-            return null;
-        }
-        return calendar.toGregorianCalendar().getTime();
-    }
+
 }
