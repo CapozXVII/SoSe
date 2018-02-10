@@ -119,8 +119,85 @@ public class JDBCRestaurantInsertingImpl implements RestaurantInsertingService {
 
 	@Override
 	public RestaurantUpdateResponse updateRestaurant(RestaurantUpdateRequest parameters) throws BusinessException {
+		
 		RestaurantUpdateResponse result = new RestaurantUpdateResponse();
-		result.setAccepted(true);/* controllare se va bene */
-		return result;
+		LOGGER.info("Called JDBcRestaurantUpdate");
+		
+		Restaurant newRestaurant = new Restaurant();
+		newRestaurant.setId(parameters.getRestaurant().getRestaurantInfo().getId());
+		newRestaurant.setLatitude(parameters.getRestaurant().getLat());
+		newRestaurant.setLongitude(parameters.getRestaurant().getLon());
+		newRestaurant.setName(parameters.getRestaurant().getRestaurantInfo().getName());
+		newRestaurant.setCap(parameters.getRestaurant().getRestaurantInfo().getCap());
+		newRestaurant.setAddress(parameters.getRestaurant().getRestaurantInfo().getAddress());
+		newRestaurant.setCity(parameters.getRestaurant().getRestaurantInfo().getCity());
+		newRestaurant.setTelephoneNumber(parameters.getRestaurant().getRestaurantInfo().getTelephoneNumber());
+		newRestaurant.setStyle(parameters.getRestaurant().getRestaurantInfo().getStyle());
+		newRestaurant.setCousine(parameters.getRestaurant().getRestaurantInfo().getCuisine());
+		newRestaurant.setMenu(parameters.getRestaurant().getRestaurantInfo().getMenu());
+		newRestaurant.setMax_seats(parameters.getRestaurant().getRestaurantInfo().getMaxSeats());
+		
+		Discount newDiscount = new Discount();
+		newDiscount.setCinema(parameters.getRestaurant().getRestaurantInfo().getDiscount().getCinema());
+		newDiscount.setPrice(parameters.getRestaurant().getRestaurantInfo().getDiscount().getPrice());
+		newDiscount.setId(parameters.getRestaurant().getRestaurantInfo().getDiscount().getDiscountId());
+
+		
+		boolean insertRestaurant = false, insertDiscount=false;
+		Connection con = null;
+		PreparedStatement sql_iRestaurant, sql_iDiscout;
+		
+
+		try {
+			con = dataSource.getConnection();
+			sql_iRestaurant = con.prepareStatement(
+					"UPDATE RESTAURANTS SET restaurant_lat=?,restaurant_lon=?,restaurant_name=?,restaurant_address=?,restaurant_cap=?,restaurant_city=?,restaurant_telephonenumber=?,style=?,cuisine=?,menu=?,max_seats=? WHERE restaurant_id=? ");
+
+			sql_iRestaurant.setDouble(1, newRestaurant.getLatitude());
+			sql_iRestaurant.setDouble(2, newRestaurant.getLongitude());
+			sql_iRestaurant.setString(3, newRestaurant.getName());
+			sql_iRestaurant.setString(4, newRestaurant.getAddress());
+			sql_iRestaurant.setString(5, newRestaurant.getCap());
+			sql_iRestaurant.setString(6, newRestaurant.getCity());
+			sql_iRestaurant.setString(7, newRestaurant.getTelephoneNumber());
+			sql_iRestaurant.setString(8, newRestaurant.getStyle());
+			sql_iRestaurant.setString(9, newRestaurant.getCousine());
+			sql_iRestaurant.setString(10, newRestaurant.getMenu());
+			sql_iRestaurant.setInt(11, newRestaurant.getMax_seats());
+			sql_iRestaurant.setLong(12, newRestaurant.getId());
+
+			if (sql_iRestaurant.executeUpdate() == 1) {
+				insertRestaurant=true;
+			}
+			
+			sql_iDiscout = con.prepareStatement("UPDATE DISCOUNT SET cinema=?,restaurant=?,price=? WHERE discount_id=?");
+			sql_iDiscout.setInt(1, newDiscount.getCinema()); /*forse meglio mettere il nome?*/
+			sql_iDiscout.setLong(2, newRestaurant.getId());
+			sql_iDiscout.setDouble(3, newDiscount.getPrice());
+			sql_iDiscout.setLong(4, newDiscount.getId());
+			
+			if (sql_iDiscout.executeUpdate()==1) {
+				insertDiscount=true;
+			}
+		} catch (SQLException e1) {
+
+			e1.printStackTrace();
+		} finally {
+			if (con != null) {
+				try {
+					con.close();
+				} catch (SQLException e) {
+				}
+			}
+		}
+
+
+		if (insertRestaurant && insertDiscount) { /* Controllare qua se va bene >0 ma penso di si perchè funziona */
+			result.setAccepted(true);
+			return result;
+		} else {
+			result.setAccepted(false);
+			return result;
+		}
 	}
 }

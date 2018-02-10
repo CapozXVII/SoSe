@@ -17,6 +17,7 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;complexContent&gt;
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&gt;
  *       &lt;sequence&gt;
+ *         &lt;element name="discount_id" type="{http://www.w3.org/2001/XMLSchema}long"/&gt;
  *         &lt;element name="cinema" type="{http://www.w3.org/2001/XMLSchema}string"/&gt;
  *         &lt;element name="price" type="{http://www.w3.org/2001/XMLSchema}float"/&gt;
  *       &lt;/sequence&gt;
@@ -29,14 +30,33 @@ import javax.xml.bind.annotation.XmlType;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "discountType", propOrder = {
+    "discountId",
     "cinema",
     "price"
 })
 public class DiscountType {
 
+    @XmlElement(name = "discount_id")
+    protected long discountId;
     @XmlElement(required = true)
     protected String cinema;
     protected float price;
+
+    /**
+     * Recupera il valore della proprietà discountId.
+     * 
+     */
+    public long getDiscountId() {
+        return discountId;
+    }
+
+    /**
+     * Imposta il valore della proprietà discountId.
+     * 
+     */
+    public void setDiscountId(long value) {
+        this.discountId = value;
+    }
 
     /**
      * Recupera il valore della proprietà cinema.
