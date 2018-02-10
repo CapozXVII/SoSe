@@ -25,7 +25,9 @@ import javax.xml.namespace.QName;
 public class ObjectFactory {
 
     private final static QName _CinemaInformationRequest_QNAME = new QName("http://it.univaq.disim.sose.cald/cinemaInformation", "cinemaInformationRequest");
+    private final static QName _SingleCinemaInformationRequest_QNAME = new QName("http://it.univaq.disim.sose.cald/cinemaInformation", "singleCinemaInformationRequest");
     private final static QName _CinemaInformationResponse_QNAME = new QName("http://it.univaq.disim.sose.cald/cinemaInformation", "cinemaInformationResponse");
+    private final static QName _SingleCinemaInformationResponse_QNAME = new QName("http://it.univaq.disim.sose.cald/cinemaInformation", "singleCinemaInformationResponse");
     private final static QName _CinemaInformationFault_QNAME = new QName("http://it.univaq.disim.sose.cald/cinemaInformation", "cinemaInformationFault");
 
     /**
@@ -44,11 +46,27 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link SingleCinemaInformationRequest }
+     * 
+     */
+    public SingleCinemaInformationRequest createSingleCinemaInformationRequest() {
+        return new SingleCinemaInformationRequest();
+    }
+
+    /**
      * Create an instance of {@link CinemaInformationResponse }
      * 
      */
     public CinemaInformationResponse createCinemaInformationResponse() {
         return new CinemaInformationResponse();
+    }
+
+    /**
+     * Create an instance of {@link SingleCinemaInformationResponse }
+     * 
+     */
+    public SingleCinemaInformationResponse createSingleCinemaInformationResponse() {
+        return new SingleCinemaInformationResponse();
     }
 
     /**
@@ -109,12 +127,30 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link SingleCinemaInformationRequest }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://it.univaq.disim.sose.cald/cinemaInformation", name = "singleCinemaInformationRequest")
+    public JAXBElement<SingleCinemaInformationRequest> createSingleCinemaInformationRequest(SingleCinemaInformationRequest value) {
+        return new JAXBElement<SingleCinemaInformationRequest>(_SingleCinemaInformationRequest_QNAME, SingleCinemaInformationRequest.class, null, value);
+    }
+
+    /**
      * Create an instance of {@link JAXBElement }{@code <}{@link CinemaInformationResponse }{@code >}}
      * 
      */
     @XmlElementDecl(namespace = "http://it.univaq.disim.sose.cald/cinemaInformation", name = "cinemaInformationResponse")
     public JAXBElement<CinemaInformationResponse> createCinemaInformationResponse(CinemaInformationResponse value) {
         return new JAXBElement<CinemaInformationResponse>(_CinemaInformationResponse_QNAME, CinemaInformationResponse.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link SingleCinemaInformationResponse }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://it.univaq.disim.sose.cald/cinemaInformation", name = "singleCinemaInformationResponse")
+    public JAXBElement<SingleCinemaInformationResponse> createSingleCinemaInformationResponse(SingleCinemaInformationResponse value) {
+        return new JAXBElement<SingleCinemaInformationResponse>(_SingleCinemaInformationResponse_QNAME, SingleCinemaInformationResponse.class, null, value);
     }
 
     /**

@@ -10,9 +10,9 @@ import javax.xml.bind.annotation.XmlType;
 
 
 /**
- * <p>Java class for cinemaInfoType complex type.
+ * <p>Classe Java per cinemaInfoType complex type.
  * 
- * <p>The following schema fragment specifies the expected content contained within this class.
+ * <p>Il seguente frammento di schema specifica il contenuto previsto contenuto in questa classe.
  * 
  * <pre>
  * &lt;complexType name="cinemaInfoType"&gt;
@@ -24,6 +24,7 @@ import javax.xml.bind.annotation.XmlType;
  *         &lt;element name="cap" type="{http://www.w3.org/2001/XMLSchema}string"/&gt;
  *         &lt;element name="city" type="{http://www.w3.org/2001/XMLSchema}string"/&gt;
  *         &lt;element name="telephoneNumber" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/&gt;
+ *         &lt;element name="id" type="{http://www.w3.org/2001/XMLSchema}long"/&gt;
  *         &lt;element name="hall" type="{http://it.univaq.disim.sose.cald/cinemaInformation}hallType" maxOccurs="unbounded"/&gt;
  *       &lt;/sequence&gt;
  *     &lt;/restriction&gt;
@@ -40,6 +41,7 @@ import javax.xml.bind.annotation.XmlType;
     "cap",
     "city",
     "telephoneNumber",
+    "id",
     "hall"
 })
 public class CinemaInfoType {
@@ -52,11 +54,12 @@ public class CinemaInfoType {
     @XmlElement(required = true)
     protected String city;
     protected String telephoneNumber;
+    protected long id;
     @XmlElement(required = true)
     protected List<HallType> hall;
 
     /**
-     * Gets the value of the name property.
+     * Recupera il valore della proprietà name.
      * 
      * @return
      *     possible object is
@@ -68,7 +71,7 @@ public class CinemaInfoType {
     }
 
     /**
-     * Sets the value of the name property.
+     * Imposta il valore della proprietà name.
      * 
      * @param value
      *     allowed object is
@@ -80,7 +83,7 @@ public class CinemaInfoType {
     }
 
     /**
-     * Gets the value of the address property.
+     * Recupera il valore della proprietà address.
      * 
      * @return
      *     possible object is
@@ -92,7 +95,7 @@ public class CinemaInfoType {
     }
 
     /**
-     * Sets the value of the address property.
+     * Imposta il valore della proprietà address.
      * 
      * @param value
      *     allowed object is
@@ -104,7 +107,7 @@ public class CinemaInfoType {
     }
 
     /**
-     * Gets the value of the cap property.
+     * Recupera il valore della proprietà cap.
      * 
      * @return
      *     possible object is
@@ -116,7 +119,7 @@ public class CinemaInfoType {
     }
 
     /**
-     * Sets the value of the cap property.
+     * Imposta il valore della proprietà cap.
      * 
      * @param value
      *     allowed object is
@@ -128,7 +131,7 @@ public class CinemaInfoType {
     }
 
     /**
-     * Gets the value of the city property.
+     * Recupera il valore della proprietà city.
      * 
      * @return
      *     possible object is
@@ -140,7 +143,7 @@ public class CinemaInfoType {
     }
 
     /**
-     * Sets the value of the city property.
+     * Imposta il valore della proprietà city.
      * 
      * @param value
      *     allowed object is
@@ -152,7 +155,7 @@ public class CinemaInfoType {
     }
 
     /**
-     * Gets the value of the telephoneNumber property.
+     * Recupera il valore della proprietà telephoneNumber.
      * 
      * @return
      *     possible object is
@@ -164,7 +167,7 @@ public class CinemaInfoType {
     }
 
     /**
-     * Sets the value of the telephoneNumber property.
+     * Imposta il valore della proprietà telephoneNumber.
      * 
      * @param value
      *     allowed object is
@@ -173,6 +176,22 @@ public class CinemaInfoType {
      */
     public void setTelephoneNumber(String value) {
         this.telephoneNumber = value;
+    }
+
+    /**
+     * Recupera il valore della proprietà id.
+     * 
+     */
+    public long getId() {
+        return id;
+    }
+
+    /**
+     * Imposta il valore della proprietà id.
+     * 
+     */
+    public void setId(long value) {
+        this.id = value;
     }
 
     /**
@@ -202,10 +221,6 @@ public class CinemaInfoType {
             hall = new ArrayList<HallType>();
         }
         return this.hall;
-    }
-    
-    public void setHall(List<HallType> hall) {
-    		this.hall = hall;
     }
 
 }

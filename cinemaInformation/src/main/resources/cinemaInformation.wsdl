@@ -13,7 +13,9 @@
 	<types>
 		<xsd:schema targetNamespace="http://it.univaq.disim.sose.cald/cinemaInformation">
 			<xsd:element name="cinemaInformationRequest" type="tns:cinemaInformationRequest" />
+			<xsd:element name="singleCinemaInformationRequest" type="tns:singleCinemaInformationRequest" />
 			<xsd:element name="cinemaInformationResponse" type="tns:cinemaInformationResponse" />
+			<xsd:element name="singleCinemaInformationResponse" type="tns:singleCinemaInformationResponse" />
 			<xsd:element name="cinemaInformationFault" type="tns:cinemaInformationFault" />
 			
 			<!-- Cinema Info -->
@@ -44,6 +46,7 @@
 					<xsd:element name="cap" type="xsd:string" />
 					<xsd:element name="city" type="xsd:string" />
 					<xsd:element name="telephoneNumber" minOccurs="0" type="xsd:string" />
+					<xsd:element name="id" type="xsd:long" />
 					<xsd:element name="hall" maxOccurs="unbounded" minOccurs="1" type="tns:hallType" />
 				</xsd:sequence>
 			</xsd:complexType>
@@ -73,6 +76,22 @@
 				</xsd:sequence>
 			</xsd:complexType>
 			
+			<!-- Single Cinema Info -->
+			<!-- Request -->
+			<xsd:complexType name="singleCinemaInformationRequest">
+				<xsd:sequence>
+					<xsd:element name="id" type="xsd:long" />
+				</xsd:sequence>
+			</xsd:complexType>
+			
+			
+			<!-- Response -->
+			<xsd:complexType name="singleCinemaInformationResponse">
+				<xsd:sequence>
+					<xsd:element name="cinemas" type="tns:cinemaType" />
+				</xsd:sequence>
+			</xsd:complexType>
+			
 			<!-- Fault -->
 			<xsd:complexType name="cinemaInformationFault">
 				<xsd:sequence>
@@ -97,12 +116,26 @@
 		<part name="parameters" element="tns:cinemaInformationFault">
 		</part>
 	</message>
+	<!-- Single Cinema Info -->
+	<message name="singleCinemaInformationRequest">
+		<part name="parameters" element="tns:singleCinemaInformationRequest">
+		</part>
+	</message>
+	<message name="singleCinemaInformationResponse">
+		<part name="parameters" element="tns:singleCinemaInformationResponse">
+		</part>
+	</message>
 	
 	<!-- Port -->
 	<portType name="cinemaInformationPT">
 		<operation name="cinemaInformation">
 			<input name="cinemaInformationRequest" message="tns:cinemaInformationRequest" />
 			<output name="cinemaInformationResponse" message="tns:cinemaInformationResponse" />
+			<fault name="cinemaInformationFault" message="tns:cinemaInformationFault" />
+		</operation>
+		<operation name="singleCinemaInformation">
+			<input name="singleCinemaInformationRequest" message="tns:singleCinemaInformationRequest" />
+			<output name="singleCinemaInformationResponse" message="tns:singleCinemaInformationResponse" />
 			<fault name="cinemaInformationFault" message="tns:cinemaInformationFault" />
 		</operation>
 	</portType>
@@ -112,6 +145,15 @@
 		<soap:binding style="document"
 			transport="http://schemas.xmlsoap.org/soap/http" />
 		<operation name="cinemaInformation">
+			<soap:operation soapAction="" />
+			<input>
+				<soap:body use="literal" />
+			</input>
+			<output>
+				<soap:body use="literal" />
+			</output>
+		</operation>
+		<operation name="singleCinemaInformation">
 			<soap:operation soapAction="" />
 			<input>
 				<soap:body use="literal" />

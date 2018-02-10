@@ -9,5 +9,5 @@ public interface RestaurantInformationService {
 
 	List<Restaurant> getRestaurants(String city) throws RestaurantInformationFault_Exception;
 	
-	Restaurant getSingleRestaurant(int id)  throws RestaurantInformationFault_Exception;
+	Restaurant getSingleRestaurant(long id)  throws RestaurantInformationFault_Exception;
 }

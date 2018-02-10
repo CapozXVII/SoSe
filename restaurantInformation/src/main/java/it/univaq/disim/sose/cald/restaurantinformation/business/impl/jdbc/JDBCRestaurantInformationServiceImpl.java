@@ -116,7 +116,7 @@ public class JDBCRestaurantInformationServiceImpl implements RestaurantInformati
 	}
 
 	@Override
-	public Restaurant getSingleRestaurant(int id) throws RestaurantInformationFault_Exception {
+	public Restaurant getSingleRestaurant(long id) throws RestaurantInformationFault_Exception {
 		LOGGER.info("CALLED JDBCSingleRestaurantInformation");
 		
 		Restaurant restaurant= new Restaurant();
@@ -128,7 +128,7 @@ public class JDBCRestaurantInformationServiceImpl implements RestaurantInformati
 		try {
 			con = dataSource.getConnection();
 			st = con.prepareStatement(sql);
-			st.setInt(1, id);
+			st.setLong(1, id);
 			rs = st.executeQuery();
 			
 			if (rs.next()) {

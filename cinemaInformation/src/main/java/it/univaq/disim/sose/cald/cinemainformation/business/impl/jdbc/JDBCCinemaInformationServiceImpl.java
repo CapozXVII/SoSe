@@ -31,7 +31,7 @@ public class JDBCCinemaInformationServiceImpl implements CinemaInformationServic
 	public List<Cinema> getCinemas(String city) throws CinemaInformationFault_Exception {
 		List<Cinema> cinemaList = new ArrayList<Cinema>();
 		List<HallFilm> hallFilmList = new ArrayList<HallFilm>();
-		String sql = "SELECT * FROM cinema JOIN halls ON cinema.cinema_id = halls.cinema JOIN hall_film ON hall_film.hall = halls.hall_id JOIN films ON films.film_id = hall_film.film AND cinema.cinema_city = ? ORDER BY cinema.cinema_id";
+		String sql = "SELECT * FROM cinemas JOIN halls ON cinemas.cinema_id = halls.cinema JOIN hall_film ON hall_film.hall = halls.hall_id JOIN films ON films.film_id = hall_film.film AND cinemas.cinema_city = ? ORDER BY cinemas.cinema_id";
 		LOGGER.info(sql);
 		Connection con = null;
 		PreparedStatement st = null;
@@ -87,6 +87,7 @@ public class JDBCCinemaInformationServiceImpl implements CinemaInformationServic
 	}
 	
 	public Cinema createCinema(ResultSet rs) throws SQLException {
+		LOGGER.info("CALLED JDBC CreateCInema");
 		Cinema cinema = new Cinema();
 		
 		cinema.setId(rs.getLong("cinema_id"));
@@ -101,6 +102,7 @@ public class JDBCCinemaInformationServiceImpl implements CinemaInformationServic
 	}
 	
 	public HallFilm createHallFilm(ResultSet rs) throws SQLException {
+		LOGGER.info("CALLED JDBCCreateHallFilm");
 		Hall hall = new Hall();
 		Film film = new Film();
 		HallFilm hallFilm = new HallFilm();
@@ -122,5 +124,47 @@ public class JDBCCinemaInformationServiceImpl implements CinemaInformationServic
 		hallFilm.setHall(hall);
 		hallFilm.setFilm(film);
 		return hallFilm;
+	}
+
+	@Override
+	public Cinema getSingleCinema(long id) throws CinemaInformationFault_Exception {
+		LOGGER.info("CALLED JDBCSingleCinemaInformation");
+		Cinema cinema= new Cinema();
+		List<HallFilm> hallFilmList = new ArrayList<HallFilm>();
+		String sql = "SELECT * FROM cinemas JOIN halls ON cinemas.cinema_id = halls.cinema JOIN hall_film ON hall_film.hall = halls.hall_id JOIN films ON films.film_id = hall_film.film AND cinemas.cinema_id = ?";
+
+		
+		Connection con = null;
+		PreparedStatement st = null;
+		ResultSet rs = null;
+		
+		try {
+			con = dataSource.getConnection();
+			st = con.prepareStatement(sql);
+			st.setLong(1, id);
+			rs = st.executeQuery();
+			
+			if (rs.next()) {
+				cinema=createCinema(rs);
+				hallFilmList.add(createHallFilm(rs));
+				cinema.setHalls(hallFilmList);
+				
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			if (st != null) {
+				try {
+					st.close();
+				} catch (SQLException e) {
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (SQLException e) {}
+			}
+		}
+		return cinema;
 	}
 }

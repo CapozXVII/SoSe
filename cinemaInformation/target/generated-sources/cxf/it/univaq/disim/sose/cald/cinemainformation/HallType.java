@@ -8,9 +8,9 @@ import javax.xml.bind.annotation.XmlType;
 
 
 /**
- * <p>Java class for hallType complex type.
+ * <p>Classe Java per hallType complex type.
  * 
- * <p>The following schema fragment specifies the expected content contained within this class.
+ * <p>Il seguente frammento di schema specifica il contenuto previsto contenuto in questa classe.
  * 
  * <pre>
  * &lt;complexType name="hallType"&gt;
@@ -42,7 +42,7 @@ public class HallType {
     protected HallInfoType hallInfo;
 
     /**
-     * Gets the value of the number property.
+     * Recupera il valore della proprietà number.
      * 
      */
     public int getNumber() {
@@ -50,7 +50,7 @@ public class HallType {
     }
 
     /**
-     * Sets the value of the number property.
+     * Imposta il valore della proprietà number.
      * 
      */
     public void setNumber(int value) {
@@ -58,7 +58,7 @@ public class HallType {
     }
 
     /**
-     * Gets the value of the seatsNumber property.
+     * Recupera il valore della proprietà seatsNumber.
      * 
      */
     public int getSeatsNumber() {
@@ -66,7 +66,7 @@ public class HallType {
     }
 
     /**
-     * Sets the value of the seatsNumber property.
+     * Imposta il valore della proprietà seatsNumber.
      * 
      */
     public void setSeatsNumber(int value) {
@@ -74,7 +74,7 @@ public class HallType {
     }
 
     /**
-     * Gets the value of the hallInfo property.
+     * Recupera il valore della proprietà hallInfo.
      * 
      * @return
      *     possible object is
@@ -86,7 +86,7 @@ public class HallType {
     }
 
     /**
-     * Sets the value of the hallInfo property.
+     * Imposta il valore della proprietà hallInfo.
      * 
      * @param value
      *     allowed object is
