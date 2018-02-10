@@ -52,6 +52,7 @@ public class RestaurantInformationPTImpl implements RestaurantInformationPT {
 				if (restaurant.getDiscount() != null) {
 					osmDiscountType.setCinema(restaurant.getDiscount().getCinema().getName());
 					osmDiscountType.setPrice(restaurant.getDiscount().getPrice());
+					osmDiscountType.setDiscountId(restaurant.getDiscount().getId());
 				} else {
 					osmDiscountType = null;
 				}
@@ -92,6 +93,7 @@ public class RestaurantInformationPTImpl implements RestaurantInformationPT {
 		if (restaurant.getDiscount() != null) {
 			osmDiscountType.setCinema(restaurant.getDiscount().getCinema().getName());
 			osmDiscountType.setPrice(restaurant.getDiscount().getPrice());
+			osmDiscountType.setDiscountId(restaurant.getDiscount().getId());
 		} else {
 			osmDiscountType = null;
 		}

@@ -99,6 +99,7 @@ public class JDBCRestaurantInformationServiceImpl implements RestaurantInformati
 			
 			if (rss.getRow() != 0) {
 				rss.first();
+				discount.setId(rss.getLong("discount_id"));
 				discount.setPrice(rss.getFloat("price"));
 				cinema.setName(rss.getString("cinema_name"));
 				discount.setCinema(cinema);
