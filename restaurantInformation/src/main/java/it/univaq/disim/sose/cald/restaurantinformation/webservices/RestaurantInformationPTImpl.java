@@ -48,6 +48,7 @@ public class RestaurantInformationPTImpl implements RestaurantInformationPT {
 				osmRestaurantInfoType.setStyle(restaurant.getStyle());
 				osmRestaurantInfoType.setMaxSeats(restaurant.getMaxSeats());
 				osmRestaurantInfoType.setTelephoneNumber(restaurant.getTelephoneNumber());
+				osmRestaurantInfoType.setId(restaurant.getId());
 				if (restaurant.getDiscount() != null) {
 					osmDiscountType.setCinema(restaurant.getDiscount().getCinema().getName());
 					osmDiscountType.setPrice(restaurant.getDiscount().getPrice());
@@ -87,6 +88,7 @@ public class RestaurantInformationPTImpl implements RestaurantInformationPT {
 		osmRestaurantInfoType.setStyle(restaurant.getStyle());
 		osmRestaurantInfoType.setMaxSeats(restaurant.getMaxSeats());
 		osmRestaurantInfoType.setTelephoneNumber(restaurant.getTelephoneNumber());
+		osmRestaurantInfoType.setId(restaurant.getId());
 		if (restaurant.getDiscount() != null) {
 			osmDiscountType.setCinema(restaurant.getDiscount().getCinema().getName());
 			osmDiscountType.setPrice(restaurant.getDiscount().getPrice());

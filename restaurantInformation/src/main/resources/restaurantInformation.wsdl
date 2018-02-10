@@ -51,6 +51,7 @@
 					<xsd:element name="menu" type="xsd:string" />
 					<xsd:element name="discount" minOccurs="0" type="tns:discountType" />
 					<xsd:element name="maxSeats" type="xsd:int" />
+					<xsd:element name="id" type="xsd:long" />
 				</xsd:sequence>
 			</xsd:complexType>
 			<xsd:complexType name="discountType">
