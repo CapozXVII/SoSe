@@ -7,6 +7,7 @@ public class HallInfo {
 	private Film film;
 	private float price;
 	private int freeSeatsNumber;
+	private Long id;
 	
 	public Date getTime() {
 		return time;
@@ -36,6 +37,13 @@ public class HallInfo {
 	
 	public void setFreeSeatsNumber(int freeSeatsNumber) {
 		this.freeSeatsNumber=freeSeatsNumber;
+	}
+	public  Long getId() {
+		return id;
+	}
+	
+	public void setId(Long id) {
+		this.id=id;
 	}
 	
 }

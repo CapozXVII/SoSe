@@ -10,6 +10,7 @@ public class Film {
     private int duration;
     private String type;
     private String plot;
+    private Long id;
     
     public String getName() {
 		return name;
@@ -55,6 +56,14 @@ public class Film {
 	
 	public void setPlot(String plot) {
 		this.plot=plot;
+	}
+	
+	public  Long getId() {
+		return id;
+	}
+	
+	public void setId(Long id) {
+		this.id=id;
 	}
 	
 
