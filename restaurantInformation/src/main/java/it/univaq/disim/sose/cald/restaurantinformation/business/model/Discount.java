@@ -5,7 +5,8 @@ public class Discount {
 	private Long id;
 	private float price;
 	private Restaurant restaurant;
-	private Cinema cinema;
+	//private Cinema cinema;
+	private int cinema;
 	
 	public Long getId() {
 		return id;
@@ -25,10 +26,10 @@ public class Discount {
 	public void setRestaurant(Restaurant restaurant) {
 		this.restaurant = restaurant;
 	}
-	public Cinema getCinema() {
+	public int getCinema() {
 		return cinema;
 	}
-	public void setCinema(Cinema cinema) {
+	public void setCinema(int cinema) {
 		this.cinema = cinema;
 	}
 }

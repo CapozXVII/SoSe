@@ -5,8 +5,8 @@ import java.sql.Date;
 public class RestaurantBooking implements java.io.Serializable {
 	
 	private int id;
-	private int id_restaurant;
-	private int id_user;
+	private int restaurant;
+	private int user;
 	private int seats;
 	private Date schedule;
 	
@@ -18,20 +18,20 @@ public class RestaurantBooking implements java.io.Serializable {
 		this.id = id;
 	}
 	
-	public int getId_restaurant() {
-		return id_restaurant;
+	public int getRestaurant() {
+		return restaurant;
 	}
 	
-	public void setId_restaurant(int id_restaurant) {
-		this.id_restaurant = id_restaurant;
+	public void setRestaurant(int restaurant) {
+		this.restaurant = restaurant;
 	}
 
-	public int getId_user() {
-		return id_user;
+	public int getUser() {
+		return user;
 	}
 	
-	public void setId_user(int id_user) {
-		this.id_user = id_user;
+	public void setUser(int user) {
+		this.user = user;
 	}
 	
 	public int getSeats() {

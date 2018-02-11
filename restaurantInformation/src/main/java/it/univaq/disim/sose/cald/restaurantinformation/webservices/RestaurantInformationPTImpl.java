@@ -50,7 +50,8 @@ public class RestaurantInformationPTImpl implements RestaurantInformationPT {
 				osmRestaurantInfoType.setTelephoneNumber(restaurant.getTelephoneNumber());
 				osmRestaurantInfoType.setId(restaurant.getId());
 				if (restaurant.getDiscount() != null) {
-					osmDiscountType.setCinema(restaurant.getDiscount().getCinema().getName());
+					osmDiscountType.setCinema(restaurant.getDiscount().getCinema());
+					//osmDiscountType.setCinema(restaurant.getDiscount().getCinema().getName());
 					osmDiscountType.setPrice(restaurant.getDiscount().getPrice());
 					osmDiscountType.setDiscountId(restaurant.getDiscount().getId());
 				} else {
@@ -91,7 +92,8 @@ public class RestaurantInformationPTImpl implements RestaurantInformationPT {
 		osmRestaurantInfoType.setTelephoneNumber(restaurant.getTelephoneNumber());
 		osmRestaurantInfoType.setId(restaurant.getId());
 		if (restaurant.getDiscount() != null) {
-			osmDiscountType.setCinema(restaurant.getDiscount().getCinema().getName());
+			osmDiscountType.setCinema(restaurant.getDiscount().getCinema());
+			//osmDiscountType.setCinema(restaurant.getDiscount().getCinema().getName());
 			osmDiscountType.setPrice(restaurant.getDiscount().getPrice());
 			osmDiscountType.setDiscountId(restaurant.getDiscount().getId());
 		} else {

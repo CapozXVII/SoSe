@@ -54,6 +54,7 @@
 			</xsd:complexType>
 			<xsd:complexType name="discountType">
 				<xsd:sequence>
+					<xsd:element name="discount_id" type="xsd:long" />
 					<xsd:element name="cinema" type="xsd:int" />
 					<xsd:element name="price" type="xsd:float" />
 				</xsd:sequence>

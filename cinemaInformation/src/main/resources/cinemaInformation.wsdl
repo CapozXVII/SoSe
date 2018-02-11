@@ -52,6 +52,7 @@
 			</xsd:complexType>
 			<xsd:complexType name="hallType">
 				<xsd:sequence>
+					<xsd:element name="id" type="xsd:long" />
 					<xsd:element name="number" type="xsd:int" />
 					<xsd:element name="seatsNumber" type="xsd:int" />
 					<xsd:element name="hallInfo" type="tns:hallInfoType" />
@@ -67,6 +68,7 @@
 			</xsd:complexType>
 			<xsd:complexType name="filmType">
 				<xsd:sequence>
+					<xsd:element name="id" type="xsd:long" />
 					<xsd:element name="name" type="xsd:string" />
 					<xsd:element name="director" type="xsd:string" />
 					<xsd:element name="cast" type="xsd:string" />

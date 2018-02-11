@@ -26,7 +26,7 @@ public class RestaurantBookingPTImpl implements RestaurantBookingPT {
 	public RestaurantBookingResponse restaurantBooking(RestaurantBookingRequest parameters) throws RestaurantBookingFault_Exception {
 		
 		try {
-			RestaurantBookingResponse response=service.insertRestaurantBooking(parameters);
+			RestaurantBookingResponse response = service.insertRestaurantBooking(parameters);
 			return response;
 			
 		} catch (Exception ex) {

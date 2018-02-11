@@ -26,7 +26,7 @@ public class CinemaBookingPTImpl implements CinemaBookingPT {
 	public CinemaBookingResponse cinemaBooking(CinemaBookingRequest parameters) throws CinemaBookingFault_Exception {
 		
 		try {
-			CinemaBookingResponse response=service.insertCinemaBooking(parameters);
+			CinemaBookingResponse response = service.insertCinemaBooking(parameters);
 			return response;
 			
 		} catch (Exception ex) {

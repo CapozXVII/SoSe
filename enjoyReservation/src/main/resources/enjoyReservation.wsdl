@@ -77,10 +77,12 @@
 					<xsd:element name="menu" type="xsd:string" />
 					<xsd:element name="discount" minOccurs="0" type="tns:OSMDiscountType" />
 					<xsd:element name="max_seats" type="xsd:int" />
+					<xsd:element name="id" type="xsd:long" />
 				</xsd:sequence>
 			</xsd:complexType>
 			<xsd:complexType name="OSMDiscountType">
 				<xsd:sequence>
+					<xsd:element name="discount_id" type="xsd:long" />
 					<xsd:element name="cinema" type="xsd:int" />
 					<xsd:element name="price" type="xsd:float" />
 				</xsd:sequence>
@@ -114,11 +116,13 @@
 					<xsd:element name="cap" type="xsd:string" />
 					<xsd:element name="city" type="xsd:string" />
 					<xsd:element name="telephoneNumber" minOccurs="0" type="xsd:string" />
+					<xsd:element name="id" type="xsd:long" />
 					<xsd:element name="hall" maxOccurs="unbounded" minOccurs="1" type="tns:OSMHallType" />
 				</xsd:sequence>
 			</xsd:complexType>
 			<xsd:complexType name="OSMHallType">
 				<xsd:sequence>
+					<xsd:element name="id" type="xsd:long" />
 					<xsd:element name="number" type="xsd:int" />
 					<xsd:element name="seatsNumber" type="xsd:int" />
 					<xsd:element name="hallInfo" maxOccurs="unbounded" minOccurs="1" type="tns:OSMHallInfoType" />
@@ -134,6 +138,7 @@
 			</xsd:complexType>
 			<xsd:complexType name="OSMFilmType">
 				<xsd:sequence>
+					<xsd:element name="id" type="xsd:long" />
 					<xsd:element name="name" type="xsd:string" />
 					<xsd:element name="director" type="xsd:string" />
 					<xsd:element name="cast" type="xsd:string" />

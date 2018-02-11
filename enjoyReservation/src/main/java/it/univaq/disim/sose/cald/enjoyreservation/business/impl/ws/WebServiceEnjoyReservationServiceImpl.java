@@ -10,6 +10,8 @@ import javax.xml.datatype.DatatypeConfigurationException;
 import javax.xml.datatype.DatatypeFactory;
 import javax.xml.datatype.XMLGregorianCalendar;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import com.google.maps.errors.ApiException;
@@ -92,6 +94,8 @@ import it.univaq.disim.sose.cald.enjoyreservation.business.GoogleMaps;
 @Service
 public class WebServiceEnjoyReservationServiceImpl implements EnjoyReservationService {
 
+	private static Logger LOGGER = LoggerFactory.getLogger(WebServiceEnjoyReservationServiceImpl.class);
+	
 	@Override
 	public GetRestaurantInfoResponse getRestaurantInfo(GetRestaurantInfoRequest request) throws BusinessException {
 		GetRestaurantInfoResponse response = new GetRestaurantInfoResponse();
@@ -111,12 +115,14 @@ public class WebServiceEnjoyReservationServiceImpl implements EnjoyReservationSe
 				OSMDiscountType newDiscount = new OSMDiscountType();
 				
 				if(restaurant.getRestaurantInfo().getDiscount() != null) {
+					newDiscount.setDiscountId(restaurant.getRestaurantInfo().getDiscount().getDiscountId());
 					newDiscount.setPrice(restaurant.getRestaurantInfo().getDiscount().getPrice());
 					newDiscount.setCinema(restaurant.getRestaurantInfo().getDiscount().getCinema());
 				} else {
 					newDiscount = null;
 				}
 				newRestaurantInfo.setDiscount(newDiscount);
+				newRestaurantInfo.setId(restaurant.getRestaurantInfo().getId());
 				newRestaurantInfo.setAddress(restaurant.getRestaurantInfo().getAddress());
 				newRestaurantInfo.setCap(restaurant.getRestaurantInfo().getCap());
 				newRestaurantInfo.setCity(restaurant.getRestaurantInfo().getCity());
@@ -166,6 +172,7 @@ public class WebServiceEnjoyReservationServiceImpl implements EnjoyReservationSe
 						OSMHallInfoType newHallInfo = new OSMHallInfoType();
 						OSMFilmType newFilm = new OSMFilmType();
 						
+						newFilm.setId(hallInfo.getFilm().getId());
 						newFilm.setCast(hallInfo.getFilm().getCast());
 						newFilm.setDirector(hallInfo.getFilm().getDirector());
 						newFilm.setDuration(hallInfo.getFilm().getDuration());
@@ -174,15 +181,16 @@ public class WebServiceEnjoyReservationServiceImpl implements EnjoyReservationSe
 						newFilm.setType(hallInfo.getFilm().getType());
 						newHallInfo.setFilm(newFilm);
 						newHallInfo.setFreeSeatsNumber(hallInfo.getFreeSeatsNumber());
-						newHallInfo.setPrice(hallInfo.getPrice());
+						newHallInfo.setPrice(hallInfo.getPrice());						
 						newHallInfo.setTime(hallInfo.getTime());
 						newHall.getHallInfo().add(newHallInfo);
 					}
-				
+					newHall.setId(hall.getId());
 					newHall.setNumber(hall.getNumber());
 					newHall.setSeatsNumber(hall.getSeatsNumber());
 					hallResponse.add(newHall);
 				}
+				newCinemaInfo.setId(cinema.getCinemaInfo().getId());
 				newCinemaInfo.setAddress(cinema.getCinemaInfo().getAddress());
 				newCinemaInfo.setCap(cinema.getCinemaInfo().getCap());
 				newCinemaInfo.setCity(cinema.getCinemaInfo().getCity());
@@ -346,7 +354,6 @@ public class WebServiceEnjoyReservationServiceImpl implements EnjoyReservationSe
 		RestaurantBookingService restaurantBookingService = new RestaurantBookingService();
 		RestaurantBookingPT restaurantBooking = restaurantBookingService.getRestaurantBookingPort();
 		RestaurantBookingRequest restaurantBookingRequest = new RestaurantBookingRequest();
-		
 		restaurantBookingRequest.setRestaurant(request.getRestaurant());
 		restaurantBookingRequest.setSchedule(request.getSchedule());
 		restaurantBookingRequest.setSeats(request.getSeats());

@@ -7,6 +7,8 @@ import javax.xml.datatype.DatatypeConfigurationException;
 import javax.xml.datatype.DatatypeFactory;
 import javax.xml.datatype.XMLGregorianCalendar;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -17,9 +19,6 @@ import org.springframework.web.bind.annotation.RestController;
 import it.univaq.disim.sose.cald.enjoyreservation.AccountSessionFault_Exception;
 import it.univaq.disim.sose.cald.enjoyreservation.AccountSessionRequest;
 import it.univaq.disim.sose.cald.enjoyreservation.AccountSessionResponse;
-import it.univaq.disim.sose.cald.enjoyreservation.BookingCinemaFault_Exception;
-import it.univaq.disim.sose.cald.enjoyreservation.BookingCinemaRequest;
-import it.univaq.disim.sose.cald.enjoyreservation.BookingCinemaResponse;
 import it.univaq.disim.sose.cald.enjoyreservation.BookingRestaurantFault_Exception;
 import it.univaq.disim.sose.cald.enjoyreservation.BookingRestaurantRequest;
 import it.univaq.disim.sose.cald.enjoyreservation.BookingRestaurantResponse;
@@ -34,7 +33,6 @@ import it.univaq.disim.sose.cald.enjoyreservation.InsertRestaurantResponse;
 import it.univaq.disim.sose.cald.enjoyreservation.OSMDiscountType;
 import it.univaq.disim.sose.cald.enjoyreservation.OSMRestaurantInfoType;
 import it.univaq.disim.sose.cald.enjoyreservation.OSMRestaurantType;
-import it.univaq.disim.sose.cald.routingrequests.model.CinemaBooking;
 import it.univaq.disim.sose.cald.routingrequests.model.Discount;
 import it.univaq.disim.sose.cald.routingrequests.model.Restaurant;
 import it.univaq.disim.sose.cald.routingrequests.model.RestaurantBooking;
@@ -42,7 +40,7 @@ import it.univaq.disim.sose.cald.routingrequests.model.RestaurantBooking;
 @RestController
 @RequestMapping(value = "/restaurant")
 public class RestaurantController {
-	
+		
 	@GetMapping("/{token}/information/{city}")
 	public GetRestaurantInfoResponse getInformation(@PathVariable(value = "token") String token, @PathVariable(value = "city") String city) throws AccountSessionFault_Exception, GetRestaurantInfoFault_Exception {
 		
@@ -71,8 +69,9 @@ public class RestaurantController {
 		
 		if(checkSession(enjoyReservation, token)) {
 			BookingRestaurantRequest request = new BookingRestaurantRequest();
-			request.setRestaurant(restaurantBooking.getId_restaurant());
-			request.setUser(restaurantBooking.getId_user());
+			
+			request.setRestaurant(restaurantBooking.getRestaurant());
+			request.setUser(restaurantBooking.getUser());
 			request.setSchedule(toXMLGregorianCalendarDate(restaurantBooking.getSchedule()));
 			request.setSeats(restaurantBooking.getSeats());
 			

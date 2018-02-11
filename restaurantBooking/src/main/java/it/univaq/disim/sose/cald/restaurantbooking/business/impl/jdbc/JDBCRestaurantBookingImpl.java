@@ -40,7 +40,6 @@ public class JDBCRestaurantBookingImpl implements RestaurantBookingService {
 		
 		RestaurantBooking booking = new RestaurantBooking();
 		RestaurantBookingResponse response = new RestaurantBookingResponse();
-		
 		booking.setId_restaurant(parameters.getRestaurant());
 		booking.setId_user(parameters.getUser());
 		booking.setSchedule(toDate(parameters.getSchedule()));
@@ -166,7 +165,6 @@ public class JDBCRestaurantBookingImpl implements RestaurantBookingService {
 		
 		PreparedStatement sql;
 		int maxSeats = 0;
-		
 		String query = "SELECT max_seats FROM restaurants WHERE restaurant_id = ?";
 		
 		try {
@@ -251,6 +249,8 @@ public class JDBCRestaurantBookingImpl implements RestaurantBookingService {
         if(calendar == null) {
             return null;
         }
-        return calendar.toGregorianCalendar().getTime();
+        java.util.Date date = calendar.toGregorianCalendar().getTime();
+        date.setTime(date.getTime() - 3600 * 1000);
+        return date;
     }
 }

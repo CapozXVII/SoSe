@@ -56,6 +56,7 @@ public class CinemaInformationPTImpl implements CinemaInformationPT{
 					FilmType osmFilmType = new FilmType();
 					HallInfoType osmHallInfoType = new HallInfoType();
 					HallType osmHallType = new HallType();
+					osmFilmType.setId(cinema.getHalls().get(i).getFilm().getId());
 					osmFilmType.setCast(cinema.getHalls().get(i).getFilm().getCast());
 					osmFilmType.setDirector(cinema.getHalls().get(i).getFilm().getDirector());
 					osmFilmType.setDuration(cinema.getHalls().get(i).getFilm().getDuration());
@@ -69,6 +70,7 @@ public class CinemaInformationPTImpl implements CinemaInformationPT{
 					xmlCalendar = DatatypeFactory.newInstance().newXMLGregorianCalendar(gtime);
 					osmHallInfoType.setTime(xmlCalendar);
 					osmHallType.setHallInfo(osmHallInfoType);
+					osmHallType.setId(cinema.getHalls().get(i).getHall().getId());
 					osmHallType.setNumber(cinema.getHalls().get(i).getHall().getNumber());
 					osmHallType.setSeatsNumber(cinema.getHalls().get(i).getHall().getSeatsNumber());
 					halls.add(osmHallType);
@@ -115,6 +117,7 @@ public class CinemaInformationPTImpl implements CinemaInformationPT{
 			HallInfoType osmHallInfoType = new HallInfoType();
 			HallType osmHallType = new HallType();
 			
+			osmFilmType.setId(cinema.getHalls().get(i).getFilm().getId());
 			osmFilmType.setCast(cinema.getHalls().get(i).getFilm().getCast());
 			osmFilmType.setDirector(cinema.getHalls().get(i).getFilm().getDirector());
 			osmFilmType.setDuration(cinema.getHalls().get(i).getFilm().getDuration());
@@ -133,6 +136,7 @@ public class CinemaInformationPTImpl implements CinemaInformationPT{
 			}
 			osmHallInfoType.setTime(xmlCalendar);
 			osmHallType.setHallInfo(osmHallInfoType);
+			osmHallType.setId(cinema.getHalls().get(i).getHall().getId());
 			osmHallType.setNumber(cinema.getHalls().get(i).getHall().getNumber());
 			osmHallType.setSeatsNumber(cinema.getHalls().get(i).getHall().getSeatsNumber());
 			halls.add(osmHallType);
