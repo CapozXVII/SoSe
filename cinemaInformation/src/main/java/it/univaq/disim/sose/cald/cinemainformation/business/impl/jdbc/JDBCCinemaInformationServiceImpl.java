@@ -145,11 +145,15 @@ public class JDBCCinemaInformationServiceImpl implements CinemaInformationServic
 			st.setLong(1, id);
 			rs = st.executeQuery();
 			
-			if (rs.next()) {
-				cinema=createCinema(rs);
-				hallFilmList.add(createHallFilm(rs));
-				cinema.setHalls(hallFilmList);
-				
+			while(rs.next()) {
+				if(rs.first()) {
+					cinema = createCinema(rs);
+					hallFilmList.add(createHallFilm(rs));
+				}
+				if(rs.last()) {
+					hallFilmList.add(createHallFilm(rs));
+					cinema.setHalls(hallFilmList);	
+				}
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();

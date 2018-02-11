@@ -17,7 +17,7 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;complexContent&gt;
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&gt;
  *       &lt;sequence&gt;
- *         &lt;element name="restaurants" type="{http://it.univaq.disim.sose.cald/restaurantInformation}restaurantType"/&gt;
+ *         &lt;element name="restaurant" type="{http://it.univaq.disim.sose.cald/restaurantInformation}restaurantType"/&gt;
  *       &lt;/sequence&gt;
  *     &lt;/restriction&gt;
  *   &lt;/complexContent&gt;
@@ -28,35 +28,35 @@ import javax.xml.bind.annotation.XmlType;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "singleRestaurantInformationResponse", propOrder = {
-    "restaurants"
+    "restaurant"
 })
 public class SingleRestaurantInformationResponse {
 
     @XmlElement(required = true)
-    protected RestaurantType restaurants;
+    protected RestaurantType restaurant;
 
     /**
-     * Gets the value of the restaurants property.
+     * Gets the value of the restaurant property.
      * 
      * @return
      *     possible object is
      *     {@link RestaurantType }
      *     
      */
-    public RestaurantType getRestaurants() {
-        return restaurants;
+    public RestaurantType getRestaurant() {
+        return restaurant;
     }
 
     /**
-     * Sets the value of the restaurants property.
+     * Sets the value of the restaurant property.
      * 
      * @param value
      *     allowed object is
      *     {@link RestaurantType }
      *     
      */
-    public void setRestaurants(RestaurantType value) {
-        this.restaurants = value;
+    public void setRestaurant(RestaurantType value) {
+        this.restaurant = value;
     }
 
 }

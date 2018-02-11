@@ -8,11 +8,10 @@ import javax.xml.datatype.DatatypeConfigurationException;
 import javax.xml.datatype.DatatypeFactory;
 import javax.xml.datatype.XMLGregorianCalendar;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -28,6 +27,8 @@ import it.univaq.disim.sose.cald.enjoyreservation.EnjoyReservationService;
 import it.univaq.disim.sose.cald.enjoyreservation.GetCinemaInfoFault_Exception;
 import it.univaq.disim.sose.cald.enjoyreservation.GetCinemaInfoRequest;
 import it.univaq.disim.sose.cald.enjoyreservation.GetCinemaInfoResponse;
+import it.univaq.disim.sose.cald.enjoyreservation.GetSingleCinemaInfoRequest;
+import it.univaq.disim.sose.cald.enjoyreservation.GetSingleCinemaInfoResponse;
 import it.univaq.disim.sose.cald.enjoyreservation.InsertCinemaFault_Exception;
 import it.univaq.disim.sose.cald.enjoyreservation.InsertCinemaRequest;
 import it.univaq.disim.sose.cald.enjoyreservation.InsertCinemaResponse;
@@ -36,6 +37,9 @@ import it.univaq.disim.sose.cald.enjoyreservation.OSMCinemaType;
 import it.univaq.disim.sose.cald.enjoyreservation.OSMFilmType;
 import it.univaq.disim.sose.cald.enjoyreservation.OSMHallInfoType;
 import it.univaq.disim.sose.cald.enjoyreservation.OSMHallType;
+import it.univaq.disim.sose.cald.enjoyreservation.UpdateCinemaFault_Exception;
+import it.univaq.disim.sose.cald.enjoyreservation.UpdateCinemaRequest;
+import it.univaq.disim.sose.cald.enjoyreservation.UpdateCinemaResponse;
 import it.univaq.disim.sose.cald.routingrequests.model.Cinema;
 import it.univaq.disim.sose.cald.routingrequests.model.CinemaBooking;
 import it.univaq.disim.sose.cald.routingrequests.model.Hall;
@@ -57,6 +61,24 @@ public class CinemaController {
 			request.setCity(city);
 			
 			response = enjoyReservation.getCinemaInfo(request);
+		} else {
+			response = null;
+		}
+		return response;
+	}
+	
+	@GetMapping("/{token}/{id}")
+	public GetSingleCinemaInfoResponse getSingleInformation(@PathVariable(value = "token") String token, @PathVariable(value = "id") int id) throws AccountSessionFault_Exception, GetCinemaInfoFault_Exception {
+		
+		EnjoyReservationService enjoyReservationService = new EnjoyReservationService();
+		EnjoyReservationPT enjoyReservation = enjoyReservationService.getEnjoyReservationPort();
+		GetSingleCinemaInfoResponse response = new GetSingleCinemaInfoResponse();
+		
+		if(checkSession(enjoyReservation, token)) {
+			GetSingleCinemaInfoRequest request = new GetSingleCinemaInfoRequest();
+			request.setId(id);
+			
+			response = enjoyReservation.getSingleCinemaInfo(request);
 		} else {
 			response = null;
 		}
@@ -86,7 +108,7 @@ public class CinemaController {
 		return response;
 	}
 	
-	@PostMapping("/{token}/inserting")
+	@PostMapping("/{token}/insert")
 	public InsertCinemaResponse insertCinema(@PathVariable(value = "token") String token, @RequestBody Cinema cinema) throws AccountSessionFault_Exception, InsertCinemaFault_Exception {
 		
 		EnjoyReservationService enjoyReservationService = new EnjoyReservationService();
@@ -95,42 +117,30 @@ public class CinemaController {
 		
 		if(checkSession(enjoyReservation, token)) {
 			InsertCinemaRequest request = new InsertCinemaRequest();
-			OSMCinemaType cinemaRequest = new OSMCinemaType();
-			OSMCinemaInfoType cinemaInfoRequest = new OSMCinemaInfoType();
-			for(Hall hall : cinema.getHall()) {
-				OSMHallType hallRequest = new OSMHallType();
-				for(HallInfo hallInfo : hall.getHallInfo()) {
-					OSMHallInfoType hallInfoRequest = new OSMHallInfoType();
-					OSMFilmType filmRequest = new OSMFilmType();
-					
-					filmRequest.setCast(hallInfo.getFilm().getCast());
-					filmRequest.setDirector(hallInfo.getFilm().getDirector());
-					filmRequest.setDuration(hallInfo.getFilm().getDuration());
-					filmRequest.setName(hallInfo.getFilm().getName());
-					filmRequest.setPlot(hallInfo.getFilm().getPlot());
-					filmRequest.setType(hallInfo.getFilm().getType());
-					hallInfoRequest.setFilm(filmRequest);
-					hallInfoRequest.setFreeSeatsNumber(hallInfo.getFreeSeatsNumber());
-					hallInfoRequest.setPrice(hallInfo.getPrice());
-					hallInfoRequest.setTime(toXMLGregorianCalendarDate(hallInfo.getTime()));
-					hallRequest.getHallInfo().add(hallInfoRequest);
-				}
-				hallRequest.setNumber(hall.getNumber());
-				hallRequest.setSeatsNumber(hall.getSeatsNumber());
-				cinemaInfoRequest.getHall().add(hallRequest);
-			}
-			cinemaInfoRequest.setAddress(cinema.getAddress());
-			cinemaInfoRequest.setCap(cinema.getCap());
-			cinemaInfoRequest.setCity(cinema.getCity());
-			cinemaInfoRequest.setName(cinema.getName());
-			cinemaInfoRequest.setTelephoneNumber(cinema.getTelephoneNumber());
-			cinemaRequest.setCinemaInfo(cinemaInfoRequest);
-			cinemaRequest.setLat(cinema.getLatitude());
-			cinemaRequest.setLon(cinema.getLongitude());
 			
-			request.setCinema(cinemaRequest);
+			request.setCinema(createCinema(cinema));
 			
 			response = enjoyReservation.insertCinema(request);
+		} else {
+			response = null;
+		}
+		
+		return response;
+	}
+	
+	@PutMapping("/{token}/update")
+	public UpdateCinemaResponse updateCinema(@PathVariable(value = "token") String token, @RequestBody Cinema cinema) throws AccountSessionFault_Exception, UpdateCinemaFault_Exception {
+		
+		EnjoyReservationService enjoyReservationService = new EnjoyReservationService();
+		EnjoyReservationPT enjoyReservation = enjoyReservationService.getEnjoyReservationPort();
+		UpdateCinemaResponse response = new UpdateCinemaResponse();
+		
+		if(checkSession(enjoyReservation, token)) {
+			UpdateCinemaRequest request = new UpdateCinemaRequest();
+	
+			request.setCinema(createCinema(cinema));
+			
+			response = enjoyReservation.updateCinema(request);
 		} else {
 			response = null;
 		}
@@ -168,5 +178,42 @@ public class CinemaController {
         }
         return xmlCalendar;
     }
+	
+	private OSMCinemaType createCinema(Cinema cinema) {
+		OSMCinemaType cinemaRequest = new OSMCinemaType();
+		OSMCinemaInfoType cinemaInfoRequest = new OSMCinemaInfoType();
+		for(Hall hall : cinema.getHall()) {
+			OSMHallType hallRequest = new OSMHallType();
+			for(HallInfo hallInfo : hall.getHallInfo()) {
+				OSMHallInfoType hallInfoRequest = new OSMHallInfoType();
+				OSMFilmType filmRequest = new OSMFilmType();
+				
+				filmRequest.setCast(hallInfo.getFilm().getCast());
+				filmRequest.setDirector(hallInfo.getFilm().getDirector());
+				filmRequest.setDuration(hallInfo.getFilm().getDuration());
+				filmRequest.setName(hallInfo.getFilm().getName());
+				filmRequest.setPlot(hallInfo.getFilm().getPlot());
+				filmRequest.setType(hallInfo.getFilm().getType());
+				hallInfoRequest.setFilm(filmRequest);
+				hallInfoRequest.setFreeSeatsNumber(hallInfo.getFreeSeatsNumber());
+				hallInfoRequest.setPrice(hallInfo.getPrice());
+				hallInfoRequest.setTime(toXMLGregorianCalendarDate(hallInfo.getTime()));
+				hallRequest.getHallInfo().add(hallInfoRequest);
+			}
+			hallRequest.setNumber(hall.getNumber());
+			hallRequest.setSeatsNumber(hall.getSeatsNumber());
+			cinemaInfoRequest.getHall().add(hallRequest);
+		}
+		cinemaInfoRequest.setAddress(cinema.getAddress());
+		cinemaInfoRequest.setCap(cinema.getCap());
+		cinemaInfoRequest.setCity(cinema.getCity());
+		cinemaInfoRequest.setName(cinema.getName());
+		cinemaInfoRequest.setTelephoneNumber(cinema.getTelephoneNumber());
+		cinemaRequest.setCinemaInfo(cinemaInfoRequest);
+		cinemaRequest.setLat(cinema.getLatitude());
+		cinemaRequest.setLon(cinema.getLongitude());
+		
+		return cinemaRequest;
+	}
 
 }

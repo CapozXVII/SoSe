@@ -103,7 +103,7 @@ public class RestaurantInformationPTImpl implements RestaurantInformationPT {
 		osmRestaurantType.setLat(restaurant.getLatitude());
 		osmRestaurantType.setLon(restaurant.getLongitude());
 		osmRestaurantType.setRestaurantInfo(osmRestaurantInfoType);
-		response.setRestaurants(osmRestaurantType);
+		response.setRestaurant(osmRestaurantType);
 		return response;
 	}
 }

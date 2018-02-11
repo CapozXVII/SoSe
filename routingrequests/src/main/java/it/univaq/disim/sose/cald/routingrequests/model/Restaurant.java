@@ -13,7 +13,7 @@ public class Restaurant implements java.io.Serializable {
 	private String style;
 	private String cousine;
 	private String menu;
-	private int max_seats;
+	private int maxSeats;
 	
 	
 	public Long getId() {
@@ -104,11 +104,11 @@ public class Restaurant implements java.io.Serializable {
 		this.menu = menu;
 	}
 	
-	public int getMax_seats() {
-		return max_seats;
+	public int getMaxSeats() {
+		return maxSeats;
 	}
 	
-	public void setMax_seats(int max_seats) {
-		this.max_seats = max_seats;
+	public void setMaxSeats(int maxSeats) {
+		this.maxSeats = maxSeats;
 	}
 }

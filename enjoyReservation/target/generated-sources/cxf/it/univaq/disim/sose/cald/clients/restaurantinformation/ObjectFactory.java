@@ -25,7 +25,9 @@ import javax.xml.namespace.QName;
 public class ObjectFactory {
 
     private final static QName _RestaurantInformationRequest_QNAME = new QName("http://it.univaq.disim.sose.cald/restaurantInformation", "restaurantInformationRequest");
+    private final static QName _SingleRestaurantInformationRequest_QNAME = new QName("http://it.univaq.disim.sose.cald/restaurantInformation", "singleRestaurantInformationRequest");
     private final static QName _RestaurantInformationResponse_QNAME = new QName("http://it.univaq.disim.sose.cald/restaurantInformation", "restaurantInformationResponse");
+    private final static QName _SingleRestaurantInformationResponse_QNAME = new QName("http://it.univaq.disim.sose.cald/restaurantInformation", "singleRestaurantInformationResponse");
     private final static QName _RestaurantInformationFault_QNAME = new QName("http://it.univaq.disim.sose.cald/restaurantInformation", "restaurantInformationFault");
 
     /**
@@ -44,11 +46,27 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link SingleRestaurantInformationRequest }
+     * 
+     */
+    public SingleRestaurantInformationRequest createSingleRestaurantInformationRequest() {
+        return new SingleRestaurantInformationRequest();
+    }
+
+    /**
      * Create an instance of {@link RestaurantInformationResponse }
      * 
      */
     public RestaurantInformationResponse createRestaurantInformationResponse() {
         return new RestaurantInformationResponse();
+    }
+
+    /**
+     * Create an instance of {@link SingleRestaurantInformationResponse }
+     * 
+     */
+    public SingleRestaurantInformationResponse createSingleRestaurantInformationResponse() {
+        return new SingleRestaurantInformationResponse();
     }
 
     /**
@@ -93,12 +111,30 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link SingleRestaurantInformationRequest }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://it.univaq.disim.sose.cald/restaurantInformation", name = "singleRestaurantInformationRequest")
+    public JAXBElement<SingleRestaurantInformationRequest> createSingleRestaurantInformationRequest(SingleRestaurantInformationRequest value) {
+        return new JAXBElement<SingleRestaurantInformationRequest>(_SingleRestaurantInformationRequest_QNAME, SingleRestaurantInformationRequest.class, null, value);
+    }
+
+    /**
      * Create an instance of {@link JAXBElement }{@code <}{@link RestaurantInformationResponse }{@code >}}
      * 
      */
     @XmlElementDecl(namespace = "http://it.univaq.disim.sose.cald/restaurantInformation", name = "restaurantInformationResponse")
     public JAXBElement<RestaurantInformationResponse> createRestaurantInformationResponse(RestaurantInformationResponse value) {
         return new JAXBElement<RestaurantInformationResponse>(_RestaurantInformationResponse_QNAME, RestaurantInformationResponse.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link SingleRestaurantInformationResponse }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://it.univaq.disim.sose.cald/restaurantInformation", name = "singleRestaurantInformationResponse")
+    public JAXBElement<SingleRestaurantInformationResponse> createSingleRestaurantInformationResponse(SingleRestaurantInformationResponse value) {
+        return new JAXBElement<SingleRestaurantInformationResponse>(_SingleRestaurantInformationResponse_QNAME, SingleRestaurantInformationResponse.class, null, value);
     }
 
     /**
