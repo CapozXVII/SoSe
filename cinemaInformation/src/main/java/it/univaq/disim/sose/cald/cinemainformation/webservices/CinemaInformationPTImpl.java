@@ -148,7 +148,7 @@ public class CinemaInformationPTImpl implements CinemaInformationPT{
 		osmCinemaType.setCinemaInfo(osmCinemaInfoType);
 		osmCinemaType.setLat(cinema.getLatitude());
 		osmCinemaType.setLon(cinema.getLongitude());
-		response.setCinemas(osmCinemaType);
+		response.setCinema(osmCinemaType);
 		
 		return response;
 	}

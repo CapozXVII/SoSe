@@ -88,7 +88,7 @@
 			<!-- Response -->
 			<xsd:complexType name="singleCinemaInformationResponse">
 				<xsd:sequence>
-					<xsd:element name="cinemas" type="tns:cinemaType" />
+					<xsd:element name="cinema" type="tns:cinemaType" />
 				</xsd:sequence>
 			</xsd:complexType>
 			
