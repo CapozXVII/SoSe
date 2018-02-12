@@ -8,9 +8,9 @@ import javax.xml.bind.annotation.XmlType;
 
 
 /**
- * <p>Java class for cinemaInsertRequest complex type.
+ * <p>Classe Java per cinemaInsertRequest complex type.
  * 
- * <p>The following schema fragment specifies the expected content contained within this class.
+ * <p>Il seguente frammento di schema specifica il contenuto previsto contenuto in questa classe.
  * 
  * <pre>
  * &lt;complexType name="cinemaInsertRequest"&gt;
@@ -36,7 +36,7 @@ public class CinemaInsertRequest {
     protected CinemaType cinema;
 
     /**
-     * Gets the value of the cinema property.
+     * Recupera il valore della proprietà cinema.
      * 
      * @return
      *     possible object is
@@ -48,7 +48,7 @@ public class CinemaInsertRequest {
     }
 
     /**
-     * Sets the value of the cinema property.
+     * Imposta il valore della proprietà cinema.
      * 
      * @param value
      *     allowed object is

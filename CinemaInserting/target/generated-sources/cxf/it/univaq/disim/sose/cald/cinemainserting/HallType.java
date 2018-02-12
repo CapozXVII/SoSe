@@ -10,15 +10,16 @@ import javax.xml.bind.annotation.XmlType;
 
 
 /**
- * <p>Java class for hallType complex type.
+ * <p>Classe Java per hallType complex type.
  * 
- * <p>The following schema fragment specifies the expected content contained within this class.
+ * <p>Il seguente frammento di schema specifica il contenuto previsto contenuto in questa classe.
  * 
  * <pre>
  * &lt;complexType name="hallType"&gt;
  *   &lt;complexContent&gt;
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&gt;
  *       &lt;sequence&gt;
+ *         &lt;element name="id_hall" type="{http://www.w3.org/2001/XMLSchema}long" minOccurs="0"/&gt;
  *         &lt;element name="number" type="{http://www.w3.org/2001/XMLSchema}int"/&gt;
  *         &lt;element name="seatsNumber" type="{http://www.w3.org/2001/XMLSchema}int"/&gt;
  *         &lt;element name="hallInfo" type="{http://it.univaq.disim.sose.cald/cinemaInserting}hallInfoType" maxOccurs="unbounded"/&gt;
@@ -32,19 +33,46 @@ import javax.xml.bind.annotation.XmlType;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "hallType", propOrder = {
+    "idHall",
     "number",
     "seatsNumber",
     "hallInfo"
 })
 public class HallType {
 
+    @XmlElement(name = "id_hall")
+    protected Long idHall;
     protected int number;
     protected int seatsNumber;
     @XmlElement(required = true)
     protected List<HallInfoType> hallInfo;
 
     /**
-     * Gets the value of the number property.
+     * Recupera il valore della proprietà idHall.
+     * 
+     * @return
+     *     possible object is
+     *     {@link Long }
+     *     
+     */
+    public Long getIdHall() {
+        return idHall;
+    }
+
+    /**
+     * Imposta il valore della proprietà idHall.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link Long }
+     *     
+     */
+    public void setIdHall(Long value) {
+        this.idHall = value;
+    }
+
+    /**
+     * Recupera il valore della proprietà number.
      * 
      */
     public int getNumber() {
@@ -52,7 +80,7 @@ public class HallType {
     }
 
     /**
-     * Sets the value of the number property.
+     * Imposta il valore della proprietà number.
      * 
      */
     public void setNumber(int value) {
@@ -60,7 +88,7 @@ public class HallType {
     }
 
     /**
-     * Gets the value of the seatsNumber property.
+     * Recupera il valore della proprietà seatsNumber.
      * 
      */
     public int getSeatsNumber() {
@@ -68,7 +96,7 @@ public class HallType {
     }
 
     /**
-     * Sets the value of the seatsNumber property.
+     * Imposta il valore della proprietà seatsNumber.
      * 
      */
     public void setSeatsNumber(int value) {
