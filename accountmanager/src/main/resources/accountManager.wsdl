@@ -12,6 +12,10 @@
 	
 	<types>
 		<xsd:schema targetNamespace="http://it.univaq.disim.sose.cald/accountManager">
+			<xsd:element name="userSignupRequest" type="tns:userSignupRequest" />
+			<xsd:element name="userSignupResponse" type="tns:userSignupResponse" />
+			<xsd:element name="userSignupFault" type="tns:userSignupFault" />
+			
 			<xsd:element name="userLoginRequest" type="tns:userLoginRequest" />
 			<xsd:element name="userLoginResponse" type="tns:userLoginResponse" />
 			<xsd:element name="userLoginFault" type="tns:userLoginFault" />
@@ -23,6 +27,41 @@
 			<xsd:element name="checkSessionRequest" type="tns:checkSessionRequest" />
 			<xsd:element name="checkSessionResponse" type="tns:checkSessionResponse" />
 			<xsd:element name="checkSessionFault" type="tns:checkSessionFault" />
+			
+			<xsd:element name="checkCinemaOwnerRequest" type="tns:checkCinemaOwnerRequest" />
+			<xsd:element name="checkCinemaOwnerResponse" type="tns:checkCinemaOwnerResponse" />
+			<xsd:element name="checkCinemaOwnerFault" type="tns:checkCinemaOwnerFault" />
+			
+			<xsd:element name="checkRestaurantOwnerRequest" type="tns:checkRestaurantOwnerRequest" />
+			<xsd:element name="checkRestaurantOwnerResponse" type="tns:checkRestaurantOwnerResponse" />
+			<xsd:element name="checkRestaurantOwnerFault" type="tns:checkRestaurantOwnerFault" />
+			
+			<!-- User Signup -->
+			<!-- Request -->
+			<xsd:complexType name="userSignupRequest">
+				<xsd:sequence>
+					<xsd:element name="username" type="xsd:string" />
+					<xsd:element name="email" type="xsd:string" />
+					<xsd:element name="password" type="xsd:string" />
+					<xsd:element name="name" type="xsd:string" />
+					<xsd:element name="surname" type="xsd:string" />
+				</xsd:sequence>
+			</xsd:complexType>
+			
+			<!-- Response -->
+			<xsd:complexType name="userSignupResponse">
+				<xsd:sequence>
+					<xsd:element name="token" type="xsd:string" />
+				</xsd:sequence>
+			</xsd:complexType>
+					
+			<!-- Fault -->
+			<xsd:complexType name="userSignupFault">
+				<xsd:sequence>
+                        <xsd:element name="faultInfo" type="xsd:string" />
+                        <xsd:element name="message" type="xsd:string" />
+				</xsd:sequence>
+			</xsd:complexType>
 			
 			<!-- User Login -->
 			<!-- Request -->
@@ -93,8 +132,69 @@
                         <xsd:element name="message" type="xsd:string" />
 				</xsd:sequence>
 			</xsd:complexType>
+			
+			<!-- Check Cinema Owner -->
+			<!-- Request -->
+			<xsd:complexType name="checkCinemaOwnerRequest">
+				<xsd:sequence>
+					<xsd:element name="token" type="xsd:string" />
+				</xsd:sequence>
+			</xsd:complexType>
+			
+			<!-- Response -->
+			<xsd:complexType name="checkCinemaOwnerResponse">
+				<xsd:sequence>
+					<xsd:element name="response" type="xsd:boolean" />
+				</xsd:sequence>
+			</xsd:complexType>
+					
+			<!-- Fault -->
+			<xsd:complexType name="checkCinemaOwnerFault">
+				<xsd:sequence>
+                        <xsd:element name="faultInfo" type="xsd:string" />
+                        <xsd:element name="message" type="xsd:string" />
+				</xsd:sequence>
+			</xsd:complexType>
+			
+			<!-- Check Restaurant Owner -->
+			<!-- Request -->
+			<xsd:complexType name="checkRestaurantOwnerRequest">
+				<xsd:sequence>
+					<xsd:element name="token" type="xsd:string" />
+				</xsd:sequence>
+			</xsd:complexType>
+			
+			<!-- Response -->
+			<xsd:complexType name="checkRestaurantOwnerResponse">
+				<xsd:sequence>
+					<xsd:element name="response" type="xsd:boolean" />
+				</xsd:sequence>
+			</xsd:complexType>
+					
+			<!-- Fault -->
+			<xsd:complexType name="checkRestaurantOwnerFault">
+				<xsd:sequence>
+                        <xsd:element name="faultInfo" type="xsd:string" />
+                        <xsd:element name="message" type="xsd:string" />
+				</xsd:sequence>
+			</xsd:complexType>
 		</xsd:schema>
 	</types>
+	
+	<!-- Message -->
+	<!-- User Signup -->
+	<message name="userSignupRequest">
+		<part name="parameters" element="tns:userSignupRequest">
+		</part>
+	</message>
+	<message name="userSignupResponse">
+		<part name="parameters" element="tns:userSignupResponse">
+		</part>
+	</message>
+	<message name="userSignupFault">
+		<part name="parameters" element="tns:userSignupFault">
+		</part>
+	</message>
 	
 	<!-- Message -->
 	<!-- User Login -->
@@ -139,8 +239,41 @@
 		</part>
 	</message>
 	
+	<!-- Check Cinema Owner -->
+	<message name="checkCinemaOwnerRequest">
+		<part name="parameters" element="tns:checkSessionRequest">
+		</part>
+	</message>
+	<message name="checkCinemaOwnerResponse">
+		<part name="parameters" element="tns:checkSessionResponse">
+		</part>
+	</message>
+	<message name="checkCinemaOwnerFault">
+		<part name="parameters" element="tns:checkSessionFault">
+		</part>
+	</message>
+	
+	<!-- Check Restaurant Owner -->
+	<message name="checkRestaurantOwnerRequest">
+		<part name="parameters" element="tns:checkSessionRequest">
+		</part>
+	</message>
+	<message name="checkRestaurantOwnerResponse">
+		<part name="parameters" element="tns:checkSessionResponse">
+		</part>
+	</message>
+	<message name="checkRestaurantOwnerFault">
+		<part name="parameters" element="tns:checkSessionFault">
+		</part>
+	</message>
+	
 	<!-- Port -->
 	<portType name="accountManagerPT">
+		<operation name="userSignup">
+			<input name="userSignupRequest" message="tns:userSignupRequest" />
+			<output name="userSignupResponse" message="tns:userSignupResponse" />
+			<fault name="userSignupFault" message="tns:userSignupFault" />
+		</operation>
 		<operation name="userLogin">
 			<input name="userLoginRequest" message="tns:userLoginRequest" />
 			<output name="userLoginResponse" message="tns:userLoginResponse" />
@@ -156,12 +289,31 @@
 			<output name="checkSessionResponse" message="tns:checkSessionResponse" />
 			<fault name="checkSessionFault" message="tns:checkSessionFault" />
 		</operation>
+		<operation name="checkCinemaOwner">
+			<input name="checkCinemaOwnerRequest" message="tns:checkCinemaOwnerRequest" />
+			<output name="checkCinemaOwnerResponse" message="tns:checkCinemaOwnerResponse" />
+			<fault name="checkCinemaOwnerFault" message="tns:checkCinemaOwnerFault" />
+		</operation>
+		<operation name="checkRestaurantOwner">
+			<input name="checkRestaurantOwnerRequest" message="tns:checkRestaurantOwnerRequest" />
+			<output name="checkRestaurantOwnerResponse" message="tns:checkRestaurantOwnerResponse" />
+			<fault name="checkRestaurantOwnerFault" message="tns:checkRestaurantOwnerFault" />
+		</operation>
 	</portType>
 	
 	<!-- Binding -->
 	<binding name="accountManagerBinding" type="tns:accountManagerPT">
 		<soap:binding style="document"
 			transport="http://schemas.xmlsoap.org/soap/http" />
+			<operation name="userSignup">
+			<soap:operation soapAction="" />
+			<input>
+				<soap:body use="literal" />
+			</input>
+			<output>
+				<soap:body use="literal" />
+			</output>
+		</operation>
 		<operation name="userLogin">
 			<soap:operation soapAction="" />
 			<input>
@@ -189,6 +341,7 @@
 				<soap:body use="literal" />
 			</output>
 		</operation>
+		
 	</binding>
 	
 	<!-- Service -->

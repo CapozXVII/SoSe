@@ -24,6 +24,9 @@ import javax.xml.namespace.QName;
 @XmlRegistry
 public class ObjectFactory {
 
+    private final static QName _UserSignupRequest_QNAME = new QName("http://it.univaq.disim.sose.cald/accountManager", "userSignupRequest");
+    private final static QName _UserSignupResponse_QNAME = new QName("http://it.univaq.disim.sose.cald/accountManager", "userSignupResponse");
+    private final static QName _UserSignupFault_QNAME = new QName("http://it.univaq.disim.sose.cald/accountManager", "userSignupFault");
     private final static QName _UserLoginRequest_QNAME = new QName("http://it.univaq.disim.sose.cald/accountManager", "userLoginRequest");
     private final static QName _UserLoginResponse_QNAME = new QName("http://it.univaq.disim.sose.cald/accountManager", "userLoginResponse");
     private final static QName _UserLoginFault_QNAME = new QName("http://it.univaq.disim.sose.cald/accountManager", "userLoginFault");
@@ -33,12 +36,42 @@ public class ObjectFactory {
     private final static QName _CheckSessionRequest_QNAME = new QName("http://it.univaq.disim.sose.cald/accountManager", "checkSessionRequest");
     private final static QName _CheckSessionResponse_QNAME = new QName("http://it.univaq.disim.sose.cald/accountManager", "checkSessionResponse");
     private final static QName _CheckSessionFault_QNAME = new QName("http://it.univaq.disim.sose.cald/accountManager", "checkSessionFault");
+    private final static QName _CheckCinemaOwnerRequest_QNAME = new QName("http://it.univaq.disim.sose.cald/accountManager", "checkCinemaOwnerRequest");
+    private final static QName _CheckCinemaOwnerResponse_QNAME = new QName("http://it.univaq.disim.sose.cald/accountManager", "checkCinemaOwnerResponse");
+    private final static QName _CheckCinemaOwnerFault_QNAME = new QName("http://it.univaq.disim.sose.cald/accountManager", "checkCinemaOwnerFault");
+    private final static QName _CheckRestaurantOwnerRequest_QNAME = new QName("http://it.univaq.disim.sose.cald/accountManager", "checkRestaurantOwnerRequest");
+    private final static QName _CheckRestaurantOwnerResponse_QNAME = new QName("http://it.univaq.disim.sose.cald/accountManager", "checkRestaurantOwnerResponse");
+    private final static QName _CheckRestaurantOwnerFault_QNAME = new QName("http://it.univaq.disim.sose.cald/accountManager", "checkRestaurantOwnerFault");
 
     /**
      * Create a new ObjectFactory that can be used to create new instances of schema derived classes for package: it.univaq.disim.sose.cald.accountmanager
      * 
      */
     public ObjectFactory() {
+    }
+
+    /**
+     * Create an instance of {@link UserSignupRequest }
+     * 
+     */
+    public UserSignupRequest createUserSignupRequest() {
+        return new UserSignupRequest();
+    }
+
+    /**
+     * Create an instance of {@link UserSignupResponse }
+     * 
+     */
+    public UserSignupResponse createUserSignupResponse() {
+        return new UserSignupResponse();
+    }
+
+    /**
+     * Create an instance of {@link UserSignupFault }
+     * 
+     */
+    public UserSignupFault createUserSignupFault() {
+        return new UserSignupFault();
     }
 
     /**
@@ -111,6 +144,81 @@ public class ObjectFactory {
      */
     public CheckSessionFault createCheckSessionFault() {
         return new CheckSessionFault();
+    }
+
+    /**
+     * Create an instance of {@link CheckCinemaOwnerRequest }
+     * 
+     */
+    public CheckCinemaOwnerRequest createCheckCinemaOwnerRequest() {
+        return new CheckCinemaOwnerRequest();
+    }
+
+    /**
+     * Create an instance of {@link CheckCinemaOwnerResponse }
+     * 
+     */
+    public CheckCinemaOwnerResponse createCheckCinemaOwnerResponse() {
+        return new CheckCinemaOwnerResponse();
+    }
+
+    /**
+     * Create an instance of {@link CheckCinemaOwnerFault }
+     * 
+     */
+    public CheckCinemaOwnerFault createCheckCinemaOwnerFault() {
+        return new CheckCinemaOwnerFault();
+    }
+
+    /**
+     * Create an instance of {@link CheckRestaurantOwnerRequest }
+     * 
+     */
+    public CheckRestaurantOwnerRequest createCheckRestaurantOwnerRequest() {
+        return new CheckRestaurantOwnerRequest();
+    }
+
+    /**
+     * Create an instance of {@link CheckRestaurantOwnerResponse }
+     * 
+     */
+    public CheckRestaurantOwnerResponse createCheckRestaurantOwnerResponse() {
+        return new CheckRestaurantOwnerResponse();
+    }
+
+    /**
+     * Create an instance of {@link CheckRestaurantOwnerFault }
+     * 
+     */
+    public CheckRestaurantOwnerFault createCheckRestaurantOwnerFault() {
+        return new CheckRestaurantOwnerFault();
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link UserSignupRequest }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://it.univaq.disim.sose.cald/accountManager", name = "userSignupRequest")
+    public JAXBElement<UserSignupRequest> createUserSignupRequest(UserSignupRequest value) {
+        return new JAXBElement<UserSignupRequest>(_UserSignupRequest_QNAME, UserSignupRequest.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link UserSignupResponse }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://it.univaq.disim.sose.cald/accountManager", name = "userSignupResponse")
+    public JAXBElement<UserSignupResponse> createUserSignupResponse(UserSignupResponse value) {
+        return new JAXBElement<UserSignupResponse>(_UserSignupResponse_QNAME, UserSignupResponse.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link UserSignupFault }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://it.univaq.disim.sose.cald/accountManager", name = "userSignupFault")
+    public JAXBElement<UserSignupFault> createUserSignupFault(UserSignupFault value) {
+        return new JAXBElement<UserSignupFault>(_UserSignupFault_QNAME, UserSignupFault.class, null, value);
     }
 
     /**
@@ -192,6 +300,60 @@ public class ObjectFactory {
     @XmlElementDecl(namespace = "http://it.univaq.disim.sose.cald/accountManager", name = "checkSessionFault")
     public JAXBElement<CheckSessionFault> createCheckSessionFault(CheckSessionFault value) {
         return new JAXBElement<CheckSessionFault>(_CheckSessionFault_QNAME, CheckSessionFault.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link CheckCinemaOwnerRequest }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://it.univaq.disim.sose.cald/accountManager", name = "checkCinemaOwnerRequest")
+    public JAXBElement<CheckCinemaOwnerRequest> createCheckCinemaOwnerRequest(CheckCinemaOwnerRequest value) {
+        return new JAXBElement<CheckCinemaOwnerRequest>(_CheckCinemaOwnerRequest_QNAME, CheckCinemaOwnerRequest.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link CheckCinemaOwnerResponse }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://it.univaq.disim.sose.cald/accountManager", name = "checkCinemaOwnerResponse")
+    public JAXBElement<CheckCinemaOwnerResponse> createCheckCinemaOwnerResponse(CheckCinemaOwnerResponse value) {
+        return new JAXBElement<CheckCinemaOwnerResponse>(_CheckCinemaOwnerResponse_QNAME, CheckCinemaOwnerResponse.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link CheckCinemaOwnerFault }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://it.univaq.disim.sose.cald/accountManager", name = "checkCinemaOwnerFault")
+    public JAXBElement<CheckCinemaOwnerFault> createCheckCinemaOwnerFault(CheckCinemaOwnerFault value) {
+        return new JAXBElement<CheckCinemaOwnerFault>(_CheckCinemaOwnerFault_QNAME, CheckCinemaOwnerFault.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link CheckRestaurantOwnerRequest }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://it.univaq.disim.sose.cald/accountManager", name = "checkRestaurantOwnerRequest")
+    public JAXBElement<CheckRestaurantOwnerRequest> createCheckRestaurantOwnerRequest(CheckRestaurantOwnerRequest value) {
+        return new JAXBElement<CheckRestaurantOwnerRequest>(_CheckRestaurantOwnerRequest_QNAME, CheckRestaurantOwnerRequest.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link CheckRestaurantOwnerResponse }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://it.univaq.disim.sose.cald/accountManager", name = "checkRestaurantOwnerResponse")
+    public JAXBElement<CheckRestaurantOwnerResponse> createCheckRestaurantOwnerResponse(CheckRestaurantOwnerResponse value) {
+        return new JAXBElement<CheckRestaurantOwnerResponse>(_CheckRestaurantOwnerResponse_QNAME, CheckRestaurantOwnerResponse.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link CheckRestaurantOwnerFault }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://it.univaq.disim.sose.cald/accountManager", name = "checkRestaurantOwnerFault")
+    public JAXBElement<CheckRestaurantOwnerFault> createCheckRestaurantOwnerFault(CheckRestaurantOwnerFault value) {
+        return new JAXBElement<CheckRestaurantOwnerFault>(_CheckRestaurantOwnerFault_QNAME, CheckRestaurantOwnerFault.class, null, value);
     }
 
 }

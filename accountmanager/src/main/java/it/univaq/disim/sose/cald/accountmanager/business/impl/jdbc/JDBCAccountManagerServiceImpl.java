@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 
 import javax.sql.DataSource;
 
@@ -21,6 +22,9 @@ import it.univaq.disim.sose.cald.accountmanager.UserLoginResponse;
 import it.univaq.disim.sose.cald.accountmanager.UserLogoutFault_Exception;
 import it.univaq.disim.sose.cald.accountmanager.UserLogoutRequest;
 import it.univaq.disim.sose.cald.accountmanager.UserLogoutResponse;
+import it.univaq.disim.sose.cald.accountmanager.UserSignupFault_Exception;
+import it.univaq.disim.sose.cald.accountmanager.UserSignupRequest;
+import it.univaq.disim.sose.cald.accountmanager.UserSignupResponse;
 import it.univaq.disim.sose.cald.accountmanager.business.AccountManagerService;
 import it.univaq.disim.sose.cald.accountmanager.business.Utility;
 import it.univaq.disim.sose.cald.accountmanager.business.model.User;
@@ -32,6 +36,67 @@ public class JDBCAccountManagerServiceImpl implements AccountManagerService {
 	
 	@Autowired
 	private DataSource dataSource;
+	
+	@Override
+	public UserSignupResponse userSignup(UserSignupRequest parameters) throws UserSignupFault_Exception {
+		UserSignupResponse response = new UserSignupResponse();
+		Connection con = null;
+		PreparedStatement stInsertUser = null, stInsertSession = null;
+		
+		try {
+			con = dataSource.getConnection();
+			stInsertUser = con.prepareStatement(
+				"INSERT INTO users (name,surname,email,password,username) VALUES (?,?,?,?,?)",
+				Statement.RETURN_GENERATED_KEYS);
+		
+			stInsertUser.setString(1, parameters.getName());
+			stInsertUser.setString(2, parameters.getSurname());
+			stInsertUser.setString(3, parameters.getEmail());
+			stInsertUser.setString(4, parameters.getPassword());
+			stInsertUser.setString(5, parameters.getUsername());
+		
+		if(stInsertUser.executeUpdate() == 1) {
+			int idUtente = 0;
+			try (ResultSet keys = stInsertUser.getGeneratedKeys()) {
+				if (keys.next()) {
+					idUtente = keys.getInt(1);
+				}
+				
+				stInsertSession = con.prepareStatement("INSERT INTO sessions (token,user) VALUES (?,?)");
+				
+				String token = Utility.generateToken();
+				
+				stInsertSession.setString(1, token);
+				stInsertSession.setInt(2, idUtente);
+				
+				if(stInsertSession.executeUpdate() == 1) {
+					response.setToken(token);
+				}
+				else {
+					response.setToken(null);
+				}
+			}
+		} else {
+			response.setToken(null);
+		}
+		} catch (SQLException e) {
+			e.printStackTrace();
+			throw new UserSignupFault_Exception("Something was wrong with User Signup");
+		} finally {
+			if (stInsertUser != null) {
+				try {
+					stInsertUser.close();
+				} catch (SQLException e) {
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (SQLException e) {}
+			}
+		}
+		return response;
+	}
 
 	@Override
 	public UserLoginResponse userLogin(UserLoginRequest parameters) throws UserLoginFault_Exception {
@@ -176,4 +241,5 @@ public class JDBCAccountManagerServiceImpl implements AccountManagerService {
 		}
 		return response;
 	}
+
 }

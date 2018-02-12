@@ -27,6 +27,9 @@ import it.univaq.disim.sose.cald.clients.accountmanager.UserLoginResponse;
 import it.univaq.disim.sose.cald.clients.accountmanager.UserLogoutFault_Exception;
 import it.univaq.disim.sose.cald.clients.accountmanager.UserLogoutRequest;
 import it.univaq.disim.sose.cald.clients.accountmanager.UserLogoutResponse;
+import it.univaq.disim.sose.cald.clients.accountmanager.UserSignupFault_Exception;
+import it.univaq.disim.sose.cald.clients.accountmanager.UserSignupRequest;
+import it.univaq.disim.sose.cald.clients.accountmanager.UserSignupResponse;
 import it.univaq.disim.sose.cald.clients.cinemabooking.CinemaBookingFault_Exception;
 import it.univaq.disim.sose.cald.clients.cinemabooking.CinemaBookingPT;
 import it.univaq.disim.sose.cald.clients.cinemabooking.CinemaBookingRequest;
@@ -77,6 +80,8 @@ import it.univaq.disim.sose.cald.enjoyreservation.AccountLogoutRequest;
 import it.univaq.disim.sose.cald.enjoyreservation.AccountLogoutResponse;
 import it.univaq.disim.sose.cald.enjoyreservation.AccountSessionRequest;
 import it.univaq.disim.sose.cald.enjoyreservation.AccountSessionResponse;
+import it.univaq.disim.sose.cald.enjoyreservation.AccountSignupRequest;
+import it.univaq.disim.sose.cald.enjoyreservation.AccountSignupResponse;
 import it.univaq.disim.sose.cald.enjoyreservation.BookingCinemaRequest;
 import it.univaq.disim.sose.cald.enjoyreservation.BookingCinemaResponse;
 import it.univaq.disim.sose.cald.enjoyreservation.BookingRestaurantRequest;
@@ -260,23 +265,11 @@ public class WebServiceEnjoyReservationServiceImpl implements EnjoyReservationSe
 		restaurantInfo.setTelephoneNumber(request.getRestaurant().getRestaurantInfo().getTelephoneNumber());
 		restaurant.setRestaurantInfo(restaurantInfo);
 		
-		GoogleMaps google = new GoogleMaps();
-		try {
-			double[] coordinates = new double[2];
-			coordinates = google.foundCoordinates(restaurantInfo.getAddress(), restaurantInfo.getCity());
-			restaurant.setLat(coordinates[0]);
-			restaurant.setLon(coordinates[1]);
-		} catch (ApiException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		} catch (InterruptedException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		} catch (IOException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
-
+		double[] coordinates = new double[2];
+		coordinates = coordinatesGoogle(restaurantInfo.getAddress(), restaurantInfo.getCity());
+		restaurant.setLat(coordinates[0]);
+		restaurant.setLon(coordinates[1]);
+	
 		restaurantInsertRequest.setRestaurant(restaurant);
 		
 		try {
@@ -336,22 +329,10 @@ public class WebServiceEnjoyReservationServiceImpl implements EnjoyReservationSe
 		cinemaInfo.setTelephoneNumber(request.getCinema().getCinemaInfo().getTelephoneNumber());
 		cinema.setCinemaInfo(cinemaInfo);
 		
-		GoogleMaps google = new GoogleMaps();
-		try {
-			double[] coordinates = new double[2];
-			coordinates = google.foundCoordinates(cinemaInfo.getAddress(), cinemaInfo.getCity());
-			cinema.setLat(coordinates[0]);
-			cinema.setLon(coordinates[1]);
-		} catch (ApiException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		} catch (InterruptedException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		} catch (IOException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
+		double[] coordinates = new double[2];
+		coordinates	= coordinatesGoogle(cinemaInfo.getAddress(), cinemaInfo.getCity());
+		cinema.setLat(coordinates[0]);
+		cinema.setLon(coordinates[1]);
 		
 		cinemaInsertRequest.setCinema(cinema);
 		
@@ -408,6 +389,31 @@ public class WebServiceEnjoyReservationServiceImpl implements EnjoyReservationSe
 			
 			response.setAccepted(cinemaBookingResponse.getAccepted());
 		} catch (CinemaBookingFault_Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return response;
+	}
+	
+	@Override
+	public AccountSignupResponse userSignup(AccountSignupRequest request) throws BusinessException {
+		AccountSignupResponse response = new AccountSignupResponse();
+		
+		AccountManagerService accountManagerService = new AccountManagerService();
+		AccountManagerPT accountManager = accountManagerService.getAccountManagerPort();
+		UserSignupRequest userSignupRequest = new UserSignupRequest();
+		
+		userSignupRequest.setEmail(request.getEmail());
+		userSignupRequest.setName(request.getName());
+		userSignupRequest.setPassword(request.getPassword());
+		userSignupRequest.setSurname(request.getSurname());
+		userSignupRequest.setUsername(request.getUsername());
+		
+		try {
+			UserSignupResponse userSignupResponse = accountManager.userSignup(userSignupRequest);
+			
+			response.setToken(userSignupResponse.getToken());
+		} catch (UserSignupFault_Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
@@ -478,24 +484,6 @@ public class WebServiceEnjoyReservationServiceImpl implements EnjoyReservationSe
 		
 		return response;
 	}
-	
-	public static XMLGregorianCalendar toXMLGregorianCalendar(Date date){
-        GregorianCalendar gCalendar = new GregorianCalendar();
-        gCalendar.setTime(date);
-        XMLGregorianCalendar xmlCalendar = null;
-        try {
-            xmlCalendar = DatatypeFactory.newInstance().newXMLGregorianCalendar(gCalendar);
-        } catch (DatatypeConfigurationException ex) {
-        }
-        return xmlCalendar;
-    }
-	
-	public static Date toDate(XMLGregorianCalendar calendar){
-        if(calendar == null) {
-            return null;
-        }
-        return calendar.toGregorianCalendar().getTime();
-    }
 
 	@Override
 	public GetSingleRestaurantInfoResponse getSingleRestaurantInfo(GetSingleRestaurantInfoRequest request)
@@ -639,8 +627,11 @@ public class WebServiceEnjoyReservationServiceImpl implements EnjoyReservationSe
 		restaurantInfo.setStyle(request.getRestaurant().getRestaurantInfo().getStyle());
 		restaurantInfo.setTelephoneNumber(request.getRestaurant().getRestaurantInfo().getTelephoneNumber());
 		restaurant.setRestaurantInfo(restaurantInfo);
-		restaurant.setLat(request.getRestaurant().getLat());
-		restaurant.setLon(request.getRestaurant().getLon());
+		
+		double[] coordinates = new double[2];
+		coordinates	= coordinatesGoogle(request.getRestaurant().getRestaurantInfo().getAddress(), request.getRestaurant().getRestaurantInfo().getCity());
+		restaurant.setLat(coordinates[0]);
+		restaurant.setLon(coordinates[1]);
 
 		restaurantUpdateRequest.setRestaurant(restaurant);
 		
@@ -704,8 +695,11 @@ public class WebServiceEnjoyReservationServiceImpl implements EnjoyReservationSe
 		cinemaInfo.setName(request.getCinema().getCinemaInfo().getName());
 		cinemaInfo.setTelephoneNumber(request.getCinema().getCinemaInfo().getTelephoneNumber());
 		cinema.setCinemaInfo(cinemaInfo);
-		cinema.setLat(request.getCinema().getLat());
-		cinema.setLon(request.getCinema().getLon());
+		
+		double[] coordinates = new double[2];
+		coordinates	= coordinatesGoogle(request.getCinema().getCinemaInfo().getAddress(), request.getCinema().getCinemaInfo().getCity());
+		cinema.setLat(coordinates[0]);
+		cinema.setLon(coordinates[1]);
 		
 		cinemaUpdateRequest.setCinema(cinema);
 		
@@ -719,5 +713,42 @@ public class WebServiceEnjoyReservationServiceImpl implements EnjoyReservationSe
 		}
 		return response;
 	}
+	
+	private double[] coordinatesGoogle(String address, String city) {
+		GoogleMaps google = new GoogleMaps();
+		double[] coordinates = new double[2];
+		try {
+			coordinates = google.foundCoordinates(address, city);
+		} catch (ApiException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		} catch (InterruptedException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		
+		return coordinates;
+	}
+	
+	public static XMLGregorianCalendar toXMLGregorianCalendar(Date date){
+        GregorianCalendar gCalendar = new GregorianCalendar();
+        gCalendar.setTime(date);
+        XMLGregorianCalendar xmlCalendar = null;
+        try {
+            xmlCalendar = DatatypeFactory.newInstance().newXMLGregorianCalendar(gCalendar);
+        } catch (DatatypeConfigurationException ex) {
+        }
+        return xmlCalendar;
+    }
+	
+	public static Date toDate(XMLGregorianCalendar calendar){
+        if(calendar == null) {
+            return null;
+        }
+        return calendar.toGregorianCalendar().getTime();
+    }
 	
 }

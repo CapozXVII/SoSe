@@ -14,6 +14,9 @@ import it.univaq.disim.sose.cald.enjoyreservation.AccountLogoutResponse;
 import it.univaq.disim.sose.cald.enjoyreservation.AccountSessionFault_Exception;
 import it.univaq.disim.sose.cald.enjoyreservation.AccountSessionRequest;
 import it.univaq.disim.sose.cald.enjoyreservation.AccountSessionResponse;
+import it.univaq.disim.sose.cald.enjoyreservation.AccountSignupFault_Exception;
+import it.univaq.disim.sose.cald.enjoyreservation.AccountSignupRequest;
+import it.univaq.disim.sose.cald.enjoyreservation.AccountSignupResponse;
 import it.univaq.disim.sose.cald.enjoyreservation.BookingCinemaFault_Exception;
 import it.univaq.disim.sose.cald.enjoyreservation.BookingCinemaRequest;
 import it.univaq.disim.sose.cald.enjoyreservation.BookingCinemaResponse;
@@ -110,6 +113,13 @@ public class EnjoyReservationPTImpl implements EnjoyReservationPT{
 	public InsertCinemaResponse insertCinema(InsertCinemaRequest parameters) throws InsertCinemaFault_Exception {
 		LOGGER.info("CALLED insertCinema ON enjoyreservation");
 		InsertCinemaResponse response = service.insertCinema(parameters);
+		return response;
+	}
+	
+	@Override
+	public AccountSignupResponse userSignup(AccountSignupRequest parameters) throws AccountSignupFault_Exception {
+		LOGGER.info("CALLED userSignup ON enjoyreservation");
+		AccountSignupResponse response = service.userSignup(parameters);
 		return response;
 	}
 

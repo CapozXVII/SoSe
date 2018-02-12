@@ -161,6 +161,14 @@ public class CinemaController {
 		return response.isResponse();
 	}
 	
+	public boolean checkOwner(EnjoyReservationPT prosumer, String token) throws AccountSessionFault_Exception {
+		AccountSessionRequest request = new AccountSessionRequest();
+		request.setToken(token);
+		AccountSessionResponse response = prosumer.accountSession(request);
+		
+		return response.isResponse();
+	}
+	
 	public static XMLGregorianCalendar toXMLGregorianCalendar(Timestamp timestamp){
 		Date date = new Date(timestamp.getTime());
         GregorianCalendar gCalendar = new GregorianCalendar();

@@ -18,9 +18,12 @@
 			<xsd:element name="getSingleRestaurantInfoRequest" type="tns:getSingleRestaurantInfoRequest" />
 			<xsd:element name="bookingRestaurantRequest" type="tns:bookingRestaurantRequest"/>	
 			<xsd:element name="updateRestaurantRequest" type="tns:updateRestaurantRequest"/>
+			<xsd:element name="accountSignupRequest" type="tns:accountSignupRequest"/>
 			<xsd:element name="accountLoginRequest" type="tns:accountLoginRequest"/>
 			<xsd:element name="accountLogoutRequest" type="tns:accountLogoutRequest"/>
 			<xsd:element name="accountSessionRequest" type="tns:accountSessionRequest"/>
+			<xsd:element name="cinemaOwnerRequest" type="tns:cinemaOwnerRequest"/>
+			<xsd:element name="restaurantOwnerRequest" type="tns:restaurantOwnerRequest"/>
 			
 			<xsd:element name="insertCinemaResponse" type="tns:insertCinemaResponse"/> 
 			<xsd:element name="getCinemaInfoResponse" type="tns:getCinemaInfoResponse"/> 
@@ -32,9 +35,12 @@
 			<xsd:element name="getSingleRestaurantInfoResponse" type="tns:getSingleRestaurantInfoResponse" />
 			<xsd:element name="bookingRestaurantResponse" type="tns:bookingRestaurantResponse"/> 
 			<xsd:element name="updateRestaurantResponse" type="tns:updateRestaurantResponse"/>
+			<xsd:element name="accountSignupResponse" type="tns:accountSignupResponse"/>
 			<xsd:element name="accountLoginResponse" type="tns:accountLoginResponse"/>
 			<xsd:element name="accountLogoutResponse" type="tns:accountLogoutResponse"/>
 			<xsd:element name="accountSessionResponse" type="tns:accountSessionResponse"/>
+			<xsd:element name="cinemaOwnerResponse" type="tns:cinemaOwnerResponse"/>
+			<xsd:element name="restaurantOwnerResponse" type="tns:restaurantOwnerResponse"/>
 			
 			<xsd:element name="getRestaurantInfoFault" type="tns:getRestaurantInfoFault"/>
 			<xsd:element name="getCinemaInfoFault" type="tns:getCinemaInfoFault"/>
@@ -44,9 +50,12 @@
 			<xsd:element name="updateRestaurantFault" type="tns:updateRestaurantFault"/>
 			<xsd:element name="insertCinemaFault" type="tns:insertCinemaFault"/>
 			<xsd:element name="updateCinemaFault" type="tns:updateCinemaFault"/>
+			<xsd:element name="accountSignupFault" type="tns:accountSignupFault"/>
 			<xsd:element name="accountLoginFault" type="tns:accountLoginFault"/>
 			<xsd:element name="accountLogoutFault" type="tns:accountLogoutFault"/>
 			<xsd:element name="accountSessionFault" type="tns:accountSessionFault"/>
+			<xsd:element name="cinemaOwnerFault" type="tns:cinemaOwnerFault"/>
+			<xsd:element name="restaurantOwnerFault" type="tns:restaurantOwnerFault"/>
 			
 			<!-- Resturant Info -->
 			<!-- Request -->
@@ -275,11 +284,29 @@
 				</xsd:sequence>
 			</xsd:complexType>
 			
-			
 			<!--response-->
 			<xsd:complexType name="updateCinemaResponse">
 				<xsd:sequence>
 					<xsd:element name="accepted" type="xsd:boolean" />
+				</xsd:sequence>
+			</xsd:complexType>
+			
+			<!--accountSignup-->
+			<!--request-->
+			<xsd:complexType name="accountSignupRequest">
+				<xsd:sequence>
+					<xsd:element name="username" type="xsd:string" />
+					<xsd:element name="email" type="xsd:string" />
+					<xsd:element name="password" type="xsd:string" />
+					<xsd:element name="name" type="xsd:string" />
+					<xsd:element name="surname" type="xsd:string" />
+				</xsd:sequence>
+			</xsd:complexType>
+			
+			<!--response-->
+			<xsd:complexType name="accountSignupResponse">
+				<xsd:sequence>
+					<xsd:element name="token" type="xsd:string" />
 				</xsd:sequence>
 			</xsd:complexType>
 			
@@ -324,6 +351,36 @@
 			
 			<!--response-->
 			<xsd:complexType name="accountSessionResponse">
+				<xsd:sequence>
+					<xsd:element name="response" type="xsd:boolean" />
+				</xsd:sequence>
+			</xsd:complexType>
+			
+			<!--checkCinemaOwner-->
+			<!--request-->
+			<xsd:complexType name="cinemaOwnerRequest">
+				<xsd:sequence>
+					<xsd:element name="token" type="xsd:string" />
+				</xsd:sequence>
+			</xsd:complexType>
+			
+			<!--response-->
+			<xsd:complexType name="cinemaOwnerResponse">
+				<xsd:sequence>
+					<xsd:element name="response" type="xsd:boolean" />
+				</xsd:sequence>
+			</xsd:complexType>
+			
+			<!--checkRestaurantOwner-->
+			<!--request-->
+			<xsd:complexType name="restaurantOwnerRequest">
+				<xsd:sequence>
+					<xsd:element name="token" type="xsd:string" />
+				</xsd:sequence>
+			</xsd:complexType>
+			
+			<!--response-->
+			<xsd:complexType name="restaurantOwnerResponse">
 				<xsd:sequence>
 					<xsd:element name="response" type="xsd:boolean" />
 				</xsd:sequence>
@@ -378,6 +435,12 @@
                         <xsd:element name="message" type="xsd:string" />
 				</xsd:sequence>
 			</xsd:complexType>
+			<xsd:complexType name="accountSignupFault">
+				<xsd:sequence>
+                        <xsd:element name="faultInsert" type="xsd:string" />
+                        <xsd:element name="message" type="xsd:string" />
+				</xsd:sequence>
+			</xsd:complexType>
 			<xsd:complexType name="accountLoginFault">
 				<xsd:sequence>
                         <xsd:element name="faultInsert" type="xsd:string" />
@@ -391,6 +454,18 @@
 				</xsd:sequence>
 			</xsd:complexType>
 			<xsd:complexType name="accountSessionFault">
+				<xsd:sequence>
+                        <xsd:element name="faultInsert" type="xsd:string" />
+                        <xsd:element name="message" type="xsd:string" />
+				</xsd:sequence>
+			</xsd:complexType>
+			<xsd:complexType name="cinemaOwnerFault">
+				<xsd:sequence>
+                        <xsd:element name="faultInsert" type="xsd:string" />
+                        <xsd:element name="message" type="xsd:string" />
+				</xsd:sequence>
+			</xsd:complexType>
+			<xsd:complexType name="restaurantOwnerFault">
 				<xsd:sequence>
                         <xsd:element name="faultInsert" type="xsd:string" />
                         <xsd:element name="message" type="xsd:string" />
@@ -474,6 +549,13 @@
     <message name="updateCinemaResponse">
         <part name="parameters" element="tns:updateCinemaResponse"/>
     </message>
+    <!--Account Signup-->
+	<message name="accountSignupRequest">
+        <part name="parameters" element="tns:accountSignupRequest"/>
+    </message>
+    <message name="accountSignupResponse">
+        <part name="parameters" element="tns:accountSignupResponse"/>
+    </message>
     <!--Account Login-->
 	<message name="accountLoginRequest">
         <part name="parameters" element="tns:accountLoginRequest"/>
@@ -494,6 +576,20 @@
     </message>
     <message name="accountSessionResponse">
         <part name="parameters" element="tns:accountSessionResponse"/>
+    </message>
+     <!--Check CinemaOwner-->
+	<message name="cinemaOwnerRequest">
+        <part name="parameters" element="tns:cinemaOwnerRequest"/>
+    </message>
+    <message name="cinemaOwnerResponse">
+        <part name="parameters" element="tns:cinemaOwnerResponse"/>
+    </message>
+    <!--Check RestaurantOwner-->
+	<message name="restaurantOwnerRequest">
+        <part name="parameters" element="tns:restaurantOwnerRequest"/>
+    </message>
+    <message name="restaurantOwnerResponse">
+        <part name="parameters" element="tns:restaurantOwnerResponse"/>
     </message>
 	
 	<!--Fault Messages-->
@@ -521,6 +617,9 @@
 	<message name="updateCinemaFault">
         <part name="parameters" element="tns:updateRestaurantFault"/>
     </message>
+    <message name="accountSignupFault">
+        <part name="parameters" element="tns:accountLoginFault"/>
+    </message>
     <message name="accountLoginFault">
         <part name="parameters" element="tns:accountLoginFault"/>
     </message>
@@ -528,6 +627,12 @@
         <part name="parameters" element="tns:accountLogoutFault"/>
     </message>
     <message name="accountSessionFault">
+        <part name="parameters" element="tns:accountSessionFault"/>
+    </message>
+    <message name="cinemaOwnerFault">
+        <part name="parameters" element="tns:accountSessionFault"/>
+    </message>
+    <message name="restaurantOwnerFault">
         <part name="parameters" element="tns:accountSessionFault"/>
     </message>
 		
@@ -582,7 +687,12 @@
             <input name="updateCinemaRequest" message="tns:updateCinemaRequest" />
             <output name="updateCinemaResponse" message="tns:updateCinemaResponse"/>
 			<fault name="updateCinemaFault" message="tns:updateCinemaFault"/>
-        </operation>	
+        </operation>
+         <operation name="userSignup">
+            <input name="accountSignupRequest" message="tns:accountSignupRequest" />
+            <output name="accountSignupResponse" message="tns:accountSignupResponse"/>
+			<fault name="accountSignupFault" message="tns:accountSignupFault"/>
+        </operation>		
         <operation name="userLogin">
             <input name="accountLoginRequest" message="tns:accountLoginRequest" />
             <output name="accountLoginResponse" message="tns:accountLoginResponse"/>
@@ -597,6 +707,16 @@
             <input name="accountSessionRequest" message="tns:accountSessionRequest" />
             <output name="accountSessionResponse" message="tns:accountSessionResponse"/>
 			<fault name="accountSessionFault" message="tns:accountSessionFault"/>
+        </operation>	
+        <operation name="checkCinemaOwner">
+            <input name="cinemaOwnerRequest" message="tns:cinemaOwnerRequest" />
+            <output name="cinemaOwnerResponse" message="tns:cinemaOwnerResponse"/>
+			<fault name="cinemaOwnerFault" message="tns:cinemaOwnerFault"/>
+        </operation>	
+         <operation name="checkRestaurantOwner">
+            <input name="restaurantOwnerRequest" message="tns:restaurantOwnerRequest" />
+            <output name="restaurantOwnerResponse" message="tns:restaurantOwnerResponse"/>
+			<fault name="restaurantOwnerFault" message="tns:restaurantOwnerFault"/>
         </operation>	
     </portType>
 		
@@ -693,6 +813,15 @@
     			<soap:body use="literal" />
     		</output>
     	</operation>
+    	<operation name="userSignup">
+    		<soap:operation soapAction="" />    	
+    		<input>
+    			<soap:body use="literal" />
+    		</input>
+    		<output>
+    			<soap:body use="literal" />
+    		</output>
+    	</operation>
     	<operation name="userLogin">
     		<soap:operation soapAction="" />    	
     		<input>
@@ -720,6 +849,7 @@
     			<soap:body use="literal" />
     		</output>
     	</operation>
+   
     </binding>
 	
 	<!-- SERVICE-->

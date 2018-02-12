@@ -6,6 +6,8 @@ import it.univaq.disim.sose.cald.enjoyreservation.AccountLogoutRequest;
 import it.univaq.disim.sose.cald.enjoyreservation.AccountLogoutResponse;
 import it.univaq.disim.sose.cald.enjoyreservation.AccountSessionRequest;
 import it.univaq.disim.sose.cald.enjoyreservation.AccountSessionResponse;
+import it.univaq.disim.sose.cald.enjoyreservation.AccountSignupRequest;
+import it.univaq.disim.sose.cald.enjoyreservation.AccountSignupResponse;
 import it.univaq.disim.sose.cald.enjoyreservation.BookingCinemaRequest;
 import it.univaq.disim.sose.cald.enjoyreservation.BookingCinemaResponse;
 import it.univaq.disim.sose.cald.enjoyreservation.BookingRestaurantRequest;
@@ -48,6 +50,8 @@ public interface EnjoyReservationService {
 	BookingRestaurantResponse restaurantBooking(BookingRestaurantRequest request) throws BusinessException;
 	
 	BookingCinemaResponse cinemaBooking(BookingCinemaRequest request) throws BusinessException;
+	
+	AccountSignupResponse userSignup(AccountSignupRequest request) throws BusinessException;
 	
 	AccountLoginResponse userLogin(AccountLoginRequest request) throws BusinessException;
 	

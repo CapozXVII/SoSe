@@ -15,6 +15,9 @@ import it.univaq.disim.sose.cald.accountmanager.UserLoginResponse;
 import it.univaq.disim.sose.cald.accountmanager.UserLogoutFault_Exception;
 import it.univaq.disim.sose.cald.accountmanager.UserLogoutRequest;
 import it.univaq.disim.sose.cald.accountmanager.UserLogoutResponse;
+import it.univaq.disim.sose.cald.accountmanager.UserSignupFault_Exception;
+import it.univaq.disim.sose.cald.accountmanager.UserSignupRequest;
+import it.univaq.disim.sose.cald.accountmanager.UserSignupResponse;
 import it.univaq.disim.sose.cald.accountmanager.business.AccountManagerService;
 
 @Component(value = "AccountManagerPTImpl")
@@ -46,6 +49,14 @@ public class AccountManagerPTImpl implements AccountManagerPT {
 		LOGGER.info("called Check Session in Account Service");
 		CheckSessionResponse response = new CheckSessionResponse();
 		response = service.checkSession(parameters);
+		return response;
+	}
+
+	@Override
+	public UserSignupResponse userSignup(UserSignupRequest parameters) throws UserSignupFault_Exception {
+		LOGGER.info("called User Signup in Account Service");
+		UserSignupResponse response = new UserSignupResponse();
+		response = service.userSignup(parameters);
 		return response;
 	}
 

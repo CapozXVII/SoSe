@@ -231,7 +231,9 @@ public class JDBCCinemaInsertingServiceImpl implements CinemaInsertingService {
         if(calendar == null) {
             return null;
         }
-        return calendar.toGregorianCalendar().getTime();
+        Date date = calendar.toGregorianCalendar().getTime();
+        date.setTime(date.getTime() - 3600 * 1000);
+        return date;
     }
 
 
@@ -249,9 +251,7 @@ public class JDBCCinemaInsertingServiceImpl implements CinemaInsertingService {
 		newCinema.setCap(parameters.getCinema().getCinemaInfo().getCap());
 		newCinema.setCity(parameters.getCinema().getCinemaInfo().getCity());
 		newCinema.setTelephoneNumber(parameters.getCinema().getCinemaInfo().getTelephoneNumber());
-		newCinema.setId(parameters.getCinema().getCinemaInfo().getIdCinema());
-		LOGGER.info(newCinema.getId() + "ciao1");
-		
+		newCinema.setId(parameters.getCinema().getCinemaInfo().getIdCinema());		
 		
 		for(HallType x : parameters.getCinema().getCinemaInfo().getHall()) {
 			Hall newHall  = new Hall();
@@ -259,7 +259,6 @@ public class JDBCCinemaInsertingServiceImpl implements CinemaInsertingService {
 			newHall.setNumber(x.getNumber());
 			newHall.setSeatsNumber(x.getSeatsNumber());
 			newHall.setHall_id(x.getIdHall());
-			LOGGER.info(newHall.getHall_id() + "ciao2");
 			List<HallInfo> listHallInfo = new ArrayList<HallInfo>();
 			
 			for(HallInfoType h : x.getHallInfo()) {
@@ -269,7 +268,6 @@ public class JDBCCinemaInsertingServiceImpl implements CinemaInsertingService {
 				newHallInfo.setFreeSeatsNumber(h.getFreeSeatsNumber());
 				newHallInfo.setPrice(h.getPrice());
 				newHallInfo.setId(h.getIdHallFilm());
-				LOGGER.info(newHallInfo.getId() + "ciao3");
 				Film newFilm = new Film();
 				newFilm.setName(h.getFilm().getName());
 				newFilm.setDirector(h.getFilm().getDirector());
@@ -278,7 +276,6 @@ public class JDBCCinemaInsertingServiceImpl implements CinemaInsertingService {
 				newFilm.setType(h.getFilm().getType());
 				newFilm.setPlot(h.getFilm().getPlot());
 				newFilm.setId(h.getFilm().getIdFilm());
-				LOGGER.info(newFilm.getId() + "ciao4");
 				newHallInfo.setFilm(newFilm);
 				listHallInfo.add(newHallInfo);
 			}
