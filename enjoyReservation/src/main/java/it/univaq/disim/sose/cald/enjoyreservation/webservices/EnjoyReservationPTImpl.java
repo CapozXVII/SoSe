@@ -27,6 +27,10 @@ import it.univaq.disim.sose.cald.enjoyreservation.GetCinemaInfoResponse;
 import it.univaq.disim.sose.cald.enjoyreservation.GetRestaurantInfoFault_Exception;
 import it.univaq.disim.sose.cald.enjoyreservation.GetRestaurantInfoRequest;
 import it.univaq.disim.sose.cald.enjoyreservation.GetRestaurantInfoResponse;
+import it.univaq.disim.sose.cald.enjoyreservation.GetSingleCinemaInfoRequest;
+import it.univaq.disim.sose.cald.enjoyreservation.GetSingleCinemaInfoResponse;
+import it.univaq.disim.sose.cald.enjoyreservation.GetSingleRestaurantInfoRequest;
+import it.univaq.disim.sose.cald.enjoyreservation.GetSingleRestaurantInfoResponse;
 import it.univaq.disim.sose.cald.enjoyreservation.InsertCinemaFault_Exception;
 import it.univaq.disim.sose.cald.enjoyreservation.InsertCinemaRequest;
 import it.univaq.disim.sose.cald.enjoyreservation.InsertCinemaResponse;
@@ -60,14 +64,16 @@ public class EnjoyReservationPTImpl implements EnjoyReservationPT{
 	@Override
 	public UpdateRestaurantResponse updateRestaurant(UpdateRestaurantRequest parameters)
 			throws UpdateRestaurantFault_Exception {
-		// TODO Auto-generated method stub
-		return null;
+		LOGGER.info("CALLED updateRestaurant ON enjoyreservation");
+		UpdateRestaurantResponse response = service.updateRestaurant(parameters);
+		return response;
 	}
 
 	@Override
 	public UpdateCinemaResponse updateCinema(UpdateCinemaRequest parameters) throws UpdateCinemaFault_Exception {
-		// TODO Auto-generated method stub
-		return null;
+		LOGGER.info("CALLED updateCinema ON enjoyreservation");
+		UpdateCinemaResponse response = service.updateCinema(parameters);
+		return response;
 	}
 
 	@Override
@@ -125,6 +131,22 @@ public class EnjoyReservationPTImpl implements EnjoyReservationPT{
 	public AccountLogoutResponse userLogout(AccountLogoutRequest parameters) throws AccountLogoutFault_Exception {
 		LOGGER.info("CALLED userLogout ON enjoyreservation");
 		AccountLogoutResponse response = service.userLogout(parameters);
+		return response;
+	}
+
+	@Override
+	public GetSingleCinemaInfoResponse getSingleCinemaInfo(GetSingleCinemaInfoRequest parameters) 
+			throws GetCinemaInfoFault_Exception {
+		LOGGER.info("CALLED getSingleCinemaInfo ON enjoyreservation");
+		GetSingleCinemaInfoResponse response = service.getSingleCinemaInfo(parameters);
+		return response;
+	}
+
+	@Override
+	public GetSingleRestaurantInfoResponse getSingleRestaurantInfo(GetSingleRestaurantInfoRequest parameters) 
+			throws GetRestaurantInfoFault_Exception {
+		LOGGER.info("CALLED getSingleRestaurantInfo ON enjoyreservation");
+		GetSingleRestaurantInfoResponse response = service.getSingleRestaurantInfo(parameters);
 		return response;
 	}
 

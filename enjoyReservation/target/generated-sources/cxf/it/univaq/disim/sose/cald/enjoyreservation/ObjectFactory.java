@@ -26,10 +26,12 @@ public class ObjectFactory {
 
     private final static QName _InsertCinemaRequest_QNAME = new QName("http://it.univaq.disim.sose.cald/enjoyReservation", "insertCinemaRequest");
     private final static QName _GetCinemaInfoRequest_QNAME = new QName("http://it.univaq.disim.sose.cald/enjoyReservation", "getCinemaInfoRequest");
+    private final static QName _GetSingleCinemaInfoRequest_QNAME = new QName("http://it.univaq.disim.sose.cald/enjoyReservation", "getSingleCinemaInfoRequest");
     private final static QName _BookingCinemaRequest_QNAME = new QName("http://it.univaq.disim.sose.cald/enjoyReservation", "bookingCinemaRequest");
     private final static QName _UpdateCinemaRequest_QNAME = new QName("http://it.univaq.disim.sose.cald/enjoyReservation", "updateCinemaRequest");
     private final static QName _InsertRestaurantRequest_QNAME = new QName("http://it.univaq.disim.sose.cald/enjoyReservation", "insertRestaurantRequest");
     private final static QName _GetRestaurantInfoRequest_QNAME = new QName("http://it.univaq.disim.sose.cald/enjoyReservation", "getRestaurantInfoRequest");
+    private final static QName _GetSingleRestaurantInfoRequest_QNAME = new QName("http://it.univaq.disim.sose.cald/enjoyReservation", "getSingleRestaurantInfoRequest");
     private final static QName _BookingRestaurantRequest_QNAME = new QName("http://it.univaq.disim.sose.cald/enjoyReservation", "bookingRestaurantRequest");
     private final static QName _UpdateRestaurantRequest_QNAME = new QName("http://it.univaq.disim.sose.cald/enjoyReservation", "updateRestaurantRequest");
     private final static QName _AccountLoginRequest_QNAME = new QName("http://it.univaq.disim.sose.cald/enjoyReservation", "accountLoginRequest");
@@ -37,10 +39,12 @@ public class ObjectFactory {
     private final static QName _AccountSessionRequest_QNAME = new QName("http://it.univaq.disim.sose.cald/enjoyReservation", "accountSessionRequest");
     private final static QName _InsertCinemaResponse_QNAME = new QName("http://it.univaq.disim.sose.cald/enjoyReservation", "insertCinemaResponse");
     private final static QName _GetCinemaInfoResponse_QNAME = new QName("http://it.univaq.disim.sose.cald/enjoyReservation", "getCinemaInfoResponse");
+    private final static QName _GetSingleCinemaInfoResponse_QNAME = new QName("http://it.univaq.disim.sose.cald/enjoyReservation", "getSingleCinemaInfoResponse");
     private final static QName _BookingCinemaResponse_QNAME = new QName("http://it.univaq.disim.sose.cald/enjoyReservation", "bookingCinemaResponse");
     private final static QName _UpdateCinemaResponse_QNAME = new QName("http://it.univaq.disim.sose.cald/enjoyReservation", "updateCinemaResponse");
     private final static QName _InsertRestaurantResponse_QNAME = new QName("http://it.univaq.disim.sose.cald/enjoyReservation", "insertRestaurantResponse");
     private final static QName _GetRestaurantInfoResponse_QNAME = new QName("http://it.univaq.disim.sose.cald/enjoyReservation", "getRestaurantInfoResponse");
+    private final static QName _GetSingleRestaurantInfoResponse_QNAME = new QName("http://it.univaq.disim.sose.cald/enjoyReservation", "getSingleRestaurantInfoResponse");
     private final static QName _BookingRestaurantResponse_QNAME = new QName("http://it.univaq.disim.sose.cald/enjoyReservation", "bookingRestaurantResponse");
     private final static QName _UpdateRestaurantResponse_QNAME = new QName("http://it.univaq.disim.sose.cald/enjoyReservation", "updateRestaurantResponse");
     private final static QName _AccountLoginResponse_QNAME = new QName("http://it.univaq.disim.sose.cald/enjoyReservation", "accountLoginResponse");
@@ -82,6 +86,14 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link GetSingleCinemaInfoRequest }
+     * 
+     */
+    public GetSingleCinemaInfoRequest createGetSingleCinemaInfoRequest() {
+        return new GetSingleCinemaInfoRequest();
+    }
+
+    /**
      * Create an instance of {@link BookingCinemaRequest }
      * 
      */
@@ -111,6 +123,14 @@ public class ObjectFactory {
      */
     public GetRestaurantInfoRequest createGetRestaurantInfoRequest() {
         return new GetRestaurantInfoRequest();
+    }
+
+    /**
+     * Create an instance of {@link GetSingleRestaurantInfoRequest }
+     * 
+     */
+    public GetSingleRestaurantInfoRequest createGetSingleRestaurantInfoRequest() {
+        return new GetSingleRestaurantInfoRequest();
     }
 
     /**
@@ -170,6 +190,14 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link GetSingleCinemaInfoResponse }
+     * 
+     */
+    public GetSingleCinemaInfoResponse createGetSingleCinemaInfoResponse() {
+        return new GetSingleCinemaInfoResponse();
+    }
+
+    /**
      * Create an instance of {@link BookingCinemaResponse }
      * 
      */
@@ -199,6 +227,14 @@ public class ObjectFactory {
      */
     public GetRestaurantInfoResponse createGetRestaurantInfoResponse() {
         return new GetRestaurantInfoResponse();
+    }
+
+    /**
+     * Create an instance of {@link GetSingleRestaurantInfoResponse }
+     * 
+     */
+    public GetSingleRestaurantInfoResponse createGetSingleRestaurantInfoResponse() {
+        return new GetSingleRestaurantInfoResponse();
     }
 
     /**
@@ -412,6 +448,15 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link GetSingleCinemaInfoRequest }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://it.univaq.disim.sose.cald/enjoyReservation", name = "getSingleCinemaInfoRequest")
+    public JAXBElement<GetSingleCinemaInfoRequest> createGetSingleCinemaInfoRequest(GetSingleCinemaInfoRequest value) {
+        return new JAXBElement<GetSingleCinemaInfoRequest>(_GetSingleCinemaInfoRequest_QNAME, GetSingleCinemaInfoRequest.class, null, value);
+    }
+
+    /**
      * Create an instance of {@link JAXBElement }{@code <}{@link BookingCinemaRequest }{@code >}}
      * 
      */
@@ -445,6 +490,15 @@ public class ObjectFactory {
     @XmlElementDecl(namespace = "http://it.univaq.disim.sose.cald/enjoyReservation", name = "getRestaurantInfoRequest")
     public JAXBElement<GetRestaurantInfoRequest> createGetRestaurantInfoRequest(GetRestaurantInfoRequest value) {
         return new JAXBElement<GetRestaurantInfoRequest>(_GetRestaurantInfoRequest_QNAME, GetRestaurantInfoRequest.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link GetSingleRestaurantInfoRequest }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://it.univaq.disim.sose.cald/enjoyReservation", name = "getSingleRestaurantInfoRequest")
+    public JAXBElement<GetSingleRestaurantInfoRequest> createGetSingleRestaurantInfoRequest(GetSingleRestaurantInfoRequest value) {
+        return new JAXBElement<GetSingleRestaurantInfoRequest>(_GetSingleRestaurantInfoRequest_QNAME, GetSingleRestaurantInfoRequest.class, null, value);
     }
 
     /**
@@ -511,6 +565,15 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link GetSingleCinemaInfoResponse }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://it.univaq.disim.sose.cald/enjoyReservation", name = "getSingleCinemaInfoResponse")
+    public JAXBElement<GetSingleCinemaInfoResponse> createGetSingleCinemaInfoResponse(GetSingleCinemaInfoResponse value) {
+        return new JAXBElement<GetSingleCinemaInfoResponse>(_GetSingleCinemaInfoResponse_QNAME, GetSingleCinemaInfoResponse.class, null, value);
+    }
+
+    /**
      * Create an instance of {@link JAXBElement }{@code <}{@link BookingCinemaResponse }{@code >}}
      * 
      */
@@ -544,6 +607,15 @@ public class ObjectFactory {
     @XmlElementDecl(namespace = "http://it.univaq.disim.sose.cald/enjoyReservation", name = "getRestaurantInfoResponse")
     public JAXBElement<GetRestaurantInfoResponse> createGetRestaurantInfoResponse(GetRestaurantInfoResponse value) {
         return new JAXBElement<GetRestaurantInfoResponse>(_GetRestaurantInfoResponse_QNAME, GetRestaurantInfoResponse.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link GetSingleRestaurantInfoResponse }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://it.univaq.disim.sose.cald/enjoyReservation", name = "getSingleRestaurantInfoResponse")
+    public JAXBElement<GetSingleRestaurantInfoResponse> createGetSingleRestaurantInfoResponse(GetSingleRestaurantInfoResponse value) {
+        return new JAXBElement<GetSingleRestaurantInfoResponse>(_GetSingleRestaurantInfoResponse_QNAME, GetSingleRestaurantInfoResponse.class, null, value);
     }
 
     /**

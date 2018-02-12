@@ -10,10 +10,12 @@
 		<xsd:schema targetNamespace="http://it.univaq.disim.sose.cald/enjoyReservation">
 			<xsd:element name="insertCinemaRequest" type="tns:insertCinemaRequest"/> 
 			<xsd:element name="getCinemaInfoRequest" type="tns:getCinemaInfoRequest"/> 
+			<xsd:element name="getSingleCinemaInfoRequest" type="tns:getSingleCinemaInfoRequest" />
 			<xsd:element name="bookingCinemaRequest" type="tns:bookingCinemaRequest"/> 
 			<xsd:element name="updateCinemaRequest" type="tns:updateCinemaRequest"/>
 			<xsd:element name="insertRestaurantRequest" type="tns:insertRestaurantRequest"/> 
 			<xsd:element name="getRestaurantInfoRequest" type="tns:getRestaurantInfoRequest"/> 
+			<xsd:element name="getSingleRestaurantInfoRequest" type="tns:getSingleRestaurantInfoRequest" />
 			<xsd:element name="bookingRestaurantRequest" type="tns:bookingRestaurantRequest"/>	
 			<xsd:element name="updateRestaurantRequest" type="tns:updateRestaurantRequest"/>
 			<xsd:element name="accountLoginRequest" type="tns:accountLoginRequest"/>
@@ -22,10 +24,12 @@
 			
 			<xsd:element name="insertCinemaResponse" type="tns:insertCinemaResponse"/> 
 			<xsd:element name="getCinemaInfoResponse" type="tns:getCinemaInfoResponse"/> 
+			<xsd:element name="getSingleCinemaInfoResponse" type="tns:getSingleCinemaInfoResponse" />
 			<xsd:element name="bookingCinemaResponse" type="tns:bookingCinemaResponse"/> 
 			<xsd:element name="updateCinemaResponse" type="tns:updateCinemaResponse"/>
 			<xsd:element name="insertRestaurantResponse" type="tns:insertRestaurantResponse"/> 
 			<xsd:element name="getRestaurantInfoResponse" type="tns:getRestaurantInfoResponse"/> 
+			<xsd:element name="getSingleRestaurantInfoResponse" type="tns:getSingleRestaurantInfoResponse" />
 			<xsd:element name="bookingRestaurantResponse" type="tns:bookingRestaurantResponse"/> 
 			<xsd:element name="updateRestaurantResponse" type="tns:updateRestaurantResponse"/>
 			<xsd:element name="accountLoginResponse" type="tns:accountLoginResponse"/>
@@ -88,6 +92,22 @@
 				</xsd:sequence>
 			</xsd:complexType>
 			
+			<!-- Single Restaurant Info -->
+			<!-- Request -->
+			<xsd:complexType name="getSingleRestaurantInfoRequest">
+				<xsd:sequence>
+					<xsd:element name="id" type="xsd:long" />
+				</xsd:sequence>
+			</xsd:complexType>
+			
+			
+			<!-- Response -->
+			<xsd:complexType name="getSingleRestaurantInfoResponse">
+				<xsd:sequence>
+					<xsd:element name="restaurant" type="tns:OSMRestaurantType" />
+				</xsd:sequence>
+			</xsd:complexType>
+			
 			<!-- Cinema Info -->
 			<!-- Request -->
 			<xsd:complexType name="getCinemaInfoRequest">
@@ -145,6 +165,21 @@
 					<xsd:element name="duration" type="xsd:int" />
 					<xsd:element name="type" type="xsd:string" />
 					<xsd:element name="plot" type="xsd:string" />
+				</xsd:sequence>
+			</xsd:complexType>
+			
+			<!-- Single Cinema Info -->
+			<!-- Request -->
+			<xsd:complexType name="getSingleCinemaInfoRequest">
+				<xsd:sequence>
+					<xsd:element name="id" type="xsd:long" />
+				</xsd:sequence>
+			</xsd:complexType>
+			
+			<!-- Response -->
+			<xsd:complexType name="getSingleCinemaInfoResponse">
+				<xsd:sequence>
+					<xsd:element name="cinema" type="tns:OSMCinemaType" />
 				</xsd:sequence>
 			</xsd:complexType>
 			
@@ -371,6 +406,24 @@
     <message name="getRestaurantInfoResponse">
         <part name="parameters" element="tns:getRestaurantInfoResponse"/>
     </message>
+    <!-- Single Cinema Info -->
+	<message name="getSingleCinemaInfoRequest">
+		<part name="parameters" element="tns:getSingleCinemaInfoRequest">
+		</part>
+	</message>
+	<message name="getSingleCinemaInfoResponse">
+		<part name="parameters" element="tns:getSingleCinemaInfoResponse">
+		</part>
+	</message>
+	<!-- Single Restaurant Info -->
+	<message name="getSingleRestaurantInfoRequest">
+		<part name="parameters" element="tns:getSingleRestaurantInfoRequest">
+		</part>
+	</message>
+	<message name="getSingleRestaurantInfoResponse">
+		<part name="parameters" element="tns:getSingleRestaurantInfoResponse">
+		</part>
+	</message>
 	<!--Restaurant Booking-->
 	<message name="bookingRestaurantRequest">
         <part name="parameters" element="tns:bookingRestaurantRequest"/>
@@ -489,6 +542,16 @@
             <output name="getRestaurantInfoResponse" message="tns:getRestaurantInfoResponse"/>
 			<fault name="getRestaurantInfoFault" message="tns:getRestaurantInfoFault"/>
         </operation>
+        <operation name="getSingleRestaurantInfo">
+			<input name="getSingleRestaurantInfoRequest" message="tns:getSingleRestaurantInfoRequest" />
+			<output name="getSingleRestaurantInfoResponse" message="tns:getSingleRestaurantInfoResponse" />
+			<fault name="getRestaurantInfoFault" message="tns:getRestaurantInfoFault" />
+		</operation>
+        <operation name="getSingleCinemaInfo">
+			<input name="getSingleCinemaInfoRequest" message="tns:getSingleCinemaInfoRequest" />
+			<output name="getSingleCinemaInfoResponse" message="tns:getSingleCinemaInfoResponse" />
+			<fault name="getCinemaInfoFault" message="tns:getCinemaInfoFault" />
+		</operation>
 		<operation name="cinemaBooking">
             <input  name="bookingCinemaRequest" message="tns:bookingCinemaRequest" />
             <output name="bookingCinemaResponse" message="tns:bookingCinemaResponse"/>
@@ -549,6 +612,24 @@
     		</output>
     	</operation>
 		<operation name="getRestaurantInfo">
+    		<soap:operation soapAction="" />    	
+    		<input>
+    			<soap:body use="literal" />
+    		</input>
+    		<output>
+    			<soap:body use="literal" />
+    		</output>
+    	</operation>
+    	<operation name="getSingleRestaurantInfo">
+    		<soap:operation soapAction="" />    	
+    		<input>
+    			<soap:body use="literal" />
+    		</input>
+    		<output>
+    			<soap:body use="literal" />
+    		</output>
+    	</operation>
+    	<operation name="getSingleCinemaInfo">
     		<soap:operation soapAction="" />    	
     		<input>
     			<soap:body use="literal" />

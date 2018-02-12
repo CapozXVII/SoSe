@@ -104,11 +104,10 @@ public class CinemaInformationPTImpl implements CinemaInformationPT{
 		
 		Cinema cinema = service.getSingleCinema(parameters.getId());
 		SingleCinemaInformationResponse response = new SingleCinemaInformationResponse();
-		List<HallType> halls;
+		List<HallType> halls = new ArrayList<HallType>();
 		GregorianCalendar gtime = new GregorianCalendar();
 		XMLGregorianCalendar xmlCalendar = null;
 		
-		halls = new ArrayList<HallType>();
 		CinemaInfoType osmCinemaInfoType = new CinemaInfoType();
 		CinemaType osmCinemaType = new CinemaType();
 		

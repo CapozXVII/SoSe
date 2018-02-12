@@ -17,7 +17,7 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;complexContent&gt;
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&gt;
  *       &lt;sequence&gt;
- *         &lt;element name="cinemas" type="{http://it.univaq.disim.sose.cald/cinemaInformation}cinemaType"/&gt;
+ *         &lt;element name="cinema" type="{http://it.univaq.disim.sose.cald/cinemaInformation}cinemaType"/&gt;
  *       &lt;/sequence&gt;
  *     &lt;/restriction&gt;
  *   &lt;/complexContent&gt;
@@ -28,35 +28,35 @@ import javax.xml.bind.annotation.XmlType;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "singleCinemaInformationResponse", propOrder = {
-    "cinemas"
+    "cinema"
 })
 public class SingleCinemaInformationResponse {
 
     @XmlElement(required = true)
-    protected CinemaType cinemas;
+    protected CinemaType cinema;
 
     /**
-     * Gets the value of the cinemas property.
+     * Gets the value of the cinema property.
      * 
      * @return
      *     possible object is
      *     {@link CinemaType }
      *     
      */
-    public CinemaType getCinemas() {
-        return cinemas;
+    public CinemaType getCinema() {
+        return cinema;
     }
 
     /**
-     * Sets the value of the cinemas property.
+     * Sets the value of the cinema property.
      * 
      * @param value
      *     allowed object is
      *     {@link CinemaType }
      *     
      */
-    public void setCinemas(CinemaType value) {
-        this.cinemas = value;
+    public void setCinema(CinemaType value) {
+        this.cinema = value;
     }
 
 }

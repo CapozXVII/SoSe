@@ -75,7 +75,7 @@
 			<!-- Response -->
 			<xsd:complexType name="singleRestaurantInformationResponse">
 				<xsd:sequence>
-					<xsd:element name="restaurants" type="tns:restaurantType" />
+					<xsd:element name="restaurant" type="tns:restaurantType" />
 				</xsd:sequence>
 			</xsd:complexType>
 			
