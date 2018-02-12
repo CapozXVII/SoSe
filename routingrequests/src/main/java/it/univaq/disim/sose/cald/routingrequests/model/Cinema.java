@@ -5,7 +5,7 @@ import java.util.List;
 public class Cinema {
 	
 	private Long id;
-	private double latitude;
+	private double lat;
 	private double longitude;
 	private String name;
 	private String cap;
@@ -20,11 +20,11 @@ public class Cinema {
 	public void setId(Long id) {
 		this.id = id;
 	}
-	public double getLatitude() {
-		return latitude;
+	public double getLat() {
+		return lat;
 	}
-	public void setLatitude(double latitude) {
-		this.latitude = latitude;
+	public void setLat(double lat) {
+		this.lat = lat;
 	}
 	public double getLongitude() {
 		return longitude;

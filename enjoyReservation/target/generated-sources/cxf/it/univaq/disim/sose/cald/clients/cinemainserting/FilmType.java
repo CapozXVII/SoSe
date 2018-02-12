@@ -17,6 +17,7 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;complexContent&gt;
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&gt;
  *       &lt;sequence&gt;
+ *         &lt;element name="id_film" type="{http://www.w3.org/2001/XMLSchema}long" minOccurs="0"/&gt;
  *         &lt;element name="name" type="{http://www.w3.org/2001/XMLSchema}string"/&gt;
  *         &lt;element name="director" type="{http://www.w3.org/2001/XMLSchema}string"/&gt;
  *         &lt;element name="cast" type="{http://www.w3.org/2001/XMLSchema}string"/&gt;
@@ -33,6 +34,7 @@ import javax.xml.bind.annotation.XmlType;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "filmType", propOrder = {
+    "idFilm",
     "name",
     "director",
     "cast",
@@ -42,6 +44,8 @@ import javax.xml.bind.annotation.XmlType;
 })
 public class FilmType {
 
+    @XmlElement(name = "id_film")
+    protected Long idFilm;
     @XmlElement(required = true)
     protected String name;
     @XmlElement(required = true)
@@ -53,6 +57,30 @@ public class FilmType {
     protected String type;
     @XmlElement(required = true)
     protected String plot;
+
+    /**
+     * Gets the value of the idFilm property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link Long }
+     *     
+     */
+    public Long getIdFilm() {
+        return idFilm;
+    }
+
+    /**
+     * Sets the value of the idFilm property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link Long }
+     *     
+     */
+    public void setIdFilm(Long value) {
+        this.idFilm = value;
+    }
 
     /**
      * Gets the value of the name property.

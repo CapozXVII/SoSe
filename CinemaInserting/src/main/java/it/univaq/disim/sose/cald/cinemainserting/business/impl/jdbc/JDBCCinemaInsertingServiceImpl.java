@@ -101,7 +101,7 @@ public class JDBCCinemaInsertingServiceImpl implements CinemaInsertingService {
 		try {
 			con = dataSource.getConnection();
 			sql_iCinema = con.prepareStatement(
-					"INSERT INTO cinema (cinema_lat,cinema_lon,cinema_name,cinema_address,cinema_cap,cinema_city,cinema_telephoneNumber) VALUES (?,?,?,?,?,?,?)",
+					"INSERT INTO cinemas (cinema_lat,cinema_lon,cinema_name,cinema_address,cinema_cap,cinema_city,cinema_telephoneNumber) VALUES (?,?,?,?,?,?,?)",
 					Statement.RETURN_GENERATED_KEYS);
 			/*Insert cinema*/
 			
@@ -250,6 +250,7 @@ public class JDBCCinemaInsertingServiceImpl implements CinemaInsertingService {
 		newCinema.setCity(parameters.getCinema().getCinemaInfo().getCity());
 		newCinema.setTelephoneNumber(parameters.getCinema().getCinemaInfo().getTelephoneNumber());
 		newCinema.setId(parameters.getCinema().getCinemaInfo().getIdCinema());
+		LOGGER.info(newCinema.getId() + "ciao1");
 		
 		
 		for(HallType x : parameters.getCinema().getCinemaInfo().getHall()) {
@@ -258,6 +259,7 @@ public class JDBCCinemaInsertingServiceImpl implements CinemaInsertingService {
 			newHall.setNumber(x.getNumber());
 			newHall.setSeatsNumber(x.getSeatsNumber());
 			newHall.setHall_id(x.getIdHall());
+			LOGGER.info(newHall.getHall_id() + "ciao2");
 			List<HallInfo> listHallInfo = new ArrayList<HallInfo>();
 			
 			for(HallInfoType h : x.getHallInfo()) {
@@ -267,6 +269,7 @@ public class JDBCCinemaInsertingServiceImpl implements CinemaInsertingService {
 				newHallInfo.setFreeSeatsNumber(h.getFreeSeatsNumber());
 				newHallInfo.setPrice(h.getPrice());
 				newHallInfo.setId(h.getIdHallFilm());
+				LOGGER.info(newHallInfo.getId() + "ciao3");
 				Film newFilm = new Film();
 				newFilm.setName(h.getFilm().getName());
 				newFilm.setDirector(h.getFilm().getDirector());
@@ -275,6 +278,7 @@ public class JDBCCinemaInsertingServiceImpl implements CinemaInsertingService {
 				newFilm.setType(h.getFilm().getType());
 				newFilm.setPlot(h.getFilm().getPlot());
 				newFilm.setId(h.getFilm().getIdFilm());
+				LOGGER.info(newFilm.getId() + "ciao4");
 				newHallInfo.setFilm(newFilm);
 				listHallInfo.add(newHallInfo);
 			}
@@ -327,16 +331,11 @@ public class JDBCCinemaInsertingServiceImpl implements CinemaInsertingService {
 				sql_iHalls.setLong(3, newCinema.getId());
 				sql_iHalls.setLong(4, newCinema.getHall().get(i).getHall_id());
 				
-				
 				if (sql_iHalls.executeUpdate() == 1) {
-					
 				}
 
 				for (int j = 0; j < hall_list.get(i).getHallInfo().size(); j++) { /* film iteration */
-					
-					
-
-					
+				
 						sql_iFilms = con.prepareStatement(
 								"UPDATE films  SET name=?,director=?,cast=?,duration=?,type=?,plot=? WHERE film_id=?");
 						
@@ -348,13 +347,11 @@ public class JDBCCinemaInsertingServiceImpl implements CinemaInsertingService {
 								hall_list.get(i).getHallInfo().get(j).getFilm().getType());
 						sql_iFilms.setString(6, hall_list.get(i).getHallInfo().get(j).getFilm().getPlot());
 						sql_iFilms.setLong(7, hall_list.get(i).getHallInfo().get(j).getFilm().getId());
-
+						
 						if (sql_iFilms.executeUpdate() == 1) {
-							
+														
 						}
 
-
-					
 					/* insert hall film */
 
 					sql_iHallFilm = con.prepareStatement(
@@ -366,9 +363,9 @@ public class JDBCCinemaInsertingServiceImpl implements CinemaInsertingService {
 					sql_iHallFilm.setFloat(4, hall_list.get(i).getHallInfo().get(j).getPrice());
 					sql_iHallFilm.setInt(5, hall_list.get(i).getHallInfo().get(j).getFreeSeatsNumber());
 					sql_iHallFilm.setLong(6, hall_list.get(i).getHallInfo().get(j).getId());
+					
 
 					if (sql_iHallFilm.executeUpdate() == 1) {
-						
 					}
 				}
 			}
@@ -390,7 +387,10 @@ public class JDBCCinemaInsertingServiceImpl implements CinemaInsertingService {
 			}
 		}
 		
-		return null;
+		CinemaUpdateResponse result = new CinemaUpdateResponse();
+		result.setAccepted(true); 
+		
+		return result;
 	}
 
 }

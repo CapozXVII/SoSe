@@ -8,7 +8,7 @@ public class Hall implements java.io.Serializable {
 	private int number; 
 	private int seatsNumber;
 	private Long cinema;
-	private List<HallInfo> hallinfo;
+	private List<HallInfo> hallInfo;
 	
 	public Long getHall_id() {
 		return hall_id;
@@ -43,11 +43,11 @@ public class Hall implements java.io.Serializable {
 	}
 	
 	public List<HallInfo> getHallInfo() {
-		return hallinfo;
+		return hallInfo;
 	}
 	
-	public void setHallInfo(List<HallInfo> hallinfo) {
-		this.hallinfo=hallinfo;
+	public void setHallInfo(List<HallInfo> hallInfo) {
+		this.hallInfo=hallInfo;
 	}
 	
 	

@@ -148,6 +148,7 @@ public class WebServiceEnjoyReservationServiceImpl implements EnjoyReservationSe
 				newRestaurantInfo.setMenu(restaurant.getRestaurantInfo().getMenu());
 				newRestaurantInfo.setName(restaurant.getRestaurantInfo().getName());
 				newRestaurantInfo.setStyle(restaurant.getRestaurantInfo().getStyle());
+				newRestaurantInfo.setMaxSeats(restaurant.getRestaurantInfo().getMaxSeats());
 				newRestaurantInfo.setTelephoneNumber(restaurant.getRestaurantInfo().getTelephoneNumber());
 				newRestaurant.setRestaurantInfo(newRestaurantInfo);
 				newRestaurant.setLat(restaurant.getLat());
@@ -190,7 +191,7 @@ public class WebServiceEnjoyReservationServiceImpl implements EnjoyReservationSe
 						OSMHallInfoType newHallInfo = new OSMHallInfoType();
 						OSMFilmType newFilm = new OSMFilmType();
 						
-						newFilm.setId(hallInfo.getFilm().getId());
+						newFilm.setIdFilm(hallInfo.getFilm().getId());
 						newFilm.setCast(hallInfo.getFilm().getCast());
 						newFilm.setDirector(hallInfo.getFilm().getDirector());
 						newFilm.setDuration(hallInfo.getFilm().getDuration());
@@ -203,12 +204,12 @@ public class WebServiceEnjoyReservationServiceImpl implements EnjoyReservationSe
 						newHallInfo.setTime(hallInfo.getTime());
 						newHall.getHallInfo().add(newHallInfo);
 					}
-					newHall.setId(hall.getId());
+					newHall.setIdHall(hall.getId());
 					newHall.setNumber(hall.getNumber());
 					newHall.setSeatsNumber(hall.getSeatsNumber());
 					hallResponse.add(newHall);
 				}
-				newCinemaInfo.setId(cinema.getCinemaInfo().getId());
+				newCinemaInfo.setIdCinema(cinema.getCinemaInfo().getId());
 				newCinemaInfo.setAddress(cinema.getCinemaInfo().getAddress());
 				newCinemaInfo.setCap(cinema.getCinemaInfo().getCap());
 				newCinemaInfo.setCity(cinema.getCinemaInfo().getCity());
@@ -339,8 +340,8 @@ public class WebServiceEnjoyReservationServiceImpl implements EnjoyReservationSe
 		try {
 			double[] coordinates = new double[2];
 			coordinates = google.foundCoordinates(cinemaInfo.getAddress(), cinemaInfo.getCity());
-			cinema.setLat(request.getCinema().getLat());
-			cinema.setLon(request.getCinema().getLon());
+			cinema.setLat(coordinates[0]);
+			cinema.setLon(coordinates[1]);
 		} catch (ApiException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
@@ -529,6 +530,7 @@ public class WebServiceEnjoyReservationServiceImpl implements EnjoyReservationSe
 				newRestaurantInfo.setMenu(restaurant.getRestaurantInfo().getMenu());
 				newRestaurantInfo.setName(restaurant.getRestaurantInfo().getName());
 				newRestaurantInfo.setStyle(restaurant.getRestaurantInfo().getStyle());
+				newRestaurantInfo.setMaxSeats(restaurant.getRestaurantInfo().getMaxSeats());
 				newRestaurantInfo.setTelephoneNumber(restaurant.getRestaurantInfo().getTelephoneNumber());
 				newRestaurant.setRestaurantInfo(newRestaurantInfo);
 				newRestaurant.setLat(restaurant.getLat());
@@ -569,7 +571,7 @@ public class WebServiceEnjoyReservationServiceImpl implements EnjoyReservationSe
 					OSMHallInfoType newHallInfo = new OSMHallInfoType();
 					OSMFilmType newFilm = new OSMFilmType();
 								
-					newFilm.setId(hallInfo.getFilm().getId());
+					newFilm.setIdFilm(hallInfo.getFilm().getId());
 					newFilm.setCast(hallInfo.getFilm().getCast());
 					newFilm.setDirector(hallInfo.getFilm().getDirector());
 					newFilm.setDuration(hallInfo.getFilm().getDuration());
@@ -582,12 +584,12 @@ public class WebServiceEnjoyReservationServiceImpl implements EnjoyReservationSe
 					newHallInfo.setTime(hallInfo.getTime());
 					newHall.getHallInfo().add(newHallInfo);
 				}
-				newHall.setId(hall.getId());
+				newHall.setIdHall(hall.getId());
 				newHall.setNumber(hall.getNumber());
 				newHall.setSeatsNumber(hall.getSeatsNumber());
 				hallResponse.add(newHall);
 			}
-			newCinemaInfo.setId(cinema.getCinemaInfo().getId());
+			newCinemaInfo.setIdCinema(cinema.getCinemaInfo().getId());
 			newCinemaInfo.setAddress(cinema.getCinemaInfo().getAddress());
 			newCinemaInfo.setCap(cinema.getCinemaInfo().getCap());
 			newCinemaInfo.setCity(cinema.getCinemaInfo().getCity());
@@ -622,9 +624,11 @@ public class WebServiceEnjoyReservationServiceImpl implements EnjoyReservationSe
 		RestaurantPT restaurantInserting = restaurantInsertingService.getRestaurantPort();
 		RestaurantUpdateRequest restaurantUpdateRequest = new RestaurantUpdateRequest();
 		
+		discount.setDiscountId(request.getRestaurant().getRestaurantInfo().getDiscount().getDiscountId());
 		discount.setPrice(request.getRestaurant().getRestaurantInfo().getDiscount().getPrice());
 		discount.setCinema(request.getRestaurant().getRestaurantInfo().getDiscount().getCinema());
 		restaurantInfo.setDiscount(discount);
+		restaurantInfo.setId(request.getRestaurant().getRestaurantInfo().getId());
 		restaurantInfo.setAddress(request.getRestaurant().getRestaurantInfo().getAddress());
 		restaurantInfo.setCap(request.getRestaurant().getRestaurantInfo().getCap());
 		restaurantInfo.setCity(request.getRestaurant().getRestaurantInfo().getCity());
@@ -669,6 +673,7 @@ public class WebServiceEnjoyReservationServiceImpl implements EnjoyReservationSe
 				it.univaq.disim.sose.cald.clients.cinemainserting.HallInfoType hallInfo = new it.univaq.disim.sose.cald.clients.cinemainserting.HallInfoType();
 				it.univaq.disim.sose.cald.clients.cinemainserting.FilmType film = new it.univaq.disim.sose.cald.clients.cinemainserting.FilmType();
 				
+				film.setIdFilm(hallInfoRequest.getFilm().getIdFilm());
 				film.setCast(hallInfoRequest.getFilm().getCast());
 				film.setDirector(hallInfoRequest.getFilm().getDirector());
 				film.setDuration(hallInfoRequest.getFilm().getDuration());
@@ -676,12 +681,14 @@ public class WebServiceEnjoyReservationServiceImpl implements EnjoyReservationSe
 				film.setPlot(hallInfoRequest.getFilm().getPlot());
 				film.setType(hallInfoRequest.getFilm().getType());
 				hallInfo.setFilm(film);
+				hallInfo.setIdHallFilm(hallInfoRequest.getIdHallFilm());
 				hallInfo.setFreeSeatsNumber(hallInfoRequest.getFreeSeatsNumber());
 				hallInfo.setPrice(hallInfoRequest.getPrice());
 				hallInfo.setTime(hallInfoRequest.getTime());
 				hall.getHallInfo().add(hallInfo);
 			}
 			
+			hall.setIdHall(hallRequest.getIdHall());
 			hall.setNumber(hallRequest.getNumber());
 			hall.setSeatsNumber(hallRequest.getSeatsNumber());
 			hallList.add(hall);
@@ -690,6 +697,7 @@ public class WebServiceEnjoyReservationServiceImpl implements EnjoyReservationSe
 			cinemaInfo.getHall().add(hall);
 		}
 		//cinemaInfo.setHall(hallList);
+		cinemaInfo.setIdCinema(request.getCinema().getCinemaInfo().getIdCinema());
 		cinemaInfo.setAddress(request.getCinema().getCinemaInfo().getAddress());
 		cinemaInfo.setCap(request.getCinema().getCinemaInfo().getCap());
 		cinemaInfo.setCity(request.getCinema().getCinemaInfo().getCity());

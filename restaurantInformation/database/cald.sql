@@ -1,15 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 4.7.0
--- https://www.phpmyadmin.net/
+-- version 4.5.2
+-- http://www.phpmyadmin.net
 --
--- Host: 127.0.0.1
--- Creato il: Feb 09, 2018 alle 23:16
--- Versione del server: 10.1.22-MariaDB
--- Versione PHP: 7.0.18
+-- Host: localhost
+-- Creato il: Feb 12, 2018 alle 17:49
+-- Versione del server: 10.1.19-MariaDB
+-- Versione PHP: 7.0.13
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
-START TRANSACTION;
 SET time_zone = "+00:00";
 
 
@@ -62,10 +60,10 @@ CREATE TABLE `cinemas` (
 INSERT INTO `cinemas` (`cinema_id`, `cinema_lat`, `cinema_lon`, `cinema_name`, `cinema_address`, `cinema_cap`, `cinema_city`, `cinema_telephoneNumber`, `owner`) VALUES
 (3, '19.00000000', '19.00000000', 'Bo', 'Bo', '67100', 'Rome', NULL, NULL),
 (4, '19.00000000', '19.00000000', 'Bo', 'Bo', '67100', 'Rome', NULL, NULL),
-(5, '42.34697000', '13.95190000', 'davide4', 'davide4', '65011', 'catignano', '3389945', NULL),
-(6, '42.34697000', '13.95190000', 'davide4', 'davide4', '65011', 'catignano', '3389945', NULL),
-(7, '42.34697000', '13.95190000', 'davide4', 'davide4', '65011', 'catignano', '3389945', NULL),
-(8, '42.34697000', '13.95190000', 'davide4', 'davide4', '65011', 'catignano', '3389945', NULL);
+(5, '1.00000000', '1.00000000', 'cc', 'cc', '67', 'Florence', '?', NULL),
+(6, '1.00000000', '0.00000000', 'ProvaUpdated', 'Via Giuseppe Mazzini', '37121', 'Verona', '08632', NULL),
+(7, '1.00000000', '1.00000000', 'cc', 'cc', '67', 'Rome', '?', NULL),
+(9, '45.44240660', '10.99790350', 'Prova', 'Via Giuseppe Mazzini', '37121', 'Verona', '0863241515', NULL);
 
 -- --------------------------------------------------------
 
@@ -87,9 +85,10 @@ CREATE TABLE `discount` (
 INSERT INTO `discount` (`discount_id`, `cinema`, `restaurant`, `price`) VALUES
 (1, 3, 1, 5),
 (2, 4, 2, 3),
-(3, 3, 4, 3),
-(4, 3, 5, 3),
-(5, 3, 6, 3);
+(4, 3, 5, 12),
+(5, 3, 6, 12),
+(6, 5, 7, 3),
+(7, 4, 8, 3);
 
 -- --------------------------------------------------------
 
@@ -113,11 +112,8 @@ CREATE TABLE `films` (
 
 INSERT INTO `films` (`film_id`, `name`, `director`, `cast`, `duration`, `type`, `plot`) VALUES
 (1, 'Avengers: Infinity War', 'Anthony Russo', 'Robert Downey Jr, Josh Brolin, Mark Buffalo, Tom Hiddleston, Chris Evans, Chris Hemsworth, Jeremy Renner, Chris Pratt', 147, 'Action', 'Four years after the events of Guardians of the Galaxy Vol. 2,[1] the Avengers have been torn apart following the events of Captain America: Civil War. When Thanos arrives on Earth to collect the Infinity Stones for a gauntlet that will allow him to bend reality to his will, the Avengers must join forces with the Guardians of the Galaxy to stop him before his onslaught of destruction puts an end to the universe'),
-(2, 'nuovofilm33', 'direttore33', 'ciao', 180, 'ciao', 'plot'),
-(3, 'nuovofilm22', 'direttore22', 'ciao', 180, 'ciao', 'plot'),
-(4, 'blu23', 'blu23', 'ciao2', 1802, 'ciao2', 'plot2'),
-(5, 'nuovofilm23', 'direttore22', 'ciao', 180, 'ciao', 'plot'),
-(6, 'nuovofilm333', 'direttore33', 'ciao', 180, 'ciao', 'plot');
+(2, 'si', 'si', 'si', 17, 'si', 'si'),
+(3, 'Avengers: Infinity War2', 'Anthony Russo', 'Robert Downey Jr, Josh Brolin, Mark Buffalo, Tom Hiddleston, Chris Evans, Chris Hemsworth, Jeremy Renner, Chris Pratt', 147, 'Action', 'Four years after the events of Guardians of the Galaxy Vol. 2,[1] the Avengers have been torn apart following the events of Captain America: Civil War. When Thanos arrives on Earth to collect the Infinity Stones for a gauntlet that will allow him to bend reality to his will, the Avengers must join forces with the Guardians of the Galaxy to stop him before his onslaught of destruction puts an end to the universe');
 
 -- --------------------------------------------------------
 
@@ -140,14 +136,11 @@ INSERT INTO `halls` (`hall_id`, `number`, `seatsNumber`, `cinema`) VALUES
 (1, 1, 100, 3),
 (2, 10, 101, 4),
 (3, 10, 100, 3),
-(4, 25, 100, 5),
-(5, 83, 200, 5),
-(6, 20, 100, 6),
-(7, 21, 200, 6),
-(8, 23, 100, 7),
-(9, 24, 200, 7),
-(10, 23, 100, 8),
-(11, 24, 200, 8);
+(4, 1, 2, 5),
+(5, 1, 100, 6),
+(6, 1, 2, 7),
+(9, 1, 80, 9),
+(10, 1, 80, 9);
 
 -- --------------------------------------------------------
 
@@ -170,19 +163,13 @@ CREATE TABLE `hall_film` (
 
 INSERT INTO `hall_film` (`hall_film_id`, `hall`, `film`, `time`, `price`, `freeSeatsNumber`) VALUES
 (1, 1, 1, '2018-02-01 16:00:00', 5, 248),
-(2, 1, 1, '2018-02-01 22:00:00', 7.5, 118),
-(3, 4, 2, '2017-12-12 18:00:00', 10, 100),
-(4, 4, 3, '2017-12-12 20:00:00', 10, 100),
-(5, 5, 4, '2017-12-12 19:00:00', 20, 200),
-(6, 6, 2, '2017-12-12 18:00:00', 10, 100),
-(7, 6, 3, '2017-12-12 20:00:00', 10, 100),
-(8, 7, 4, '2017-12-12 19:00:00', 20, 200),
-(9, 8, 2, '2017-12-12 18:00:00', 10, 100),
-(10, 8, 3, '2017-12-12 20:00:00', 10, 100),
-(11, 9, 4, '2017-12-12 19:00:00', 20, 200),
-(12, 9, 5, '2017-12-12 20:00:00', 10, 100),
-(13, 10, 6, '2017-12-12 18:00:00', 10, 100),
-(14, 11, 4, '2017-12-12 19:00:00', 20, 200);
+(2, 1, 1, '2018-02-01 22:00:00', 7.5, 110),
+(3, 4, 2, '2018-02-02 21:00:00', 7, 10),
+(4, 5, 3, '2018-02-18 19:00:00', 15, 248),
+(5, 6, 2, '2018-02-02 21:00:00', 7, 10),
+(6, 2, 1, '2018-02-09 20:00:00', 7, 100),
+(9, 9, 1, '2018-02-18 17:00:00', 5, 248),
+(10, 10, 1, '2018-02-18 21:00:00', 7.5, 110);
 
 -- --------------------------------------------------------
 
@@ -225,12 +212,25 @@ CREATE TABLE `restaurants` (
 --
 
 INSERT INTO `restaurants` (`restaurant_id`, `restaurant_lat`, `restaurant_lon`, `restaurant_name`, `restaurant_address`, `restaurant_cap`, `restaurant_city`, `restaurant_telephoneNumber`, `style`, `cuisine`, `menu`, `max_seats`, `owner`) VALUES
-(1, NULL, NULL, 'Da Paolo', 'Via Mazzini 3', '00123', 'Rome', '3458987666', 'Napoletano', 'Bo', 'Bo', 0, NULL),
+(1, NULL, NULL, 'Da Paolo', 'Via Mazzini 3', '00123', 'Rome', '3458987666', 'Napoletano', 'Bo', 'Bo', 50, NULL),
 (2, '11.00000000', '11.00000000', 'Da Paolo', 'Via Mazzini 3', '00123', 'Rome', '3458987666', 'Napoletano', 'Bo', 'Bo', 100, NULL),
 (3, '12.00000000', '12.00000000', 'Arrosticini Divini', 'Via Francia 3', '50121', 'Rome', '3478854123', 'Italian', 'Italian', 'BO', 50, NULL),
-(4, '42.34697000', '13.95190000', 'david', 'Via Roma', '65011', 'Catignano', '02586936', 'Agriturismo', 'Italiana', 'ababababa', 0, NULL),
-(5, '42.34697000', '13.95190000', 'david', 'Via Roma', '65011', 'Catignano', '02586936', 'Agriturismo', 'Italiana', 'ababababa', 0, NULL),
-(6, '42.34697000', '13.95190000', 'david', 'Via Roma', '65011', 'Catignano', '02586936', 'Agriturismo', 'Italiana', 'ababababa', 100, NULL);
+(5, '1.00000000', '1.00000000', 'cc', 'cc', 'cc', 'cc', 'cc', 'cc', 'cc', '?', 2, NULL),
+(6, '1.00000000', '1.00000000', 'pp', 'cc', 'cc', 'cc', 'cc', 'cc', 'cc', 'dd', 2, NULL),
+(7, '42.36552278', '13.39768908', 'Ciao', 'Via Monte Brancastello 2', '67100', 'L''Aquila', '0987654', 'bo', 'vo', 'no', 100, NULL),
+(8, '45.44240660', '10.99790350', 'Bobo2', 'Via Giuseppe Mazzini', '31076', 'Verona', '09876540988', 'bo', 'si', 'no', 90, NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Struttura della tabella `sessions`
+--
+
+CREATE TABLE `sessions` (
+  `id` int(20) UNSIGNED NOT NULL,
+  `token` varchar(256) DEFAULT NULL,
+  `user` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -302,7 +302,9 @@ ALTER TABLE `hall_film`
 ALTER TABLE `restaurantbookings`
   ADD PRIMARY KEY (`Id_Booking`),
   ADD KEY `Restaurant` (`Restaurant`),
-  ADD KEY `User` (`User`);
+  ADD KEY `User` (`User`),
+  ADD KEY `Restaurant_2` (`Restaurant`),
+  ADD KEY `User_2` (`User`);
 
 --
 -- Indici per le tabelle `restaurants`
@@ -310,6 +312,13 @@ ALTER TABLE `restaurantbookings`
 ALTER TABLE `restaurants`
   ADD PRIMARY KEY (`restaurant_id`),
   ADD KEY `owner` (`owner`);
+
+--
+-- Indici per le tabelle `sessions`
+--
+ALTER TABLE `sessions`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `user` (`user`);
 
 --
 -- Indici per le tabelle `users`
@@ -327,47 +336,52 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT per la tabella `cinemabooking`
 --
 ALTER TABLE `cinemabooking`
-  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT per la tabella `cinemas`
 --
 ALTER TABLE `cinemas`
-  MODIFY `cinema_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `cinema_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 --
 -- AUTO_INCREMENT per la tabella `discount`
 --
 ALTER TABLE `discount`
-  MODIFY `discount_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `discount_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 --
 -- AUTO_INCREMENT per la tabella `films`
 --
 ALTER TABLE `films`
-  MODIFY `film_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `film_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT per la tabella `halls`
 --
 ALTER TABLE `halls`
-  MODIFY `hall_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `hall_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 --
 -- AUTO_INCREMENT per la tabella `hall_film`
 --
 ALTER TABLE `hall_film`
-  MODIFY `hall_film_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `hall_film_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 --
 -- AUTO_INCREMENT per la tabella `restaurantbookings`
 --
 ALTER TABLE `restaurantbookings`
-  MODIFY `Id_Booking` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `Id_Booking` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT per la tabella `restaurants`
 --
 ALTER TABLE `restaurants`
-  MODIFY `restaurant_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `restaurant_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+--
+-- AUTO_INCREMENT per la tabella `sessions`
+--
+ALTER TABLE `sessions`
+  MODIFY `id` int(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT per la tabella `users`
 --
 ALTER TABLE `users`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
 -- Limiti per le tabelle scaricate
 --
@@ -376,15 +390,15 @@ ALTER TABLE `users`
 -- Limiti per la tabella `cinemabooking`
 --
 ALTER TABLE `cinemabooking`
-  ADD CONSTRAINT `ext_film_id` FOREIGN KEY (`film`) REFERENCES `films` (`film_id`),
-  ADD CONSTRAINT `ext_hall_id` FOREIGN KEY (`user`) REFERENCES `halls` (`hall_id`),
-  ADD CONSTRAINT `ext_user_id` FOREIGN KEY (`user`) REFERENCES `users` (`user_id`);
+  ADD CONSTRAINT `cinemabooking_ibfk_1` FOREIGN KEY (`hall`) REFERENCES `halls` (`hall_id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `cinemabooking_ibfk_2` FOREIGN KEY (`film`) REFERENCES `films` (`film_id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `cinemabooking_ibfk_3` FOREIGN KEY (`user`) REFERENCES `users` (`user_id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
 -- Limiti per la tabella `cinemas`
 --
 ALTER TABLE `cinemas`
-  ADD CONSTRAINT `cinemas_ibfk_1` FOREIGN KEY (`owner`) REFERENCES `users` (`user_id`);
+  ADD CONSTRAINT `cinemas_ibfk_1` FOREIGN KEY (`owner`) REFERENCES `users` (`user_id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Limiti per la tabella `discount`
@@ -410,15 +424,20 @@ ALTER TABLE `hall_film`
 -- Limiti per la tabella `restaurantbookings`
 --
 ALTER TABLE `restaurantbookings`
-  ADD CONSTRAINT `ext_restaurant` FOREIGN KEY (`Restaurant`) REFERENCES `restaurants` (`restaurant_id`),
-  ADD CONSTRAINT `ext_user` FOREIGN KEY (`User`) REFERENCES `users` (`user_id`);
+  ADD CONSTRAINT `restaurantbookings_ibfk_1` FOREIGN KEY (`Restaurant`) REFERENCES `restaurants` (`restaurant_id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `restaurantbookings_ibfk_2` FOREIGN KEY (`User`) REFERENCES `users` (`user_id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
 -- Limiti per la tabella `restaurants`
 --
 ALTER TABLE `restaurants`
   ADD CONSTRAINT `restaurants_ibfk_1` FOREIGN KEY (`owner`) REFERENCES `users` (`user_id`);
-COMMIT;
+
+--
+-- Limiti per la tabella `sessions`
+--
+ALTER TABLE `sessions`
+  ADD CONSTRAINT `sessions_ibfk_1` FOREIGN KEY (`user`) REFERENCES `users` (`user_id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

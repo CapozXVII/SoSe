@@ -10,9 +10,9 @@ import javax.xml.bind.annotation.XmlType;
 
 
 /**
- * <p>Classe Java per cinemaInfoType complex type.
+ * <p>Java class for cinemaInfoType complex type.
  * 
- * <p>Il seguente frammento di schema specifica il contenuto previsto contenuto in questa classe.
+ * <p>The following schema fragment specifies the expected content contained within this class.
  * 
  * <pre>
  * &lt;complexType name="cinemaInfoType"&gt;
@@ -60,7 +60,7 @@ public class CinemaInfoType {
     protected List<HallType> hall;
 
     /**
-     * Recupera il valore della proprietà idCinema.
+     * Gets the value of the idCinema property.
      * 
      * @return
      *     possible object is
@@ -72,7 +72,7 @@ public class CinemaInfoType {
     }
 
     /**
-     * Imposta il valore della proprietà idCinema.
+     * Sets the value of the idCinema property.
      * 
      * @param value
      *     allowed object is
@@ -84,7 +84,7 @@ public class CinemaInfoType {
     }
 
     /**
-     * Recupera il valore della proprietà name.
+     * Gets the value of the name property.
      * 
      * @return
      *     possible object is
@@ -96,7 +96,7 @@ public class CinemaInfoType {
     }
 
     /**
-     * Imposta il valore della proprietà name.
+     * Sets the value of the name property.
      * 
      * @param value
      *     allowed object is
@@ -108,7 +108,7 @@ public class CinemaInfoType {
     }
 
     /**
-     * Recupera il valore della proprietà address.
+     * Gets the value of the address property.
      * 
      * @return
      *     possible object is
@@ -120,7 +120,7 @@ public class CinemaInfoType {
     }
 
     /**
-     * Imposta il valore della proprietà address.
+     * Sets the value of the address property.
      * 
      * @param value
      *     allowed object is
@@ -132,7 +132,7 @@ public class CinemaInfoType {
     }
 
     /**
-     * Recupera il valore della proprietà cap.
+     * Gets the value of the cap property.
      * 
      * @return
      *     possible object is
@@ -144,7 +144,7 @@ public class CinemaInfoType {
     }
 
     /**
-     * Imposta il valore della proprietà cap.
+     * Sets the value of the cap property.
      * 
      * @param value
      *     allowed object is
@@ -156,7 +156,7 @@ public class CinemaInfoType {
     }
 
     /**
-     * Recupera il valore della proprietà city.
+     * Gets the value of the city property.
      * 
      * @return
      *     possible object is
@@ -168,7 +168,7 @@ public class CinemaInfoType {
     }
 
     /**
-     * Imposta il valore della proprietà city.
+     * Sets the value of the city property.
      * 
      * @param value
      *     allowed object is
@@ -180,7 +180,7 @@ public class CinemaInfoType {
     }
 
     /**
-     * Recupera il valore della proprietà telephoneNumber.
+     * Gets the value of the telephoneNumber property.
      * 
      * @return
      *     possible object is
@@ -192,7 +192,7 @@ public class CinemaInfoType {
     }
 
     /**
-     * Imposta il valore della proprietà telephoneNumber.
+     * Sets the value of the telephoneNumber property.
      * 
      * @param value
      *     allowed object is

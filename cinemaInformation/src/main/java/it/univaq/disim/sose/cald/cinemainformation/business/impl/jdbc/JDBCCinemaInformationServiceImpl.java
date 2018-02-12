@@ -32,7 +32,7 @@ public class JDBCCinemaInformationServiceImpl implements CinemaInformationServic
 		List<Cinema> cinemaList = new ArrayList<Cinema>();
 		List<HallFilm> hallFilmList = new ArrayList<HallFilm>();
 		String sql = "SELECT * FROM cinemas JOIN halls ON cinemas.cinema_id = halls.cinema JOIN hall_film ON hall_film.hall = halls.hall_id JOIN films ON films.film_id = hall_film.film AND cinemas.cinema_city = ? ORDER BY cinemas.cinema_id";
-		LOGGER.info(sql);
+		
 		Connection con = null;
 		PreparedStatement st = null;
 		ResultSet rs = null;
@@ -44,18 +44,23 @@ public class JDBCCinemaInformationServiceImpl implements CinemaInformationServic
 			con = dataSource.getConnection();
 			st = con.prepareStatement(sql);
 			st.setString(1, city);
+			LOGGER.info(st.toString());
 			rs = st.executeQuery();
+			int cinemaId = 0;
 			
 			while (rs.next()) {
-				int cinemaId = rs.getInt("cinema_id");
+				cinemaId = rs.getInt("cinema_id");
 				if (rs.isFirst()) {
 					count = cinemaId;
 					cinema = createCinema(rs);
+					LOGGER.info("Sono primo");
 				}
 				if (count == cinemaId) {
+					LOGGER.info("" + count);
 					hallFilmList.add(createHallFilm(rs));
 				} else {
 					count = cinemaId;
+					LOGGER.info("ciao" + count);
 					cinema.setHalls(hallFilmList);
 					cinemaList.add(cinema);
 					hallFilmList = new ArrayList<HallFilm>();
@@ -63,6 +68,7 @@ public class JDBCCinemaInformationServiceImpl implements CinemaInformationServic
 					hallFilmList.add(createHallFilm(rs));
 				}
 				if (rs.isLast()) {
+					LOGGER.info("Sono ultimo");
 					cinema.setHalls(hallFilmList);
 					cinemaList.add(cinema);
 				}
@@ -83,6 +89,7 @@ public class JDBCCinemaInformationServiceImpl implements CinemaInformationServic
 				} catch (SQLException e) {}
 			}
 		}
+		
 		return cinemaList;
 	}
 	
@@ -150,6 +157,11 @@ public class JDBCCinemaInformationServiceImpl implements CinemaInformationServic
 					cinema = createCinema(rs);
 					hallFilmList.add(createHallFilm(rs));
 				}
+				
+				if(!rs.first() && !rs.last()) {
+					hallFilmList.add(createHallFilm(rs));
+				}
+				
 				if(rs.last()) {
 					hallFilmList.add(createHallFilm(rs));
 					cinema.setHalls(hallFilmList);	

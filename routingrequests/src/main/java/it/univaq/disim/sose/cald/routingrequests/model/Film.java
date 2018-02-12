@@ -4,12 +4,21 @@ import javax.xml.bind.annotation.XmlElement;
 
 public class Film {
 	
+	private Long id;
     private String name;
     private String director;
     private String cast;
     private int duration;
     private String type;
     private String plot;
+    
+    public Long getId() {
+    		return this.id;
+    }
+    
+    public void setId(Long id) {
+    		this.id = id;
+    }
     
     public String getName() {
 		return name;

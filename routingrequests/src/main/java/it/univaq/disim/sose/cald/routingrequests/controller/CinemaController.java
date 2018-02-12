@@ -8,6 +8,8 @@ import javax.xml.datatype.DatatypeConfigurationException;
 import javax.xml.datatype.DatatypeFactory;
 import javax.xml.datatype.XMLGregorianCalendar;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -48,6 +50,9 @@ import it.univaq.disim.sose.cald.routingrequests.model.HallInfo;
 @RestController
 @RequestMapping(value = "/cinema")
 public class CinemaController {
+	
+	private static Logger LOGGER = LoggerFactory.getLogger(CinemaController.class);
+
 		
 	@GetMapping("/{token}/information/{city}")
 	public GetCinemaInfoResponse getInformation(@PathVariable(value = "token") String token, @PathVariable(value = "city") String city) throws AccountSessionFault_Exception, GetCinemaInfoFault_Exception {
@@ -182,12 +187,14 @@ public class CinemaController {
 	private OSMCinemaType createCinema(Cinema cinema) {
 		OSMCinemaType cinemaRequest = new OSMCinemaType();
 		OSMCinemaInfoType cinemaInfoRequest = new OSMCinemaInfoType();
+		
 		for(Hall hall : cinema.getHall()) {
 			OSMHallType hallRequest = new OSMHallType();
 			for(HallInfo hallInfo : hall.getHallInfo()) {
 				OSMHallInfoType hallInfoRequest = new OSMHallInfoType();
 				OSMFilmType filmRequest = new OSMFilmType();
 				
+				filmRequest.setIdFilm(hallInfo.getFilm().getId());
 				filmRequest.setCast(hallInfo.getFilm().getCast());
 				filmRequest.setDirector(hallInfo.getFilm().getDirector());
 				filmRequest.setDuration(hallInfo.getFilm().getDuration());
@@ -195,22 +202,25 @@ public class CinemaController {
 				filmRequest.setPlot(hallInfo.getFilm().getPlot());
 				filmRequest.setType(hallInfo.getFilm().getType());
 				hallInfoRequest.setFilm(filmRequest);
+				hallInfoRequest.setIdHallFilm(hallInfo.getId());
 				hallInfoRequest.setFreeSeatsNumber(hallInfo.getFreeSeatsNumber());
 				hallInfoRequest.setPrice(hallInfo.getPrice());
 				hallInfoRequest.setTime(toXMLGregorianCalendarDate(hallInfo.getTime()));
 				hallRequest.getHallInfo().add(hallInfoRequest);
 			}
+			hallRequest.setIdHall(hall.getHall_id());
 			hallRequest.setNumber(hall.getNumber());
 			hallRequest.setSeatsNumber(hall.getSeatsNumber());
 			cinemaInfoRequest.getHall().add(hallRequest);
 		}
+		cinemaInfoRequest.setIdCinema(cinema.getId());
 		cinemaInfoRequest.setAddress(cinema.getAddress());
 		cinemaInfoRequest.setCap(cinema.getCap());
 		cinemaInfoRequest.setCity(cinema.getCity());
 		cinemaInfoRequest.setName(cinema.getName());
 		cinemaInfoRequest.setTelephoneNumber(cinema.getTelephoneNumber());
 		cinemaRequest.setCinemaInfo(cinemaInfoRequest);
-		cinemaRequest.setLat(cinema.getLatitude());
+		cinemaRequest.setLat(cinema.getLat());
 		cinemaRequest.setLon(cinema.getLongitude());
 		
 		return cinemaRequest;

@@ -19,6 +19,7 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;complexContent&gt;
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&gt;
  *       &lt;sequence&gt;
+ *         &lt;element name="id_cinema" type="{http://www.w3.org/2001/XMLSchema}long" minOccurs="0"/&gt;
  *         &lt;element name="name" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/&gt;
  *         &lt;element name="address" type="{http://www.w3.org/2001/XMLSchema}string"/&gt;
  *         &lt;element name="cap" type="{http://www.w3.org/2001/XMLSchema}string"/&gt;
@@ -35,6 +36,7 @@ import javax.xml.bind.annotation.XmlType;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "cinemaInfoType", propOrder = {
+    "idCinema",
     "name",
     "address",
     "cap",
@@ -44,6 +46,8 @@ import javax.xml.bind.annotation.XmlType;
 })
 public class CinemaInfoType {
 
+    @XmlElement(name = "id_cinema")
+    protected Long idCinema;
     protected String name;
     @XmlElement(required = true)
     protected String address;
@@ -54,6 +58,30 @@ public class CinemaInfoType {
     protected String telephoneNumber;
     @XmlElement(required = true)
     protected List<HallType> hall;
+
+    /**
+     * Gets the value of the idCinema property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link Long }
+     *     
+     */
+    public Long getIdCinema() {
+        return idCinema;
+    }
+
+    /**
+     * Sets the value of the idCinema property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link Long }
+     *     
+     */
+    public void setIdCinema(Long value) {
+        this.idCinema = value;
+    }
 
     /**
      * Gets the value of the name property.

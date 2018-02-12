@@ -136,12 +136,11 @@ public class JDBCRestaurantInsertingImpl implements RestaurantInsertingService {
 		newRestaurant.setCousine(parameters.getRestaurant().getRestaurantInfo().getCuisine());
 		newRestaurant.setMenu(parameters.getRestaurant().getRestaurantInfo().getMenu());
 		newRestaurant.setMax_seats(parameters.getRestaurant().getRestaurantInfo().getMaxSeats());
-		
+				
 		Discount newDiscount = new Discount();
 		newDiscount.setCinema(parameters.getRestaurant().getRestaurantInfo().getDiscount().getCinema());
 		newDiscount.setPrice(parameters.getRestaurant().getRestaurantInfo().getDiscount().getPrice());
 		newDiscount.setId(parameters.getRestaurant().getRestaurantInfo().getDiscount().getDiscountId());
-
 		
 		boolean insertRestaurant = false, insertDiscount=false;
 		Connection con = null;
@@ -165,9 +164,9 @@ public class JDBCRestaurantInsertingImpl implements RestaurantInsertingService {
 			sql_iRestaurant.setString(10, newRestaurant.getMenu());
 			sql_iRestaurant.setInt(11, newRestaurant.getMax_seats());
 			sql_iRestaurant.setLong(12, newRestaurant.getId());
-
+			
 			if (sql_iRestaurant.executeUpdate() == 1) {
-				insertRestaurant=true;
+				insertRestaurant = true;
 			}
 			
 			sql_iDiscout = con.prepareStatement("UPDATE DISCOUNT SET cinema=?,restaurant=?,price=? WHERE discount_id=?");
@@ -177,7 +176,7 @@ public class JDBCRestaurantInsertingImpl implements RestaurantInsertingService {
 			sql_iDiscout.setLong(4, newDiscount.getId());
 			
 			if (sql_iDiscout.executeUpdate()==1) {
-				insertDiscount=true;
+				insertDiscount = true;
 			}
 		} catch (SQLException e1) {
 
@@ -192,12 +191,11 @@ public class JDBCRestaurantInsertingImpl implements RestaurantInsertingService {
 		}
 
 
-		if (insertRestaurant && insertDiscount) { /* Controllare qua se va bene >0 ma penso di si perchè funziona */
+		if (insertRestaurant && insertDiscount) { 
 			result.setAccepted(true);
-			return result;
 		} else {
 			result.setAccepted(false);
-			return result;
 		}
+		return result;
 	}
 }

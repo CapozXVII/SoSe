@@ -8,9 +8,9 @@ import javax.xml.bind.annotation.XmlType;
 
 
 /**
- * <p>Classe Java per cinemaInsertFault complex type.
+ * <p>Java class for cinemaInsertFault complex type.
  * 
- * <p>Il seguente frammento di schema specifica il contenuto previsto contenuto in questa classe.
+ * <p>The following schema fragment specifies the expected content contained within this class.
  * 
  * <pre>
  * &lt;complexType name="cinemaInsertFault"&gt;
@@ -40,7 +40,7 @@ public class CinemaInsertFault {
     protected String message;
 
     /**
-     * Recupera il valore della proprietà faultInfo.
+     * Gets the value of the faultInfo property.
      * 
      * @return
      *     possible object is
@@ -52,7 +52,7 @@ public class CinemaInsertFault {
     }
 
     /**
-     * Imposta il valore della proprietà faultInfo.
+     * Sets the value of the faultInfo property.
      * 
      * @param value
      *     allowed object is
@@ -64,7 +64,7 @@ public class CinemaInsertFault {
     }
 
     /**
-     * Recupera il valore della proprietà message.
+     * Gets the value of the message property.
      * 
      * @return
      *     possible object is
@@ -76,7 +76,7 @@ public class CinemaInsertFault {
     }
 
     /**
-     * Imposta il valore della proprietà message.
+     * Sets the value of the message property.
      * 
      * @param value
      *     allowed object is

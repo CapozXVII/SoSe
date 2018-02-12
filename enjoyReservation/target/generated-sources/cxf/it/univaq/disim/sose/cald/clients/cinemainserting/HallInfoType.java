@@ -19,6 +19,7 @@ import javax.xml.datatype.XMLGregorianCalendar;
  *   &lt;complexContent&gt;
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&gt;
  *       &lt;sequence&gt;
+ *         &lt;element name="id_hallFilm" type="{http://www.w3.org/2001/XMLSchema}long" minOccurs="0"/&gt;
  *         &lt;element name="time" type="{http://www.w3.org/2001/XMLSchema}dateTime"/&gt;
  *         &lt;element name="film" type="{http://it.univaq.disim.sose.cald/cinemaInserting}filmType"/&gt;
  *         &lt;element name="price" type="{http://www.w3.org/2001/XMLSchema}float"/&gt;
@@ -33,6 +34,7 @@ import javax.xml.datatype.XMLGregorianCalendar;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "hallInfoType", propOrder = {
+    "idHallFilm",
     "time",
     "film",
     "price",
@@ -40,6 +42,8 @@ import javax.xml.datatype.XMLGregorianCalendar;
 })
 public class HallInfoType {
 
+    @XmlElement(name = "id_hallFilm")
+    protected Long idHallFilm;
     @XmlElement(required = true)
     @XmlSchemaType(name = "dateTime")
     protected XMLGregorianCalendar time;
@@ -47,6 +51,30 @@ public class HallInfoType {
     protected FilmType film;
     protected float price;
     protected int freeSeatsNumber;
+
+    /**
+     * Gets the value of the idHallFilm property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link Long }
+     *     
+     */
+    public Long getIdHallFilm() {
+        return idHallFilm;
+    }
+
+    /**
+     * Sets the value of the idHallFilm property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link Long }
+     *     
+     */
+    public void setIdHallFilm(Long value) {
+        this.idHallFilm = value;
+    }
 
     /**
      * Gets the value of the time property.

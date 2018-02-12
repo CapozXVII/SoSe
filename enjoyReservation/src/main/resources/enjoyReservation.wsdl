@@ -131,18 +131,18 @@
 			</xsd:complexType>
 			<xsd:complexType name="OSMCinemaInfoType">
 				<xsd:sequence>
+					<xsd:element name="id_cinema" minOccurs="0" type="xsd:long" />
 					<xsd:element name="name" minOccurs="0" type="xsd:string" />
 					<xsd:element name="address" type="xsd:string" />
 					<xsd:element name="cap" type="xsd:string" />
 					<xsd:element name="city" type="xsd:string" />
 					<xsd:element name="telephoneNumber" minOccurs="0" type="xsd:string" />
-					<xsd:element name="id" type="xsd:long" />
 					<xsd:element name="hall" maxOccurs="unbounded" minOccurs="1" type="tns:OSMHallType" />
 				</xsd:sequence>
 			</xsd:complexType>
 			<xsd:complexType name="OSMHallType">
 				<xsd:sequence>
-					<xsd:element name="id" type="xsd:long" />
+					<xsd:element name="id_hall" type="xsd:long" />
 					<xsd:element name="number" type="xsd:int" />
 					<xsd:element name="seatsNumber" type="xsd:int" />
 					<xsd:element name="hallInfo" maxOccurs="unbounded" minOccurs="1" type="tns:OSMHallInfoType" />
@@ -150,6 +150,7 @@
 			</xsd:complexType>
 			<xsd:complexType name="OSMHallInfoType">
 				<xsd:sequence>
+					<xsd:element name="id_hallFilm" minOccurs="0" type="xsd:long" />
 					<xsd:element name="time" type="xsd:dateTime" />
 					<xsd:element name="film" type="tns:OSMFilmType" />
 					<xsd:element name="price" type="xsd:float" />
@@ -158,7 +159,7 @@
 			</xsd:complexType>
 			<xsd:complexType name="OSMFilmType">
 				<xsd:sequence>
-					<xsd:element name="id" type="xsd:long" />
+					<xsd:element name="id_film" type="xsd:long" />
 					<xsd:element name="name" type="xsd:string" />
 					<xsd:element name="director" type="xsd:string" />
 					<xsd:element name="cast" type="xsd:string" />

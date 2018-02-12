@@ -3,10 +3,19 @@ package it.univaq.disim.sose.cald.routingrequests.model;
 import java.util.Date;
 
 public class HallInfo {
+	private Long id;
 	private Date time;
 	private Film film;
 	private float price;
 	private int freeSeatsNumber;
+	
+	public Long getId() {
+		return this.id;
+	}
+	
+	public void setId(Long id) {
+		this.id = id;
+	}
 	
 	public Date getTime() {
 		return time;

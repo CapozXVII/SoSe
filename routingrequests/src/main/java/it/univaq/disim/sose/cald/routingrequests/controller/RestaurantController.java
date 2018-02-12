@@ -7,7 +7,8 @@ import javax.xml.datatype.DatatypeConfigurationException;
 import javax.xml.datatype.DatatypeFactory;
 import javax.xml.datatype.XMLGregorianCalendar;
 
-
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -45,6 +46,9 @@ import it.univaq.disim.sose.cald.routingrequests.model.RestaurantBooking;
 @RestController
 @RequestMapping(value = "/restaurant")
 public class RestaurantController {
+	
+	private static Logger LOGGER = LoggerFactory.getLogger(RestaurantController.class);
+	
 		
 	@GetMapping("/{token}/information/{city}")
 	public GetRestaurantInfoResponse getInformation(@PathVariable(value = "token") String token, @PathVariable(value = "city") String city) throws AccountSessionFault_Exception, GetRestaurantInfoFault_Exception {
@@ -108,7 +112,7 @@ public class RestaurantController {
 	}
 	
 	@PostMapping("/{token}/insert")
-	public InsertRestaurantResponse insertRestaurant(@PathVariable(value = "token") String token, @RequestBody Restaurant restaurant, @RequestBody Discount discount) throws AccountSessionFault_Exception, InsertRestaurantFault_Exception {
+	public InsertRestaurantResponse insertRestaurant(@PathVariable(value = "token") String token, @RequestBody Restaurant restaurant) throws AccountSessionFault_Exception, InsertRestaurantFault_Exception {
 		
 		EnjoyReservationService enjoyReservationService = new EnjoyReservationService();
 		EnjoyReservationPT enjoyReservation = enjoyReservationService.getEnjoyReservationPort();
@@ -117,7 +121,7 @@ public class RestaurantController {
 		if(checkSession(enjoyReservation, token)) {
 			InsertRestaurantRequest request = new InsertRestaurantRequest();
 
-			request.setRestaurant(createRestaurant(restaurant, discount));
+			request.setRestaurant(createRestaurant(restaurant));
 			
 			response = enjoyReservation.insertRestaurant(request);
 		} else {
@@ -128,7 +132,7 @@ public class RestaurantController {
 	}
 	
 	@PutMapping("/{token}/update")
-	public UpdateRestaurantResponse updateRestaurant(@PathVariable(value = "token") String token, @RequestBody Restaurant restaurant, @RequestBody Discount discount) throws AccountSessionFault_Exception, UpdateRestaurantFault_Exception {
+	public UpdateRestaurantResponse updateRestaurant(@PathVariable(value = "token") String token, @RequestBody Restaurant restaurant) throws AccountSessionFault_Exception, UpdateRestaurantFault_Exception {
 		
 		EnjoyReservationService enjoyReservationService = new EnjoyReservationService();
 		EnjoyReservationPT enjoyReservation = enjoyReservationService.getEnjoyReservationPort();
@@ -137,7 +141,7 @@ public class RestaurantController {
 		if(checkSession(enjoyReservation, token)) {
 			UpdateRestaurantRequest request = new UpdateRestaurantRequest();
 			
-			request.setRestaurant(createRestaurant(restaurant, discount));
+			request.setRestaurant(createRestaurant(restaurant));
 			
 			response = enjoyReservation.updateRestaurant(request);
 		} else {
@@ -166,26 +170,33 @@ public class RestaurantController {
         return xmlCalendar;
     }
 	
-	private OSMRestaurantType createRestaurant(Restaurant restaurant, Discount discount) {
+	private OSMRestaurantType createRestaurant(Restaurant restaurant) {
 		OSMRestaurantType restaurantRequest = new OSMRestaurantType();
 		OSMRestaurantInfoType restaurantInfoRequest = new OSMRestaurantInfoType();
 		OSMDiscountType discountRequest = new OSMDiscountType();
 		
-		discountRequest.setCinema(discount.getCinema());
-		discountRequest.setPrice(discount.getPrice());
-		restaurantInfoRequest.setDiscount(discountRequest);
+		if(restaurant.getDiscount() != null) {
+			discountRequest.setDiscountId(restaurant.getDiscount().getId());
+			discountRequest.setCinema(restaurant.getDiscount().getCinema());
+			discountRequest.setPrice(restaurant.getDiscount().getPrice());
+			restaurantInfoRequest.setDiscount(discountRequest);
+		} else {
+			restaurantInfoRequest.setDiscount(null);
+		}
+		
+		restaurantInfoRequest.setId(restaurant.getId());
 		restaurantInfoRequest.setAddress(restaurant.getAddress());
 		restaurantInfoRequest.setCap(restaurant.getCap());
 		restaurantInfoRequest.setCity(restaurant.getCity());
-		restaurantInfoRequest.setCuisine(restaurant.getCousine());
+		restaurantInfoRequest.setCuisine(restaurant.getCuisine());
 		restaurantInfoRequest.setMaxSeats(restaurant.getMaxSeats());
 		restaurantInfoRequest.setMenu(restaurant.getMenu());
 		restaurantInfoRequest.setName(restaurant.getName());
 		restaurantInfoRequest.setStyle(restaurant.getStyle());
 		restaurantInfoRequest.setTelephoneNumber(restaurant.getTelephoneNumber());
 		restaurantRequest.setRestaurantInfo(restaurantInfoRequest);
-		restaurantRequest.setLat(restaurant.getLatitude());
-		restaurantRequest.setLon(restaurant.getLongitude());
+		restaurantRequest.setLat(restaurant.getLat());
+		restaurantRequest.setLon(restaurant.getLon());
 		
 		return restaurantRequest;
 	}

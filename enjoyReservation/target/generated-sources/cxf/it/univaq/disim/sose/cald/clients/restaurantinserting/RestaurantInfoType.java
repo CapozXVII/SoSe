@@ -17,6 +17,7 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;complexContent&gt;
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&gt;
  *       &lt;sequence&gt;
+ *         &lt;element name="id" type="{http://www.w3.org/2001/XMLSchema}long" minOccurs="0"/&gt;
  *         &lt;element name="name" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/&gt;
  *         &lt;element name="address" type="{http://www.w3.org/2001/XMLSchema}string"/&gt;
  *         &lt;element name="cap" type="{http://www.w3.org/2001/XMLSchema}string"/&gt;
@@ -37,6 +38,7 @@ import javax.xml.bind.annotation.XmlType;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "restaurantInfoType", propOrder = {
+    "id",
     "name",
     "address",
     "cap",
@@ -50,6 +52,7 @@ import javax.xml.bind.annotation.XmlType;
 })
 public class RestaurantInfoType {
 
+    protected Long id;
     protected String name;
     @XmlElement(required = true)
     protected String address;
@@ -67,6 +70,30 @@ public class RestaurantInfoType {
     @XmlElement(name = "max_seats")
     protected int maxSeats;
     protected DiscountType discount;
+
+    /**
+     * Gets the value of the id property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link Long }
+     *     
+     */
+    public Long getId() {
+        return id;
+    }
+
+    /**
+     * Sets the value of the id property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link Long }
+     *     
+     */
+    public void setId(Long value) {
+        this.id = value;
+    }
 
     /**
      * Gets the value of the name property.

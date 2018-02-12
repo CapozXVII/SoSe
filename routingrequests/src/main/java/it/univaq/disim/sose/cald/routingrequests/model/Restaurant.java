@@ -3,17 +3,18 @@ package it.univaq.disim.sose.cald.routingrequests.model;
 public class Restaurant implements java.io.Serializable {
 	
 	private Long id;
-	private double latitude;
-	private double longitude;
+	private double lat;
+	private double lon;
 	private String name;
 	private String cap;
 	private String address;
 	private String city;
 	private String telephoneNumber;
 	private String style;
-	private String cousine;
+	private String cuisine;
 	private String menu;
 	private int maxSeats;
+	private Discount discount;
 	
 	
 	public Long getId() {
@@ -24,20 +25,20 @@ public class Restaurant implements java.io.Serializable {
 		this.id = id;
 	}
 	
-	public double getLatitude() {
-		return latitude;
+	public double getLat() {
+		return lat;
 	}
 	
-	public void setLatitude(double latitude) {
-		this.latitude = latitude;
+	public void setLat(double lat) {
+		this.lat = lat;
 	}
 	
-	public double getLongitude() {
-		return longitude;
+	public double getLon() {
+		return lon;
 	}
 	
-	public void setLongitude(double longitude) {
-		this.longitude = longitude;
+	public void setLon(double lon) {
+		this.lon = lon;
 	}
 	
 	public String getName() {
@@ -88,12 +89,12 @@ public class Restaurant implements java.io.Serializable {
 		this.style = style;
 	}
 	
-	public String getCousine() {
-		return cousine;
+	public String getCuisine() {
+		return cuisine;
 	}
 	
-	public void setCousine(String cousine) {
-		this.cousine = cousine;
+	public void setCuisine(String cuisine) {
+		this.cuisine = cuisine;
 	}
 	
 	public String getMenu() {
@@ -110,5 +111,13 @@ public class Restaurant implements java.io.Serializable {
 	
 	public void setMaxSeats(int maxSeats) {
 		this.maxSeats = maxSeats;
+	}
+	
+	public Discount getDiscount() {
+		return this.discount;
+	}
+	
+	public void setDiscount(Discount discount) {
+		this.discount = discount;
 	}
 }

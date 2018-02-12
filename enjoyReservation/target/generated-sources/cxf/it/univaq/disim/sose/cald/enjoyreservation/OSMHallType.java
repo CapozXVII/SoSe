@@ -19,7 +19,7 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;complexContent&gt;
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&gt;
  *       &lt;sequence&gt;
- *         &lt;element name="id" type="{http://www.w3.org/2001/XMLSchema}long"/&gt;
+ *         &lt;element name="id_hall" type="{http://www.w3.org/2001/XMLSchema}long"/&gt;
  *         &lt;element name="number" type="{http://www.w3.org/2001/XMLSchema}int"/&gt;
  *         &lt;element name="seatsNumber" type="{http://www.w3.org/2001/XMLSchema}int"/&gt;
  *         &lt;element name="hallInfo" type="{http://it.univaq.disim.sose.cald/enjoyReservation}OSMHallInfoType" maxOccurs="unbounded"/&gt;
@@ -33,33 +33,34 @@ import javax.xml.bind.annotation.XmlType;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "OSMHallType", propOrder = {
-    "id",
+    "idHall",
     "number",
     "seatsNumber",
     "hallInfo"
 })
 public class OSMHallType {
 
-    protected long id;
+    @XmlElement(name = "id_hall")
+    protected long idHall;
     protected int number;
     protected int seatsNumber;
     @XmlElement(required = true)
     protected List<OSMHallInfoType> hallInfo;
 
     /**
-     * Gets the value of the id property.
+     * Gets the value of the idHall property.
      * 
      */
-    public long getId() {
-        return id;
+    public long getIdHall() {
+        return idHall;
     }
 
     /**
-     * Sets the value of the id property.
+     * Sets the value of the idHall property.
      * 
      */
-    public void setId(long value) {
-        this.id = value;
+    public void setIdHall(long value) {
+        this.idHall = value;
     }
 
     /**

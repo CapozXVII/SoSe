@@ -19,6 +19,7 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;complexContent&gt;
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&gt;
  *       &lt;sequence&gt;
+ *         &lt;element name="id_hall" type="{http://www.w3.org/2001/XMLSchema}long" minOccurs="0"/&gt;
  *         &lt;element name="number" type="{http://www.w3.org/2001/XMLSchema}int"/&gt;
  *         &lt;element name="seatsNumber" type="{http://www.w3.org/2001/XMLSchema}int"/&gt;
  *         &lt;element name="hallInfo" type="{http://it.univaq.disim.sose.cald/cinemaInserting}hallInfoType" maxOccurs="unbounded"/&gt;
@@ -32,16 +33,43 @@ import javax.xml.bind.annotation.XmlType;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "hallType", propOrder = {
+    "idHall",
     "number",
     "seatsNumber",
     "hallInfo"
 })
 public class HallType {
 
+    @XmlElement(name = "id_hall")
+    protected Long idHall;
     protected int number;
     protected int seatsNumber;
     @XmlElement(required = true)
     protected List<HallInfoType> hallInfo;
+
+    /**
+     * Gets the value of the idHall property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link Long }
+     *     
+     */
+    public Long getIdHall() {
+        return idHall;
+    }
+
+    /**
+     * Sets the value of the idHall property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link Long }
+     *     
+     */
+    public void setIdHall(Long value) {
+        this.idHall = value;
+    }
 
     /**
      * Gets the value of the number property.

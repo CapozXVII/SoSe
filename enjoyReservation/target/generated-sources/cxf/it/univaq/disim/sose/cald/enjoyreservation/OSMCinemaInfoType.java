@@ -19,12 +19,12 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;complexContent&gt;
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&gt;
  *       &lt;sequence&gt;
+ *         &lt;element name="id_cinema" type="{http://www.w3.org/2001/XMLSchema}long" minOccurs="0"/&gt;
  *         &lt;element name="name" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/&gt;
  *         &lt;element name="address" type="{http://www.w3.org/2001/XMLSchema}string"/&gt;
  *         &lt;element name="cap" type="{http://www.w3.org/2001/XMLSchema}string"/&gt;
  *         &lt;element name="city" type="{http://www.w3.org/2001/XMLSchema}string"/&gt;
  *         &lt;element name="telephoneNumber" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/&gt;
- *         &lt;element name="id" type="{http://www.w3.org/2001/XMLSchema}long"/&gt;
  *         &lt;element name="hall" type="{http://it.univaq.disim.sose.cald/enjoyReservation}OSMHallType" maxOccurs="unbounded"/&gt;
  *       &lt;/sequence&gt;
  *     &lt;/restriction&gt;
@@ -36,16 +36,18 @@ import javax.xml.bind.annotation.XmlType;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "OSMCinemaInfoType", propOrder = {
+    "idCinema",
     "name",
     "address",
     "cap",
     "city",
     "telephoneNumber",
-    "id",
     "hall"
 })
 public class OSMCinemaInfoType {
 
+    @XmlElement(name = "id_cinema")
+    protected Long idCinema;
     protected String name;
     @XmlElement(required = true)
     protected String address;
@@ -54,9 +56,32 @@ public class OSMCinemaInfoType {
     @XmlElement(required = true)
     protected String city;
     protected String telephoneNumber;
-    protected long id;
     @XmlElement(required = true)
     protected List<OSMHallType> hall;
+
+    /**
+     * Gets the value of the idCinema property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link Long }
+     *     
+     */
+    public Long getIdCinema() {
+        return idCinema;
+    }
+
+    /**
+     * Sets the value of the idCinema property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link Long }
+     *     
+     */
+    public void setIdCinema(Long value) {
+        this.idCinema = value;
+    }
 
     /**
      * Gets the value of the name property.
@@ -176,22 +201,6 @@ public class OSMCinemaInfoType {
      */
     public void setTelephoneNumber(String value) {
         this.telephoneNumber = value;
-    }
-
-    /**
-     * Gets the value of the id property.
-     * 
-     */
-    public long getId() {
-        return id;
-    }
-
-    /**
-     * Sets the value of the id property.
-     * 
-     */
-    public void setId(long value) {
-        this.id = value;
     }
 
     /**
