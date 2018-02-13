@@ -235,7 +235,10 @@ public class CinemaController {
 				OSMHallInfoType hallInfoRequest = new OSMHallInfoType();
 				OSMFilmType filmRequest = new OSMFilmType();
 				
-				filmRequest.setIdFilm(hallInfo.getFilm().getId());
+				if(hallInfo.getFilm().getId() != null) {
+					filmRequest.setIdFilm(hallInfo.getFilm().getId());
+				}
+				
 				filmRequest.setCast(hallInfo.getFilm().getCast());
 				filmRequest.setDirector(hallInfo.getFilm().getDirector());
 				filmRequest.setDuration(hallInfo.getFilm().getDuration());
@@ -243,18 +246,30 @@ public class CinemaController {
 				filmRequest.setPlot(hallInfo.getFilm().getPlot());
 				filmRequest.setType(hallInfo.getFilm().getType());
 				hallInfoRequest.setFilm(filmRequest);
-				hallInfoRequest.setIdHallFilm(hallInfo.getId());
+				
+				if(hallInfo.getId() != null) {
+					hallInfoRequest.setIdHallFilm(hallInfo.getId());
+				}
+				
 				hallInfoRequest.setFreeSeatsNumber(hallInfo.getFreeSeatsNumber());
 				hallInfoRequest.setPrice(hallInfo.getPrice());
 				hallInfoRequest.setTime(toXMLGregorianCalendarDate(hallInfo.getTime()));
 				hallRequest.getHallInfo().add(hallInfoRequest);
 			}
-			hallRequest.setIdHall(hall.getHall_id());
+			
+			if(hall.getHall_id() != null) {
+				hallRequest.setIdHall(hall.getHall_id());
+			}
+			
 			hallRequest.setNumber(hall.getNumber());
 			hallRequest.setSeatsNumber(hall.getSeatsNumber());
 			cinemaInfoRequest.getHall().add(hallRequest);
 		}
-		cinemaInfoRequest.setIdCinema(cinema.getId());
+		
+		if(cinema.getId() != null) {
+			cinemaInfoRequest.setIdCinema(cinema.getId());
+		}
+		
 		cinemaInfoRequest.setAddress(cinema.getAddress());
 		cinemaInfoRequest.setCap(cinema.getCap());
 		cinemaInfoRequest.setCity(cinema.getCity());

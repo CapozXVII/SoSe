@@ -221,7 +221,10 @@ public class RestaurantController {
 		OSMDiscountType discountRequest = new OSMDiscountType();
 		
 		if(restaurant.getDiscount() != null) {
-			discountRequest.setDiscountId(restaurant.getDiscount().getId());
+			if(restaurant.getDiscount().getId() != null) {
+				discountRequest.setDiscountId(restaurant.getDiscount().getId());
+			}
+			
 			discountRequest.setCinema(restaurant.getDiscount().getCinema());
 			discountRequest.setPrice(restaurant.getDiscount().getPrice());
 			restaurantInfoRequest.setDiscount(discountRequest);
@@ -229,7 +232,10 @@ public class RestaurantController {
 			restaurantInfoRequest.setDiscount(null);
 		}
 		
-		restaurantInfoRequest.setId(restaurant.getId());
+		if(restaurant.getId() != null) {
+			restaurantInfoRequest.setId(restaurant.getId());
+		}
+		
 		restaurantInfoRequest.setAddress(restaurant.getAddress());
 		restaurantInfoRequest.setCap(restaurant.getCap());
 		restaurantInfoRequest.setCity(restaurant.getCity());
