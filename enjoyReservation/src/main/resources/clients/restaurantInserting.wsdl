@@ -18,6 +18,9 @@
 			<xsd:element name="restaurantUpdateRequest" type="tns:restaurantUpdateRequest" />
 			<xsd:element name="restaurantUpdateResponse" type="tns:restaurantUpdateResponse" />
 			<xsd:element name="restaurantUpdateFault" type="tns:restaurantUpdateFault" />
+			<xsd:element name="restaurantDeleteRequest" type="tns:restaurantDeleteRequest" />
+			<xsd:element name="restaurantDeleteResponse" type="tns:restaurantDeleteResponse" />
+			<xsd:element name="restaurantDeleteFault" type="tns:restaurantDeleteFault" />
 			
 			<!-- Resturant Inserting -->
 			<!-- Request -->
@@ -93,6 +96,29 @@
                         <xsd:element name="message" type="xsd:string" />
 				</xsd:sequence>
 			</xsd:complexType>
+			
+			<!-- Resturant Delete -->
+			<!-- Request -->
+			<xsd:complexType name="restaurantDeleteRequest">
+				<xsd:sequence>
+					<xsd:element name="restaurant_id" type="xsd:long" />
+				</xsd:sequence>
+			</xsd:complexType>
+			
+			<!-- Response -->
+			<xsd:complexType name="restaurantDeleteResponse">
+				<xsd:sequence>
+					<xsd:element name="accepted" type="xsd:boolean" />
+				</xsd:sequence>
+			</xsd:complexType>
+			
+			<!-- Fault -->
+			<xsd:complexType name="restaurantDeleteFault">
+				<xsd:sequence>
+                        <xsd:element name="faultInfo" type="xsd:string" />
+                        <xsd:element name="message" type="xsd:string" />
+				</xsd:sequence>
+			</xsd:complexType>
 		</xsd:schema>
 	</types>
 	
@@ -125,6 +151,20 @@
 		</part>
 	</message>
 	
+		<!-- Resturant Delete -->
+	<message name="restaurantDeleteRequest">
+		<part name="parameters" element="tns:restaurantDeleteRequest">
+		</part>
+	</message>
+	<message name="restaurantDeleteResponse">
+		<part name="parameters" element="tns:restaurantDeleteResponse">
+		</part>
+	</message>
+	<message name="restaurantDeleteFault">
+		<part name="parameters" element="tns:restaurantDeleteFault">
+		</part>
+	</message>
+	
 	<!-- Port -->
 	<portType name="restaurantPT">
 		<operation name="restaurantInsert">
@@ -146,6 +186,15 @@
 			</output>
 			<fault name="restaurantUpdateFault" message="tns:restaurantUpdateFault"></fault>
 		</operation>
+		<operation name="restaurantDelete">
+			<input message="tns:restaurantDeleteRequest"
+				wsam:Action="http://it.univaq.disim.sose.cald/restaurantInserting/restaurantDeleteRequest">
+			</input>
+			<output message="tns:restaurantDeleteResponse"
+				wsam:Action="http://it.univaq.disim.sose.cald/restaurantInserting/restaurantDeleteResponse">
+			</output>
+			<fault name="restaurantDeleteFault" message="tns:restaurantDeleteFault"></fault>
+		</operation>
 	</portType>
 	
 	<!-- Binding -->
@@ -162,6 +211,15 @@
 			</output>
 		</operation>
 		<operation name="restaurantUpdate">
+			<soap:operation soapAction="" />
+			<input>
+				<soap:body use="literal" />
+			</input>
+			<output>
+				<soap:body use="literal" />
+			</output>
+		</operation>
+		<operation name="restaurantDelete">
 			<soap:operation soapAction="" />
 			<input>
 				<soap:body use="literal" />

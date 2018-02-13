@@ -14,7 +14,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-
+import it.univaq.disim.sose.cald.restaurantinserting.RestaurantDeleteRequest;
+import it.univaq.disim.sose.cald.restaurantinserting.RestaurantDeleteResponse;
 import it.univaq.disim.sose.cald.restaurantinserting.RestaurantInsertRequest;
 import it.univaq.disim.sose.cald.restaurantinserting.RestaurantInsertResponse;
 import it.univaq.disim.sose.cald.restaurantinserting.RestaurantUpdateRequest;
@@ -87,7 +88,7 @@ public class JDBCRestaurantInsertingImpl implements RestaurantInsertingService {
 			}
 			
 			sql_iDiscout = con.prepareStatement("INSERT INTO DISCOUNT (cinema,restaurant,price) VALUES (?,?,?)");
-			sql_iDiscout.setInt(1, newDiscount.getCinema()); /*forse meglio mettere il nome?*/
+			sql_iDiscout.setInt(1, newDiscount.getCinema());
 			sql_iDiscout.setInt(2, id_restaurant);
 			sql_iDiscout.setDouble(3, newDiscount.getPrice());
 			
@@ -108,7 +109,7 @@ public class JDBCRestaurantInsertingImpl implements RestaurantInsertingService {
 
 		RestaurantInsertResponse result = new RestaurantInsertResponse();
 
-		if (id_restaurant > 0 && insert) { /* Controllare qua se va bene >0 ma penso di si perchè funziona */
+		if (id_restaurant > 0 && insert) { 
 			result.setAccepted(true);
 			return result;
 		} else {
@@ -121,7 +122,7 @@ public class JDBCRestaurantInsertingImpl implements RestaurantInsertingService {
 	public RestaurantUpdateResponse updateRestaurant(RestaurantUpdateRequest parameters) throws BusinessException {
 		
 		RestaurantUpdateResponse result = new RestaurantUpdateResponse();
-		LOGGER.info("Called JDBcRestaurantUpdate");
+		LOGGER.info("Called JDBCRestaurantUpdate");
 		
 		Restaurant newRestaurant = new Restaurant();
 		newRestaurant.setId(parameters.getRestaurant().getRestaurantInfo().getId());
@@ -144,38 +145,38 @@ public class JDBCRestaurantInsertingImpl implements RestaurantInsertingService {
 		
 		boolean insertRestaurant = false, insertDiscount=false;
 		Connection con = null;
-		PreparedStatement sql_iRestaurant, sql_iDiscout;
+		PreparedStatement sql_uRestaurant, sql_uDiscout;
 		
 
 		try {
 			con = dataSource.getConnection();
-			sql_iRestaurant = con.prepareStatement(
+			sql_uRestaurant = con.prepareStatement(
 					"UPDATE RESTAURANTS SET restaurant_lat=?,restaurant_lon=?,restaurant_name=?,restaurant_address=?,restaurant_cap=?,restaurant_city=?,restaurant_telephonenumber=?,style=?,cuisine=?,menu=?,max_seats=? WHERE restaurant_id=? ");
 
-			sql_iRestaurant.setDouble(1, newRestaurant.getLatitude());
-			sql_iRestaurant.setDouble(2, newRestaurant.getLongitude());
-			sql_iRestaurant.setString(3, newRestaurant.getName());
-			sql_iRestaurant.setString(4, newRestaurant.getAddress());
-			sql_iRestaurant.setString(5, newRestaurant.getCap());
-			sql_iRestaurant.setString(6, newRestaurant.getCity());
-			sql_iRestaurant.setString(7, newRestaurant.getTelephoneNumber());
-			sql_iRestaurant.setString(8, newRestaurant.getStyle());
-			sql_iRestaurant.setString(9, newRestaurant.getCousine());
-			sql_iRestaurant.setString(10, newRestaurant.getMenu());
-			sql_iRestaurant.setInt(11, newRestaurant.getMax_seats());
-			sql_iRestaurant.setLong(12, newRestaurant.getId());
+			sql_uRestaurant.setDouble(1, newRestaurant.getLatitude());
+			sql_uRestaurant.setDouble(2, newRestaurant.getLongitude());
+			sql_uRestaurant.setString(3, newRestaurant.getName());
+			sql_uRestaurant.setString(4, newRestaurant.getAddress());
+			sql_uRestaurant.setString(5, newRestaurant.getCap());
+			sql_uRestaurant.setString(6, newRestaurant.getCity());
+			sql_uRestaurant.setString(7, newRestaurant.getTelephoneNumber());
+			sql_uRestaurant.setString(8, newRestaurant.getStyle());
+			sql_uRestaurant.setString(9, newRestaurant.getCousine());
+			sql_uRestaurant.setString(10, newRestaurant.getMenu());
+			sql_uRestaurant.setInt(11, newRestaurant.getMax_seats());
+			sql_uRestaurant.setLong(12, newRestaurant.getId());
 			
-			if (sql_iRestaurant.executeUpdate() == 1) {
+			if (sql_uRestaurant.executeUpdate() == 1) {
 				insertRestaurant = true;
 			}
 			
-			sql_iDiscout = con.prepareStatement("UPDATE DISCOUNT SET cinema=?,restaurant=?,price=? WHERE discount_id=?");
-			sql_iDiscout.setInt(1, newDiscount.getCinema()); /*forse meglio mettere il nome?*/
-			sql_iDiscout.setLong(2, newRestaurant.getId());
-			sql_iDiscout.setDouble(3, newDiscount.getPrice());
-			sql_iDiscout.setLong(4, newDiscount.getId());
+			sql_uDiscout = con.prepareStatement("UPDATE DISCOUNT SET cinema=?,restaurant=?,price=? WHERE discount_id=?");
+			sql_uDiscout.setInt(1, newDiscount.getCinema()); /*forse meglio mettere il nome?*/
+			sql_uDiscout.setLong(2, newRestaurant.getId());
+			sql_uDiscout.setDouble(3, newDiscount.getPrice());
+			sql_uDiscout.setLong(4, newDiscount.getId());
 			
-			if (sql_iDiscout.executeUpdate()==1) {
+			if (sql_uDiscout.executeUpdate()==1) {
 				insertDiscount = true;
 			}
 		} catch (SQLException e1) {
@@ -196,6 +197,61 @@ public class JDBCRestaurantInsertingImpl implements RestaurantInsertingService {
 		} else {
 			result.setAccepted(false);
 		}
+		return result;
+	}
+
+	@Override
+	public RestaurantDeleteResponse deleteRestaurant(RestaurantDeleteRequest parameters) throws BusinessException {
+		LOGGER.info("Called JDBCRestaurantDelete");
+		
+		RestaurantDeleteResponse result = new RestaurantDeleteResponse();
+		long idRestaurant=parameters.getRestaurantId();
+		Connection con = null;
+		PreparedStatement sql_dRestaurant, sql_dDiscout;
+		boolean delete_restaurant=false, delete_discount=false;
+		
+		try {
+			con = dataSource.getConnection();
+			
+			sql_dDiscout = con.prepareStatement(
+					"DELETE FROM discount WHERE restaurant=?");
+			
+			sql_dDiscout.setLong(1, idRestaurant);
+			LOGGER.info(idRestaurant + "ciao");
+			LOGGER.info(sql_dDiscout.toString());
+			if (sql_dDiscout.executeUpdate() == 1) {
+				delete_discount=true;
+			}
+			
+			
+			sql_dRestaurant = con.prepareStatement(
+					"DELETE FROM restaurants WHERE restaurant_id=?");
+			
+			sql_dRestaurant.setLong(1, idRestaurant);
+			LOGGER.info(sql_dRestaurant.toString());
+			if (sql_dRestaurant.executeUpdate() == 1) {
+				delete_restaurant=true;
+			}
+			
+			if(delete_restaurant && delete_discount) {
+				result.setAccepted(true);
+			} else {
+				result.setAccepted(false);
+			}
+
+		
+		}catch (SQLException e1) {
+
+			e1.printStackTrace();
+		} finally {
+			if (con != null) {
+				try {
+					con.close();
+				} catch (SQLException e) {
+				}
+			}
+		}
+
 		return result;
 	}
 }

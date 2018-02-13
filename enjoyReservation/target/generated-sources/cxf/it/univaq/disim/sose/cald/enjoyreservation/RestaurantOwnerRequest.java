@@ -18,6 +18,7 @@ import javax.xml.bind.annotation.XmlType;
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&gt;
  *       &lt;sequence&gt;
  *         &lt;element name="token" type="{http://www.w3.org/2001/XMLSchema}string"/&gt;
+ *         &lt;element name="restaurantId" type="{http://www.w3.org/2001/XMLSchema}long"/&gt;
  *       &lt;/sequence&gt;
  *     &lt;/restriction&gt;
  *   &lt;/complexContent&gt;
@@ -28,12 +29,14 @@ import javax.xml.bind.annotation.XmlType;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "restaurantOwnerRequest", propOrder = {
-    "token"
+    "token",
+    "restaurantId"
 })
 public class RestaurantOwnerRequest {
 
     @XmlElement(required = true)
     protected String token;
+    protected long restaurantId;
 
     /**
      * Gets the value of the token property.
@@ -57,6 +60,22 @@ public class RestaurantOwnerRequest {
      */
     public void setToken(String value) {
         this.token = value;
+    }
+
+    /**
+     * Gets the value of the restaurantId property.
+     * 
+     */
+    public long getRestaurantId() {
+        return restaurantId;
+    }
+
+    /**
+     * Sets the value of the restaurantId property.
+     * 
+     */
+    public void setRestaurantId(long value) {
+        this.restaurantId = value;
     }
 
 }

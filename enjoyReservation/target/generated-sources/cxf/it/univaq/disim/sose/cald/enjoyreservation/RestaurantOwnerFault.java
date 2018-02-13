@@ -17,7 +17,7 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;complexContent&gt;
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&gt;
  *       &lt;sequence&gt;
- *         &lt;element name="faultInsert" type="{http://www.w3.org/2001/XMLSchema}string"/&gt;
+ *         &lt;element name="faultInfo" type="{http://www.w3.org/2001/XMLSchema}string"/&gt;
  *         &lt;element name="message" type="{http://www.w3.org/2001/XMLSchema}string"/&gt;
  *       &lt;/sequence&gt;
  *     &lt;/restriction&gt;
@@ -29,38 +29,38 @@ import javax.xml.bind.annotation.XmlType;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "restaurantOwnerFault", propOrder = {
-    "faultInsert",
+    "faultInfo",
     "message"
 })
 public class RestaurantOwnerFault {
 
     @XmlElement(required = true)
-    protected String faultInsert;
+    protected String faultInfo;
     @XmlElement(required = true)
     protected String message;
 
     /**
-     * Gets the value of the faultInsert property.
+     * Gets the value of the faultInfo property.
      * 
      * @return
      *     possible object is
      *     {@link String }
      *     
      */
-    public String getFaultInsert() {
-        return faultInsert;
+    public String getFaultInfo() {
+        return faultInfo;
     }
 
     /**
-     * Sets the value of the faultInsert property.
+     * Sets the value of the faultInfo property.
      * 
      * @param value
      *     allowed object is
      *     {@link String }
      *     
      */
-    public void setFaultInsert(String value) {
-        this.faultInsert = value;
+    public void setFaultInfo(String value) {
+        this.faultInfo = value;
     }
 
     /**

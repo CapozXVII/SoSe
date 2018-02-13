@@ -18,6 +18,9 @@
 			<xsd:element name="cinemaUpdateRequest" type="tns:cinemaUpdateRequest" />
 			<xsd:element name="cinemaUpdateResponse" type="tns:cinemaUpdateResponse" />
 			<xsd:element name="cinemaUpdateFault" type="tns:cinemaUpdateFault" />
+			<xsd:element name="cinemaDeleteRequest" type="tns:cinemaDeleteRequest" />
+			<xsd:element name="cinemaDeleteResponse" type="tns:cinemaDeleteResponse" />
+			<xsd:element name="cinemaDeleteFault" type="tns:cinemaDeleteFault" />
 			
 			<!-- Cinema Insert Info -->
 			<!-- Request -->
@@ -111,6 +114,29 @@
                         <xsd:element name="message" type="xsd:string" />
 				</xsd:sequence>
 			</xsd:complexType>
+			
+			<!-- Cinema Delete -->
+			<!-- Request -->
+			<xsd:complexType name="cinemaDeleteRequest">
+				<xsd:sequence>
+					<xsd:element name="hallFilm_id" minOccurs="0" type="xsd:long" />
+				</xsd:sequence>
+			</xsd:complexType>
+			
+			<!-- Response -->
+			<xsd:complexType name="cinemaDeleteResponse">
+				<xsd:sequence>
+					<xsd:element name="accepted" type="xsd:boolean" />
+				</xsd:sequence>
+			</xsd:complexType>
+			
+			<!-- Fault -->
+			<xsd:complexType name="cinemaDeleteFault">
+				<xsd:sequence>
+                        <xsd:element name="faultInfo" type="xsd:string" />
+                        <xsd:element name="message" type="xsd:string" />
+				</xsd:sequence>
+			</xsd:complexType>
 		</xsd:schema>
 	</types>
 	
@@ -143,6 +169,20 @@
 		</part>
 	</message>
 	
+	<!-- Cinema Delete -->
+	<message name="cinemaDeleteRequest">
+		<part name="parameters" element="tns:cinemaDeleteRequest">
+		</part>
+	</message>
+	<message name="cinemaDeleteResponse">
+		<part name="parameters" element="tns:cinemaDeleteResponse">
+		</part>
+	</message>
+	<message name="cinemaDeleteFault">
+		<part name="parameters" element="tns:cinemaDeleteFault">
+		</part>
+	</message>
+	
 	<!-- Port -->
 	<portType name="cinemaPT">
 		<operation name="cinemaInsert">
@@ -165,6 +205,15 @@
 			<fault message="tns:cinemaUpdateFault" name="cinemaUpdateFault">
 			</fault>
 		</operation>
+		<operation name="cinemaDelete">
+			<input message="tns:cinemaDeleteRequest"
+				wsam:Action="http://it.univaq.disim.sose.cald/cinemaInserting/cinemaDeleteRequest">
+			</input>
+			<output message="tns:cinemaDeleteResponse"
+				wsam:Action="http://it.univaq.disim.sose.cald/cinemaInserting/cinemaDeleteResponse">
+			</output>
+			<fault name="cinemaDeleteFault" message="tns:cinemaDeleteFault"></fault>
+		</operation>
 	</portType>
 	
 	<!-- Binding -->
@@ -181,6 +230,15 @@
 			</output>
 		</operation>
 		<operation name="cinemaUpdate">
+			<soap:operation soapAction="" />
+			<input>
+				<soap:body use="literal" />
+			</input>
+			<output>
+				<soap:body use="literal" />
+			</output>
+		</operation>
+		<operation name="cinemaDelete">
 			<soap:operation soapAction="" />
 			<input>
 				<soap:body use="literal" />

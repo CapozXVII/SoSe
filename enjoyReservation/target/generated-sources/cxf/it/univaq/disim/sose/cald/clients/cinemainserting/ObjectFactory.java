@@ -30,6 +30,9 @@ public class ObjectFactory {
     private final static QName _CinemaUpdateRequest_QNAME = new QName("http://it.univaq.disim.sose.cald/cinemaInserting", "cinemaUpdateRequest");
     private final static QName _CinemaUpdateResponse_QNAME = new QName("http://it.univaq.disim.sose.cald/cinemaInserting", "cinemaUpdateResponse");
     private final static QName _CinemaUpdateFault_QNAME = new QName("http://it.univaq.disim.sose.cald/cinemaInserting", "cinemaUpdateFault");
+    private final static QName _CinemaDeleteRequest_QNAME = new QName("http://it.univaq.disim.sose.cald/cinemaInserting", "cinemaDeleteRequest");
+    private final static QName _CinemaDeleteResponse_QNAME = new QName("http://it.univaq.disim.sose.cald/cinemaInserting", "cinemaDeleteResponse");
+    private final static QName _CinemaDeleteFault_QNAME = new QName("http://it.univaq.disim.sose.cald/cinemaInserting", "cinemaDeleteFault");
 
     /**
      * Create a new ObjectFactory that can be used to create new instances of schema derived classes for package: it.univaq.disim.sose.cald.clients.cinemainserting
@@ -84,6 +87,30 @@ public class ObjectFactory {
      */
     public CinemaUpdateFault createCinemaUpdateFault() {
         return new CinemaUpdateFault();
+    }
+
+    /**
+     * Create an instance of {@link CinemaDeleteRequest }
+     * 
+     */
+    public CinemaDeleteRequest createCinemaDeleteRequest() {
+        return new CinemaDeleteRequest();
+    }
+
+    /**
+     * Create an instance of {@link CinemaDeleteResponse }
+     * 
+     */
+    public CinemaDeleteResponse createCinemaDeleteResponse() {
+        return new CinemaDeleteResponse();
+    }
+
+    /**
+     * Create an instance of {@link CinemaDeleteFault }
+     * 
+     */
+    public CinemaDeleteFault createCinemaDeleteFault() {
+        return new CinemaDeleteFault();
     }
 
     /**
@@ -178,6 +205,33 @@ public class ObjectFactory {
     @XmlElementDecl(namespace = "http://it.univaq.disim.sose.cald/cinemaInserting", name = "cinemaUpdateFault")
     public JAXBElement<CinemaUpdateFault> createCinemaUpdateFault(CinemaUpdateFault value) {
         return new JAXBElement<CinemaUpdateFault>(_CinemaUpdateFault_QNAME, CinemaUpdateFault.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link CinemaDeleteRequest }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://it.univaq.disim.sose.cald/cinemaInserting", name = "cinemaDeleteRequest")
+    public JAXBElement<CinemaDeleteRequest> createCinemaDeleteRequest(CinemaDeleteRequest value) {
+        return new JAXBElement<CinemaDeleteRequest>(_CinemaDeleteRequest_QNAME, CinemaDeleteRequest.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link CinemaDeleteResponse }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://it.univaq.disim.sose.cald/cinemaInserting", name = "cinemaDeleteResponse")
+    public JAXBElement<CinemaDeleteResponse> createCinemaDeleteResponse(CinemaDeleteResponse value) {
+        return new JAXBElement<CinemaDeleteResponse>(_CinemaDeleteResponse_QNAME, CinemaDeleteResponse.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link CinemaDeleteFault }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://it.univaq.disim.sose.cald/cinemaInserting", name = "cinemaDeleteFault")
+    public JAXBElement<CinemaDeleteFault> createCinemaDeleteFault(CinemaDeleteFault value) {
+        return new JAXBElement<CinemaDeleteFault>(_CinemaDeleteFault_QNAME, CinemaDeleteFault.class, null, value);
     }
 
 }

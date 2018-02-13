@@ -31,7 +31,7 @@
 			<xsd:element name="checkCinemaOwnerRequest" type="tns:checkCinemaOwnerRequest" />
 			<xsd:element name="checkCinemaOwnerResponse" type="tns:checkCinemaOwnerResponse" />
 			<xsd:element name="checkCinemaOwnerFault" type="tns:checkCinemaOwnerFault" />
-			
+
 			<xsd:element name="checkRestaurantOwnerRequest" type="tns:checkRestaurantOwnerRequest" />
 			<xsd:element name="checkRestaurantOwnerResponse" type="tns:checkRestaurantOwnerResponse" />
 			<xsd:element name="checkRestaurantOwnerFault" type="tns:checkRestaurantOwnerFault" />
@@ -138,6 +138,7 @@
 			<xsd:complexType name="checkCinemaOwnerRequest">
 				<xsd:sequence>
 					<xsd:element name="token" type="xsd:string" />
+					<xsd:element name="cinemaId" type="xsd:long" />
 				</xsd:sequence>
 			</xsd:complexType>
 			
@@ -161,6 +162,7 @@
 			<xsd:complexType name="checkRestaurantOwnerRequest">
 				<xsd:sequence>
 					<xsd:element name="token" type="xsd:string" />
+					<xsd:element name="restaurantId" type="xsd:long" />
 				</xsd:sequence>
 			</xsd:complexType>
 			
@@ -240,29 +242,29 @@
 	
 	<!-- Check Cinema Owner -->
 	<message name="checkCinemaOwnerRequest">
-		<part name="parameters" element="tns:checkSessionRequest">
+		<part name="parameters" element="tns:checkCinemaOwnerRequest">
 		</part>
 	</message>
 	<message name="checkCinemaOwnerResponse">
-		<part name="parameters" element="tns:checkSessionResponse">
+		<part name="parameters" element="tns:checkCinemaOwnerResponse">
 		</part>
 	</message>
 	<message name="checkCinemaOwnerFault">
-		<part name="parameters" element="tns:checkSessionFault">
+		<part name="parameters" element="tns:checkCinemaOwnerFault">
 		</part>
 	</message>
 	
 	<!-- Check Restaurant Owner -->
 	<message name="checkRestaurantOwnerRequest">
-		<part name="parameters" element="tns:checkSessionRequest">
+		<part name="parameters" element="tns:checkRestaurantOwnerRequest">
 		</part>
 	</message>
 	<message name="checkRestaurantOwnerResponse">
-		<part name="parameters" element="tns:checkSessionResponse">
+		<part name="parameters" element="tns:checkRestaurantOwnerResponse">
 		</part>
 	</message>
 	<message name="checkRestaurantOwnerFault">
-		<part name="parameters" element="tns:checkSessionFault">
+		<part name="parameters" element="tns:checkRestaurantOwnerFault">
 		</part>
 	</message>
 	
@@ -340,7 +342,24 @@
 				<soap:body use="literal" />
 			</output>
 		</operation>
-		
+		<operation name="checkCinemaOwner">
+			<soap:operation soapAction="" />
+			<input>
+				<soap:body use="literal" />
+			</input>
+			<output>
+				<soap:body use="literal" />
+			</output>
+		</operation>
+		<operation name="checkRestaurantOwner">
+			<soap:operation soapAction="" />
+			<input>
+				<soap:body use="literal" />
+			</input>
+			<output>
+				<soap:body use="literal" />
+			</output>
+		</operation>
 	</binding>
 	
 	<!-- Service -->

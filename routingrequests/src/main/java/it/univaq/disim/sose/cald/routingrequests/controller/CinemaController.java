@@ -10,6 +10,7 @@ import javax.xml.datatype.XMLGregorianCalendar;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -24,6 +25,12 @@ import it.univaq.disim.sose.cald.enjoyreservation.AccountSessionResponse;
 import it.univaq.disim.sose.cald.enjoyreservation.BookingCinemaFault_Exception;
 import it.univaq.disim.sose.cald.enjoyreservation.BookingCinemaRequest;
 import it.univaq.disim.sose.cald.enjoyreservation.BookingCinemaResponse;
+import it.univaq.disim.sose.cald.enjoyreservation.CinemaOwnerFault_Exception;
+import it.univaq.disim.sose.cald.enjoyreservation.CinemaOwnerRequest;
+import it.univaq.disim.sose.cald.enjoyreservation.CinemaOwnerResponse;
+import it.univaq.disim.sose.cald.enjoyreservation.DeleteCinemaFault_Exception;
+import it.univaq.disim.sose.cald.enjoyreservation.DeleteCinemaRequest;
+import it.univaq.disim.sose.cald.enjoyreservation.DeleteCinemaResponse;
 import it.univaq.disim.sose.cald.enjoyreservation.EnjoyReservationPT;
 import it.univaq.disim.sose.cald.enjoyreservation.EnjoyReservationService;
 import it.univaq.disim.sose.cald.enjoyreservation.GetCinemaInfoFault_Exception;
@@ -54,7 +61,7 @@ public class CinemaController {
 	private static Logger LOGGER = LoggerFactory.getLogger(CinemaController.class);
 
 		
-	@GetMapping("/{token}/information/{city}")
+	@GetMapping("/{token}/information/city/{city}")
 	public GetCinemaInfoResponse getInformation(@PathVariable(value = "token") String token, @PathVariable(value = "city") String city) throws AccountSessionFault_Exception, GetCinemaInfoFault_Exception {
 		
 		EnjoyReservationService enjoyReservationService = new EnjoyReservationService();
@@ -72,7 +79,7 @@ public class CinemaController {
 		return response;
 	}
 	
-	@GetMapping("/{token}/{id}")
+	@GetMapping("/{token}/information/{id}")
 	public GetSingleCinemaInfoResponse getSingleInformation(@PathVariable(value = "token") String token, @PathVariable(value = "id") int id) throws AccountSessionFault_Exception, GetCinemaInfoFault_Exception {
 		
 		EnjoyReservationService enjoyReservationService = new EnjoyReservationService();
@@ -107,7 +114,7 @@ public class CinemaController {
 			
 			response = enjoyReservation.cinemaBooking(request);
 		} else {
-			response = null;
+			response.setAccepted("You are not logging it");
 		}
 		
 		return response;
@@ -127,27 +134,52 @@ public class CinemaController {
 			
 			response = enjoyReservation.insertCinema(request);
 		} else {
-			response = null;
+			response.setAccepted(false);
 		}
 		
 		return response;
 	}
 	
 	@PutMapping("/{token}/update")
-	public UpdateCinemaResponse updateCinema(@PathVariable(value = "token") String token, @RequestBody Cinema cinema) throws AccountSessionFault_Exception, UpdateCinemaFault_Exception {
+	public UpdateCinemaResponse updateCinema(@PathVariable(value = "token") String token, @RequestBody Cinema cinema) throws AccountSessionFault_Exception, UpdateCinemaFault_Exception, CinemaOwnerFault_Exception {
 		
 		EnjoyReservationService enjoyReservationService = new EnjoyReservationService();
 		EnjoyReservationPT enjoyReservation = enjoyReservationService.getEnjoyReservationPort();
 		UpdateCinemaResponse response = new UpdateCinemaResponse();
 		
 		if(checkSession(enjoyReservation, token)) {
-			UpdateCinemaRequest request = new UpdateCinemaRequest();
-	
-			request.setCinema(createCinema(cinema));
-			
-			response = enjoyReservation.updateCinema(request);
+			if(checkOwner(enjoyReservation, token, cinema.getId())) {
+				UpdateCinemaRequest request = new UpdateCinemaRequest();
+				
+				request.setCinema(createCinema(cinema));
+				
+				response = enjoyReservation.updateCinema(request);
+			} else {
+				response.setAccepted(false);
+			}
+		
 		} else {
-			response = null;
+			response.setAccepted(false);
+		}
+		
+		return response;
+	}
+	
+	@DeleteMapping("/{token}/delete/{id}")
+	public DeleteCinemaResponse deleteCinema(@PathVariable(value = "token") String token, @PathVariable(value = "id") long id) throws DeleteCinemaFault_Exception, AccountSessionFault_Exception {
+		
+		EnjoyReservationService enjoyReservationService = new EnjoyReservationService();
+		EnjoyReservationPT enjoyReservation = enjoyReservationService.getEnjoyReservationPort();
+		DeleteCinemaResponse response = new DeleteCinemaResponse();
+		
+		if(checkSession(enjoyReservation, token)) {
+			DeleteCinemaRequest request = new DeleteCinemaRequest();
+			
+			request.setHallFilmId(id);
+			
+			response = enjoyReservation.cinemaDelete(request);
+		} else {
+			response.setAccepted(false);
 		}
 		
 		return response;
@@ -161,10 +193,11 @@ public class CinemaController {
 		return response.isResponse();
 	}
 	
-	public boolean checkOwner(EnjoyReservationPT prosumer, String token) throws AccountSessionFault_Exception {
-		AccountSessionRequest request = new AccountSessionRequest();
+	public boolean checkOwner(EnjoyReservationPT prosumer, String token, Long id) throws CinemaOwnerFault_Exception {
+		CinemaOwnerRequest request = new CinemaOwnerRequest();
 		request.setToken(token);
-		AccountSessionResponse response = prosumer.accountSession(request);
+		request.setCinemaId(id);
+		CinemaOwnerResponse response = prosumer.checkCinemaOwner(request);
 		
 		return response.isResponse();
 	}

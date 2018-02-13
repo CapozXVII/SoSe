@@ -23,6 +23,15 @@ import it.univaq.disim.sose.cald.enjoyreservation.BookingCinemaResponse;
 import it.univaq.disim.sose.cald.enjoyreservation.BookingRestaurantFault_Exception;
 import it.univaq.disim.sose.cald.enjoyreservation.BookingRestaurantRequest;
 import it.univaq.disim.sose.cald.enjoyreservation.BookingRestaurantResponse;
+import it.univaq.disim.sose.cald.enjoyreservation.CinemaOwnerFault_Exception;
+import it.univaq.disim.sose.cald.enjoyreservation.CinemaOwnerRequest;
+import it.univaq.disim.sose.cald.enjoyreservation.CinemaOwnerResponse;
+import it.univaq.disim.sose.cald.enjoyreservation.DeleteCinemaFault_Exception;
+import it.univaq.disim.sose.cald.enjoyreservation.DeleteCinemaRequest;
+import it.univaq.disim.sose.cald.enjoyreservation.DeleteCinemaResponse;
+import it.univaq.disim.sose.cald.enjoyreservation.DeleteRestaurantFault_Exception;
+import it.univaq.disim.sose.cald.enjoyreservation.DeleteRestaurantRequest;
+import it.univaq.disim.sose.cald.enjoyreservation.DeleteRestaurantResponse;
 import it.univaq.disim.sose.cald.enjoyreservation.EnjoyReservationPT;
 import it.univaq.disim.sose.cald.enjoyreservation.GetCinemaInfoFault_Exception;
 import it.univaq.disim.sose.cald.enjoyreservation.GetCinemaInfoRequest;
@@ -40,6 +49,9 @@ import it.univaq.disim.sose.cald.enjoyreservation.InsertCinemaResponse;
 import it.univaq.disim.sose.cald.enjoyreservation.InsertRestaurantFault_Exception;
 import it.univaq.disim.sose.cald.enjoyreservation.InsertRestaurantRequest;
 import it.univaq.disim.sose.cald.enjoyreservation.InsertRestaurantResponse;
+import it.univaq.disim.sose.cald.enjoyreservation.RestaurantOwnerFault_Exception;
+import it.univaq.disim.sose.cald.enjoyreservation.RestaurantOwnerRequest;
+import it.univaq.disim.sose.cald.enjoyreservation.RestaurantOwnerResponse;
 import it.univaq.disim.sose.cald.enjoyreservation.UpdateCinemaFault_Exception;
 import it.univaq.disim.sose.cald.enjoyreservation.UpdateCinemaRequest;
 import it.univaq.disim.sose.cald.enjoyreservation.UpdateCinemaResponse;
@@ -157,6 +169,36 @@ public class EnjoyReservationPTImpl implements EnjoyReservationPT{
 			throws GetRestaurantInfoFault_Exception {
 		LOGGER.info("CALLED getSingleRestaurantInfo ON enjoyreservation");
 		GetSingleRestaurantInfoResponse response = service.getSingleRestaurantInfo(parameters);
+		return response;
+	}
+
+	@Override
+	public RestaurantOwnerResponse checkRestaurantOwner(RestaurantOwnerRequest parameters)
+			throws RestaurantOwnerFault_Exception {
+		LOGGER.info("CALLED checkRestaurantOwner ON enjoyreservation");
+		RestaurantOwnerResponse response = service.checkRestaurantOwner(parameters);
+		return response;
+	}
+
+	@Override
+	public CinemaOwnerResponse checkCinemaOwner(CinemaOwnerRequest parameters) throws CinemaOwnerFault_Exception {
+		LOGGER.info("CALLED checkCinemaOwner ON enjoyreservation");
+		CinemaOwnerResponse response = service.checkCinemaOwner(parameters);
+		return response;
+	}
+
+	@Override
+	public DeleteRestaurantResponse restaurantDelete(DeleteRestaurantRequest parameters)
+			throws DeleteRestaurantFault_Exception {
+		LOGGER.info("CALLED restaurantDelete ON enjoyreservation");
+		DeleteRestaurantResponse response = service.deleteRestautant(parameters);
+		return response;
+	}
+
+	@Override
+	public DeleteCinemaResponse cinemaDelete(DeleteCinemaRequest parameters) throws DeleteCinemaFault_Exception {
+		LOGGER.info("CALLED cinemaDelete ON enjoyreservation");
+		DeleteCinemaResponse response = service.deleteCinema(parameters);
 		return response;
 	}
 

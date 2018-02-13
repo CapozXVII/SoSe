@@ -5,6 +5,9 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import it.univaq.disim.sose.cald.restaurantinserting.RestaurantDeleteFault_Exception;
+import it.univaq.disim.sose.cald.restaurantinserting.RestaurantDeleteRequest;
+import it.univaq.disim.sose.cald.restaurantinserting.RestaurantDeleteResponse;
 import it.univaq.disim.sose.cald.restaurantinserting.RestaurantInsertFault_Exception;
 import it.univaq.disim.sose.cald.restaurantinserting.RestaurantInsertRequest;
 import it.univaq.disim.sose.cald.restaurantinserting.RestaurantInsertResponse;
@@ -48,6 +51,22 @@ public class RestaurantInsertingPTImpl implements RestaurantPT {
 		}catch (Exception ex) {
 			throw new RuntimeException(ex.getMessage());
 		}
+	}
+
+	@Override
+	public RestaurantDeleteResponse restaurantDelete(RestaurantDeleteRequest parameters)
+			throws RestaurantDeleteFault_Exception {
+		LOGGER.info("CALLED Restaurant - delete");
+
+		try {
+			RestaurantDeleteResponse response = service.deleteRestaurant(parameters);
+			return response;
+
+		} catch (Exception ex) {
+			throw new RuntimeException(ex.getMessage());
+		}
+
+		
 	}
 
 }

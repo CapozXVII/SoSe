@@ -22,8 +22,10 @@
 			<xsd:element name="accountLoginRequest" type="tns:accountLoginRequest"/>
 			<xsd:element name="accountLogoutRequest" type="tns:accountLogoutRequest"/>
 			<xsd:element name="accountSessionRequest" type="tns:accountSessionRequest"/>
-			<xsd:element name="cinemaOwnerRequest" type="tns:cinemaOwnerRequest"/>
-			<xsd:element name="restaurantOwnerRequest" type="tns:restaurantOwnerRequest"/>
+			<xsd:element name="cinemaOwnerRequest" type="tns:cinemaOwnerRequest" />
+			<xsd:element name="restaurantOwnerRequest" type="tns:restaurantOwnerRequest" />
+			<xsd:element name="deleteCinemaRequest" type="tns:deleteCinemaRequest" />
+			<xsd:element name="deleteRestaurantRequest" type="tns:deleteRestaurantRequest" />
 			
 			<xsd:element name="insertCinemaResponse" type="tns:insertCinemaResponse"/> 
 			<xsd:element name="getCinemaInfoResponse" type="tns:getCinemaInfoResponse"/> 
@@ -39,8 +41,10 @@
 			<xsd:element name="accountLoginResponse" type="tns:accountLoginResponse"/>
 			<xsd:element name="accountLogoutResponse" type="tns:accountLogoutResponse"/>
 			<xsd:element name="accountSessionResponse" type="tns:accountSessionResponse"/>
-			<xsd:element name="cinemaOwnerResponse" type="tns:cinemaOwnerResponse"/>
-			<xsd:element name="restaurantOwnerResponse" type="tns:restaurantOwnerResponse"/>
+			<xsd:element name="cinemaOwnerResponse" type="tns:cinemaOwnerResponse" />
+			<xsd:element name="restaurantOwnerResponse" type="tns:restaurantOwnerResponse" />
+			<xsd:element name="deleteCinemaResponse" type="tns:deleteCinemaResponse" />
+			<xsd:element name="deleteRestaurantResponse" type="tns:deleteRestaurantResponse" />
 			
 			<xsd:element name="getRestaurantInfoFault" type="tns:getRestaurantInfoFault"/>
 			<xsd:element name="getCinemaInfoFault" type="tns:getCinemaInfoFault"/>
@@ -54,8 +58,10 @@
 			<xsd:element name="accountLoginFault" type="tns:accountLoginFault"/>
 			<xsd:element name="accountLogoutFault" type="tns:accountLogoutFault"/>
 			<xsd:element name="accountSessionFault" type="tns:accountSessionFault"/>
-			<xsd:element name="cinemaOwnerFault" type="tns:cinemaOwnerFault"/>
-			<xsd:element name="restaurantOwnerFault" type="tns:restaurantOwnerFault"/>
+			<xsd:element name="cinemaOwnerFault" type="tns:cinemaOwnerFault" />
+			<xsd:element name="restaurantOwnerFault" type="tns:restaurantOwnerFault" />
+			<xsd:element name="deleteCinemaFault" type="tns:deleteCinemaFault" />
+			<xsd:element name="deleteRestaurantFault" type="tns:deleteRestaurantFault" />
 			
 			<!-- Resturant Info -->
 			<!-- Request -->
@@ -357,14 +363,15 @@
 			</xsd:complexType>
 			
 			<!--checkCinemaOwner-->
-			<!--request-->
+			<!-- Request -->
 			<xsd:complexType name="cinemaOwnerRequest">
 				<xsd:sequence>
 					<xsd:element name="token" type="xsd:string" />
+					<xsd:element name="cinemaId" type="xsd:long" />
 				</xsd:sequence>
 			</xsd:complexType>
 			
-			<!--response-->
+			<!-- Response -->
 			<xsd:complexType name="cinemaOwnerResponse">
 				<xsd:sequence>
 					<xsd:element name="response" type="xsd:boolean" />
@@ -372,19 +379,51 @@
 			</xsd:complexType>
 			
 			<!--checkRestaurantOwner-->
-			<!--request-->
+			<!-- Request -->
 			<xsd:complexType name="restaurantOwnerRequest">
 				<xsd:sequence>
 					<xsd:element name="token" type="xsd:string" />
+					<xsd:element name="restaurantId" type="xsd:long" />
 				</xsd:sequence>
 			</xsd:complexType>
 			
-			<!--response-->
+			<!-- Response -->
 			<xsd:complexType name="restaurantOwnerResponse">
 				<xsd:sequence>
 					<xsd:element name="response" type="xsd:boolean" />
 				</xsd:sequence>
 			</xsd:complexType>
+			
+			<!-- Cinema Delete -->
+			<!-- Request -->
+			<xsd:complexType name="deleteCinemaRequest">
+				<xsd:sequence>
+					<xsd:element name="hallFilm_id" minOccurs="0" type="xsd:long" />
+				</xsd:sequence>
+			</xsd:complexType>
+			
+			<!-- Response -->
+			<xsd:complexType name="deleteCinemaResponse">
+				<xsd:sequence>
+					<xsd:element name="accepted" type="xsd:boolean" />
+				</xsd:sequence>
+			</xsd:complexType>
+			
+			<!-- Resturant Delete -->
+			<!-- Request -->
+			<xsd:complexType name="deleteRestaurantRequest">
+				<xsd:sequence>
+					<xsd:element name="restaurant_id" type="xsd:long" />
+				</xsd:sequence>
+			</xsd:complexType>
+			
+			<!-- Response -->
+			<xsd:complexType name="deleteRestaurantResponse">
+				<xsd:sequence>
+					<xsd:element name="accepted" type="xsd:boolean" />
+				</xsd:sequence>
+			</xsd:complexType>
+		
 		
 			<!--Fault Types-->
 			<xsd:complexType name="getRestaurantInfoFault">
@@ -461,13 +500,25 @@
 			</xsd:complexType>
 			<xsd:complexType name="cinemaOwnerFault">
 				<xsd:sequence>
-                        <xsd:element name="faultInsert" type="xsd:string" />
+                        <xsd:element name="faultInfo" type="xsd:string" />
                         <xsd:element name="message" type="xsd:string" />
 				</xsd:sequence>
 			</xsd:complexType>
 			<xsd:complexType name="restaurantOwnerFault">
 				<xsd:sequence>
-                        <xsd:element name="faultInsert" type="xsd:string" />
+                        <xsd:element name="faultInfo" type="xsd:string" />
+                        <xsd:element name="message" type="xsd:string" />
+				</xsd:sequence>
+			</xsd:complexType>
+			<xsd:complexType name="deleteRestaurantFault">
+				<xsd:sequence>
+                        <xsd:element name="faultInfo" type="xsd:string" />
+                        <xsd:element name="message" type="xsd:string" />
+				</xsd:sequence>
+			</xsd:complexType>
+			<xsd:complexType name="deleteCinemaFault">
+				<xsd:sequence>
+                        <xsd:element name="faultInfo" type="xsd:string" />
                         <xsd:element name="message" type="xsd:string" />
 				</xsd:sequence>
 			</xsd:complexType>
@@ -579,18 +630,22 @@
     </message>
      <!--Check CinemaOwner-->
 	<message name="cinemaOwnerRequest">
-        <part name="parameters" element="tns:cinemaOwnerRequest"/>
-    </message>
-    <message name="cinemaOwnerResponse">
-        <part name="parameters" element="tns:cinemaOwnerResponse"/>
-    </message>
+		<part name="parameters" element="tns:cinemaOwnerRequest">
+		</part>
+	</message>
+	<message name="cinemaOwnerResponse">
+		<part name="parameters" element="tns:cinemaOwnerResponse">
+		</part>
+	</message>
     <!--Check RestaurantOwner-->
 	<message name="restaurantOwnerRequest">
-        <part name="parameters" element="tns:restaurantOwnerRequest"/>
-    </message>
-    <message name="restaurantOwnerResponse">
-        <part name="parameters" element="tns:restaurantOwnerResponse"/>
-    </message>
+		<part name="parameters" element="tns:restaurantOwnerRequest">
+		</part>
+	</message>
+	<message name="restaurantOwnerResponse">
+		<part name="parameters" element="tns:restaurantOwnerResponse">
+		</part>
+	</message>
 	
 	<!--Fault Messages-->
 	 <message name="getRestaurantInfoFault">
@@ -630,11 +685,39 @@
         <part name="parameters" element="tns:accountSessionFault"/>
     </message>
     <message name="cinemaOwnerFault">
-        <part name="parameters" element="tns:accountSessionFault"/>
-    </message>
+		<part name="parameters" element="tns:cinemaOwnerFault">
+		</part>
+	</message>
     <message name="restaurantOwnerFault">
-        <part name="parameters" element="tns:accountSessionFault"/>
-    </message>
+		<part name="parameters" element="tns:restaurantOwnerFault">
+		</part>
+	</message>
+	<!-- Cinema Delete -->
+	<message name="deleteCinemaRequest">
+		<part name="parameters" element="tns:deleteCinemaRequest">
+		</part>
+	</message>
+	<message name="deleteCinemaResponse">
+		<part name="parameters" element="tns:deleteCinemaResponse">
+		</part>
+	</message>
+	<message name="deleteCinemaFault">
+		<part name="parameters" element="tns:deleteCinemaFault">
+		</part>
+	</message>
+	<!-- Resturant Delete -->
+	<message name="deleteRestaurantRequest">
+		<part name="parameters" element="tns:deleteRestaurantRequest">
+		</part>
+	</message>
+	<message name="deleteRestaurantResponse">
+		<part name="parameters" element="tns:deleteRestaurantResponse">
+		</part>
+	</message>
+	<message name="deleteRestaurantFault">
+		<part name="parameters" element="tns:deleteRestaurantFault">
+		</part>
+	</message>
 		
 	<!-- PORT -->
 	<portType name="enjoyReservationPT">
@@ -709,15 +792,29 @@
 			<fault name="accountSessionFault" message="tns:accountSessionFault"/>
         </operation>	
         <operation name="checkCinemaOwner">
-            <input name="cinemaOwnerRequest" message="tns:cinemaOwnerRequest" />
-            <output name="cinemaOwnerResponse" message="tns:cinemaOwnerResponse"/>
-			<fault name="cinemaOwnerFault" message="tns:cinemaOwnerFault"/>
-        </operation>	
-         <operation name="checkRestaurantOwner">
-            <input name="restaurantOwnerRequest" message="tns:restaurantOwnerRequest" />
-            <output name="restaurantOwnerResponse" message="tns:restaurantOwnerResponse"/>
-			<fault name="restaurantOwnerFault" message="tns:restaurantOwnerFault"/>
-        </operation>	
+			<input name="cinemaOwnerRequest" message="tns:cinemaOwnerRequest" />
+			<output name="cinemaOwnerResponse" message="tns:cinemaOwnerResponse" />
+			<fault name="cinemaOwnerFault" message="tns:cinemaOwnerFault" />
+		</operation>
+		<operation name="checkRestaurantOwner">
+			<input name="restaurantOwnerRequest" message="tns:restaurantOwnerRequest" />
+			<output name="restaurantOwnerResponse" message="tns:restaurantOwnerResponse" />
+			<fault name="restaurantOwnerFault" message="tns:restaurantOwnerFault" />
+		</operation>
+		<operation name="cinemaDelete">
+			<input message="tns:deleteCinemaRequest">
+			</input>
+			<output message="tns:deleteCinemaResponse">
+			</output>
+			<fault name="deleteCinemaFault" message="tns:deleteCinemaFault"></fault>
+		</operation>
+		<operation name="restaurantDelete">
+			<input message="tns:deleteRestaurantRequest">
+			</input>
+			<output message="tns:deleteRestaurantResponse">
+			</output>
+			<fault name="deleteRestaurantFault" message="tns:deleteRestaurantFault"></fault>
+		</operation>
     </portType>
 		
 	<!--BINDING-->
@@ -849,7 +946,42 @@
     			<soap:body use="literal" />
     		</output>
     	</operation>
-   
+   <operation name="checkCinemaOwner">
+			<soap:operation soapAction="" />
+			<input>
+				<soap:body use="literal" />
+			</input>
+			<output>
+				<soap:body use="literal" />
+			</output>
+		</operation>
+		<operation name="checkRestaurantOwner">
+			<soap:operation soapAction="" />
+			<input>
+				<soap:body use="literal" />
+			</input>
+			<output>
+				<soap:body use="literal" />
+			</output>
+		</operation>
+		<operation name="cinemaDelete">
+			<soap:operation soapAction="" />
+			<input>
+				<soap:body use="literal" />
+			</input>
+			<output>
+				<soap:body use="literal" />
+			</output>
+		</operation>
+		<operation name="restaurantDelete">
+			<soap:operation soapAction="" />
+			<input>
+				<soap:body use="literal" />
+			</input>
+			<output>
+				<soap:body use="literal" />
+			</output>
+		</operation>
     </binding>
 	
 	<!-- SERVICE-->

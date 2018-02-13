@@ -12,6 +12,12 @@ import it.univaq.disim.sose.cald.enjoyreservation.BookingCinemaRequest;
 import it.univaq.disim.sose.cald.enjoyreservation.BookingCinemaResponse;
 import it.univaq.disim.sose.cald.enjoyreservation.BookingRestaurantRequest;
 import it.univaq.disim.sose.cald.enjoyreservation.BookingRestaurantResponse;
+import it.univaq.disim.sose.cald.enjoyreservation.CinemaOwnerRequest;
+import it.univaq.disim.sose.cald.enjoyreservation.CinemaOwnerResponse;
+import it.univaq.disim.sose.cald.enjoyreservation.DeleteCinemaRequest;
+import it.univaq.disim.sose.cald.enjoyreservation.DeleteCinemaResponse;
+import it.univaq.disim.sose.cald.enjoyreservation.DeleteRestaurantRequest;
+import it.univaq.disim.sose.cald.enjoyreservation.DeleteRestaurantResponse;
 import it.univaq.disim.sose.cald.enjoyreservation.GetCinemaInfoRequest;
 import it.univaq.disim.sose.cald.enjoyreservation.GetCinemaInfoResponse;
 import it.univaq.disim.sose.cald.enjoyreservation.GetRestaurantInfoRequest;
@@ -24,6 +30,8 @@ import it.univaq.disim.sose.cald.enjoyreservation.InsertCinemaRequest;
 import it.univaq.disim.sose.cald.enjoyreservation.InsertCinemaResponse;
 import it.univaq.disim.sose.cald.enjoyreservation.InsertRestaurantRequest;
 import it.univaq.disim.sose.cald.enjoyreservation.InsertRestaurantResponse;
+import it.univaq.disim.sose.cald.enjoyreservation.RestaurantOwnerRequest;
+import it.univaq.disim.sose.cald.enjoyreservation.RestaurantOwnerResponse;
 import it.univaq.disim.sose.cald.enjoyreservation.UpdateCinemaRequest;
 import it.univaq.disim.sose.cald.enjoyreservation.UpdateCinemaResponse;
 import it.univaq.disim.sose.cald.enjoyreservation.UpdateRestaurantRequest;
@@ -58,4 +66,12 @@ public interface EnjoyReservationService {
 	AccountLogoutResponse userLogout(AccountLogoutRequest request) throws BusinessException;
 	
 	AccountSessionResponse accountSession(AccountSessionRequest request) throws BusinessException;
+	
+	CinemaOwnerResponse checkCinemaOwner(CinemaOwnerRequest request) throws BusinessException;
+	
+	RestaurantOwnerResponse checkRestaurantOwner(RestaurantOwnerRequest request) throws BusinessException;
+	
+	DeleteCinemaResponse deleteCinema(DeleteCinemaRequest request) throws BusinessException;
+	
+	DeleteRestaurantResponse deleteRestautant(DeleteRestaurantRequest request) throws BusinessException;
 }

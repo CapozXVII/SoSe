@@ -18,6 +18,7 @@ import javax.xml.bind.annotation.XmlType;
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&gt;
  *       &lt;sequence&gt;
  *         &lt;element name="token" type="{http://www.w3.org/2001/XMLSchema}string"/&gt;
+ *         &lt;element name="cinemaId" type="{http://www.w3.org/2001/XMLSchema}long"/&gt;
  *       &lt;/sequence&gt;
  *     &lt;/restriction&gt;
  *   &lt;/complexContent&gt;
@@ -28,12 +29,14 @@ import javax.xml.bind.annotation.XmlType;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "checkCinemaOwnerRequest", propOrder = {
-    "token"
+    "token",
+    "cinemaId"
 })
 public class CheckCinemaOwnerRequest {
 
     @XmlElement(required = true)
     protected String token;
+    protected long cinemaId;
 
     /**
      * Gets the value of the token property.
@@ -57,6 +60,22 @@ public class CheckCinemaOwnerRequest {
      */
     public void setToken(String value) {
         this.token = value;
+    }
+
+    /**
+     * Gets the value of the cinemaId property.
+     * 
+     */
+    public long getCinemaId() {
+        return cinemaId;
+    }
+
+    /**
+     * Sets the value of the cinemaId property.
+     * 
+     */
+    public void setCinemaId(long value) {
+        this.cinemaId = value;
     }
 
 }

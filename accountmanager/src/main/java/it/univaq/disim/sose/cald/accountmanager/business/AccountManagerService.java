@@ -1,7 +1,9 @@
 package it.univaq.disim.sose.cald.accountmanager.business;
 
+import it.univaq.disim.sose.cald.accountmanager.CheckCinemaOwnerFault_Exception;
 import it.univaq.disim.sose.cald.accountmanager.CheckCinemaOwnerRequest;
 import it.univaq.disim.sose.cald.accountmanager.CheckCinemaOwnerResponse;
+import it.univaq.disim.sose.cald.accountmanager.CheckRestaurantOwnerFault_Exception;
 import it.univaq.disim.sose.cald.accountmanager.CheckRestaurantOwnerRequest;
 import it.univaq.disim.sose.cald.accountmanager.CheckRestaurantOwnerResponse;
 import it.univaq.disim.sose.cald.accountmanager.CheckSessionFault_Exception;
@@ -27,7 +29,7 @@ public interface AccountManagerService {
 	
 	UserLogoutResponse userLogout(UserLogoutRequest parameters) throws UserLogoutFault_Exception;
 	
-	CheckCinemaOwnerResponse checkCinemaOwner(CheckCinemaOwnerRequest paramaters);
+	CheckCinemaOwnerResponse checkCinemaOwner(CheckCinemaOwnerRequest parameters) throws CheckCinemaOwnerFault_Exception;
 	
-	CheckRestaurantOwnerResponse checkRestaurantOwner(CheckRestaurantOwnerRequest paramaters);
+	CheckRestaurantOwnerResponse checkRestaurantOwner(CheckRestaurantOwnerRequest parameters) throws CheckRestaurantOwnerFault_Exception;
 }

@@ -6,6 +6,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import it.univaq.disim.sose.cald.accountmanager.AccountManagerPT;
+import it.univaq.disim.sose.cald.accountmanager.CheckCinemaOwnerFault_Exception;
+import it.univaq.disim.sose.cald.accountmanager.CheckCinemaOwnerRequest;
+import it.univaq.disim.sose.cald.accountmanager.CheckCinemaOwnerResponse;
+import it.univaq.disim.sose.cald.accountmanager.CheckRestaurantOwnerFault_Exception;
+import it.univaq.disim.sose.cald.accountmanager.CheckRestaurantOwnerRequest;
+import it.univaq.disim.sose.cald.accountmanager.CheckRestaurantOwnerResponse;
 import it.univaq.disim.sose.cald.accountmanager.CheckSessionFault_Exception;
 import it.univaq.disim.sose.cald.accountmanager.CheckSessionRequest;
 import it.univaq.disim.sose.cald.accountmanager.CheckSessionResponse;
@@ -57,6 +63,24 @@ public class AccountManagerPTImpl implements AccountManagerPT {
 		LOGGER.info("called User Signup in Account Service");
 		UserSignupResponse response = new UserSignupResponse();
 		response = service.userSignup(parameters);
+		return response;
+	}
+
+	@Override
+	public CheckRestaurantOwnerResponse checkRestaurantOwner(CheckRestaurantOwnerRequest parameters)
+			throws CheckRestaurantOwnerFault_Exception {
+		LOGGER.info("called Check Restaurant Owner in Account Service");
+		CheckRestaurantOwnerResponse response = new CheckRestaurantOwnerResponse();
+		response = service.checkRestaurantOwner(parameters);
+		return response;
+	}
+
+	@Override
+	public CheckCinemaOwnerResponse checkCinemaOwner(CheckCinemaOwnerRequest parameters)
+			throws CheckCinemaOwnerFault_Exception {
+		LOGGER.info("called Check Cinema Owner in Account Service");
+		CheckCinemaOwnerResponse response = new CheckCinemaOwnerResponse();
+		response = service.checkCinemaOwner(parameters);
 		return response;
 	}
 

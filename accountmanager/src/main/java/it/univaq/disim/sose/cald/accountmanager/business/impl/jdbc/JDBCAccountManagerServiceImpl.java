@@ -13,6 +13,12 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import it.univaq.disim.sose.cald.accountmanager.CheckCinemaOwnerFault_Exception;
+import it.univaq.disim.sose.cald.accountmanager.CheckCinemaOwnerRequest;
+import it.univaq.disim.sose.cald.accountmanager.CheckCinemaOwnerResponse;
+import it.univaq.disim.sose.cald.accountmanager.CheckRestaurantOwnerFault_Exception;
+import it.univaq.disim.sose.cald.accountmanager.CheckRestaurantOwnerRequest;
+import it.univaq.disim.sose.cald.accountmanager.CheckRestaurantOwnerResponse;
 import it.univaq.disim.sose.cald.accountmanager.CheckSessionFault_Exception;
 import it.univaq.disim.sose.cald.accountmanager.CheckSessionRequest;
 import it.univaq.disim.sose.cald.accountmanager.CheckSessionResponse;
@@ -226,6 +232,120 @@ public class JDBCAccountManagerServiceImpl implements AccountManagerService {
 		} catch (SQLException e) {
 			e.printStackTrace();
 			throw new UserLogoutFault_Exception("Something was wrong with User Logout");
+		} finally {
+			if (st != null) {
+				try {
+					st.close();
+				} catch (SQLException e) {
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (SQLException e) {}
+			}
+		}
+		return response;
+	}
+
+	@Override
+	public CheckCinemaOwnerResponse checkCinemaOwner(CheckCinemaOwnerRequest parameters) throws CheckCinemaOwnerFault_Exception{
+		CheckCinemaOwnerResponse response = new CheckCinemaOwnerResponse();
+		String sql = "SELECT * FROM sessions WHERE token = ?";
+		String sql1 = "SELECT * FROM cinemas WHERE cinema_id = ? AND owner = ?";
+		LOGGER.info(sql);
+		Connection con = null;
+		PreparedStatement st = null, st1 = null;
+		ResultSet rs = null, rs1 = null;
+		
+		try {			
+			con = dataSource.getConnection();
+			st = con.prepareStatement(sql);
+			
+			st.setString(1, parameters.getToken());
+			rs = st.executeQuery();
+			
+			rs.last();
+			int num_rows = rs.getRow();
+			
+			if(num_rows != 0) {
+				st1 = con.prepareStatement(sql1);
+				
+				st1.setLong(1, parameters.getCinemaId());
+				st1.setLong(2, rs.getLong("user"));
+				rs1 = st1.executeQuery();
+				
+				rs1.last();
+				int num_rows1 = rs1.getRow();
+				
+				if(num_rows1 != 0) {
+					response.setResponse(true);
+				} else {
+					response.setResponse(false);
+				}
+			} else {
+				response.setResponse(false);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+			throw new CheckCinemaOwnerFault_Exception("Something was wrong with Checking Cinema Owner");
+		} finally {
+			if (st != null) {
+				try {
+					st.close();
+				} catch (SQLException e) {
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (SQLException e) {}
+			}
+		}
+		return response;
+	}
+
+	@Override
+	public CheckRestaurantOwnerResponse checkRestaurantOwner(CheckRestaurantOwnerRequest parameters) throws CheckRestaurantOwnerFault_Exception{
+		CheckRestaurantOwnerResponse response = new CheckRestaurantOwnerResponse();
+		String sql = "SELECT * FROM sessions WHERE token = ?";
+		String sql1 = "SELECT * FROM restaurants WHERE restaurant_id = ? AND owner = ?";
+		LOGGER.info(sql);
+		Connection con = null;
+		PreparedStatement st = null, st1 = null;
+		ResultSet rs = null, rs1 = null;
+		
+		try {			
+			con = dataSource.getConnection();
+			st = con.prepareStatement(sql);
+			
+			st.setString(1, parameters.getToken());
+			rs = st.executeQuery();
+			
+			rs.last();
+			int num_rows = rs.getRow();
+			
+			if(num_rows != 0) {
+				st1 = con.prepareStatement(sql1);
+				
+				st1.setLong(1, parameters.getRestaurantId());
+				st1.setLong(2, rs.getLong("user"));
+				rs1 = st1.executeQuery();
+				
+				rs1.last();
+				int num_rows1 = rs1.getRow();
+				
+				if(num_rows1 != 0) {
+					response.setResponse(true);
+				} else {
+					response.setResponse(false);
+				}
+			} else {
+				response.setResponse(false);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+			throw new CheckRestaurantOwnerFault_Exception("Something was wrong with Checking Restaurant Owner");
 		} finally {
 			if (st != null) {
 				try {

@@ -18,6 +18,12 @@ import com.google.maps.errors.ApiException;
 
 import it.univaq.disim.sose.cald.clients.accountmanager.AccountManagerPT;
 import it.univaq.disim.sose.cald.clients.accountmanager.AccountManagerService;
+import it.univaq.disim.sose.cald.clients.accountmanager.CheckCinemaOwnerFault_Exception;
+import it.univaq.disim.sose.cald.clients.accountmanager.CheckCinemaOwnerRequest;
+import it.univaq.disim.sose.cald.clients.accountmanager.CheckCinemaOwnerResponse;
+import it.univaq.disim.sose.cald.clients.accountmanager.CheckRestaurantOwnerFault_Exception;
+import it.univaq.disim.sose.cald.clients.accountmanager.CheckRestaurantOwnerRequest;
+import it.univaq.disim.sose.cald.clients.accountmanager.CheckRestaurantOwnerResponse;
 import it.univaq.disim.sose.cald.clients.accountmanager.CheckSessionFault_Exception;
 import it.univaq.disim.sose.cald.clients.accountmanager.CheckSessionRequest;
 import it.univaq.disim.sose.cald.clients.accountmanager.CheckSessionResponse;
@@ -45,6 +51,9 @@ import it.univaq.disim.sose.cald.clients.cinemainformation.HallInfoType;
 import it.univaq.disim.sose.cald.clients.cinemainformation.HallType;
 import it.univaq.disim.sose.cald.clients.cinemainformation.SingleCinemaInformationRequest;
 import it.univaq.disim.sose.cald.clients.cinemainformation.SingleCinemaInformationResponse;
+import it.univaq.disim.sose.cald.clients.cinemainserting.CinemaDeleteFault_Exception;
+import it.univaq.disim.sose.cald.clients.cinemainserting.CinemaDeleteRequest;
+import it.univaq.disim.sose.cald.clients.cinemainserting.CinemaDeleteResponse;
 import it.univaq.disim.sose.cald.clients.cinemainserting.CinemaInsertFault_Exception;
 import it.univaq.disim.sose.cald.clients.cinemainserting.CinemaInsertRequest;
 import it.univaq.disim.sose.cald.clients.cinemainserting.CinemaInsertResponse;
@@ -66,6 +75,9 @@ import it.univaq.disim.sose.cald.clients.restaurantinformation.SingleRestaurantI
 import it.univaq.disim.sose.cald.clients.restaurantinformation.SingleRestaurantInformationResponse;
 import it.univaq.disim.sose.cald.clients.restaurantinformation.RestaurantInformationService;
 import it.univaq.disim.sose.cald.clients.restaurantinformation.RestaurantType;
+import it.univaq.disim.sose.cald.clients.restaurantinserting.RestaurantDeleteFault_Exception;
+import it.univaq.disim.sose.cald.clients.restaurantinserting.RestaurantDeleteRequest;
+import it.univaq.disim.sose.cald.clients.restaurantinserting.RestaurantDeleteResponse;
 import it.univaq.disim.sose.cald.clients.restaurantinserting.RestaurantInsertFault_Exception;
 import it.univaq.disim.sose.cald.clients.restaurantinserting.RestaurantInsertRequest;
 import it.univaq.disim.sose.cald.clients.restaurantinserting.RestaurantInsertResponse;
@@ -86,6 +98,12 @@ import it.univaq.disim.sose.cald.enjoyreservation.BookingCinemaRequest;
 import it.univaq.disim.sose.cald.enjoyreservation.BookingCinemaResponse;
 import it.univaq.disim.sose.cald.enjoyreservation.BookingRestaurantRequest;
 import it.univaq.disim.sose.cald.enjoyreservation.BookingRestaurantResponse;
+import it.univaq.disim.sose.cald.enjoyreservation.CinemaOwnerRequest;
+import it.univaq.disim.sose.cald.enjoyreservation.CinemaOwnerResponse;
+import it.univaq.disim.sose.cald.enjoyreservation.DeleteCinemaRequest;
+import it.univaq.disim.sose.cald.enjoyreservation.DeleteCinemaResponse;
+import it.univaq.disim.sose.cald.enjoyreservation.DeleteRestaurantRequest;
+import it.univaq.disim.sose.cald.enjoyreservation.DeleteRestaurantResponse;
 import it.univaq.disim.sose.cald.enjoyreservation.GetCinemaInfoRequest;
 import it.univaq.disim.sose.cald.enjoyreservation.GetCinemaInfoResponse;
 import it.univaq.disim.sose.cald.enjoyreservation.GetRestaurantInfoRequest;
@@ -106,6 +124,8 @@ import it.univaq.disim.sose.cald.enjoyreservation.OSMHallInfoType;
 import it.univaq.disim.sose.cald.enjoyreservation.OSMHallType;
 import it.univaq.disim.sose.cald.enjoyreservation.OSMRestaurantInfoType;
 import it.univaq.disim.sose.cald.enjoyreservation.OSMRestaurantType;
+import it.univaq.disim.sose.cald.enjoyreservation.RestaurantOwnerRequest;
+import it.univaq.disim.sose.cald.enjoyreservation.RestaurantOwnerResponse;
 import it.univaq.disim.sose.cald.enjoyreservation.UpdateCinemaRequest;
 import it.univaq.disim.sose.cald.enjoyreservation.UpdateCinemaResponse;
 import it.univaq.disim.sose.cald.enjoyreservation.UpdateRestaurantRequest;
@@ -189,6 +209,7 @@ public class WebServiceEnjoyReservationServiceImpl implements EnjoyReservationSe
 				OSMCinemaType newCinema = new OSMCinemaType();
 				OSMCinemaInfoType newCinemaInfo = new OSMCinemaInfoType();
 				
+				hallResponse = new ArrayList<OSMHallType>();
 				for(HallType hall : cinema.getCinemaInfo().getHall()) {
 					OSMHallType newHall = new OSMHallType();
 					
@@ -711,6 +732,100 @@ public class WebServiceEnjoyReservationServiceImpl implements EnjoyReservationSe
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		return response;
+	}
+	
+	@Override
+	public DeleteCinemaResponse deleteCinema(DeleteCinemaRequest request) throws BusinessException {
+		DeleteCinemaResponse response = new DeleteCinemaResponse();
+		
+		CinemaInsertingService cinemaInsertingService = new CinemaInsertingService();
+		CinemaPT cinemaInserting = cinemaInsertingService.getCinemaPort();
+		CinemaDeleteRequest cinemaDeleteRequest = new CinemaDeleteRequest();
+		
+		if(request.getHallFilmId() != null) {
+			cinemaDeleteRequest.setHallFilmId(request.getHallFilmId());
+		}
+		
+		try {
+			CinemaDeleteResponse cinemaDeleteResponse = cinemaInserting.cinemaDelete(cinemaDeleteRequest);
+			
+			response.setAccepted(cinemaDeleteResponse.isAccepted());
+		} catch (CinemaDeleteFault_Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return response;
+	}
+
+	@Override
+	public DeleteRestaurantResponse deleteRestautant(DeleteRestaurantRequest request) throws BusinessException {
+		DeleteRestaurantResponse response = new DeleteRestaurantResponse();
+		
+		RestaurantInsertingService restaurantInsertingService = new RestaurantInsertingService();
+		RestaurantPT restaurantInserting = restaurantInsertingService.getRestaurantPort();
+		RestaurantDeleteRequest restaurantDeleteRequest = new RestaurantDeleteRequest();
+		
+		if((Long) request.getRestaurantId() != null) {
+			restaurantDeleteRequest.setRestaurantId(request.getRestaurantId());
+		}
+		
+		try {
+			RestaurantDeleteResponse restaurantDeleteResponse = restaurantInserting.restaurantDelete(restaurantDeleteRequest);
+			
+			response.setAccepted(restaurantDeleteResponse.isAccepted());
+		} catch (RestaurantDeleteFault_Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return response;
+	}
+	
+	@Override
+	public CinemaOwnerResponse checkCinemaOwner(CinemaOwnerRequest request) throws BusinessException {
+		CinemaOwnerResponse response = new CinemaOwnerResponse();
+		
+		AccountManagerService accountManagerService = new AccountManagerService();
+		AccountManagerPT accountManager = accountManagerService.getAccountManagerPort();
+		CheckCinemaOwnerRequest checkCinemaOwnerRequest = new CheckCinemaOwnerRequest();
+		
+		checkCinemaOwnerRequest.setToken(request.getToken());
+		checkCinemaOwnerRequest.setCinemaId(request.getCinemaId());
+		
+		try {
+			CheckCinemaOwnerResponse checkCinemaOwnerResponse = accountManager.checkCinemaOwner(checkCinemaOwnerRequest);
+			response.setResponse(checkCinemaOwnerResponse.isResponse());
+			
+		} catch (CheckCinemaOwnerFault_Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return response;
+	}
+
+	@Override
+	public RestaurantOwnerResponse checkRestaurantOwner(RestaurantOwnerRequest request) throws BusinessException {
+		RestaurantOwnerResponse response = new RestaurantOwnerResponse();
+		
+		AccountManagerService accountManagerService = new AccountManagerService();
+		AccountManagerPT accountManager = accountManagerService.getAccountManagerPort();
+		CheckRestaurantOwnerRequest checkRestaurantOwnerRequest = new CheckRestaurantOwnerRequest();
+		
+		checkRestaurantOwnerRequest.setToken(request.getToken());
+		checkRestaurantOwnerRequest.setRestaurantId(request.getRestaurantId());
+		
+		try {
+			CheckRestaurantOwnerResponse checkRestaurantOwnerResponse = accountManager.checkRestaurantOwner(checkRestaurantOwnerRequest);
+			response.setResponse(checkRestaurantOwnerResponse.isResponse());
+			
+		} catch (CheckRestaurantOwnerFault_Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 		return response;
 	}
 	
