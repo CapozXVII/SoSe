@@ -76,6 +76,7 @@ public class JDBCAccountManagerServiceImpl implements AccountManagerService {
 				stInsertSession.setInt(2, idUtente);
 				
 				if(stInsertSession.executeUpdate() == 1) {
+					response.setId(idUtente);
 					response.setToken(token);
 				}
 				else {
@@ -127,7 +128,8 @@ public class JDBCAccountManagerServiceImpl implements AccountManagerService {
 			int num_rows = rs.getRow();
 			rs.first();
 			if(num_rows != 0 && parameters.getPassword().equals(rs.getString("password"))) {
-				user.setId(rs.getLong("user_id"));
+				long idUtente = rs.getLong("user_id");
+				user.setId(idUtente);
 				user.setEmail(rs.getString("email"));
 				user.setName(rs.getString("name"));
 				user.setSurname(rs.getString("surname"));
@@ -140,6 +142,7 @@ public class JDBCAccountManagerServiceImpl implements AccountManagerService {
 				st1.setLong(2, user.getId());
 				
 				if(st1.executeUpdate() == 1) {
+					response.setId(idUtente);
 					response.setToken(token);
 				} else {
 					response.setToken(null);

@@ -27,6 +27,7 @@
 			<xsd:complexType name="cinemaInsertRequest">
 				<xsd:sequence>
 					<xsd:element name="cinema" type="tns:cinemaType" />
+					<xsd:element name="id" type="xsd:long" />
 				</xsd:sequence>
 			</xsd:complexType>
 			<xsd:complexType name="cinemaType">

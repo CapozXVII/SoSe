@@ -103,7 +103,10 @@ public class RestaurantController {
 		
 		if(checkSession(enjoyReservation, token)) {
 			BookingRestaurantRequest request = new BookingRestaurantRequest();
-			
+			LOGGER.info(restaurantBooking.getRestaurant() +"ciao");
+			LOGGER.info(restaurantBooking.getUser() + "ciao2");
+			LOGGER.info(toXMLGregorianCalendarDate(restaurantBooking.getSchedule()).toString());
+			LOGGER.info(restaurantBooking.getSeats() + "ciao3");
 			request.setRestaurant(restaurantBooking.getRestaurant());
 			request.setUser(restaurantBooking.getUser());
 			request.setSchedule(toXMLGregorianCalendarDate(restaurantBooking.getSchedule()));
@@ -128,6 +131,7 @@ public class RestaurantController {
 			InsertRestaurantRequest request = new InsertRestaurantRequest();
 
 			request.setRestaurant(createRestaurant(restaurant));
+			request.setId(restaurant.getOwner());
 			
 			response = enjoyReservation.insertRestaurant(request);
 		} else {

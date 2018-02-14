@@ -18,6 +18,8 @@ import it.univaq.disim.sose.cald.enjoyreservation.DeleteCinemaRequest;
 import it.univaq.disim.sose.cald.enjoyreservation.DeleteCinemaResponse;
 import it.univaq.disim.sose.cald.enjoyreservation.DeleteRestaurantRequest;
 import it.univaq.disim.sose.cald.enjoyreservation.DeleteRestaurantResponse;
+import it.univaq.disim.sose.cald.enjoyreservation.GetAllInfoRequest;
+import it.univaq.disim.sose.cald.enjoyreservation.GetAllInfoResponse;
 import it.univaq.disim.sose.cald.enjoyreservation.GetCinemaInfoRequest;
 import it.univaq.disim.sose.cald.enjoyreservation.GetCinemaInfoResponse;
 import it.univaq.disim.sose.cald.enjoyreservation.GetRestaurantInfoRequest;
@@ -74,4 +76,6 @@ public interface EnjoyReservationService {
 	DeleteCinemaResponse deleteCinema(DeleteCinemaRequest request) throws BusinessException;
 	
 	DeleteRestaurantResponse deleteRestautant(DeleteRestaurantRequest request) throws BusinessException;
+	
+	GetAllInfoResponse getAllInfo(GetAllInfoRequest request) throws BusinessException;
 }

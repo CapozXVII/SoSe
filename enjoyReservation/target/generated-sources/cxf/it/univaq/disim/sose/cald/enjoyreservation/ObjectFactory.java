@@ -42,6 +42,7 @@ public class ObjectFactory {
     private final static QName _RestaurantOwnerRequest_QNAME = new QName("http://it.univaq.disim.sose.cald/enjoyReservation", "restaurantOwnerRequest");
     private final static QName _DeleteCinemaRequest_QNAME = new QName("http://it.univaq.disim.sose.cald/enjoyReservation", "deleteCinemaRequest");
     private final static QName _DeleteRestaurantRequest_QNAME = new QName("http://it.univaq.disim.sose.cald/enjoyReservation", "deleteRestaurantRequest");
+    private final static QName _GetAllInfoRequest_QNAME = new QName("http://it.univaq.disim.sose.cald/enjoyReservation", "getAllInfoRequest");
     private final static QName _InsertCinemaResponse_QNAME = new QName("http://it.univaq.disim.sose.cald/enjoyReservation", "insertCinemaResponse");
     private final static QName _GetCinemaInfoResponse_QNAME = new QName("http://it.univaq.disim.sose.cald/enjoyReservation", "getCinemaInfoResponse");
     private final static QName _GetSingleCinemaInfoResponse_QNAME = new QName("http://it.univaq.disim.sose.cald/enjoyReservation", "getSingleCinemaInfoResponse");
@@ -60,6 +61,7 @@ public class ObjectFactory {
     private final static QName _RestaurantOwnerResponse_QNAME = new QName("http://it.univaq.disim.sose.cald/enjoyReservation", "restaurantOwnerResponse");
     private final static QName _DeleteCinemaResponse_QNAME = new QName("http://it.univaq.disim.sose.cald/enjoyReservation", "deleteCinemaResponse");
     private final static QName _DeleteRestaurantResponse_QNAME = new QName("http://it.univaq.disim.sose.cald/enjoyReservation", "deleteRestaurantResponse");
+    private final static QName _GetAllInfoResponse_QNAME = new QName("http://it.univaq.disim.sose.cald/enjoyReservation", "getAllInfoResponse");
     private final static QName _GetRestaurantInfoFault_QNAME = new QName("http://it.univaq.disim.sose.cald/enjoyReservation", "getRestaurantInfoFault");
     private final static QName _GetCinemaInfoFault_QNAME = new QName("http://it.univaq.disim.sose.cald/enjoyReservation", "getCinemaInfoFault");
     private final static QName _BookingCinemaFault_QNAME = new QName("http://it.univaq.disim.sose.cald/enjoyReservation", "bookingCinemaFault");
@@ -76,6 +78,7 @@ public class ObjectFactory {
     private final static QName _RestaurantOwnerFault_QNAME = new QName("http://it.univaq.disim.sose.cald/enjoyReservation", "restaurantOwnerFault");
     private final static QName _DeleteCinemaFault_QNAME = new QName("http://it.univaq.disim.sose.cald/enjoyReservation", "deleteCinemaFault");
     private final static QName _DeleteRestaurantFault_QNAME = new QName("http://it.univaq.disim.sose.cald/enjoyReservation", "deleteRestaurantFault");
+    private final static QName _GetAllInfoFault_QNAME = new QName("http://it.univaq.disim.sose.cald/enjoyReservation", "getAllInfoFault");
 
     /**
      * Create a new ObjectFactory that can be used to create new instances of schema derived classes for package: it.univaq.disim.sose.cald.enjoyreservation
@@ -229,6 +232,14 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link GetAllInfoRequest }
+     * 
+     */
+    public GetAllInfoRequest createGetAllInfoRequest() {
+        return new GetAllInfoRequest();
+    }
+
+    /**
      * Create an instance of {@link InsertCinemaResponse }
      * 
      */
@@ -373,6 +384,14 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link GetAllInfoResponse }
+     * 
+     */
+    public GetAllInfoResponse createGetAllInfoResponse() {
+        return new GetAllInfoResponse();
+    }
+
+    /**
      * Create an instance of {@link GetRestaurantInfoFault }
      * 
      */
@@ -498,6 +517,14 @@ public class ObjectFactory {
      */
     public DeleteRestaurantFault createDeleteRestaurantFault() {
         return new DeleteRestaurantFault();
+    }
+
+    /**
+     * Create an instance of {@link GetAllInfoFault }
+     * 
+     */
+    public GetAllInfoFault createGetAllInfoFault() {
+        return new GetAllInfoFault();
     }
 
     /**
@@ -727,6 +754,15 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link GetAllInfoRequest }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://it.univaq.disim.sose.cald/enjoyReservation", name = "getAllInfoRequest")
+    public JAXBElement<GetAllInfoRequest> createGetAllInfoRequest(GetAllInfoRequest value) {
+        return new JAXBElement<GetAllInfoRequest>(_GetAllInfoRequest_QNAME, GetAllInfoRequest.class, null, value);
+    }
+
+    /**
      * Create an instance of {@link JAXBElement }{@code <}{@link InsertCinemaResponse }{@code >}}
      * 
      */
@@ -889,6 +925,15 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link GetAllInfoResponse }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://it.univaq.disim.sose.cald/enjoyReservation", name = "getAllInfoResponse")
+    public JAXBElement<GetAllInfoResponse> createGetAllInfoResponse(GetAllInfoResponse value) {
+        return new JAXBElement<GetAllInfoResponse>(_GetAllInfoResponse_QNAME, GetAllInfoResponse.class, null, value);
+    }
+
+    /**
      * Create an instance of {@link JAXBElement }{@code <}{@link GetRestaurantInfoFault }{@code >}}
      * 
      */
@@ -1030,6 +1075,15 @@ public class ObjectFactory {
     @XmlElementDecl(namespace = "http://it.univaq.disim.sose.cald/enjoyReservation", name = "deleteRestaurantFault")
     public JAXBElement<DeleteRestaurantFault> createDeleteRestaurantFault(DeleteRestaurantFault value) {
         return new JAXBElement<DeleteRestaurantFault>(_DeleteRestaurantFault_QNAME, DeleteRestaurantFault.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link GetAllInfoFault }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://it.univaq.disim.sose.cald/enjoyReservation", name = "getAllInfoFault")
+    public JAXBElement<GetAllInfoFault> createGetAllInfoFault(GetAllInfoFault value) {
+        return new JAXBElement<GetAllInfoFault>(_GetAllInfoFault_QNAME, GetAllInfoFault.class, null, value);
     }
 
 }

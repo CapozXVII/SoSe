@@ -26,6 +26,7 @@
 			<xsd:element name="restaurantOwnerRequest" type="tns:restaurantOwnerRequest" />
 			<xsd:element name="deleteCinemaRequest" type="tns:deleteCinemaRequest" />
 			<xsd:element name="deleteRestaurantRequest" type="tns:deleteRestaurantRequest" />
+			<xsd:element name="getAllInfoRequest" type="tns:getAllInfoRequest" />
 			
 			<xsd:element name="insertCinemaResponse" type="tns:insertCinemaResponse"/> 
 			<xsd:element name="getCinemaInfoResponse" type="tns:getCinemaInfoResponse"/> 
@@ -45,6 +46,7 @@
 			<xsd:element name="restaurantOwnerResponse" type="tns:restaurantOwnerResponse" />
 			<xsd:element name="deleteCinemaResponse" type="tns:deleteCinemaResponse" />
 			<xsd:element name="deleteRestaurantResponse" type="tns:deleteRestaurantResponse" />
+			<xsd:element name="getAllInfoResponse" type="tns:getAllInfoResponse" />
 			
 			<xsd:element name="getRestaurantInfoFault" type="tns:getRestaurantInfoFault"/>
 			<xsd:element name="getCinemaInfoFault" type="tns:getCinemaInfoFault"/>
@@ -62,6 +64,7 @@
 			<xsd:element name="restaurantOwnerFault" type="tns:restaurantOwnerFault" />
 			<xsd:element name="deleteCinemaFault" type="tns:deleteCinemaFault" />
 			<xsd:element name="deleteRestaurantFault" type="tns:deleteRestaurantFault" />
+			<xsd:element name="getAllInfoFault" type="tns:getAllInfoFault" />
 			
 			<!-- Resturant Info -->
 			<!-- Request -->
@@ -241,6 +244,7 @@
 			<xsd:complexType name="insertRestaurantRequest">
 				<xsd:sequence>
 					<xsd:element name="restaurant" type="tns:OSMRestaurantType" />
+					<xsd:element name="id" type="xsd:long"/>
 				</xsd:sequence>
 			</xsd:complexType>
 			
@@ -272,6 +276,7 @@
 			<xsd:complexType name="insertCinemaRequest">
 				<xsd:sequence>
 					<xsd:element name="cinema" type="tns:OSMCinemaType" />
+					<xsd:element name="id" type="xsd:long"/>
 				</xsd:sequence>
 			</xsd:complexType>
 			
@@ -313,6 +318,7 @@
 			<xsd:complexType name="accountSignupResponse">
 				<xsd:sequence>
 					<xsd:element name="token" type="xsd:string" />
+					<xsd:element name="id" type="xsd:long" />
 				</xsd:sequence>
 			</xsd:complexType>
 			
@@ -329,6 +335,7 @@
 			<xsd:complexType name="accountLoginResponse">
 				<xsd:sequence>
 					<xsd:element name="token" type="xsd:string" />
+					<xsd:element name="id" type="xsd:long" />
 				</xsd:sequence>
 			</xsd:complexType>
 			
@@ -421,6 +428,22 @@
 			<xsd:complexType name="deleteRestaurantResponse">
 				<xsd:sequence>
 					<xsd:element name="accepted" type="xsd:boolean" />
+				</xsd:sequence>
+			</xsd:complexType>
+			
+			<!-- All Info -->
+			<!-- Request -->
+			<xsd:complexType name="getAllInfoRequest">
+				<xsd:sequence>
+					<xsd:element name="city" type="xsd:string" />
+				</xsd:sequence>
+			</xsd:complexType>
+			
+			<!-- Response -->
+			<xsd:complexType name="getAllInfoResponse">
+				<xsd:sequence>
+					<xsd:element maxOccurs="unbounded" minOccurs="0" name="cinemas" type="tns:OSMCinemaType"/>
+					<xsd:element maxOccurs="unbounded" minOccurs="0" name="restaurants" type="tns:OSMRestaurantType"/>
 				</xsd:sequence>
 			</xsd:complexType>
 		
@@ -517,6 +540,12 @@
 				</xsd:sequence>
 			</xsd:complexType>
 			<xsd:complexType name="deleteCinemaFault">
+				<xsd:sequence>
+                        <xsd:element name="faultInfo" type="xsd:string" />
+                        <xsd:element name="message" type="xsd:string" />
+				</xsd:sequence>
+			</xsd:complexType>
+			<xsd:complexType name="getAllInfoFault">
 				<xsd:sequence>
                         <xsd:element name="faultInfo" type="xsd:string" />
                         <xsd:element name="message" type="xsd:string" />
@@ -646,7 +675,15 @@
 		<part name="parameters" element="tns:restaurantOwnerResponse">
 		</part>
 	</message>
-	
+ <!--Get AllInfo -->
+	<message name="getAllInfoRequest">
+		<part name="parameters" element="tns:getAllInfoRequest">
+		</part>
+	</message>
+	<message name="getAllInfoResponse">
+		<part name="parameters" element="tns:getAllInfoResponse">
+		</part>
+	</message>
 	<!--Fault Messages-->
 	 <message name="getRestaurantInfoFault">
         <part name="parameters" element="tns:getRestaurantInfoFault"/>
@@ -716,6 +753,10 @@
 	</message>
 	<message name="deleteRestaurantFault">
 		<part name="parameters" element="tns:deleteRestaurantFault">
+		</part>
+	</message>
+	<message name="getAllInfoFault">
+		<part name="parameters" element="tns:getAllInfoFault">
 		</part>
 	</message>
 		
@@ -814,6 +855,13 @@
 			<output message="tns:deleteRestaurantResponse">
 			</output>
 			<fault name="deleteRestaurantFault" message="tns:deleteRestaurantFault"></fault>
+		</operation>
+		<operation name="getAllInfo">
+			<input message="tns:getAllInfoRequest">
+			</input>
+			<output message="tns:getAllInfoResponse">
+			</output>
+			<fault name="getAllInfoFault" message="tns:getAllInfoFault"></fault>
 		</operation>
     </portType>
 		
@@ -974,6 +1022,15 @@
 			</output>
 		</operation>
 		<operation name="restaurantDelete">
+			<soap:operation soapAction="" />
+			<input>
+				<soap:body use="literal" />
+			</input>
+			<output>
+				<soap:body use="literal" />
+			</output>
+		</operation>
+		<operation name="getAllInfo">
 			<soap:operation soapAction="" />
 			<input>
 				<soap:body use="literal" />

@@ -104,6 +104,8 @@ import it.univaq.disim.sose.cald.enjoyreservation.DeleteCinemaRequest;
 import it.univaq.disim.sose.cald.enjoyreservation.DeleteCinemaResponse;
 import it.univaq.disim.sose.cald.enjoyreservation.DeleteRestaurantRequest;
 import it.univaq.disim.sose.cald.enjoyreservation.DeleteRestaurantResponse;
+import it.univaq.disim.sose.cald.enjoyreservation.GetAllInfoRequest;
+import it.univaq.disim.sose.cald.enjoyreservation.GetAllInfoResponse;
 import it.univaq.disim.sose.cald.enjoyreservation.GetCinemaInfoRequest;
 import it.univaq.disim.sose.cald.enjoyreservation.GetCinemaInfoResponse;
 import it.univaq.disim.sose.cald.enjoyreservation.GetRestaurantInfoRequest;
@@ -260,6 +262,45 @@ public class WebServiceEnjoyReservationServiceImpl implements EnjoyReservationSe
 		}
 		return response;
 	}
+	
+	@Override
+	public GetAllInfoResponse getAllInfo(GetAllInfoRequest request) throws BusinessException {
+		GetAllInfoResponse response = new GetAllInfoResponse();
+		CinemaRunnable cinemaRunnable = new CinemaRunnable(request.getCity());
+		RestaurantRunnable restaurantRunnable = new RestaurantRunnable(request.getCity());
+		
+		Thread myCinema = new Thread(cinemaRunnable);	
+		try {
+			myCinema.start();
+			myCinema.join();
+			
+			if(cinemaRunnable.getResponse().getCinemas() != null) {
+				for(OSMCinemaType cinema : cinemaRunnable.getResponse().getCinemas()) {
+					response.getCinemas().add(cinema);
+				}
+			} else {
+				response.getCinemas().add(null);
+			}
+			
+			Thread myRestaurant = new Thread(restaurantRunnable);
+			myRestaurant.start();
+			myRestaurant.join();
+			
+			if(restaurantRunnable.getResponse().getRestaurants() != null) {
+				for(OSMRestaurantType restaurant : restaurantRunnable.getResponse().getRestaurants()) {
+					response.getRestaurants().add(restaurant);
+				}
+			} else {
+				response.getRestaurants().add(null);
+			}
+						
+			return response;
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return response;
+	}
 
 	@Override
 	public InsertRestaurantResponse insertRestaurant(InsertRestaurantRequest request) throws BusinessException {
@@ -292,6 +333,7 @@ public class WebServiceEnjoyReservationServiceImpl implements EnjoyReservationSe
 		restaurant.setLon(coordinates[1]);
 	
 		restaurantInsertRequest.setRestaurant(restaurant);
+		restaurantInsertRequest.setId(request.getId());
 		
 		try {
 			RestaurantInsertResponse restaurantInsertResponse = restaurantInserting.restaurantInsert(restaurantInsertRequest);
@@ -336,7 +378,6 @@ public class WebServiceEnjoyReservationServiceImpl implements EnjoyReservationSe
 			}
 			
 			hall.setNumber(hallRequest.getNumber());
-			hall.setSeatsNumber(hallRequest.getSeatsNumber());
 			hallList.add(hall);
 		}
 		for(it.univaq.disim.sose.cald.clients.cinemainserting.HallType hall : hallList) {
@@ -356,6 +397,7 @@ public class WebServiceEnjoyReservationServiceImpl implements EnjoyReservationSe
 		cinema.setLon(coordinates[1]);
 		
 		cinemaInsertRequest.setCinema(cinema);
+		cinemaInsertRequest.setId(request.getId());
 		
 		try {
 			CinemaInsertResponse cinemaInsertResponse = cinemaInserting.cinemaInsert(cinemaInsertRequest);
@@ -433,6 +475,7 @@ public class WebServiceEnjoyReservationServiceImpl implements EnjoyReservationSe
 		try {
 			UserSignupResponse userSignupResponse = accountManager.userSignup(userSignupRequest);
 			
+			response.setId(userSignupResponse.getId());
 			response.setToken(userSignupResponse.getToken());
 		} catch (UserSignupFault_Exception e) {
 			// TODO Auto-generated catch block
@@ -455,6 +498,7 @@ public class WebServiceEnjoyReservationServiceImpl implements EnjoyReservationSe
 		try {
 			UserLoginResponse userLoginResponse = accountManager.userLogin(userLoginRequest);
 			
+			response.setId(userLoginResponse.getId());
 			response.setToken(userLoginResponse.getToken());
 		} catch (UserLoginFault_Exception e) {
 			// TODO Auto-generated catch block
@@ -702,7 +746,6 @@ public class WebServiceEnjoyReservationServiceImpl implements EnjoyReservationSe
 			
 			hall.setIdHall(hallRequest.getIdHall());
 			hall.setNumber(hallRequest.getNumber());
-			hall.setSeatsNumber(hallRequest.getSeatsNumber());
 			hallList.add(hall);
 		}
 		for(it.univaq.disim.sose.cald.clients.cinemainserting.HallType hall : hallList) {

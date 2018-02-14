@@ -18,6 +18,7 @@ import javax.xml.bind.annotation.XmlType;
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&gt;
  *       &lt;sequence&gt;
  *         &lt;element name="cinema" type="{http://it.univaq.disim.sose.cald/cinemaInserting}cinemaType"/&gt;
+ *         &lt;element name="id" type="{http://www.w3.org/2001/XMLSchema}long"/&gt;
  *       &lt;/sequence&gt;
  *     &lt;/restriction&gt;
  *   &lt;/complexContent&gt;
@@ -28,12 +29,14 @@ import javax.xml.bind.annotation.XmlType;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "cinemaInsertRequest", propOrder = {
-    "cinema"
+    "cinema",
+    "id"
 })
 public class CinemaInsertRequest {
 
     @XmlElement(required = true)
     protected CinemaType cinema;
+    protected long id;
 
     /**
      * Gets the value of the cinema property.
@@ -57,6 +60,22 @@ public class CinemaInsertRequest {
      */
     public void setCinema(CinemaType value) {
         this.cinema = value;
+    }
+
+    /**
+     * Gets the value of the id property.
+     * 
+     */
+    public long getId() {
+        return id;
+    }
+
+    /**
+     * Sets the value of the id property.
+     * 
+     */
+    public void setId(long value) {
+        this.id = value;
     }
 
 }

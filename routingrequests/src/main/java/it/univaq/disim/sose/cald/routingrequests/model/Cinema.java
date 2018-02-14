@@ -12,8 +12,15 @@ public class Cinema {
 	private String address;
 	private String city;
 	private String telephoneNumber;
+	private Long owner;
 	private List<Hall> hall;
 	
+	public Long getOwner() {
+		return owner;
+	}
+	public void setOwner(Long owner) {
+		this.owner = owner;
+	}
 	public Long getId() {
 		return id;
 	}

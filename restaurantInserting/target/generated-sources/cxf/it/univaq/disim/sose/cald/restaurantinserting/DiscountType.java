@@ -20,6 +20,7 @@ import javax.xml.bind.annotation.XmlType;
  *         &lt;element name="discount_id" type="{http://www.w3.org/2001/XMLSchema}long" minOccurs="0"/&gt;
  *         &lt;element name="cinema" type="{http://www.w3.org/2001/XMLSchema}int"/&gt;
  *         &lt;element name="price" type="{http://www.w3.org/2001/XMLSchema}float"/&gt;
+ *         &lt;element name="freeSeatsNumber" type="{http://www.w3.org/2001/XMLSchema}int"/&gt;
  *       &lt;/sequence&gt;
  *     &lt;/restriction&gt;
  *   &lt;/complexContent&gt;
@@ -32,7 +33,8 @@ import javax.xml.bind.annotation.XmlType;
 @XmlType(name = "discountType", propOrder = {
     "discountId",
     "cinema",
-    "price"
+    "price",
+    "freeSeatsNumber"
 })
 public class DiscountType {
 
@@ -40,6 +42,7 @@ public class DiscountType {
     protected Long discountId;
     protected int cinema;
     protected float price;
+    protected int freeSeatsNumber;
 
     /**
      * Gets the value of the discountId property.
@@ -95,6 +98,22 @@ public class DiscountType {
      */
     public void setPrice(float value) {
         this.price = value;
+    }
+
+    /**
+     * Gets the value of the freeSeatsNumber property.
+     * 
+     */
+    public int getFreeSeatsNumber() {
+        return freeSeatsNumber;
+    }
+
+    /**
+     * Sets the value of the freeSeatsNumber property.
+     * 
+     */
+    public void setFreeSeatsNumber(int value) {
+        this.freeSeatsNumber = value;
     }
 
 }

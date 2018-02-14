@@ -50,6 +50,7 @@ public class JDBCCinemaInsertingServiceImpl implements CinemaInsertingService {
 		Cinema newCinema = new Cinema();
 		List<Hall> hall_list = new ArrayList<Hall>();
 
+		newCinema.setOwner(parameters.getId());
 		newCinema.setLatitude(parameters.getCinema().getLat());
 		newCinema.setLongitude(parameters.getCinema().getLon());
 		newCinema.setName(parameters.getCinema().getCinemaInfo().getName());
@@ -69,7 +70,7 @@ public class JDBCCinemaInsertingServiceImpl implements CinemaInsertingService {
 				HallInfo newHallInfo = new HallInfo();
 
 				newHallInfo.setTime(toDate(h.getTime()));
-				newHallInfo.setFreeSeatsNumber(h.getFreeSeatsNumber());
+				newHallInfo.setFreeSeatsNumber(x.getSeatsNumber());
 				newHallInfo.setPrice(h.getPrice());
 				Film newFilm = new Film();
 				newFilm.setName(h.getFilm().getName());
@@ -108,7 +109,7 @@ public class JDBCCinemaInsertingServiceImpl implements CinemaInsertingService {
 		try {
 			con = dataSource.getConnection();
 			sql_iCinema = con.prepareStatement(
-					"INSERT INTO cinemas (cinema_lat,cinema_lon,cinema_name,cinema_address,cinema_cap,cinema_city,cinema_telephoneNumber) VALUES (?,?,?,?,?,?,?)",
+					"INSERT INTO cinemas (cinema_lat,cinema_lon,cinema_name,cinema_address,cinema_cap,cinema_city,cinema_telephoneNumber,owner) VALUES (?,?,?,?,?,?,?,?)",
 					Statement.RETURN_GENERATED_KEYS);
 			/* Insert cinema */
 
@@ -119,6 +120,7 @@ public class JDBCCinemaInsertingServiceImpl implements CinemaInsertingService {
 			sql_iCinema.setString(5, newCinema.getCap());
 			sql_iCinema.setString(6, newCinema.getCity());
 			sql_iCinema.setString(7, newCinema.getTelephoneNumber());
+			sql_iCinema.setLong(8, newCinema.getOwner());
 
 			if (sql_iCinema.executeUpdate() == 1) {
 				try (ResultSet keys = sql_iCinema.getGeneratedKeys()) {
@@ -303,7 +305,7 @@ public class JDBCCinemaInsertingServiceImpl implements CinemaInsertingService {
 				HallInfo newHallInfo = new HallInfo();
 
 				newHallInfo.setTime(toDate(h.getTime()));
-				newHallInfo.setFreeSeatsNumber(h.getFreeSeatsNumber());
+				newHallInfo.setFreeSeatsNumber(x.getSeatsNumber());
 				newHallInfo.setPrice(h.getPrice());
 				newHallInfo.setId(h.getIdHallFilm());
 				Film newFilm = new Film();

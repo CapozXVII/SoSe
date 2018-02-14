@@ -44,7 +44,6 @@ public class JDBCCinemaInformationServiceImpl implements CinemaInformationServic
 			con = dataSource.getConnection();
 			st = con.prepareStatement(sql);
 			st.setString(1, city);
-			LOGGER.info(st.toString());
 			rs = st.executeQuery();
 			int cinemaId = 0;
 			
@@ -53,14 +52,11 @@ public class JDBCCinemaInformationServiceImpl implements CinemaInformationServic
 				if (rs.isFirst()) {
 					count = cinemaId;
 					cinema = createCinema(rs);
-					LOGGER.info("Sono primo");
 				}
 				if (count == cinemaId) {
-					LOGGER.info("" + count);
 					hallFilmList.add(createHallFilm(rs));
 				} else {
 					count = cinemaId;
-					LOGGER.info("ciao" + count);
 					cinema.setHalls(hallFilmList);
 					cinemaList.add(cinema);
 					hallFilmList = new ArrayList<HallFilm>();
@@ -68,7 +64,6 @@ public class JDBCCinemaInformationServiceImpl implements CinemaInformationServic
 					hallFilmList.add(createHallFilm(rs));
 				}
 				if (rs.isLast()) {
-					LOGGER.info("Sono ultimo");
 					cinema.setHalls(hallFilmList);
 					cinemaList.add(cinema);
 				}
@@ -94,7 +89,6 @@ public class JDBCCinemaInformationServiceImpl implements CinemaInformationServic
 	}
 	
 	public Cinema createCinema(ResultSet rs) throws SQLException {
-		LOGGER.info("CALLED JDBC CreateCInema");
 		Cinema cinema = new Cinema();
 		
 		cinema.setId(rs.getLong("cinema_id"));
@@ -109,7 +103,6 @@ public class JDBCCinemaInformationServiceImpl implements CinemaInformationServic
 	}
 	
 	public HallFilm createHallFilm(ResultSet rs) throws SQLException {
-		LOGGER.info("CALLED JDBCCreateHallFilm");
 		Hall hall = new Hall();
 		Film film = new Film();
 		HallFilm hallFilm = new HallFilm();
@@ -136,7 +129,6 @@ public class JDBCCinemaInformationServiceImpl implements CinemaInformationServic
 
 	@Override
 	public Cinema getSingleCinema(long id) throws CinemaInformationFault_Exception {
-		LOGGER.info("CALLED JDBCSingleCinemaInformation");
 		Cinema cinema= new Cinema();
 		List<HallFilm> hallFilmList = new ArrayList<HallFilm>();
 		String sql = "SELECT * FROM cinemas JOIN halls ON cinemas.cinema_id = halls.cinema JOIN hall_film ON hall_film.hall = halls.hall_id JOIN films ON films.film_id = hall_film.film AND cinemas.cinema_id = ?";

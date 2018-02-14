@@ -33,6 +33,9 @@ import it.univaq.disim.sose.cald.enjoyreservation.DeleteRestaurantFault_Exceptio
 import it.univaq.disim.sose.cald.enjoyreservation.DeleteRestaurantRequest;
 import it.univaq.disim.sose.cald.enjoyreservation.DeleteRestaurantResponse;
 import it.univaq.disim.sose.cald.enjoyreservation.EnjoyReservationPT;
+import it.univaq.disim.sose.cald.enjoyreservation.GetAllInfoFault_Exception;
+import it.univaq.disim.sose.cald.enjoyreservation.GetAllInfoRequest;
+import it.univaq.disim.sose.cald.enjoyreservation.GetAllInfoResponse;
 import it.univaq.disim.sose.cald.enjoyreservation.GetCinemaInfoFault_Exception;
 import it.univaq.disim.sose.cald.enjoyreservation.GetCinemaInfoRequest;
 import it.univaq.disim.sose.cald.enjoyreservation.GetCinemaInfoResponse;
@@ -199,6 +202,13 @@ public class EnjoyReservationPTImpl implements EnjoyReservationPT{
 	public DeleteCinemaResponse cinemaDelete(DeleteCinemaRequest parameters) throws DeleteCinemaFault_Exception {
 		LOGGER.info("CALLED cinemaDelete ON enjoyreservation");
 		DeleteCinemaResponse response = service.deleteCinema(parameters);
+		return response;
+	}
+
+	@Override
+	public GetAllInfoResponse getAllInfo(GetAllInfoRequest parameters) throws GetAllInfoFault_Exception {
+		LOGGER.info("CALLED getAllInfo ON enjoyreservation");
+		GetAllInfoResponse response = service.getAllInfo(parameters);
 		return response;
 	}
 

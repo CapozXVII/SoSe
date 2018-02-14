@@ -52,6 +52,7 @@
 			<xsd:complexType name="userSignupResponse">
 				<xsd:sequence>
 					<xsd:element name="token" type="xsd:string" />
+					<xsd:element name="id" type="xsd:long" />
 				</xsd:sequence>
 			</xsd:complexType>
 					
@@ -76,6 +77,7 @@
 			<xsd:complexType name="userLoginResponse">
 				<xsd:sequence>
 					<xsd:element name="token" type="xsd:string" />
+					<xsd:element name="id" type="xsd:long" />
 				</xsd:sequence>
 			</xsd:complexType>
 					

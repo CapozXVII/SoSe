@@ -130,6 +130,7 @@ public class CinemaController {
 		if(checkSession(enjoyReservation, token)) {
 			InsertCinemaRequest request = new InsertCinemaRequest();
 			
+			request.setId(cinema.getOwner());
 			request.setCinema(createCinema(cinema));
 			
 			response = enjoyReservation.insertCinema(request);
@@ -251,7 +252,7 @@ public class CinemaController {
 					hallInfoRequest.setIdHallFilm(hallInfo.getId());
 				}
 				
-				hallInfoRequest.setFreeSeatsNumber(hallInfo.getFreeSeatsNumber());
+				hallInfoRequest.setFreeSeatsNumber(hall.getSeatsNumber());
 				hallInfoRequest.setPrice(hallInfo.getPrice());
 				hallInfoRequest.setTime(toXMLGregorianCalendarDate(hallInfo.getTime()));
 				hallRequest.getHallInfo().add(hallInfoRequest);

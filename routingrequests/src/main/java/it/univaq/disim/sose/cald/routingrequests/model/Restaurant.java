@@ -14,9 +14,17 @@ public class Restaurant implements java.io.Serializable {
 	private String cuisine;
 	private String menu;
 	private int maxSeats;
+	private Long owner;
 	private Discount discount;
 	
-	
+	public Long getOwner() {
+		return owner;
+	}
+
+	public void setOwner(Long owner) {
+		this.owner = owner;
+	}
+
 	public Long getId() {
 		return id;
 	}

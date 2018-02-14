@@ -50,6 +50,7 @@ public class JDBCRestaurantInsertingImpl implements RestaurantInsertingService {
 		newRestaurant.setCousine(parameters.getRestaurant().getRestaurantInfo().getCuisine());
 		newRestaurant.setMenu(parameters.getRestaurant().getRestaurantInfo().getMenu());
 		newRestaurant.setMax_seats(parameters.getRestaurant().getRestaurantInfo().getMaxSeats());
+		newRestaurant.setOwner(parameters.getId());
 		
 		Discount newDiscount = new Discount();
 		newDiscount.setCinema(parameters.getRestaurant().getRestaurantInfo().getDiscount().getCinema());
@@ -64,7 +65,7 @@ public class JDBCRestaurantInsertingImpl implements RestaurantInsertingService {
 		try {
 			con = dataSource.getConnection();
 			sql_iRestaurant = con.prepareStatement(
-					"INSERT INTO RESTAURANTS (restaurant_lat,restaurant_lon,restaurant_name,restaurant_address,restaurant_cap,restaurant_city,restaurant_telephonenumber,style,cuisine,menu,max_seats) VALUES (?,?,?,?,?,?,?,?,?,?,?)",
+					"INSERT INTO RESTAURANTS (restaurant_lat,restaurant_lon,restaurant_name,restaurant_address,restaurant_cap,restaurant_city,restaurant_telephonenumber,style,cuisine,menu,max_seats,owner) VALUES (?,?,?,?,?,?,?,?,?,?,?,?)",
 					Statement.RETURN_GENERATED_KEYS);
 
 			sql_iRestaurant.setDouble(1, newRestaurant.getLatitude());
@@ -78,6 +79,7 @@ public class JDBCRestaurantInsertingImpl implements RestaurantInsertingService {
 			sql_iRestaurant.setString(9, newRestaurant.getCousine());
 			sql_iRestaurant.setString(10, newRestaurant.getMenu());
 			sql_iRestaurant.setInt(11, newRestaurant.getMax_seats());
+			sql_iRestaurant.setLong(12, newRestaurant.getOwner());
 
 			if (sql_iRestaurant.executeUpdate() == 1) {
 				try (ResultSet keys = sql_iRestaurant.getGeneratedKeys()) {
@@ -205,21 +207,27 @@ public class JDBCRestaurantInsertingImpl implements RestaurantInsertingService {
 		LOGGER.info("Called JDBCRestaurantDelete");
 		
 		RestaurantDeleteResponse result = new RestaurantDeleteResponse();
-		long idRestaurant=parameters.getRestaurantId();
+		long idRestaurant = parameters.getRestaurantId();
 		Connection con = null;
-		PreparedStatement sql_dRestaurant, sql_dDiscout;
-		boolean delete_restaurant=false, delete_discount=false;
+		PreparedStatement sql_dRestaurant, sql_dDiscount, sql_dRestaurantBooking;
+		boolean delete_restaurant = false, delete_discount = false, delete_restaurantBooking = false;
 		
 		try {
 			con = dataSource.getConnection();
 			
-			sql_dDiscout = con.prepareStatement(
+			sql_dRestaurantBooking = con.prepareStatement(
+					"DELETE FROM restaurantbookings WHERE restaurant=?");
+			
+			sql_dRestaurantBooking.setLong(1, idRestaurant);
+			if (sql_dRestaurantBooking.executeUpdate() == 1) {
+				delete_restaurantBooking = true;
+			}
+			
+			sql_dDiscount = con.prepareStatement(
 					"DELETE FROM discount WHERE restaurant=?");
 			
-			sql_dDiscout.setLong(1, idRestaurant);
-			LOGGER.info(idRestaurant + "ciao");
-			LOGGER.info(sql_dDiscout.toString());
-			if (sql_dDiscout.executeUpdate() == 1) {
+			sql_dDiscount.setLong(1, idRestaurant);
+			if (sql_dDiscount.executeUpdate() == 1) {
 				delete_discount=true;
 			}
 			
@@ -228,12 +236,12 @@ public class JDBCRestaurantInsertingImpl implements RestaurantInsertingService {
 					"DELETE FROM restaurants WHERE restaurant_id=?");
 			
 			sql_dRestaurant.setLong(1, idRestaurant);
-			LOGGER.info(sql_dRestaurant.toString());
+			
 			if (sql_dRestaurant.executeUpdate() == 1) {
 				delete_restaurant=true;
 			}
 			
-			if(delete_restaurant && delete_discount) {
+			if(delete_restaurant && delete_discount && delete_restaurantBooking) {
 				result.setAccepted(true);
 			} else {
 				result.setAccepted(false);
