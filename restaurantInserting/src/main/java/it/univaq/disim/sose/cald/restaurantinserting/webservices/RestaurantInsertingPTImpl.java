@@ -17,8 +17,6 @@ import it.univaq.disim.sose.cald.restaurantinserting.RestaurantUpdateRequest;
 import it.univaq.disim.sose.cald.restaurantinserting.RestaurantUpdateResponse;
 import it.univaq.disim.sose.cald.restaurantinserting.business.RestaurantInsertingService;
 
-
-
 @Component(value = "RestaurantInsertingPTImpl")
 public class RestaurantInsertingPTImpl implements RestaurantPT {
 	
@@ -28,7 +26,7 @@ public class RestaurantInsertingPTImpl implements RestaurantPT {
 	private RestaurantInsertingService service;
 
 	@Override
-	public RestaurantInsertResponse restaurantInsert(RestaurantInsertRequest parameters){
+	public RestaurantInsertResponse restaurantInsert(RestaurantInsertRequest parameters) throws RestaurantInsertFault_Exception{
 		
 		LOGGER.info("CALLED RestaurantInserting");
 		try {
@@ -36,26 +34,26 @@ public class RestaurantInsertingPTImpl implements RestaurantPT {
 			return response;
 			
 		} catch (Exception ex) {
-			throw new RuntimeException(ex.getMessage());
+			throw new RestaurantInsertFault_Exception("Something was wrong with Restaurant Inserting");
 		}
 		
 	}
 
 	@Override
-	public RestaurantUpdateResponse restaurantUpdate(RestaurantUpdateRequest parameters){
+	public RestaurantUpdateResponse restaurantUpdate(RestaurantUpdateRequest parameters) throws RestaurantUpdateFault_Exception{
 		LOGGER.info("CALLED RestaurantInserting");
+		
 		try {
 			RestaurantUpdateResponse response=service.updateRestaurant(parameters);
 			return response;
 			
 		}catch (Exception ex) {
-			throw new RuntimeException(ex.getMessage());
+			throw new RestaurantUpdateFault_Exception("Something was wrong with Restaurant Update");
 		}
 	}
 
 	@Override
-	public RestaurantDeleteResponse restaurantDelete(RestaurantDeleteRequest parameters)
-			throws RestaurantDeleteFault_Exception {
+	public RestaurantDeleteResponse restaurantDelete(RestaurantDeleteRequest parameters) throws RestaurantDeleteFault_Exception {
 		LOGGER.info("CALLED Restaurant - delete");
 
 		try {
@@ -63,7 +61,7 @@ public class RestaurantInsertingPTImpl implements RestaurantPT {
 			return response;
 
 		} catch (Exception ex) {
-			throw new RuntimeException(ex.getMessage());
+			throw new RestaurantDeleteFault_Exception("Something was wrong with Restaurant Delete");
 		}
 
 		

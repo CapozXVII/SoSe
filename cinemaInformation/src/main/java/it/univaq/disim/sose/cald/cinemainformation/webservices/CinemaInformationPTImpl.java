@@ -79,7 +79,6 @@ public class CinemaInformationPTImpl implements CinemaInformationPT{
 				for(HallType hall : halls) {
 					osmCinemaInfoType.getHall().add(hall);
 				}
-				//osmCinemaInfoType.setHall(halls);
 				osmCinemaInfoType.setAddress(cinema.getAddress());
 				osmCinemaInfoType.setCap(cinema.getCap());
 				osmCinemaInfoType.setCity(cinema.getCity());
@@ -144,7 +143,6 @@ public class CinemaInformationPTImpl implements CinemaInformationPT{
 		for(HallType hall : halls) {
 			osmCinemaInfoType.getHall().add(hall);
 		}
-		//osmCinemaInfoType.setHall(halls);
 		osmCinemaInfoType.setAddress(cinema.getAddress());
 		osmCinemaInfoType.setCap(cinema.getCap());
 		osmCinemaInfoType.setCity(cinema.getCity());

@@ -6,7 +6,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-
 import javax.sql.DataSource;
 
 import org.slf4j.Logger;
@@ -14,13 +13,15 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import it.univaq.disim.sose.cald.restaurantinserting.RestaurantDeleteFault_Exception;
 import it.univaq.disim.sose.cald.restaurantinserting.RestaurantDeleteRequest;
 import it.univaq.disim.sose.cald.restaurantinserting.RestaurantDeleteResponse;
+import it.univaq.disim.sose.cald.restaurantinserting.RestaurantInsertFault_Exception;
 import it.univaq.disim.sose.cald.restaurantinserting.RestaurantInsertRequest;
 import it.univaq.disim.sose.cald.restaurantinserting.RestaurantInsertResponse;
+import it.univaq.disim.sose.cald.restaurantinserting.RestaurantUpdateFault_Exception;
 import it.univaq.disim.sose.cald.restaurantinserting.RestaurantUpdateRequest;
 import it.univaq.disim.sose.cald.restaurantinserting.RestaurantUpdateResponse;
-import it.univaq.disim.sose.cald.restaurantinserting.business.BusinessException;
 import it.univaq.disim.sose.cald.restaurantinserting.business.RestaurantInsertingService;
 import it.univaq.disim.sose.cald.restaurantinserting.business.model.Discount;
 import it.univaq.disim.sose.cald.restaurantinserting.business.model.Restaurant;
@@ -33,8 +34,13 @@ public class JDBCRestaurantInsertingImpl implements RestaurantInsertingService {
 	@Autowired
 	private DataSource dataSource;
 
+	/**
+     * Insert a new restaurant in the database
+     * @param parameters All the information about the restaurant that the user wants to register
+     * @return response Boolean saying if the restaurant registration was successful or not
+     */
 	@Override
-	public RestaurantInsertResponse insertRestaurant(RestaurantInsertRequest parameters) throws BusinessException {
+	public RestaurantInsertResponse insertRestaurant(RestaurantInsertRequest parameters) throws RestaurantInsertFault_Exception {
 
 		LOGGER.info("Called JDBCInserting");
 		
@@ -98,8 +104,8 @@ public class JDBCRestaurantInsertingImpl implements RestaurantInsertingService {
 				insert=true;
 			}
 		} catch (SQLException e1) {
-
 			e1.printStackTrace();
+			throw new RestaurantInsertFault_Exception("Something was wrong with Insert Restaurant");
 		} finally {
 			if (con != null) {
 				try {
@@ -120,8 +126,13 @@ public class JDBCRestaurantInsertingImpl implements RestaurantInsertingService {
 		}
 	}
 
+	/**
+     * Update an existed restaurant 
+     * @param parameters All the information about the restaurant that the user wants to update
+     * @return response Boolean saying if the restaurant updating was successful or not
+     */
 	@Override
-	public RestaurantUpdateResponse updateRestaurant(RestaurantUpdateRequest parameters) throws BusinessException {
+	public RestaurantUpdateResponse updateRestaurant(RestaurantUpdateRequest parameters) throws RestaurantUpdateFault_Exception {
 		
 		RestaurantUpdateResponse result = new RestaurantUpdateResponse();
 		LOGGER.info("Called JDBCRestaurantUpdate");
@@ -173,7 +184,7 @@ public class JDBCRestaurantInsertingImpl implements RestaurantInsertingService {
 			}
 			
 			sql_uDiscout = con.prepareStatement("UPDATE DISCOUNT SET cinema=?,restaurant=?,price=? WHERE discount_id=?");
-			sql_uDiscout.setInt(1, newDiscount.getCinema()); /*forse meglio mettere il nome?*/
+			sql_uDiscout.setInt(1, newDiscount.getCinema()); 
 			sql_uDiscout.setLong(2, newRestaurant.getId());
 			sql_uDiscout.setDouble(3, newDiscount.getPrice());
 			sql_uDiscout.setLong(4, newDiscount.getId());
@@ -182,8 +193,8 @@ public class JDBCRestaurantInsertingImpl implements RestaurantInsertingService {
 				insertDiscount = true;
 			}
 		} catch (SQLException e1) {
-
 			e1.printStackTrace();
+			throw new RestaurantUpdateFault_Exception("Something was wrong with Restaurant Delete");
 		} finally {
 			if (con != null) {
 				try {
@@ -202,8 +213,13 @@ public class JDBCRestaurantInsertingImpl implements RestaurantInsertingService {
 		return result;
 	}
 
+	/**
+     * Delete an existing restaurant from the database
+     * @param parameters restaurant_id that the user wants to delete
+     * @return response Boolean saying if the restaurant deleting was successful or not
+     */
 	@Override
-	public RestaurantDeleteResponse deleteRestaurant(RestaurantDeleteRequest parameters) throws BusinessException {
+	public RestaurantDeleteResponse deleteRestaurant(RestaurantDeleteRequest parameters) throws RestaurantDeleteFault_Exception {
 		LOGGER.info("Called JDBCRestaurantDelete");
 		
 		RestaurantDeleteResponse result = new RestaurantDeleteResponse();
@@ -249,8 +265,8 @@ public class JDBCRestaurantInsertingImpl implements RestaurantInsertingService {
 
 		
 		}catch (SQLException e1) {
-
 			e1.printStackTrace();
+			throw new RestaurantDeleteFault_Exception("Something was wrong with Restaurant Delete");
 		} finally {
 			if (con != null) {
 				try {

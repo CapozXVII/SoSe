@@ -28,6 +28,11 @@ public class JDBCRestaurantInformationServiceImpl implements RestaurantInformati
 	@Autowired
 	private DataSource dataSource;
 
+	/**
+     * Get information about all the restaurant given a city
+     * @param parameters city where the user wants to see the restaurants
+     * @return response List of restaurants in the city passed in input
+     */
 	@Override
 	public List<Restaurant> getRestaurants(String city) throws RestaurantInformationFault_Exception {
 		List<Restaurant> restaurantList = new ArrayList<Restaurant>();
@@ -75,7 +80,6 @@ public class JDBCRestaurantInformationServiceImpl implements RestaurantInformati
 		String sql = "SELECT * FROM discount JOIN cinemas ON cinemas.cinema_id = discount.cinema AND discount.restaurant = ?";
 		Restaurant restaurant = new Restaurant();
 		Discount discount = new Discount();
-		Cinema cinema = new Cinema();
 		
 		restaurant.setId(restaurantId);
 		restaurant.setAddress(rs.getString("restaurant_address"));
@@ -102,8 +106,7 @@ public class JDBCRestaurantInformationServiceImpl implements RestaurantInformati
 				discount.setId(rss.getLong("discount_id"));
 				discount.setPrice(rss.getFloat("price"));
 				discount.setCinema(rss.getInt("cinema_id"));
-				//cinema.setName(rss.getString("cinema_name"));
-				//discount.setCinema(cinema);
+			
 			} else {
 				discount = null;
 			}
@@ -117,6 +120,11 @@ public class JDBCRestaurantInformationServiceImpl implements RestaurantInformati
 		return restaurant;
 	}
 
+	/**
+     * Get information about a single restaurant
+     * @param id restaurant_id we want to show out 
+     * @return response Information about the restaurant
+     */
 	@Override
 	public Restaurant getSingleRestaurant(long id) throws RestaurantInformationFault_Exception {
 		LOGGER.info("CALLED JDBCSingleRestaurantInformation");

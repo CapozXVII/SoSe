@@ -4,11 +4,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.sql.Timestamp;
 import java.util.Date;
-
-
 
 import javax.sql.DataSource;
 import javax.xml.datatype.XMLGregorianCalendar;
@@ -18,6 +15,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import it.univaq.disim.sose.cald.cinemabooking.CinemaBookingFault_Exception;
 import it.univaq.disim.sose.cald.cinemabooking.CinemaBookingRequest;
 import it.univaq.disim.sose.cald.cinemabooking.CinemaBookingResponse;
 import it.univaq.disim.sose.cald.cinemabooking.business.*;
@@ -28,19 +26,22 @@ import it.univaq.disim.sose.cald.cinemabooking.business.model.CinemaBooking;
 public class JDBCCinemaBookingImpl implements CinemaBookingService {
 	
 	private static Logger LOGGER = LoggerFactory.getLogger(JDBCCinemaBookingImpl.class);
-
 	
 	@Autowired
 	private DataSource dataSource;
 
+	/**
+     * Insert into the database a cinema booking request by a user 
+     * @param parameters Information about booking request
+     * @return response String saying if the booking was successful or not
+     */
 	@Override
-	public CinemaBookingResponse insertCinemaBooking(CinemaBookingRequest parameters) throws BusinessException {
+	public CinemaBookingResponse insertCinemaBooking(CinemaBookingRequest parameters) throws CinemaBookingFault_Exception {
 		
 		int nSeats = 0;
 		boolean resultUpdate = false;
 		String resultBook = "Booking not inserted";
 		Connection con;
-		PreparedStatement sql;
 		
 		CinemaBooking booking = new CinemaBooking();
 		
@@ -81,6 +82,7 @@ public class JDBCCinemaBookingImpl implements CinemaBookingService {
 
 		catch (SQLException e) {
 			e.printStackTrace();
+			throw new CinemaBookingFault_Exception("Something was wrong with Insert Cinema Booking");
 		}
 		finally {
 			if (con != null) {

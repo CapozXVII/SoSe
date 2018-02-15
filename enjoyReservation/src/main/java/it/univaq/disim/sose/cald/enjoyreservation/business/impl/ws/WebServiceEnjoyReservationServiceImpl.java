@@ -10,8 +10,6 @@ import javax.xml.datatype.DatatypeConfigurationException;
 import javax.xml.datatype.DatatypeFactory;
 import javax.xml.datatype.XMLGregorianCalendar;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import com.google.maps.errors.ApiException;
@@ -86,36 +84,50 @@ import it.univaq.disim.sose.cald.clients.restaurantinserting.RestaurantPT;
 import it.univaq.disim.sose.cald.clients.restaurantinserting.RestaurantUpdateFault_Exception;
 import it.univaq.disim.sose.cald.clients.restaurantinserting.RestaurantUpdateRequest;
 import it.univaq.disim.sose.cald.clients.restaurantinserting.RestaurantUpdateResponse;
+import it.univaq.disim.sose.cald.enjoyreservation.AccountLoginFault_Exception;
 import it.univaq.disim.sose.cald.enjoyreservation.AccountLoginRequest;
 import it.univaq.disim.sose.cald.enjoyreservation.AccountLoginResponse;
+import it.univaq.disim.sose.cald.enjoyreservation.AccountLogoutFault_Exception;
 import it.univaq.disim.sose.cald.enjoyreservation.AccountLogoutRequest;
 import it.univaq.disim.sose.cald.enjoyreservation.AccountLogoutResponse;
+import it.univaq.disim.sose.cald.enjoyreservation.AccountSessionFault_Exception;
 import it.univaq.disim.sose.cald.enjoyreservation.AccountSessionRequest;
 import it.univaq.disim.sose.cald.enjoyreservation.AccountSessionResponse;
+import it.univaq.disim.sose.cald.enjoyreservation.AccountSignupFault_Exception;
 import it.univaq.disim.sose.cald.enjoyreservation.AccountSignupRequest;
 import it.univaq.disim.sose.cald.enjoyreservation.AccountSignupResponse;
+import it.univaq.disim.sose.cald.enjoyreservation.BookingCinemaFault_Exception;
 import it.univaq.disim.sose.cald.enjoyreservation.BookingCinemaRequest;
 import it.univaq.disim.sose.cald.enjoyreservation.BookingCinemaResponse;
+import it.univaq.disim.sose.cald.enjoyreservation.BookingRestaurantFault_Exception;
 import it.univaq.disim.sose.cald.enjoyreservation.BookingRestaurantRequest;
 import it.univaq.disim.sose.cald.enjoyreservation.BookingRestaurantResponse;
+import it.univaq.disim.sose.cald.enjoyreservation.CinemaOwnerFault_Exception;
 import it.univaq.disim.sose.cald.enjoyreservation.CinemaOwnerRequest;
 import it.univaq.disim.sose.cald.enjoyreservation.CinemaOwnerResponse;
+import it.univaq.disim.sose.cald.enjoyreservation.DeleteCinemaFault_Exception;
 import it.univaq.disim.sose.cald.enjoyreservation.DeleteCinemaRequest;
 import it.univaq.disim.sose.cald.enjoyreservation.DeleteCinemaResponse;
+import it.univaq.disim.sose.cald.enjoyreservation.DeleteRestaurantFault_Exception;
 import it.univaq.disim.sose.cald.enjoyreservation.DeleteRestaurantRequest;
 import it.univaq.disim.sose.cald.enjoyreservation.DeleteRestaurantResponse;
+import it.univaq.disim.sose.cald.enjoyreservation.GetAllInfoFault_Exception;
 import it.univaq.disim.sose.cald.enjoyreservation.GetAllInfoRequest;
 import it.univaq.disim.sose.cald.enjoyreservation.GetAllInfoResponse;
+import it.univaq.disim.sose.cald.enjoyreservation.GetCinemaInfoFault_Exception;
 import it.univaq.disim.sose.cald.enjoyreservation.GetCinemaInfoRequest;
 import it.univaq.disim.sose.cald.enjoyreservation.GetCinemaInfoResponse;
+import it.univaq.disim.sose.cald.enjoyreservation.GetRestaurantInfoFault_Exception;
 import it.univaq.disim.sose.cald.enjoyreservation.GetRestaurantInfoRequest;
 import it.univaq.disim.sose.cald.enjoyreservation.GetRestaurantInfoResponse;
 import it.univaq.disim.sose.cald.enjoyreservation.GetSingleCinemaInfoRequest;
 import it.univaq.disim.sose.cald.enjoyreservation.GetSingleCinemaInfoResponse;
 import it.univaq.disim.sose.cald.enjoyreservation.GetSingleRestaurantInfoRequest;
 import it.univaq.disim.sose.cald.enjoyreservation.GetSingleRestaurantInfoResponse;
+import it.univaq.disim.sose.cald.enjoyreservation.InsertCinemaFault_Exception;
 import it.univaq.disim.sose.cald.enjoyreservation.InsertCinemaRequest;
 import it.univaq.disim.sose.cald.enjoyreservation.InsertCinemaResponse;
+import it.univaq.disim.sose.cald.enjoyreservation.InsertRestaurantFault_Exception;
 import it.univaq.disim.sose.cald.enjoyreservation.InsertRestaurantRequest;
 import it.univaq.disim.sose.cald.enjoyreservation.InsertRestaurantResponse;
 import it.univaq.disim.sose.cald.enjoyreservation.OSMCinemaInfoType;
@@ -126,23 +138,23 @@ import it.univaq.disim.sose.cald.enjoyreservation.OSMHallInfoType;
 import it.univaq.disim.sose.cald.enjoyreservation.OSMHallType;
 import it.univaq.disim.sose.cald.enjoyreservation.OSMRestaurantInfoType;
 import it.univaq.disim.sose.cald.enjoyreservation.OSMRestaurantType;
+import it.univaq.disim.sose.cald.enjoyreservation.RestaurantOwnerFault_Exception;
 import it.univaq.disim.sose.cald.enjoyreservation.RestaurantOwnerRequest;
 import it.univaq.disim.sose.cald.enjoyreservation.RestaurantOwnerResponse;
+import it.univaq.disim.sose.cald.enjoyreservation.UpdateCinemaFault_Exception;
 import it.univaq.disim.sose.cald.enjoyreservation.UpdateCinemaRequest;
 import it.univaq.disim.sose.cald.enjoyreservation.UpdateCinemaResponse;
+import it.univaq.disim.sose.cald.enjoyreservation.UpdateRestaurantFault_Exception;
 import it.univaq.disim.sose.cald.enjoyreservation.UpdateRestaurantRequest;
 import it.univaq.disim.sose.cald.enjoyreservation.UpdateRestaurantResponse;
-import it.univaq.disim.sose.cald.enjoyreservation.business.BusinessException;
 import it.univaq.disim.sose.cald.enjoyreservation.business.EnjoyReservationService;
 import it.univaq.disim.sose.cald.enjoyreservation.business.GoogleMaps;
 
 @Service
 public class WebServiceEnjoyReservationServiceImpl implements EnjoyReservationService {
-
-	private static Logger LOGGER = LoggerFactory.getLogger(WebServiceEnjoyReservationServiceImpl.class);
 	
 	@Override
-	public GetRestaurantInfoResponse getRestaurantInfo(GetRestaurantInfoRequest request) throws BusinessException {
+	public GetRestaurantInfoResponse getRestaurantInfo(GetRestaurantInfoRequest request) throws GetRestaurantInfoFault_Exception {
 		GetRestaurantInfoResponse response = new GetRestaurantInfoResponse();
 		List<RestaurantType> restaurants = new ArrayList<RestaurantType>();
 		List<OSMRestaurantType> restaurantsResponse = new ArrayList<OSMRestaurantType>();
@@ -185,16 +197,15 @@ public class WebServiceEnjoyReservationServiceImpl implements EnjoyReservationSe
 			for(OSMRestaurantType restaurant : restaurantsResponse) {
 				response.getRestaurants().add(restaurant);
 			}
-			//response.setRestaurants(restaurantsResponse);
 		} catch (RestaurantInformationFault_Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
+			throw new GetRestaurantInfoFault_Exception("Something was wrong with Restaurant Info");
 		}
 		return response;
 	}
 
 	@Override
-	public GetCinemaInfoResponse getCinemaInfo(GetCinemaInfoRequest request) throws BusinessException {
+	public GetCinemaInfoResponse getCinemaInfo(GetCinemaInfoRequest request) throws GetCinemaInfoFault_Exception {
 		GetCinemaInfoResponse response = new GetCinemaInfoResponse();
 		List<CinemaType> cinemas = new ArrayList<CinemaType>();
 		List<OSMCinemaType> cinemasResponse = new ArrayList<OSMCinemaType>();
@@ -246,7 +257,6 @@ public class WebServiceEnjoyReservationServiceImpl implements EnjoyReservationSe
 				for(OSMHallType hall : hallResponse) {
 					newCinemaInfo.getHall().add(hall);
 				}
-				//newCinemaInfo.setHall(hallResponse);
 				newCinema.setCinemaInfo(newCinemaInfo);
 				newCinema.setLat(cinema.getLat());
 				newCinema.setLon(cinema.getLon());
@@ -255,22 +265,26 @@ public class WebServiceEnjoyReservationServiceImpl implements EnjoyReservationSe
 			for(OSMCinemaType cinema : cinemasResponse) {
 				response.getCinemas().add(cinema);
 			}
-			//response.setCinemas(cinemasResponse);
 		} catch (CinemaInformationFault_Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
+			throw new GetCinemaInfoFault_Exception("Something was wrong with Cinema Info");
 		}
 		return response;
 	}
 	
+	/**
+     * Get all the cinemas and restaurants information in parallel given a city
+     * @param request city
+     * @return response List of all the cinemas and list of all the restaurants
+     */
 	@Override
-	public GetAllInfoResponse getAllInfo(GetAllInfoRequest request) throws BusinessException {
+	public GetAllInfoResponse getAllInfo(GetAllInfoRequest request) throws GetAllInfoFault_Exception {
 		GetAllInfoResponse response = new GetAllInfoResponse();
 		CinemaRunnable cinemaRunnable = new CinemaRunnable(request.getCity());
 		RestaurantRunnable restaurantRunnable = new RestaurantRunnable(request.getCity());
-		
-		Thread myCinema = new Thread(cinemaRunnable);	
+			
 		try {
+			Thread myCinema = new Thread(cinemaRunnable);
 			myCinema.start();
 			myCinema.join();
 			
@@ -293,17 +307,16 @@ public class WebServiceEnjoyReservationServiceImpl implements EnjoyReservationSe
 			} else {
 				response.getRestaurants().add(null);
 			}
-						
-			return response;
 		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
+			throw new GetAllInfoFault_Exception("Something was wrong with All Info");
 		}
+		
 		return response;
 	}
 
 	@Override
-	public InsertRestaurantResponse insertRestaurant(InsertRestaurantRequest request) throws BusinessException {
+	public InsertRestaurantResponse insertRestaurant(InsertRestaurantRequest request) throws InsertRestaurantFault_Exception {
 		InsertRestaurantResponse response = new InsertRestaurantResponse();
 		it.univaq.disim.sose.cald.clients.restaurantinserting.RestaurantType restaurant = new it.univaq.disim.sose.cald.clients.restaurantinserting.RestaurantType();
 		it.univaq.disim.sose.cald.clients.restaurantinserting.RestaurantInfoType restaurantInfo = new it.univaq.disim.sose.cald.clients.restaurantinserting.RestaurantInfoType();
@@ -340,14 +353,14 @@ public class WebServiceEnjoyReservationServiceImpl implements EnjoyReservationSe
 			
 			response.setAccepted(restaurantInsertResponse.isAccepted());
 		} catch (RestaurantInsertFault_Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
+			throw new InsertRestaurantFault_Exception("Something was wrong with Insert Restaurant");
 		}
 		return response;
 	}
 
 	@Override
-	public InsertCinemaResponse insertCinema(InsertCinemaRequest request) throws BusinessException {
+	public InsertCinemaResponse insertCinema(InsertCinemaRequest request) throws InsertCinemaFault_Exception {
 		InsertCinemaResponse response = new InsertCinemaResponse();
 		it.univaq.disim.sose.cald.clients.cinemainserting.CinemaType cinema = new it.univaq.disim.sose.cald.clients.cinemainserting.CinemaType();
 		it.univaq.disim.sose.cald.clients.cinemainserting.CinemaInfoType cinemaInfo = new it.univaq.disim.sose.cald.clients.cinemainserting.CinemaInfoType();
@@ -377,13 +390,13 @@ public class WebServiceEnjoyReservationServiceImpl implements EnjoyReservationSe
 				hall.getHallInfo().add(hallInfo);
 			}
 			
+			hall.setSeatsNumber(hallRequest.getSeatsNumber());
 			hall.setNumber(hallRequest.getNumber());
 			hallList.add(hall);
 		}
 		for(it.univaq.disim.sose.cald.clients.cinemainserting.HallType hall : hallList) {
 			cinemaInfo.getHall().add(hall);
 		}
-		//cinemaInfo.setHall(hallList);
 		cinemaInfo.setAddress(request.getCinema().getCinemaInfo().getAddress());
 		cinemaInfo.setCap(request.getCinema().getCinemaInfo().getCap());
 		cinemaInfo.setCity(request.getCinema().getCinemaInfo().getCity());
@@ -404,14 +417,14 @@ public class WebServiceEnjoyReservationServiceImpl implements EnjoyReservationSe
 			
 			response.setAccepted(cinemaInsertResponse.isAccepted());
 		} catch (CinemaInsertFault_Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
+			throw new InsertCinemaFault_Exception("Something was wrong with Cinema Insert");
 		}
 		return response;
 	}
 
 	@Override
-	public BookingRestaurantResponse restaurantBooking(BookingRestaurantRequest request) throws BusinessException {
+	public BookingRestaurantResponse restaurantBooking(BookingRestaurantRequest request) throws BookingRestaurantFault_Exception {
 		BookingRestaurantResponse response = new BookingRestaurantResponse();
 		
 		RestaurantBookingService restaurantBookingService = new RestaurantBookingService();
@@ -427,14 +440,14 @@ public class WebServiceEnjoyReservationServiceImpl implements EnjoyReservationSe
 			
 			response.setAccepted(restaurantBookingResponse.getAccepted());
 		} catch (RestaurantBookingFault_Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
+			throw new BookingRestaurantFault_Exception("Something was wrong with Restaurant Booking");
 		}
 		return response;
 	}
 
 	@Override
-	public BookingCinemaResponse cinemaBooking(BookingCinemaRequest request) throws BusinessException {
+	public BookingCinemaResponse cinemaBooking(BookingCinemaRequest request) throws BookingCinemaFault_Exception {
 		BookingCinemaResponse response = new BookingCinemaResponse();
 		
 		CinemaBookingService cinemaBookingService = new CinemaBookingService();
@@ -452,14 +465,14 @@ public class WebServiceEnjoyReservationServiceImpl implements EnjoyReservationSe
 			
 			response.setAccepted(cinemaBookingResponse.getAccepted());
 		} catch (CinemaBookingFault_Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
+			throw new BookingCinemaFault_Exception("Something was wrong with Cinema Booking");
 		}
 		return response;
 	}
 	
 	@Override
-	public AccountSignupResponse userSignup(AccountSignupRequest request) throws BusinessException {
+	public AccountSignupResponse userSignup(AccountSignupRequest request) throws AccountSignupFault_Exception {
 		AccountSignupResponse response = new AccountSignupResponse();
 		
 		AccountManagerService accountManagerService = new AccountManagerService();
@@ -478,14 +491,14 @@ public class WebServiceEnjoyReservationServiceImpl implements EnjoyReservationSe
 			response.setId(userSignupResponse.getId());
 			response.setToken(userSignupResponse.getToken());
 		} catch (UserSignupFault_Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
+			throw new AccountSignupFault_Exception("Something was wrong with Account Signup");
 		}
 		return response;
 	}
 	
 	@Override
-	public AccountLoginResponse userLogin(AccountLoginRequest request) throws BusinessException {
+	public AccountLoginResponse userLogin(AccountLoginRequest request) throws AccountLoginFault_Exception {
 		AccountLoginResponse response = new AccountLoginResponse();
 		
 		AccountManagerService accountManagerService = new AccountManagerService();
@@ -501,14 +514,14 @@ public class WebServiceEnjoyReservationServiceImpl implements EnjoyReservationSe
 			response.setId(userLoginResponse.getId());
 			response.setToken(userLoginResponse.getToken());
 		} catch (UserLoginFault_Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
+			throw new AccountLoginFault_Exception("Something was wrong with Account Login");
 		}
 		return response;
 	}
 
 	@Override
-	public AccountLogoutResponse userLogout(AccountLogoutRequest request) throws BusinessException {
+	public AccountLogoutResponse userLogout(AccountLogoutRequest request) throws AccountLogoutFault_Exception {
 		AccountLogoutResponse response = new AccountLogoutResponse();
 		
 		AccountManagerService accountManagerService = new AccountManagerService();
@@ -522,14 +535,14 @@ public class WebServiceEnjoyReservationServiceImpl implements EnjoyReservationSe
 			response.setResponse(userLogoutResponse.getResponse());
 			
 		} catch (UserLogoutFault_Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
+			throw new AccountLogoutFault_Exception("Something was wrong with Account Logout");
 		}
 		return response;
 	}
 
 	@Override
-	public AccountSessionResponse accountSession(AccountSessionRequest request) throws BusinessException {
+	public AccountSessionResponse accountSession(AccountSessionRequest request) throws AccountSessionFault_Exception {
 		AccountSessionResponse response = new AccountSessionResponse();
 		
 		AccountManagerService accountManagerService = new AccountManagerService();
@@ -543,8 +556,8 @@ public class WebServiceEnjoyReservationServiceImpl implements EnjoyReservationSe
 			response.setResponse(checkSessionResponse.isResponse());
 			
 		} catch (CheckSessionFault_Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
+			throw new AccountSessionFault_Exception("Something was wrong with Account Session");
 		}
 		
 		return response;
@@ -552,7 +565,7 @@ public class WebServiceEnjoyReservationServiceImpl implements EnjoyReservationSe
 
 	@Override
 	public GetSingleRestaurantInfoResponse getSingleRestaurantInfo(GetSingleRestaurantInfoRequest request)
-			throws BusinessException {
+			throws GetRestaurantInfoFault_Exception {
 		GetSingleRestaurantInfoResponse response = new GetSingleRestaurantInfoResponse();
 		RestaurantType restaurant = new RestaurantType();
 		
@@ -591,17 +604,16 @@ public class WebServiceEnjoyReservationServiceImpl implements EnjoyReservationSe
 				
 				response.setRestaurant(newRestaurant);
 			
-			//response.setRestaurants(restaurantsResponse);
 		} catch (RestaurantInformationFault_Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
+			throw new GetRestaurantInfoFault_Exception("Something was wrong with Single Restaunt Info");
 		}
 		return response;
 	}
 
 	@Override
 	public GetSingleCinemaInfoResponse getSingleCinemaInfo(GetSingleCinemaInfoRequest request)
-			throws BusinessException {
+			throws GetCinemaInfoFault_Exception {
 		GetSingleCinemaInfoResponse response = new GetSingleCinemaInfoResponse();
 		CinemaType cinema = new CinemaType();
 		List<OSMHallType> hallResponse = new ArrayList<OSMHallType>();
@@ -652,22 +664,20 @@ public class WebServiceEnjoyReservationServiceImpl implements EnjoyReservationSe
 			for(OSMHallType hall : hallResponse) {
 					newCinemaInfo.getHall().add(hall);
 			}
-			//newCinemaInfo.setHall(hallResponse);
 			newCinema.setCinemaInfo(newCinemaInfo);
 			newCinema.setLat(cinema.getLat());
 			newCinema.setLon(cinema.getLon());
 			response.setCinema(newCinema);
 		
-			//response.setCinemas(cinemasResponse);
 		} catch (CinemaInformationFault_Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
+			throw new GetCinemaInfoFault_Exception("Something was wrong with Single Cinema Info");
 		}
 		return response;
 	}
 
 	@Override
-	public UpdateRestaurantResponse updateRestaurant(UpdateRestaurantRequest request) throws BusinessException {
+	public UpdateRestaurantResponse updateRestaurant(UpdateRestaurantRequest request) throws UpdateRestaurantFault_Exception {
 		UpdateRestaurantResponse response = new UpdateRestaurantResponse();
 		it.univaq.disim.sose.cald.clients.restaurantinserting.RestaurantType restaurant = new it.univaq.disim.sose.cald.clients.restaurantinserting.RestaurantType();
 		it.univaq.disim.sose.cald.clients.restaurantinserting.RestaurantInfoType restaurantInfo = new it.univaq.disim.sose.cald.clients.restaurantinserting.RestaurantInfoType();
@@ -705,14 +715,14 @@ public class WebServiceEnjoyReservationServiceImpl implements EnjoyReservationSe
 			
 			response.setAccepted(restaurantUpdateResponse.isAccepted());
 		} catch (RestaurantUpdateFault_Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
+			throw new UpdateRestaurantFault_Exception("Something was wrong with Update Restaurant");
 		}
 		return response;
 	}
 
 	@Override
-	public UpdateCinemaResponse updateCinema(UpdateCinemaRequest request) throws BusinessException {
+	public UpdateCinemaResponse updateCinema(UpdateCinemaRequest request) throws UpdateCinemaFault_Exception {
 		UpdateCinemaResponse response = new UpdateCinemaResponse();
 		it.univaq.disim.sose.cald.clients.cinemainserting.CinemaType cinema = new it.univaq.disim.sose.cald.clients.cinemainserting.CinemaType();
 		it.univaq.disim.sose.cald.clients.cinemainserting.CinemaInfoType cinemaInfo = new it.univaq.disim.sose.cald.clients.cinemainserting.CinemaInfoType();
@@ -751,7 +761,6 @@ public class WebServiceEnjoyReservationServiceImpl implements EnjoyReservationSe
 		for(it.univaq.disim.sose.cald.clients.cinemainserting.HallType hall : hallList) {
 			cinemaInfo.getHall().add(hall);
 		}
-		//cinemaInfo.setHall(hallList);
 		cinemaInfo.setIdCinema(request.getCinema().getCinemaInfo().getIdCinema());
 		cinemaInfo.setAddress(request.getCinema().getCinemaInfo().getAddress());
 		cinemaInfo.setCap(request.getCinema().getCinemaInfo().getCap());
@@ -772,14 +781,14 @@ public class WebServiceEnjoyReservationServiceImpl implements EnjoyReservationSe
 			
 			response.setAccepted(cinemaUpdateResponse.isAccepted());
 		} catch (CinemaUpdateFault_Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
+			throw new UpdateCinemaFault_Exception("Something was wrong Update Cinema");
 		}
 		return response;
 	}
 	
 	@Override
-	public DeleteCinemaResponse deleteCinema(DeleteCinemaRequest request) throws BusinessException {
+	public DeleteCinemaResponse deleteCinema(DeleteCinemaRequest request) throws DeleteCinemaFault_Exception {
 		DeleteCinemaResponse response = new DeleteCinemaResponse();
 		
 		CinemaInsertingService cinemaInsertingService = new CinemaInsertingService();
@@ -795,15 +804,15 @@ public class WebServiceEnjoyReservationServiceImpl implements EnjoyReservationSe
 			
 			response.setAccepted(cinemaDeleteResponse.isAccepted());
 		} catch (CinemaDeleteFault_Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
+			throw new DeleteCinemaFault_Exception("Something was wrong with with Delete Cinema");
 		}
 		
 		return response;
 	}
 
 	@Override
-	public DeleteRestaurantResponse deleteRestautant(DeleteRestaurantRequest request) throws BusinessException {
+	public DeleteRestaurantResponse deleteRestautant(DeleteRestaurantRequest request) throws DeleteRestaurantFault_Exception {
 		DeleteRestaurantResponse response = new DeleteRestaurantResponse();
 		
 		RestaurantInsertingService restaurantInsertingService = new RestaurantInsertingService();
@@ -819,15 +828,15 @@ public class WebServiceEnjoyReservationServiceImpl implements EnjoyReservationSe
 			
 			response.setAccepted(restaurantDeleteResponse.isAccepted());
 		} catch (RestaurantDeleteFault_Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
+			throw new DeleteRestaurantFault_Exception("Something was wrong with Delete Restaurant");
 		}
 		
 		return response;
 	}
 	
 	@Override
-	public CinemaOwnerResponse checkCinemaOwner(CinemaOwnerRequest request) throws BusinessException {
+	public CinemaOwnerResponse checkCinemaOwner(CinemaOwnerRequest request) throws CinemaOwnerFault_Exception {
 		CinemaOwnerResponse response = new CinemaOwnerResponse();
 		
 		AccountManagerService accountManagerService = new AccountManagerService();
@@ -842,15 +851,15 @@ public class WebServiceEnjoyReservationServiceImpl implements EnjoyReservationSe
 			response.setResponse(checkCinemaOwnerResponse.isResponse());
 			
 		} catch (CheckCinemaOwnerFault_Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
+			throw new CinemaOwnerFault_Exception("Something was wrong with Check Cinema Owner");
 		}
 		
 		return response;
 	}
 
 	@Override
-	public RestaurantOwnerResponse checkRestaurantOwner(RestaurantOwnerRequest request) throws BusinessException {
+	public RestaurantOwnerResponse checkRestaurantOwner(RestaurantOwnerRequest request) throws RestaurantOwnerFault_Exception {
 		RestaurantOwnerResponse response = new RestaurantOwnerResponse();
 		
 		AccountManagerService accountManagerService = new AccountManagerService();
@@ -865,32 +874,40 @@ public class WebServiceEnjoyReservationServiceImpl implements EnjoyReservationSe
 			response.setResponse(checkRestaurantOwnerResponse.isResponse());
 			
 		} catch (CheckRestaurantOwnerFault_Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
+			throw new RestaurantOwnerFault_Exception("Something was wrong with Check Restaurant Owner");
 		}
 		
 		return response;
 	}
 	
+	/**
+     * Instance of Google class creation for found coordinates given an address and a city
+     * @param address
+     * * @param city
+     * @return coordinates building's latitude and longitude 
+     */
 	private double[] coordinatesGoogle(String address, String city) {
 		GoogleMaps google = new GoogleMaps();
 		double[] coordinates = new double[2];
 		try {
 			coordinates = google.foundCoordinates(address, city);
 		} catch (ApiException e1) {
-			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		} catch (InterruptedException e1) {
-			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		} catch (IOException e1) {
-			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
 		
 		return coordinates;
 	}
 	
+	/**
+     * Convert a Date date in XMLGregorianCalendar date
+     * @param date
+     * @return xmlCalendar XMLGregorianCalendar date
+     */
 	public static XMLGregorianCalendar toXMLGregorianCalendar(Date date){
         GregorianCalendar gCalendar = new GregorianCalendar();
         gCalendar.setTime(date);
@@ -902,6 +919,11 @@ public class WebServiceEnjoyReservationServiceImpl implements EnjoyReservationSe
         return xmlCalendar;
     }
 	
+	/**
+     * Convert a XMLGregorianCalendar date to a Date date
+     * @param calendar
+     * @return Date date
+     */
 	public static Date toDate(XMLGregorianCalendar calendar){
         if(calendar == null) {
             return null;

@@ -21,6 +21,7 @@ import javax.xml.bind.annotation.XmlType;
  *       &lt;sequence&gt;
  *         &lt;element name="id_hall" type="{http://www.w3.org/2001/XMLSchema}long" minOccurs="0"/&gt;
  *         &lt;element name="number" type="{http://www.w3.org/2001/XMLSchema}int"/&gt;
+ *         &lt;element name="seatsNumber" type="{http://www.w3.org/2001/XMLSchema}int"/&gt;
  *         &lt;element name="hallInfo" type="{http://it.univaq.disim.sose.cald/cinemaInserting}hallInfoType" maxOccurs="unbounded"/&gt;
  *       &lt;/sequence&gt;
  *     &lt;/restriction&gt;
@@ -34,6 +35,7 @@ import javax.xml.bind.annotation.XmlType;
 @XmlType(name = "hallType", propOrder = {
     "idHall",
     "number",
+    "seatsNumber",
     "hallInfo"
 })
 public class HallType {
@@ -41,6 +43,7 @@ public class HallType {
     @XmlElement(name = "id_hall")
     protected Long idHall;
     protected int number;
+    protected int seatsNumber;
     @XmlElement(required = true)
     protected List<HallInfoType> hallInfo;
 
@@ -82,6 +85,22 @@ public class HallType {
      */
     public void setNumber(int value) {
         this.number = value;
+    }
+
+    /**
+     * Gets the value of the seatsNumber property.
+     * 
+     */
+    public int getSeatsNumber() {
+        return seatsNumber;
+    }
+
+    /**
+     * Sets the value of the seatsNumber property.
+     * 
+     */
+    public void setSeatsNumber(int value) {
+        this.seatsNumber = value;
     }
 
     /**

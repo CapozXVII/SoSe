@@ -43,6 +43,11 @@ public class JDBCAccountManagerServiceImpl implements AccountManagerService {
 	@Autowired
 	private DataSource dataSource;
 	
+	/**
+     * User Registration 
+     * @param parameters Information about the user who want to register
+     * @return response Boolean saying if the registration was successful or not
+     */
 	@Override
 	public UserSignupResponse userSignup(UserSignupRequest parameters) throws UserSignupFault_Exception {
 		UserSignupResponse response = new UserSignupResponse();
@@ -105,6 +110,11 @@ public class JDBCAccountManagerServiceImpl implements AccountManagerService {
 		return response;
 	}
 
+	/**
+     * User Login 
+     * @param parameters Email and password of the user who want to logging in
+     * @return response Session token and user_id
+     */
 	@Override
 	public UserLoginResponse userLogin(UserLoginRequest parameters) throws UserLoginFault_Exception {
 		UserLoginResponse response = new UserLoginResponse();
@@ -170,6 +180,11 @@ public class JDBCAccountManagerServiceImpl implements AccountManagerService {
 		return response;
 	}
 
+	/**
+     * Check if a user is logged or not 
+     * @param parameters Session token 
+     * @return response Boolean saying if the user was logged or not
+     */
 	@Override
 	public CheckSessionResponse checkSession(CheckSessionRequest parameters) throws CheckSessionFault_Exception {
 		CheckSessionResponse response = new CheckSessionResponse();
@@ -213,6 +228,11 @@ public class JDBCAccountManagerServiceImpl implements AccountManagerService {
 		return response;
 	}
 
+	/**
+     * User Logout 
+     * @param parameters Session token for delete from database 
+     * @return response String saying if the logout was successful or not
+     */
 	@Override
 	public UserLogoutResponse userLogout(UserLogoutRequest parameters) throws UserLogoutFault_Exception {
 		UserLogoutResponse response = new UserLogoutResponse();
@@ -251,6 +271,11 @@ public class JDBCAccountManagerServiceImpl implements AccountManagerService {
 		return response;
 	}
 
+	/**
+     * Check if a user who want to update or delete a cinema is the owner 
+     * @param parameters Session token and cinema_id that the user want to update/delete
+     * @return response Boolean saying if the user is the cinema owner
+     */
 	@Override
 	public CheckCinemaOwnerResponse checkCinemaOwner(CheckCinemaOwnerRequest parameters) throws CheckCinemaOwnerFault_Exception{
 		CheckCinemaOwnerResponse response = new CheckCinemaOwnerResponse();
@@ -308,6 +333,11 @@ public class JDBCAccountManagerServiceImpl implements AccountManagerService {
 		return response;
 	}
 
+	/**
+     * Check if a user who want to update or delete a restaurant is the owner 
+     * @param parameters Session token and restaurant_id that the user want to update/delete
+     * @return response Boolean saying if the user is the restaurant owner
+     */
 	@Override
 	public CheckRestaurantOwnerResponse checkRestaurantOwner(CheckRestaurantOwnerRequest parameters) throws CheckRestaurantOwnerFault_Exception{
 		CheckRestaurantOwnerResponse response = new CheckRestaurantOwnerResponse();

@@ -1,7 +1,5 @@
 package it.univaq.disim.sose.cald.cinemainserting.business.model;
 
-import javax.xml.bind.annotation.XmlElement;
-
 public class Film {
 	
     private String name;

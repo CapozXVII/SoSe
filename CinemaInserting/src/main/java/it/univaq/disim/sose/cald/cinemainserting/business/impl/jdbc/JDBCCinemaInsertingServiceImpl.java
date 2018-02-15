@@ -9,7 +9,6 @@ import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
-import java.util.GregorianCalendar;
 import java.util.List;
 import javax.sql.DataSource;
 import javax.xml.datatype.XMLGregorianCalendar;
@@ -19,14 +18,16 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import it.univaq.disim.sose.cald.cinemainserting.CinemaDeleteFault_Exception;
 import it.univaq.disim.sose.cald.cinemainserting.CinemaDeleteRequest;
 import it.univaq.disim.sose.cald.cinemainserting.CinemaDeleteResponse;
+import it.univaq.disim.sose.cald.cinemainserting.CinemaInsertFault_Exception;
 import it.univaq.disim.sose.cald.cinemainserting.CinemaInsertRequest;
 import it.univaq.disim.sose.cald.cinemainserting.CinemaInsertResponse;
+import it.univaq.disim.sose.cald.cinemainserting.CinemaUpdateFault_Exception;
 import it.univaq.disim.sose.cald.cinemainserting.CinemaUpdateRequest;
 import it.univaq.disim.sose.cald.cinemainserting.CinemaUpdateResponse;
 import it.univaq.disim.sose.cald.cinemainserting.HallType;
-import it.univaq.disim.sose.cald.cinemainserting.business.BusinessException;
 import it.univaq.disim.sose.cald.cinemainserting.business.CinemaInsertingService;
 import it.univaq.disim.sose.cald.cinemainserting.business.model.Cinema;
 import it.univaq.disim.sose.cald.cinemainserting.business.model.Film;
@@ -42,8 +43,13 @@ public class JDBCCinemaInsertingServiceImpl implements CinemaInsertingService {
 	@Autowired
 	private DataSource dataSource;
 
+	/**
+     * Insert a new cinema in the database
+     * @param parameters All the information about the cinema that the user wants to register
+     * @return response Boolean saying if the cinema registration was successful or not
+     */
 	@Override
-	public CinemaInsertResponse insertCinema(CinemaInsertRequest parameters) throws BusinessException {
+	public CinemaInsertResponse insertCinema(CinemaInsertRequest parameters) throws CinemaInsertFault_Exception {
 
 		LOGGER.info("Called JDBCInserting");
 
@@ -205,7 +211,7 @@ public class JDBCCinemaInsertingServiceImpl implements CinemaInsertingService {
 					sql_iHallFilm.setTimestamp(3,
 							new Timestamp(hall_list.get(i).getHallInfo().get(j).getTime().getTime()));
 					sql_iHallFilm.setFloat(4, hall_list.get(i).getHallInfo().get(j).getPrice());
-					sql_iHallFilm.setInt(5, hall_list.get(i).getHallInfo().get(j).getFreeSeatsNumber());
+					sql_iHallFilm.setInt(5, hall_list.get(i).getSeatsNumber());
 
 					if (sql_iHallFilm.executeUpdate() == 1) {
 						try (ResultSet keys = sql_iHallFilm.getGeneratedKeys()) {
@@ -221,7 +227,7 @@ public class JDBCCinemaInsertingServiceImpl implements CinemaInsertingService {
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
-			throw new BusinessException(e);
+			throw new CinemaInsertFault_Exception("Something was wrong with Cinema Insert");
 		} finally {
 			if (st != null) {
 				try {
@@ -277,8 +283,13 @@ public class JDBCCinemaInsertingServiceImpl implements CinemaInsertingService {
 		return date;
 	}
 
+	/**
+     * Update an existed cinema 
+     * @param parameters All the information about the cinema that the user wants to update
+     * @return response Boolean saying if the cinema updating was successful or not
+     */
 	@Override
-	public CinemaUpdateResponse updateCinema(CinemaUpdateRequest parameters) throws BusinessException {
+	public CinemaUpdateResponse updateCinema(CinemaUpdateRequest parameters) throws CinemaUpdateFault_Exception {
 		LOGGER.info("Called JDBCCinemaUpdate");
 
 		Cinema newCinema = new Cinema();
@@ -326,11 +337,7 @@ public class JDBCCinemaInsertingServiceImpl implements CinemaInsertingService {
 		}
 		newCinema.setHall(hall_list);
 
-		int id_newCinema = 0;
-		int id_newHall = 0;
-		int id_newFilm = 0;
-		int id_newHallFilm = 0;
-		String film_name = "", film_director = "";
+
 		boolean updateCinema = false;
 		List<Boolean> updateHalls = new ArrayList<Boolean>();
 		List<Boolean> updateFilms = new ArrayList<Boolean>();
@@ -339,7 +346,6 @@ public class JDBCCinemaInsertingServiceImpl implements CinemaInsertingService {
 		Connection con = null;
 		PreparedStatement sql_uCinema, sql_uHalls, sql_uFilms, sql_uHallFilm;
 		Statement st = null;
-		ResultSet rss = null;
 
 		try {
 			con = dataSource.getConnection();
@@ -416,7 +422,7 @@ public class JDBCCinemaInsertingServiceImpl implements CinemaInsertingService {
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
-			throw new BusinessException(e);
+			throw new CinemaUpdateFault_Exception("Something was wromg with Cinema Update");
 		} finally {
 			if (st != null) {
 				try {
@@ -463,8 +469,13 @@ public class JDBCCinemaInsertingServiceImpl implements CinemaInsertingService {
 		return result;
 	}
 
+	/**
+     * Delete an existing cinema's hall_film from the database
+     * @param parameters hall_film_id that the user wants to delete
+     * @return response Boolean saying if the hall_film deleting was successful or not
+     */
 	@Override
-	public CinemaDeleteResponse deleteCinema(CinemaDeleteRequest parameters) throws BusinessException {
+	public CinemaDeleteResponse deleteCinema(CinemaDeleteRequest parameters) throws CinemaDeleteFault_Exception {
 			LOGGER.info("Called JDBCCinemaUpdate");
 			CinemaDeleteResponse result = new CinemaDeleteResponse();
 			Connection con = null;
@@ -493,11 +504,9 @@ public class JDBCCinemaInsertingServiceImpl implements CinemaInsertingService {
 						result.setAccepted(false);
 						return result;
 					}
-
-				
-				}catch (SQLException e1) {
-
+				} catch (SQLException e1) {
 					e1.printStackTrace();
+					throw new CinemaDeleteFault_Exception("Something was wrong with Cinema Delete");
 				} finally {
 					if (con != null) {
 						try {
@@ -506,12 +515,8 @@ public class JDBCCinemaInsertingServiceImpl implements CinemaInsertingService {
 						}
 					}
 				}
-				
-				
 			}
 			
 		return null;
 	}
-
-
 }

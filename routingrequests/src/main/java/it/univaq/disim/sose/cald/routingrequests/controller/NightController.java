@@ -1,7 +1,5 @@
 package it.univaq.disim.sose.cald.routingrequests.controller;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,9 +17,7 @@ import it.univaq.disim.sose.cald.enjoyreservation.GetAllInfoResponse;
 @RestController
 @RequestMapping(value = "/night")
 public class NightController {
-	
-	private static Logger LOGGER = LoggerFactory.getLogger(NightController.class);
-	
+		
 	@GetMapping("/{token}/information/city/{city}")
 	public GetAllInfoResponse getInformation(@PathVariable(value = "token") String token, @PathVariable(value = "city") String city) throws AccountSessionFault_Exception, GetAllInfoFault_Exception {
 		

@@ -49,12 +49,5 @@ public class CinemaBooking implements java.io.Serializable {
 		
 		this.schedule = new Timestamp(schedule.getTime());
 	}
-
-	
-	
-	
-	
-	
-	
 	
 }

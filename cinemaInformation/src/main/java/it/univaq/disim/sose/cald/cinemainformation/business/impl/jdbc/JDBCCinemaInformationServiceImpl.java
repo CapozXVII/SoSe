@@ -4,7 +4,6 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.*;
 
 import javax.sql.DataSource;
@@ -23,11 +22,14 @@ public class JDBCCinemaInformationServiceImpl implements CinemaInformationServic
 	
 	private static Logger LOGGER = LoggerFactory.getLogger(JDBCCinemaInformationServiceImpl.class);
 	
-	//private Map<Cinema, Map<Hall, Map<HallFilm, Film>>> listCinema = new HashMap<Cinema, Map<Hall, Map<HallFilm, Film>>>();
-	//private Map<Cinema, List<HallFilm>> listCinema = new HashMap<Cinema, List<HallFilm>>();
 	@Autowired
 	private DataSource dataSource;
 	
+	/**
+     * Get information about all the cinema given a city
+     * @param parameters City where the user wants to see the cinemas
+     * @return response List of cinemas in the city passed in input
+     */
 	public List<Cinema> getCinemas(String city) throws CinemaInformationFault_Exception {
 		List<Cinema> cinemaList = new ArrayList<Cinema>();
 		List<HallFilm> hallFilmList = new ArrayList<HallFilm>();
@@ -127,6 +129,11 @@ public class JDBCCinemaInformationServiceImpl implements CinemaInformationServic
 		return hallFilm;
 	}
 
+	/**
+     * Get information about a single cinema
+     * @param id cinema_id we want to show out 
+     * @return response Information about the cinema
+     */
 	@Override
 	public Cinema getSingleCinema(long id) throws CinemaInformationFault_Exception {
 		Cinema cinema= new Cinema();

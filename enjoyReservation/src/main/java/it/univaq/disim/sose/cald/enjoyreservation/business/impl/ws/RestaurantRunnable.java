@@ -40,8 +40,8 @@ public class RestaurantRunnable implements Runnable{
 		EnjoyReservationPT enjoyReservation = enjoyReservationService.getEnjoyReservationPort();
 		try {
 			this.response = enjoyReservation.getRestaurantInfo(request);
+			
 		} catch (GetRestaurantInfoFault_Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}

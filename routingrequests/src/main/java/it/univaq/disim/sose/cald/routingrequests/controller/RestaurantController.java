@@ -7,8 +7,6 @@ import javax.xml.datatype.DatatypeConfigurationException;
 import javax.xml.datatype.DatatypeFactory;
 import javax.xml.datatype.XMLGregorianCalendar;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -52,9 +50,6 @@ import it.univaq.disim.sose.cald.routingrequests.model.RestaurantBooking;
 @RestController
 @RequestMapping(value = "/restaurant")
 public class RestaurantController {
-	
-	private static Logger LOGGER = LoggerFactory.getLogger(RestaurantController.class);
-	
 		
 	@GetMapping("/{token}/information/city/{city}")
 	public GetRestaurantInfoResponse getInformation(@PathVariable(value = "token") String token, @PathVariable(value = "city") String city) throws AccountSessionFault_Exception, GetRestaurantInfoFault_Exception {
@@ -103,10 +98,7 @@ public class RestaurantController {
 		
 		if(checkSession(enjoyReservation, token)) {
 			BookingRestaurantRequest request = new BookingRestaurantRequest();
-			LOGGER.info(restaurantBooking.getRestaurant() +"ciao");
-			LOGGER.info(restaurantBooking.getUser() + "ciao2");
-			LOGGER.info(toXMLGregorianCalendarDate(restaurantBooking.getSchedule()).toString());
-			LOGGER.info(restaurantBooking.getSeats() + "ciao3");
+			
 			request.setRestaurant(restaurantBooking.getRestaurant());
 			request.setUser(restaurantBooking.getUser());
 			request.setSchedule(toXMLGregorianCalendarDate(restaurantBooking.getSchedule()));

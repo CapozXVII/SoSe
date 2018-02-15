@@ -14,6 +14,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import it.univaq.disim.sose.cald.restaurantbooking.RestaurantBookingFault_Exception;
 import it.univaq.disim.sose.cald.restaurantbooking.RestaurantBookingRequest;
 import it.univaq.disim.sose.cald.restaurantbooking.RestaurantBookingResponse;
 import it.univaq.disim.sose.cald.restaurantbooking.business.*;
@@ -25,12 +26,16 @@ public class JDBCRestaurantBookingImpl implements RestaurantBookingService {
 	
 	private static Logger LOGGER = LoggerFactory.getLogger(JDBCRestaurantBookingImpl.class);
 
-	
 	@Autowired
 	private DataSource dataSource;
 
+	/**
+     * Insert into the database a restaurant booking request by a user 
+     * @param parameters Information about booking request
+     * @return response String saying if the booking was successful or not
+     */
 	@Override
-	public RestaurantBookingResponse insertRestaurantBooking(RestaurantBookingRequest parameters) throws BusinessException {
+	public RestaurantBookingResponse insertRestaurantBooking(RestaurantBookingRequest parameters) throws RestaurantBookingFault_Exception {
 		
 		int nSeats = 0, seatsPreviousBooking = 0;
 		boolean resultSeats = false, resultBooking = false;
@@ -87,6 +92,7 @@ public class JDBCRestaurantBookingImpl implements RestaurantBookingService {
 		
 		catch (SQLException e) {
 			e.printStackTrace();
+			throw new RestaurantBookingFault_Exception("Something was wrong with Insert Booking Restaurant");
 		} 
 		finally {
 			if (con != null) {

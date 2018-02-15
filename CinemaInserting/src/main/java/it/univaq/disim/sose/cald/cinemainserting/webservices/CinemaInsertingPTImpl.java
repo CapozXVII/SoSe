@@ -61,8 +61,5 @@ public class CinemaInsertingPTImpl implements CinemaPT {
 		}catch (Exception ex) {
 			throw new RuntimeException(ex.getMessage());
 		}
-		
-		
 	}
-
 }
