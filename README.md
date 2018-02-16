@@ -27,5 +27,5 @@ mvn clean package
 ```
 Then open command prompt, go to target folder and execute below command. 
 ```
-java -jar routingrequests.jar.
+java -jar routingrequests-1.0.0.jar.
 ```
