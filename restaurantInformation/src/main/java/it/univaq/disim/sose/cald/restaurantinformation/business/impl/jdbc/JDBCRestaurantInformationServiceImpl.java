@@ -14,7 +14,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import it.univaq.disim.sose.cald.restaurantinformation.business.model.Cinema;
 import it.univaq.disim.sose.cald.restaurantinformation.RestaurantInformationFault_Exception;
 import it.univaq.disim.sose.cald.restaurantinformation.business.RestaurantInformationService;
 import it.univaq.disim.sose.cald.restaurantinformation.business.model.Discount;

@@ -34,34 +34,38 @@ public class RestaurantInformationPTImpl implements RestaurantInformationPT {
 			List<Restaurant> restaurants = service.getRestaurants(parameters.getCity());
 			RestaurantInformationResponse response = new RestaurantInformationResponse();
 			
-			for(Restaurant restaurant : restaurants) {
-				RestaurantInfoType osmRestaurantInfoType = new RestaurantInfoType();
-				RestaurantType osmRestaurantType = new RestaurantType();
-				DiscountType osmDiscountType = new DiscountType();
-		
-				osmRestaurantInfoType.setAddress(restaurant.getAddress());
-				osmRestaurantInfoType.setCap(restaurant.getCap());
-				osmRestaurantInfoType.setCity(restaurant.getCity());
-				osmRestaurantInfoType.setCuisine(restaurant.getCousine());
-				osmRestaurantInfoType.setMenu(restaurant.getMenu());
-				osmRestaurantInfoType.setName(restaurant.getName());
-				osmRestaurantInfoType.setStyle(restaurant.getStyle());
-				osmRestaurantInfoType.setMaxSeats(restaurant.getMaxSeats());
-				osmRestaurantInfoType.setTelephoneNumber(restaurant.getTelephoneNumber());
-				osmRestaurantInfoType.setId(restaurant.getId());
-				if (restaurant.getDiscount() != null) {
-					osmDiscountType.setCinema(restaurant.getDiscount().getCinema());
-					osmDiscountType.setPrice(restaurant.getDiscount().getPrice());
-					osmDiscountType.setDiscountId(restaurant.getDiscount().getId());
-				} else {
-					osmDiscountType = null;
+			if(restaurants != null) {
+				for(Restaurant restaurant : restaurants) {
+					RestaurantInfoType osmRestaurantInfoType = new RestaurantInfoType();
+					RestaurantType osmRestaurantType = new RestaurantType();
+					DiscountType osmDiscountType = new DiscountType();
+			
+					osmRestaurantInfoType.setAddress(restaurant.getAddress());
+					osmRestaurantInfoType.setCap(restaurant.getCap());
+					osmRestaurantInfoType.setCity(restaurant.getCity());
+					osmRestaurantInfoType.setCuisine(restaurant.getCousine());
+					osmRestaurantInfoType.setMenu(restaurant.getMenu());
+					osmRestaurantInfoType.setName(restaurant.getName());
+					osmRestaurantInfoType.setStyle(restaurant.getStyle());
+					osmRestaurantInfoType.setMaxSeats(restaurant.getMaxSeats());
+					osmRestaurantInfoType.setTelephoneNumber(restaurant.getTelephoneNumber());
+					osmRestaurantInfoType.setId(restaurant.getId());
+					if (restaurant.getDiscount() != null) {
+						osmDiscountType.setCinema(restaurant.getDiscount().getCinema());
+						osmDiscountType.setPrice(restaurant.getDiscount().getPrice());
+						osmDiscountType.setDiscountId(restaurant.getDiscount().getId());
+					} else {
+						osmDiscountType = null;
+					}
+					osmRestaurantInfoType.setDiscount(osmDiscountType);
+					osmRestaurantType.setLat(restaurant.getLatitude());
+					osmRestaurantType.setLon(restaurant.getLongitude());
+					osmRestaurantType.setRestaurantInfo(osmRestaurantInfoType);
+					response.getRestaurants().add(osmRestaurantType);
 				}
-				osmRestaurantInfoType.setDiscount(osmDiscountType);
-				osmRestaurantType.setLat(restaurant.getLatitude());
-				osmRestaurantType.setLon(restaurant.getLongitude());
-				osmRestaurantType.setRestaurantInfo(osmRestaurantInfoType);
-				response.getRestaurants().add(osmRestaurantType);
-			}
+			} else {
+					response.getRestaurants().add(null);
+		}
 			return response;
 		} catch (Exception ex) {
 			throw new RestaurantInformationFault_Exception("Something was wrong with response");

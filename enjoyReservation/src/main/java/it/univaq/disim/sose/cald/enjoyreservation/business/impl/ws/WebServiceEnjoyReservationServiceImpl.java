@@ -166,36 +166,41 @@ public class WebServiceEnjoyReservationServiceImpl implements EnjoyReservationSe
 		try {
 			RestaurantInformationResponse restaurantInformationResponse = restaurantInformation.restaurantInformation(restaurantInformationRequest);
 			restaurants = restaurantInformationResponse.getRestaurants();
-			for(RestaurantType restaurant : restaurants) {
-				OSMRestaurantType newRestaurant = new OSMRestaurantType();
-				OSMRestaurantInfoType newRestaurantInfo = new OSMRestaurantInfoType();
-				OSMDiscountType newDiscount = new OSMDiscountType();
-				
-				if(restaurant.getRestaurantInfo().getDiscount() != null) {
-					newDiscount.setDiscountId(restaurant.getRestaurantInfo().getDiscount().getDiscountId());
-					newDiscount.setPrice(restaurant.getRestaurantInfo().getDiscount().getPrice());
-					newDiscount.setCinema(restaurant.getRestaurantInfo().getDiscount().getCinema());
-				} else {
-					newDiscount = null;
+			
+			if(restaurants != null) {
+				for(RestaurantType restaurant : restaurants) {
+					OSMRestaurantType newRestaurant = new OSMRestaurantType();
+					OSMRestaurantInfoType newRestaurantInfo = new OSMRestaurantInfoType();
+					OSMDiscountType newDiscount = new OSMDiscountType();
+					
+					if(restaurant.getRestaurantInfo().getDiscount() != null) {
+						newDiscount.setDiscountId(restaurant.getRestaurantInfo().getDiscount().getDiscountId());
+						newDiscount.setPrice(restaurant.getRestaurantInfo().getDiscount().getPrice());
+						newDiscount.setCinema(restaurant.getRestaurantInfo().getDiscount().getCinema());
+					} else {
+						newDiscount = null;
+					}
+					newRestaurantInfo.setDiscount(newDiscount);
+					newRestaurantInfo.setId(restaurant.getRestaurantInfo().getId());
+					newRestaurantInfo.setAddress(restaurant.getRestaurantInfo().getAddress());
+					newRestaurantInfo.setCap(restaurant.getRestaurantInfo().getCap());
+					newRestaurantInfo.setCity(restaurant.getRestaurantInfo().getCity());
+					newRestaurantInfo.setCuisine(restaurant.getRestaurantInfo().getCuisine());
+					newRestaurantInfo.setMenu(restaurant.getRestaurantInfo().getMenu());
+					newRestaurantInfo.setName(restaurant.getRestaurantInfo().getName());
+					newRestaurantInfo.setStyle(restaurant.getRestaurantInfo().getStyle());
+					newRestaurantInfo.setMaxSeats(restaurant.getRestaurantInfo().getMaxSeats());
+					newRestaurantInfo.setTelephoneNumber(restaurant.getRestaurantInfo().getTelephoneNumber());
+					newRestaurant.setRestaurantInfo(newRestaurantInfo);
+					newRestaurant.setLat(restaurant.getLat());
+					newRestaurant.setLon(restaurant.getLon());
+					restaurantsResponse.add(newRestaurant);
 				}
-				newRestaurantInfo.setDiscount(newDiscount);
-				newRestaurantInfo.setId(restaurant.getRestaurantInfo().getId());
-				newRestaurantInfo.setAddress(restaurant.getRestaurantInfo().getAddress());
-				newRestaurantInfo.setCap(restaurant.getRestaurantInfo().getCap());
-				newRestaurantInfo.setCity(restaurant.getRestaurantInfo().getCity());
-				newRestaurantInfo.setCuisine(restaurant.getRestaurantInfo().getCuisine());
-				newRestaurantInfo.setMenu(restaurant.getRestaurantInfo().getMenu());
-				newRestaurantInfo.setName(restaurant.getRestaurantInfo().getName());
-				newRestaurantInfo.setStyle(restaurant.getRestaurantInfo().getStyle());
-				newRestaurantInfo.setMaxSeats(restaurant.getRestaurantInfo().getMaxSeats());
-				newRestaurantInfo.setTelephoneNumber(restaurant.getRestaurantInfo().getTelephoneNumber());
-				newRestaurant.setRestaurantInfo(newRestaurantInfo);
-				newRestaurant.setLat(restaurant.getLat());
-				newRestaurant.setLon(restaurant.getLon());
-				restaurantsResponse.add(newRestaurant);
-			}
-			for(OSMRestaurantType restaurant : restaurantsResponse) {
-				response.getRestaurants().add(restaurant);
+				for(OSMRestaurantType restaurant : restaurantsResponse) {
+					response.getRestaurants().add(restaurant);
+				}
+			} else {
+				response.getRestaurants().add(null);
 			}
 		} catch (RestaurantInformationFault_Exception e) {
 			e.printStackTrace();
@@ -218,52 +223,57 @@ public class WebServiceEnjoyReservationServiceImpl implements EnjoyReservationSe
 		try {
 			CinemaInformationResponse cinemaInformationResponse = cinemaInformation.cinemaInformation(cinemaInformationRequest);
 			cinemas = cinemaInformationResponse.getCinemas();
-			for(CinemaType cinema : cinemas) {
-				OSMCinemaType newCinema = new OSMCinemaType();
-				OSMCinemaInfoType newCinemaInfo = new OSMCinemaInfoType();
-				
-				hallResponse = new ArrayList<OSMHallType>();
-				for(HallType hall : cinema.getCinemaInfo().getHall()) {
-					OSMHallType newHall = new OSMHallType();
+			if(cinemas != null) {
+				for(CinemaType cinema : cinemas) {
+					OSMCinemaType newCinema = new OSMCinemaType();
+					OSMCinemaInfoType newCinemaInfo = new OSMCinemaInfoType();
 					
-					for(HallInfoType hallInfo : hall.getHallInfo()) {
-						OSMHallInfoType newHallInfo = new OSMHallInfoType();
-						OSMFilmType newFilm = new OSMFilmType();
+					hallResponse = new ArrayList<OSMHallType>();
+					for(HallType hall : cinema.getCinemaInfo().getHall()) {
+						OSMHallType newHall = new OSMHallType();
 						
-						newFilm.setIdFilm(hallInfo.getFilm().getId());
-						newFilm.setCast(hallInfo.getFilm().getCast());
-						newFilm.setDirector(hallInfo.getFilm().getDirector());
-						newFilm.setDuration(hallInfo.getFilm().getDuration());
-						newFilm.setName(hallInfo.getFilm().getName());
-						newFilm.setPlot(hallInfo.getFilm().getPlot());
-						newFilm.setType(hallInfo.getFilm().getType());
-						newHallInfo.setFilm(newFilm);
-						newHallInfo.setFreeSeatsNumber(hallInfo.getFreeSeatsNumber());
-						newHallInfo.setPrice(hallInfo.getPrice());						
-						newHallInfo.setTime(hallInfo.getTime());
-						newHall.getHallInfo().add(newHallInfo);
+						for(HallInfoType hallInfo : hall.getHallInfo()) {
+							OSMHallInfoType newHallInfo = new OSMHallInfoType();
+							OSMFilmType newFilm = new OSMFilmType();
+							
+							newFilm.setIdFilm(hallInfo.getFilm().getId());
+							newFilm.setCast(hallInfo.getFilm().getCast());
+							newFilm.setDirector(hallInfo.getFilm().getDirector());
+							newFilm.setDuration(hallInfo.getFilm().getDuration());
+							newFilm.setName(hallInfo.getFilm().getName());
+							newFilm.setPlot(hallInfo.getFilm().getPlot());
+							newFilm.setType(hallInfo.getFilm().getType());
+							newHallInfo.setFilm(newFilm);
+							newHallInfo.setFreeSeatsNumber(hallInfo.getFreeSeatsNumber());
+							newHallInfo.setPrice(hallInfo.getPrice());						
+							newHallInfo.setTime(hallInfo.getTime());
+							newHall.getHallInfo().add(newHallInfo);
+						}
+						newHall.setIdHall(hall.getId());
+						newHall.setNumber(hall.getNumber());
+						newHall.setSeatsNumber(hall.getSeatsNumber());
+						hallResponse.add(newHall);
 					}
-					newHall.setIdHall(hall.getId());
-					newHall.setNumber(hall.getNumber());
-					newHall.setSeatsNumber(hall.getSeatsNumber());
-					hallResponse.add(newHall);
+					newCinemaInfo.setIdCinema(cinema.getCinemaInfo().getId());
+					newCinemaInfo.setAddress(cinema.getCinemaInfo().getAddress());
+					newCinemaInfo.setCap(cinema.getCinemaInfo().getCap());
+					newCinemaInfo.setCity(cinema.getCinemaInfo().getCity());
+					newCinemaInfo.setName(cinema.getCinemaInfo().getName());
+					newCinemaInfo.setTelephoneNumber(cinema.getCinemaInfo().getTelephoneNumber());
+					for(OSMHallType hall : hallResponse) {
+						newCinemaInfo.getHall().add(hall);
+					}
+					newCinema.setCinemaInfo(newCinemaInfo);
+					newCinema.setLat(cinema.getLat());
+					newCinema.setLon(cinema.getLon());
+					cinemasResponse.add(newCinema);
 				}
-				newCinemaInfo.setIdCinema(cinema.getCinemaInfo().getId());
-				newCinemaInfo.setAddress(cinema.getCinemaInfo().getAddress());
-				newCinemaInfo.setCap(cinema.getCinemaInfo().getCap());
-				newCinemaInfo.setCity(cinema.getCinemaInfo().getCity());
-				newCinemaInfo.setName(cinema.getCinemaInfo().getName());
-				newCinemaInfo.setTelephoneNumber(cinema.getCinemaInfo().getTelephoneNumber());
-				for(OSMHallType hall : hallResponse) {
-					newCinemaInfo.getHall().add(hall);
-				}
-				newCinema.setCinemaInfo(newCinemaInfo);
-				newCinema.setLat(cinema.getLat());
-				newCinema.setLon(cinema.getLon());
-				cinemasResponse.add(newCinema);
-			}
-			for(OSMCinemaType cinema : cinemasResponse) {
-				response.getCinemas().add(cinema);
+				
+				for(OSMCinemaType cinema : cinemasResponse) {
+					response.getCinemas().add(cinema);
+				} 
+			} else {
+				response.getCinemas().add(null);
 			}
 		} catch (CinemaInformationFault_Exception e) {
 			e.printStackTrace();

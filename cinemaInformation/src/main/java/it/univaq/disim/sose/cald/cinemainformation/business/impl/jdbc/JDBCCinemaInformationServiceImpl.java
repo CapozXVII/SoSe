@@ -8,8 +8,6 @@ import java.util.*;
 
 import javax.sql.DataSource;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -19,9 +17,7 @@ import it.univaq.disim.sose.cald.cinemainformation.business.model.*;
 
 @Service
 public class JDBCCinemaInformationServiceImpl implements CinemaInformationService {
-	
-	private static Logger LOGGER = LoggerFactory.getLogger(JDBCCinemaInformationServiceImpl.class);
-	
+		
 	@Autowired
 	private DataSource dataSource;
 	

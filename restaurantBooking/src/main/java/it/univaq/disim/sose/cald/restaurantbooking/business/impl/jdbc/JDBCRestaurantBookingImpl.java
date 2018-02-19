@@ -9,8 +9,6 @@ import java.sql.SQLException;
 import javax.sql.DataSource;
 import javax.xml.datatype.XMLGregorianCalendar;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -24,8 +22,6 @@ import it.univaq.disim.sose.cald.restaurantbooking.business.model.RestaurantBook
 @Service
 public class JDBCRestaurantBookingImpl implements RestaurantBookingService {
 	
-	private static Logger LOGGER = LoggerFactory.getLogger(JDBCRestaurantBookingImpl.class);
-
 	@Autowired
 	private DataSource dataSource;
 

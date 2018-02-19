@@ -8,8 +8,6 @@ import java.sql.Statement;
 
 import javax.sql.DataSource;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -37,9 +35,7 @@ import it.univaq.disim.sose.cald.accountmanager.business.model.User;
 
 @Service
 public class JDBCAccountManagerServiceImpl implements AccountManagerService {
-	
-	private static Logger LOGGER = LoggerFactory.getLogger(JDBCAccountManagerServiceImpl.class);
-	
+		
 	@Autowired
 	private DataSource dataSource;
 	
@@ -120,7 +116,6 @@ public class JDBCAccountManagerServiceImpl implements AccountManagerService {
 		UserLoginResponse response = new UserLoginResponse();
 		String sql = "SELECT * FROM users WHERE email = ?";
 		String sqlSession = "INSERT into sessions(token, user) VALUES(?,?)";
-		LOGGER.info(sql);
 		Connection con = null;
 		PreparedStatement st = null;
 		PreparedStatement st1 = null;
@@ -189,7 +184,6 @@ public class JDBCAccountManagerServiceImpl implements AccountManagerService {
 	public CheckSessionResponse checkSession(CheckSessionRequest parameters) throws CheckSessionFault_Exception {
 		CheckSessionResponse response = new CheckSessionResponse();
 		String sql = "SELECT * FROM sessions WHERE token = ?";
-		LOGGER.info(sql);
 		Connection con = null;
 		PreparedStatement st = null;
 		ResultSet rs = null;
@@ -237,7 +231,6 @@ public class JDBCAccountManagerServiceImpl implements AccountManagerService {
 	public UserLogoutResponse userLogout(UserLogoutRequest parameters) throws UserLogoutFault_Exception {
 		UserLogoutResponse response = new UserLogoutResponse();
 		String sql = "DELETE FROM sessions WHERE token = ?";
-		LOGGER.info(sql);
 		Connection con = null;
 		PreparedStatement st = null;
 		
@@ -281,7 +274,6 @@ public class JDBCAccountManagerServiceImpl implements AccountManagerService {
 		CheckCinemaOwnerResponse response = new CheckCinemaOwnerResponse();
 		String sql = "SELECT * FROM sessions WHERE token = ?";
 		String sql1 = "SELECT * FROM cinemas WHERE cinema_id = ? AND owner = ?";
-		LOGGER.info(sql);
 		Connection con = null;
 		PreparedStatement st = null, st1 = null;
 		ResultSet rs = null, rs1 = null;
@@ -343,7 +335,6 @@ public class JDBCAccountManagerServiceImpl implements AccountManagerService {
 		CheckRestaurantOwnerResponse response = new CheckRestaurantOwnerResponse();
 		String sql = "SELECT * FROM sessions WHERE token = ?";
 		String sql1 = "SELECT * FROM restaurants WHERE restaurant_id = ? AND owner = ?";
-		LOGGER.info(sql);
 		Connection con = null;
 		PreparedStatement st = null, st1 = null;
 		ResultSet rs = null, rs1 = null;

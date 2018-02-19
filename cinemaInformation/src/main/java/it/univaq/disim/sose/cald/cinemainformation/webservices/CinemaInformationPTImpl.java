@@ -46,49 +46,54 @@ public class CinemaInformationPTImpl implements CinemaInformationPT{
 			GregorianCalendar gtime = new GregorianCalendar();
 			XMLGregorianCalendar xmlCalendar = null;
 			
-			for (Cinema cinema: cinemaList) {
-				halls = new ArrayList<HallType>();
-				CinemaInfoType osmCinemaInfoType = new CinemaInfoType();
-				CinemaType osmCinemaType = new CinemaType();
-				
-				for (int i = 0; i < cinema.getHalls().size(); i++) {
+			if(cinemaList != null) {	
+			
+				for (Cinema cinema: cinemaList) {
+					halls = new ArrayList<HallType>();
+					CinemaInfoType osmCinemaInfoType = new CinemaInfoType();
+					CinemaType osmCinemaType = new CinemaType();
 					
-					FilmType osmFilmType = new FilmType();
-					HallInfoType osmHallInfoType = new HallInfoType();
-					HallType osmHallType = new HallType();
-					osmFilmType.setId(cinema.getHalls().get(i).getFilm().getId());
-					osmFilmType.setCast(cinema.getHalls().get(i).getFilm().getCast());
-					osmFilmType.setDirector(cinema.getHalls().get(i).getFilm().getDirector());
-					osmFilmType.setDuration(cinema.getHalls().get(i).getFilm().getDuration());
-					osmFilmType.setName(cinema.getHalls().get(i).getFilm().getName());
-					osmFilmType.setPlot(cinema.getHalls().get(i).getFilm().getPlot());
-					osmFilmType.setType(cinema.getHalls().get(i).getFilm().getType());
-					osmHallInfoType.setFilm(osmFilmType);
-					osmHallInfoType.setFreeSeatsNumber(cinema.getHalls().get(i).getFreeSeatsNumber());
-					osmHallInfoType.setPrice(cinema.getHalls().get(i).getPrice());
-					gtime.setTime(cinema.getHalls().get(i).getTime());
-					xmlCalendar = DatatypeFactory.newInstance().newXMLGregorianCalendar(gtime);
-					osmHallInfoType.setTime(xmlCalendar);
-					osmHallType.setHallInfo(osmHallInfoType);
-					osmHallType.setId(cinema.getHalls().get(i).getHall().getId());
-					osmHallType.setNumber(cinema.getHalls().get(i).getHall().getNumber());
-					osmHallType.setSeatsNumber(cinema.getHalls().get(i).getHall().getSeatsNumber());
-					halls.add(osmHallType);
+					for (int i = 0; i < cinema.getHalls().size(); i++) {
+						
+						FilmType osmFilmType = new FilmType();
+						HallInfoType osmHallInfoType = new HallInfoType();
+						HallType osmHallType = new HallType();
+						osmFilmType.setId(cinema.getHalls().get(i).getFilm().getId());
+						osmFilmType.setCast(cinema.getHalls().get(i).getFilm().getCast());
+						osmFilmType.setDirector(cinema.getHalls().get(i).getFilm().getDirector());
+						osmFilmType.setDuration(cinema.getHalls().get(i).getFilm().getDuration());
+						osmFilmType.setName(cinema.getHalls().get(i).getFilm().getName());
+						osmFilmType.setPlot(cinema.getHalls().get(i).getFilm().getPlot());
+						osmFilmType.setType(cinema.getHalls().get(i).getFilm().getType());
+						osmHallInfoType.setFilm(osmFilmType);
+						osmHallInfoType.setFreeSeatsNumber(cinema.getHalls().get(i).getFreeSeatsNumber());
+						osmHallInfoType.setPrice(cinema.getHalls().get(i).getPrice());
+						gtime.setTime(cinema.getHalls().get(i).getTime());
+						xmlCalendar = DatatypeFactory.newInstance().newXMLGregorianCalendar(gtime);
+						osmHallInfoType.setTime(xmlCalendar);
+						osmHallType.setHallInfo(osmHallInfoType);
+						osmHallType.setId(cinema.getHalls().get(i).getHall().getId());
+						osmHallType.setNumber(cinema.getHalls().get(i).getHall().getNumber());
+						osmHallType.setSeatsNumber(cinema.getHalls().get(i).getHall().getSeatsNumber());
+						halls.add(osmHallType);
+					}
+					
+					for(HallType hall : halls) {
+						osmCinemaInfoType.getHall().add(hall);
+					}
+					osmCinemaInfoType.setAddress(cinema.getAddress());
+					osmCinemaInfoType.setCap(cinema.getCap());
+					osmCinemaInfoType.setCity(cinema.getCity());
+					osmCinemaInfoType.setName(cinema.getName());
+					osmCinemaInfoType.setId(cinema.getId());
+					osmCinemaInfoType.setTelephoneNumber(cinema.getTelephoneNumber());
+					osmCinemaType.setCinemaInfo(osmCinemaInfoType);
+					osmCinemaType.setLat(cinema.getLatitude());
+					osmCinemaType.setLon(cinema.getLongitude());
+					response.getCinemas().add(osmCinemaType);
 				}
-				
-				for(HallType hall : halls) {
-					osmCinemaInfoType.getHall().add(hall);
-				}
-				osmCinemaInfoType.setAddress(cinema.getAddress());
-				osmCinemaInfoType.setCap(cinema.getCap());
-				osmCinemaInfoType.setCity(cinema.getCity());
-				osmCinemaInfoType.setName(cinema.getName());
-				osmCinemaInfoType.setId(cinema.getId());
-				osmCinemaInfoType.setTelephoneNumber(cinema.getTelephoneNumber());
-				osmCinemaType.setCinemaInfo(osmCinemaInfoType);
-				osmCinemaType.setLat(cinema.getLatitude());
-				osmCinemaType.setLon(cinema.getLongitude());
-				response.getCinemas().add(osmCinemaType);
+			} else {
+				response.getCinemas().add(null);
 			}
 			return response;
 		} catch (Exception ex) {
