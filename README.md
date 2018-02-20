@@ -29,3 +29,15 @@ Then open command prompt, go to target folder and execute below command.
 ```
 java -jar routingrequests-1.0.0.jar.
 ```
+
+We also developed a very simple mobile application build with Ionic in order to show some functionalities of our services. 
+The services that you can try by our application are:
+* Login
+* See either restaurants and cinemas of a city
+* Insert a restaurant
+* Udpdate and/or delete the restaurant created
+* See the information about a single restaurant
+* Make a reservation at a restaurant
+* Logout
+
+You can download the Github repository at the following link: https://github.com/CristCapo/SoSeClient.
